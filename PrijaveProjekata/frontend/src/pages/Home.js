@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react' ;
 
 // components
 import FirstDataDetails from '../components/FirstDataDetails';
+import FirstDataForm from '../components/firstDataForm';
 
 const Home = () => {
     const [firstDataSets, setFirstDataSets] = useState(null);
@@ -26,6 +27,7 @@ const Home = () => {
                     <FirstDataDetails key={firstData._id} firstData={firstData}/>
                 ))}
             </div>
+            <FirstDataForm />
         </div>
     )
 }
