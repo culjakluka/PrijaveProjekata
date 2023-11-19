@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 
 // get all firstDataSets (sorted by create time)
 const getFirstDataSets = async (req, res) => {
-    const firstDataSets = await FirstDataModel.find({}).sort({createdAt: -1});
+    const firstData = await FirstDataModel.find({}).sort({createdAt: -1});
 
-    res.status(200).json(firstDataSets);
+    res.status(200).json(firstData);
 }
 
 // get a single firstData set
