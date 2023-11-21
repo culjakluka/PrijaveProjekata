@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react' ;
+import { useEffect } from 'react' ;
+import { useFirstDataContext } from '../hooks/useFirstDataContext';
 
 // components
 import FirstDataDetails from '../components/FirstDataDetails';
 import FirstDataForm from '../components/firstDataForm';
 
 const Home = () => {
-    const [firstDataSets, setFirstDataSets] = useState(null);
+    const {firstData, dispatch} = useFirstDataContext()
 
     useEffect(() => {
         const fetchFirstDataSets = async () => {
@@ -13,7 +14,7 @@ const Home = () => {
             const json = await response.json();
 
             if(response.ok){
-                setFirstDataSets(json);
+               dispatch({type: 'SET_FIRSTDATA', payload: json});
             }
         }
 
@@ -23,7 +24,7 @@ const Home = () => {
     return (
         <div className="home">
             <div className="firstDataSets">
-                {firstDataSets && firstDataSets.map((firstData) => (
+                {firstData/*zasto ne sets?*/ && firstData/*zasto ne sets?*/.map((firstData) => (
                     <FirstDataDetails key={firstData._id} firstData={firstData}/>
                 ))}
             </div>
