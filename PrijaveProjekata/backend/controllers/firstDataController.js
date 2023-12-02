@@ -29,6 +29,18 @@ const getFirstData = async (req, res) => {
 const createFirstData = async (req, res) => {
     const {name, age} = req.body;
 
+    let emptyFields = []
+
+    if(!name) {
+        emptyFields.push('name')
+    }
+    if(!age) {
+        emptyFields.push('age')
+    }
+    if(emptyFields.length > 0) {
+        return res.status(400).json({error: 'Molimo popunite sva polja', emptyFields })
+    }
+
     // add doc to database
     try{
         const firstData = await FirstDataModel.create({name, age});

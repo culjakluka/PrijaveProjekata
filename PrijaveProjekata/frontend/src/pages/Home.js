@@ -6,11 +6,11 @@ import FirstDataDetails from '../components/FirstDataDetails';
 import FirstDataForm from '../components/firstDataForm';
 
 const Home = () => {
-    const {firstData, dispatch} = useFirstDataContext()
+    const {firstDataSets, dispatch} = useFirstDataContext()
 
     useEffect(() => {
         const fetchFirstDataSets = async () => {
-            const response = await fetch('/api/firstData');
+            const response = await fetch('/api/firstDataSets');
             const json = await response.json();
 
             if(response.ok){
@@ -19,12 +19,12 @@ const Home = () => {
         }
 
         fetchFirstDataSets();
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="home">
             <div className="firstDataSets">
-                {firstData/*zasto ne sets?*/ && firstData/*zasto ne sets?*/.map((firstData) => (
+                {firstDataSets && firstDataSets.map((firstData) => (
                     <FirstDataDetails key={firstData._id} firstData={firstData}/>
                 ))}
             </div>

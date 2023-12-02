@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 })
 
 // routes
-app.use('/api/firstData',  firstData); // first submit data
+app.use('/api/firstDataSets',  firstData); // first submit data
 
 // connect to database
 const db_uri = toString(process.env.MONGO_URI);

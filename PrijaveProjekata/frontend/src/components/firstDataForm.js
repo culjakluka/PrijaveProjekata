@@ -1,16 +1,19 @@
 import { useState } from 'react'
+import { useFirstDataContext } from '../hooks/useFirstDataContext';
 
 const FirstDataForm = () => {
+    const { dispatch } = useFirstDataContext();
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [error, setError] = useState('');
+    const [emptyFields, setEmptyFields] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const firstData = {name, age};
 
-        const response = await fetch('/api/firstData', {
+        const response = await fetch('/api/firstDataSets', {
             method: 'POST',
             body: JSON.stringify(firstData),
             headers: {
@@ -21,12 +24,15 @@ const FirstDataForm = () => {
 
         if(!response.ok) {
             setError(json.error);
+            setEmptyFields(json.emptyFields);
         }
         if(response.ok) {
             setName('');
             setAge('');
             setError(null);
+            setEmptyFields([]);
             console.log('New firstData added.', json);
+            dispatch({type: 'CREATE_FIRSTDATA', payload: json});
         }
     }
 
@@ -39,6 +45,7 @@ const FirstDataForm = () => {
                 type="text"
                 onChange={(e) => setName(e.target.value)}
                 value={name}
+                className={emptyFields.includes('name') ? 'error' : ''}
              />
 
             <label>Dob (u godinama):</label>
@@ -46,6 +53,7 @@ const FirstDataForm = () => {
                 type="number"
                 onChange={(e) => setAge(e.target.value)}
                 value={age}
+                className={emptyFields.includes('age') ? 'error' : ''}
              />
 
              <button>Add firstData</button>

@@ -6,11 +6,15 @@ export const firstDataReducer = (state, action) => {
     switch (action.type){
         case 'SET_FIRSTDATA':
             return {
-                firstData: action.payload
+                firstDataSets: action.payload
             }
         case 'CREATE_FIRSTDATA':
             return {
-                firstData: [action.payload, ...state.firstData]
+                firstDataSets: [action.payload, ...state.firstDataSets]
+            }
+        case 'DELETE_FIRSTDATA':
+            return {
+                firstDataSets: state.firstDataSets.filter((f) => f._id !== action.payload._id)
             }
         default:
             return state
@@ -19,7 +23,7 @@ export const firstDataReducer = (state, action) => {
 
 export const FirstDataContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(firstDataReducer, {
-        firstData: null
+        firstDataSets: null
     });
 
 
