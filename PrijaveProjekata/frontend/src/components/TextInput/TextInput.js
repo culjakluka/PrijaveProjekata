@@ -1,0 +1,45 @@
+import React, { useEffect, useState } from 'react'
+import style from './TextInput.css'
+
+// component TextInput takes "label" and "name" as props
+const TextInput = ({label, name}) => {
+
+    // useState to manage the input value state
+    const [inputValue, setInputValue] = useState("");
+
+    // function to handle input changes
+    const handleInputChange = (event) => {
+        // update the inputValue state as the input changes
+        setInputValue(event.target.value);
+    }
+
+    // useEffect to retrive the value from localStorage when the component mounts or 'name' prop changes
+    useEffect(() => {
+        
+        // retrive the value from the local storage if it exists for the provided 'name' key
+        const storedValue = localStorage.getItem(name);
+
+        // set inputValue to the retrived value if it exists
+        if(storedValue) {
+            setInputValue(storedValue)
+        }
+    },[name])
+
+    // useEffect to save input value to local storage whenever it changes
+    useEffect(() => {
+
+        // store the input value in local storage with the 'name' as the key
+        localStorage.setItem(name, inputValue);
+
+    }, [inputValue, name]); // re-run this effect when 'inputValue' or 'name' changes
+
+    return(
+        <div class="text-input">
+            <label>{label}</label>
+            <input name={name} value={inputValue} onChange={handleInputChange} placeholder="empty..." type="text"></input>
+        </div>
+    )
+}
+
+
+export default TextInput

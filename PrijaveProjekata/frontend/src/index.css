@@ -5,7 +5,10 @@
 :root {
   --primary: #1aac83;
   --error: #e7195a;
+  --input-underline-color: #B0355E;
+  --secondary-text-color: #A4A4A4;
 }
+
 body {
   background: #f1f1f1;
   margin: 0;
@@ -34,9 +37,12 @@ header a {
 
 /* homepage */
 .home {
+  /*removing this part because we won't need grid */
+  /*
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 100px;
+  */
 }
 .firstData-details {
   background: #fff;
@@ -66,8 +72,13 @@ header a {
   border-radius: 50%;
   color: #333;
 }
-
+/*
+removing label and input since it require
+custom design
+*/
 /* new firstData form */
+/*
+
 label, input {
   display: block;
 }
@@ -80,6 +91,8 @@ input {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+*/
 form button {
   background: var(--primary);
   border: 0;

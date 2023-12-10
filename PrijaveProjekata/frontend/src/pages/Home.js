@@ -1,12 +1,19 @@
 import { useEffect } from 'react' ;
 import { useFirstDataContext } from '../hooks/useFirstDataContext';
 
+
+
 // components
 import FirstDataDetails from '../components/FirstDataDetails';
 import FirstDataForm from '../components/firstDataForm';
+import InputFormType1 from '../components/InputForm/InputForm';
+import InputForm from '../components/InputForm/InputForm';
 
 const Home = () => {
     const {firstDataSets, dispatch} = useFirstDataContext()
+    let labelName = "Test label name"
+
+
 
     useEffect(() => {
         const fetchFirstDataSets = async () => {
@@ -23,13 +30,18 @@ const Home = () => {
 
     return (
         <div className="home">
+            {/*
             <div className="firstDataSets">
                 {firstDataSets && firstDataSets.map((firstData) => (
                     <FirstDataDetails key={firstData._id} firstData={firstData}/>
                 ))}
-            </div>
+                </div> 
             <FirstDataForm />
-        </div>
+                */}
+            <InputForm/>
+            
+            </div>
+
     )
 }
 
