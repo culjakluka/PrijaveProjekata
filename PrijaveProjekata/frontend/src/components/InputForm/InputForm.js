@@ -2,10 +2,14 @@ import { useState } from 'react'
 import React from 'react'
 import TextInput from '../TextInput/TextInput'
 import style from './InputForm.css'
+import DropdownMenuInput from '../DropdownMenuInput/DropdownMenuInput'
+import RadioButtonInput from '../RadioButtonInput/RadioButtonInput'
+
 
 const InputForm = () => {
     
-
+    // 1st DropdownMenu's data
+    let data = ["Pero Peric", "Ivo Ivic", "Mijo Mijic", "Mario Maric"]
 
     return(
         <div class="input-container">
@@ -17,6 +21,8 @@ const InputForm = () => {
                 <TextInput label="Zavod(odsjek)*" name="zavod"/>
                 <TextInput label="E-mail*" name="email"/>
                 <TextInput label="Mobitel*" name="mobitel"/>
+                <DropdownMenuInput label="Dropdownmenu 1" data={data}/>
+                <RadioButtonInput/>
             </div>
         </div>
     )
