@@ -12,9 +12,11 @@ const DropdownMenuInput = ({label, data}) => {
 
     return(
         <div className='dropdown-menu-container'>
-            <select className="dropdown-menu" value={selectionValue} onChange={handleSelectionChange}>
+            <select value={selectionValue} onChange={handleSelectionChange}>
                 <option value="">Select an option</option>
                 {data.map(
+                    // takes all the data from "data" and maps it
+                    // (data that we can take of each memeber of data) => (html element and us of data's data)
                     (options, index) => (<option key={index} value={options}>{options}</option>)
                 )}
             </select>
