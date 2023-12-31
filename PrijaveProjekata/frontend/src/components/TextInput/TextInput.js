@@ -13,11 +13,11 @@ const TextInput = ({label, name}) => {
         setInputValue(event.target.value);
     }
 
-    // useEffect to retrive the value from localStorage when the component mounts or 'name' prop changes
+    // useEffect to retrive the value from sessionStorage when the component mounts or 'name' prop changes
     useEffect(() => {
         
         // retrive the value from the local storage if it exists for the provided 'name' key
-        const storedValue = localStorage.getItem(name);
+        const storedValue = sessionStorage.getItem(name);
 
         // set inputValue to the retrived value if it exists
         if(storedValue) {
@@ -25,11 +25,11 @@ const TextInput = ({label, name}) => {
         }
     },[name])
 
-    // useEffect to save input value to local storage whenever it changes
+    // useEffect to save input value to local session storage whenever it changes
     useEffect(() => {
 
         // store the input value in local storage with the 'name' as the key
-        localStorage.setItem(name, inputValue);
+        sessionStorage.setItem(name, inputValue);
 
     }, [inputValue, name]); // re-run this effect when 'inputValue' or 'name' changes
 
