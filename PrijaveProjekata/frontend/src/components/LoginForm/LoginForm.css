@@ -1,0 +1,76 @@
+.loginScreenContainer {
+    background-image: linear-gradient(to top, rgba(167, 166, 203,0.7) 0%, rgba(137, 137, 186,0.7) 52%, rgba(137, 137, 186,0.7) 100%);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    width: 380px;
+    height: 30rem;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: solid #a1acb5 1px;
+    border-radius: 5px;
+    padding-bottom: 30px;
+
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    margin: auto;
+    
+}
+
+.loginForm [type="text"], 
+.loginForm [type="password"] {
+  padding: 10px;
+  font-size: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  margin-bottom: 15px;
+  color: #e6e6e6;
+  outline: none;
+}
+
+.loginForm [type="text"]::placeholder,
+.loginForm [type="password"]::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bolder;
+    background-color: rgb(187, 160, 145);
+
+}
+
+.loginForm label {
+    text-align: left;
+}
+
+.formFooter {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    margin: auto;
+}
+
+.formFooter a {
+    text-decoration: none;
+}
+
+.submitButton {
+    
+}
+input:required:invalid {
+    border-color: red;
+}

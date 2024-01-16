@@ -34,7 +34,7 @@ const TextInput = ({label, name}) => {
     }, [inputValue, name]); // re-run this effect when 'inputValue' or 'name' changes
 
     return(
-        <div class="text-input">
+        <div className="text-input">
             <label>{label}</label>
             <input name={name} value={inputValue} onChange={handleInputChange} placeholder="empty..." type="text"></input>
         </div>

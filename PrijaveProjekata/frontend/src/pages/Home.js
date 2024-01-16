@@ -8,6 +8,7 @@ import FirstDataDetails from '../components/FirstDataDetails';
 import FirstDataForm from '../components/firstDataForm';
 import InputFormType1 from '../components/InputForm/InputForm';
 import InputForm from '../components/InputForm/InputForm';
+import LoginForm from '../components/LoginForm/LoginForm';
 
 const Home = () => {
     const {firstDataSets, dispatch} = useFirstDataContext()
@@ -15,7 +16,7 @@ const Home = () => {
 
 
 
-    useEffect(() => {
+    {/*useEffect(() => {
         const fetchFirstDataSets = async () => {
             const response = await fetch('/api/firstDataSets');
             const json = await response.json();
@@ -26,21 +27,18 @@ const Home = () => {
         }
 
         fetchFirstDataSets();
-    }, [dispatch])
+    }, [dispatch])*/}
 
     return (
         <div className="home">
-            {/*
-            <div className="firstDataSets">
+            {/*<div className="firstDataSets">
                 {firstDataSets && firstDataSets.map((firstData) => (
                     <FirstDataDetails key={firstData._id} firstData={firstData}/>
                 ))}
                 </div> 
-            <FirstDataForm />
-                */}
-            <InputForm/>
-            
-            </div>
+            <FirstDataForm />*/}
+            <LoginForm />    
+        </div>
 
     )
 }
