@@ -22,12 +22,12 @@
 
 .text-input input::placeholder {
     color: #A4A4A4;
+    margin-left: 5px;
 }
 
 
-.text-input label {
+.text-input label { 
     align-self: flex-start;
-    font-family: 'Segoe UI';
     font-weight: bold;
     text-transform: uppercase;
     color: #B0355E;

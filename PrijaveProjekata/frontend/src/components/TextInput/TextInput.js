@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import style from './TextInput.css'
+import './TextInput.css'
 
 // component TextInput takes "label" and "name" as props
 const TextInput = ({label, name}) => {

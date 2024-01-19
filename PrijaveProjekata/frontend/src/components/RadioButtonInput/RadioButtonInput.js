@@ -1,8 +1,9 @@
 import {useState} from 'react';
 import React from 'react';
 import Form from 'react-bootstrap/Form';
+import styles from './RadioButtonInput.css'
 
-const RadioButtonInput = () => {
+const RadioButtonInput = ({simpleQuestionValue}) => {
 
     const [selection, setSelection] = useState('')
 
@@ -11,6 +12,8 @@ const RadioButtonInput = () => {
     }
 
     return(
+        <div className="radio-button-container">
+            <p className="simple-question-text">{simpleQuestionValue}</p>
             <Form>
                 <Form.Check
                 type='radio'
@@ -32,6 +35,7 @@ const RadioButtonInput = () => {
                 onChange={() => handleRadioChange('ne')}
                 />                    
            </Form>
+        </div>
     )
 }
 
