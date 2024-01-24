@@ -1,28 +1,26 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styles from './SpecialInput.css'
+import SpecialInputMember from "./SpecialInputMember/SpecialInputMember";
+import SpecialInputProject from "./SpecialInputProject/SpecialInputProject";
+import SpecialInputMemberContainer from "./SpecialInputMemberContainer/SpecialInputMemberContainer";
+import './SpecialInput.css'
 
-const SpecialInput = () => {
+
+const SpecialInput = ({pitanje}) => {
     let label="NAVEDITE SVE ČLANOVE..."
 
-    return (
-        <div className="special-input-container">
-            <p className="special-input-label">{label}</p>
+    const [components, setComponents] = useState([]);
 
-            <div id="special-input-member-info">
-                <input className="special-input-input" placeholder="ime i prezime..."></input>
-                <input className="special-input-input" placeholder="e-mail..."></input>
-                <input className="special-input-input" placeholder="postotak..."></input>
-            </div>
-            <div id="special-input-member-projects">
-                <p id="other-project-title">Ostali projekti</p>
-                <div id="special-input-member-projects-project">
-                    <input className="special-input-input" placeholder="naziv projekta..."></input>
-                    <input className="special-input-input" placeholder="postotak u projektu..."></input>
-                    <button>X</button>
-                    <button>Dodaj projekt</button>
-                </div>
-            </div>
-            <button>Dodaj novog clana</button>
+    function addNewMember() {
+
+      }
+
+    return (
+        <div className="special-input-container">   
+            <p>{pitanje}</p>
+            <SpecialInputMemberContainer/>
+            <button onClick={addNewMember}>ADD NEW MEMBER</button>
+
         </div>
       );
 }

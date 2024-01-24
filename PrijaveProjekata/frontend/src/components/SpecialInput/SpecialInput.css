@@ -19,13 +19,9 @@
 
 #special-input-member-projects {
     display: flex;
-    flex-direction: column;
-}
-
-#special-input-member-projects-project {
-    display: flex;
     flex-direction: row;
 }
+
 
 #other-project-title {
     color: #A4A4A4;
@@ -38,6 +34,12 @@
     
 }
 
+
+#special-input-member-info {
+    display: flex;
+    flex-direction: row;
+}
+
 .special-input-input {
     border: none;
     border-bottom: 1px solid #A4A4A4;
@@ -47,5 +49,15 @@
 
 .special-input-input:focus {
     outline: none;
+}
+
+
+#special-input-member-projects-project {
+    display: flex;
+    flex-direction: row;
+}
+
+.special-input-member-container {
+    outline: solid black;
 }
 
