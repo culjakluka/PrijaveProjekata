@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import InputForm from './components/InputForm/InputForm';
 import Home from './pages/Home';
 import FirstInputPage from './pages/FirstInputPage/FirstInputPage';
+import SecondInputPage from './pages/SecondInputPage/SecondInputPage';
 
 
 
@@ -32,6 +33,10 @@ function App() {
             <Route
               path="/FirstInput"
               element={loggedIn ? <FirstInputPage/> : <Navigate to="/" />}
+            />
+            <Route 
+              path="/SecondInput"
+              element={<SecondInputPage />}
             />
           </Routes>
         </div>

@@ -2,6 +2,11 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
+const pdfSchema = new Schema({
+    filename: String, // ime fajla
+    filepath: String,   // lokacija fajla
+});
+
 const otherProjectInfo = new Schema ({
     otherProjectName: { // imena ostalih projekata suradnika
         type: String,
@@ -185,7 +190,10 @@ const projectInfoSchema = new Schema({
     requiredDocumentationFESB: { // opis dokumentacije FESB-a potrebne za prijavu projekta
         type: String,
     //    required: true
-    },    
+    },
+    pdfDocuments: {
+        pdfs: [pdfSchema] // svi pdfovi koje user moze uploadati
+    }
 }, { timestamps: true })
 
 module.exports = mongoose.model('ProjectInfo', projectInfoSchema)

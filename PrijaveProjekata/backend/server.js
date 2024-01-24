@@ -23,8 +23,8 @@ app.use('/api/user', userRoutes)
 app.use('/api/projectInfo', projectInfo)
 
 // connect to database
-const db_uri = toString(process.env.MONGO_URI);
-mongoose.connect(`${process.env.MONGO_URI}`)
+const db_uri = `${process.env.MONGO_URI}`;
+mongoose.connect(db_uri)
     .then(() => {
         // listen for requests
         app.listen(process.env.PORT, () => {

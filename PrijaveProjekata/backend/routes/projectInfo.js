@@ -1,4 +1,5 @@
 const express = require('express')
+const multer = require('multer')
 
 // controller functions
 const {
@@ -11,6 +12,9 @@ const {
 
 const router = express.Router();
 
+//  multer storage
+const upload = multer({ storage: multer.memoryStorage()  })
+
 // GET ProjectInfo sets
 router.get('/', getProjectInfoSets);
 
@@ -18,7 +22,8 @@ router.get('/', getProjectInfoSets);
 router.get('/:id', getProjectInfo);
 
 // POST ProjectInfo data
-router.post('/', createProjectInfoSet)
+//router.post('/', createProjectInfoSet) stara ruta
+router.post('/', upload.array('pdfs', 10), createProjectInfoSet);
 
 // DELETE ProjectInfo data by id
 router.delete('/:id', deleteProjectInfoSet)
