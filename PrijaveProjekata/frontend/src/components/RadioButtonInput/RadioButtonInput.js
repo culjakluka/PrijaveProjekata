@@ -3,12 +3,13 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import styles from './RadioButtonInput.css'
 
-const RadioButtonInput = ({simpleQuestionValue}) => {
+const RadioButtonInput = ({simpleQuestionValue, setSelectionState}) => {
 
     const [selection, setSelection] = useState('')
 
     const handleRadioChange = (value) => {
         setSelection(value)
+        setSelectionState(value)
     }
 
     return(

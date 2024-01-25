@@ -6,21 +6,22 @@ import SpecialInputMemberContainer from "./SpecialInputMemberContainer/SpecialIn
 import './SpecialInput.css'
 
 
-const SpecialInput = ({pitanje}) => {
+const SpecialInput = ({pitanje, getProjectMembers}) => {
     let label="NAVEDITE SVE ČLANOVE..."
 
-    const [components, setComponents] = useState([]);
+    const[projectMembers, setProjectMembers] = useState([]);
 
-    function addNewMember() {
-
-      }
+    const addNewMember = (newMember) => {
+      setProjectMembers(...projectMembers, newMember)
+      console.log(projectMembers)
+    }
 
     return (
         <div className="special-input-container">   
             <p>{pitanje}</p>
-            <SpecialInputMemberContainer/>
-            <button onClick={addNewMember}>ADD NEW MEMBER</button>
-
+            <p>you didn't add any members....</p>
+            <SpecialInputMemberContainer addProjectMember={addNewMember}/>
+            <button>+</button>
         </div>
       );
 }

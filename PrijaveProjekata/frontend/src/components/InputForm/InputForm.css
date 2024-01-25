@@ -24,3 +24,9 @@
     color: #A4A4A4;
     align-self: center;
 }
+
+#submit-button {
+    align-self: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
