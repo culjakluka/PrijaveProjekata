@@ -20,10 +20,6 @@ const SpecialInputMember = ({addProjectMember}) => {
         console.log(member)
     }, [newItemNameSurname, newItemEmail, newItemPercentage])
 
-    const handleChangeName = (e) => {
-        setNewItemNameSurname(e.target.value)
-    }
-
     // member is sent somewhere
     const handleAddItem = () => {
         addProjectMember(member);
@@ -33,9 +29,9 @@ const SpecialInputMember = ({addProjectMember}) => {
     return (  
         <div>
             <div id="special-input-member-info">
-                <input className="special-input-input" placeholder="ime i prezime..." onChange={handleChangeName}></input>
-                <input className="special-input-input" placeholder="e-mail..." onChange={setNewItemEmail}></input>
-                <input className="special-input-input" placeholder="postotak..." onChange={setNewItemPercentage}></input>
+                <input className="special-input-input" placeholder="ime i prezime..." onChange={(e) => setNewItemNameSurname(e.target.value)}></input>
+                <input className="special-input-input" placeholder="e-mail..." onChange={(e) => setNewItemEmail(e.target.value)}></input>
+                <input className="special-input-input" placeholder="postotak..." onChange={(e) => setNewItemPercentage(e.target.value)}></input>
                 <SpecialInputProjectContainer/>
                 <button onClick={handleAddItem}>ADD MEMBER</button>
             </div>
