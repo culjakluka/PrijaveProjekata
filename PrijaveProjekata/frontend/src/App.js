@@ -9,6 +9,7 @@ import InputForm from './components/InputForm/InputForm';
 import Home from './pages/Home';
 import FirstInputPage from './pages/FirstInputPage/FirstInputPage';
 import SecondInputPage from './pages/SecondInputPage/SecondInputPage';
+import AdminDashboardPage from './pages/AdminDashboardPage/AdminDashboardPage';
 
 
 
@@ -36,7 +37,11 @@ function App() {
             />
             <Route 
               path="/SecondInput"
-              element={<SecondInputPage />}
+              element={loggedIn ? <SecondInputPage /> : <Navigate to="/" />}
+            />
+            <Route 
+              path="/AdminDashboard"
+              element={<AdminDashboardPage />}
             />
           </Routes>
         </div>

@@ -36,6 +36,12 @@ const projectInfoSchema = new Schema({
         type: Number,
     //    required: true
     },
+    firstInputMarker: { // jeli ispunjena forma obrasca namjere
+        type: Boolean
+    },
+    secondInputMarker: { // jeli ispunjena forma trazenja suglasnosti
+        type: Boolean
+    },
     nameSurname: { // ime prezime voditelja projekta
         type: String,
     //    required: true

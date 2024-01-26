@@ -1,4 +1,5 @@
 import InputForm from "../../components/InputForm/InputForm"
+
 const FirstInputPage = () => {
 
     return (
