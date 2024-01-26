@@ -9,6 +9,7 @@ import { useAuthContext } from '../../hooks/useAuthContext'
 import Question from '../Question/Question'
 import SpecialInput from '../SpecialInput/SpecialInput'
 import TextInputWithoutTitle from '../TextInputWithoutTitle/TextInputWithoutTitle'
+import CompletedProject from '../CompletedProject/CompletedProject'
 
 const InputForm = () => {
     const { logout } = useLogout()
@@ -95,12 +96,10 @@ const InputForm = () => {
                 <TextInput label={"DIO PRORAČUNA KOJI PRIPADA FESB-u(vrijednost ili postotak ukupne vrijednosti"} name={"dio_proracuna_fesb"} setSpecificState={setFesbValuePart}/>
 
                 <Question questionText={questions[7]} />
-                <RadioButtonInput simpleQuestionValue={"no_value"} setSpecificState={setNewEmployment}/>
+                <RadioButtonInput simpleQuestionValue={"no_value"} setSelectionState={setNewEmployment}/>
 
-
-                <Question questionText={questions[8]}/>
-                <SpecialInput setSpecific={setProjectTeam}/>
-
+                <SpecialInput pitanje={questions[8]}/>
+                
                 <button id="submit-button">SUBMIT</button>
                 </div>
         </div>
