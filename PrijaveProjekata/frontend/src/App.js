@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import FirstInputPage from './pages/FirstInputPage/FirstInputPage';
 import SecondInputPage from './pages/SecondInputPage/SecondInputPage';
 import AdminDashboardPage from './pages/AdminDashboardPage/AdminDashboardPage';
+import PdfAttach from './components/PdfAttach/PdfAttach';
 
 
 
@@ -38,6 +39,10 @@ function App() {
             <Route 
               path="/SecondInput"
               element={loggedIn ? <SecondInputPage /> : <Navigate to="/" />}
+            />
+            <Route 
+              path="/PdfAttachTest"
+              element={<PdfAttach />}
             />
             <Route 
               path="/AdminDashboard"
