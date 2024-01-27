@@ -27,11 +27,11 @@ export const AuthContextProvider = ({ children }) => {
     }else{
       dispatch({type: 'LOGOUT', payload: null })
     }
-    console.log(user)
+    // console.log(user)
     setLoggedIn(Boolean(loggedUser))
   }, [])
 
-  console.log('AuthContext state:', state)
+  // console.log('AuthContext state:', state)
   
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>
