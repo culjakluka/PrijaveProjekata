@@ -7,7 +7,7 @@ import './SpecialInput.css'
 import CompletedMember from "../CompletedMember/CompletedMember"
 
 
-const SpecialInput = ({pitanje}) => {
+const SpecialInput = ({pitanje, sendProjectMembers}) => {
 
     // projectMembers contains members that consist of this fields named: - newItemNameSurname
     //                                                                    - newItemEmail
@@ -23,9 +23,10 @@ const SpecialInput = ({pitanje}) => {
     }
 
     // keeping track of projectMembers
-    // useEffect(() => {
-    //   console.log(projectMembers)
-    // }, [projectMembers])
+    useEffect(() => {
+       console.log(projectMembers)
+       sendProjectMembers(projectMembers)
+    }, [projectMembers])
 
     
     return (

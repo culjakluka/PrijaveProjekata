@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './TextInputWithoutTitle.css'
 
 // component TextInput takes "label" and "name" as props
-const TextInputWithoutTitle = ({label, name}) => {
+const TextInputWithoutTitle = ({label, name, setSpecificState}) => {
 
     // useState to manage the input value state
     const [inputValue, setInputValue] = useState("");
@@ -11,6 +11,7 @@ const TextInputWithoutTitle = ({label, name}) => {
     const handleInputChange = (event) => {
         // update the inputValue state as the input changes
         setInputValue(event.target.value);
+        setSpecificState(event.target.value)
     }
 
     // useEffect to retrive the value from sessionStorage when the component mounts or 'name' prop changes

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useLogout } from '../../hooks/useLogout'
 import React from 'react'
 import TextInput from '../TextInput/TextInput'
@@ -31,7 +31,57 @@ const InputForm = () => {
     const[fesbValuePart, setFesbValuePart] = useState("");
     const[newEmploymentBoolean, setNewEmployment] = useState("");
     const[projectTeam, setProjectTeam] = useState([]);
+
+    // object will take all data from input
+    // later it will be extracted and sent to databases
+    const[inputFormData, setInputFormData] = useState({});
     
+
+    // set inputFormData when component mount
+    useEffect(() => {
+        setInputFormData({
+            nameSurname,
+            vocation,
+            department,
+            email,
+            projectName,
+            projectAcronym,
+            applicationDeadline,
+            projectSummary,
+            applicationURL,
+            projectApplicant,
+            projectPartners,    
+            totalValue,
+            fesbValuePart,
+            newEmploymentBoolean,
+            projectTeam
+        })
+
+        console.log("PROJECT MEMBERS:\n" + JSON.stringify(projectTeam) + "\n");
+        console.log("INPUT FORM DATA:\n" + JSON.stringify(inputFormData) + JSON.stringify(inputFormData.projectTeam) + "\n");
+
+    }, [nameSurname,
+        vocation,
+        department,
+        email,
+        projectName,
+        projectAcronym,
+        applicationDeadline,
+        projectSummary,
+        applicationURL,
+        projectApplicant,
+        projectPartners,    
+        totalValue,
+        fesbValuePart,
+        newEmploymentBoolean,
+        projectTeam])
+
+    // callback
+    const updateProjectTeam = (projectMembersList) => {
+        setProjectTeam(projectMembersList)
+    }
+
+
     const handleClick = () => {
         logout()
     }
@@ -39,15 +89,13 @@ const InputForm = () => {
     // 1st DropdownMenu's data
     let data = ["Pero Peric", "Ivo Ivic", "Mijo Mijic", "Mario Maric"]
 
+
     // questions - input form
     let questions = [
         "1. Prijavitelj projekta/voditelj projektnog tima sa strane FESB-a",
         "2. Naziv, akronim i rok za prijavu",
         "3. Sažetak projekta (do 200 znakova)",
         "4. Poveznica za natječaj",
-        "5. Koordinator projekta",
-        "6. Ostali partneri na projektu",
-        "7. Proračun projekta",
         "8. Jesu li u okviru projekta planirana nova radna mjesta",
         "9. Navedite ostale osobe koje će biti uključene u provedbu projekta"
     ]
@@ -98,7 +146,7 @@ const InputForm = () => {
                 <Question questionText={questions[7]} />
                 <RadioButtonInput simpleQuestionValue={"no_value"} setSelectionState={setNewEmployment}/>
 
-                <SpecialInput pitanje={questions[8]}/>
+                <SpecialInput pitanje={questions[8]} sendProjectMembers={updateProjectTeam}/>
                 
                 <button id="submit-button">SUBMIT</button>
                 </div>
