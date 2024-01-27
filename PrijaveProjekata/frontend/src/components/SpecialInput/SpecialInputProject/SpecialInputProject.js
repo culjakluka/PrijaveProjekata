@@ -2,29 +2,36 @@ import react, { useEffect, useState } from 'react'
 import '../SpecialInput.css'
 
 const SpecialInputProject = ({addNewProjectProp}) => {
-
-    const[name, setName] = useState('');
-    const[percentage, setPercentage] = useState('');
+    const[otherProjectName, setOtherProjectName] = useState('');
+    const[otherProjectPercentage, setOtherProjectPercentage] = useState('');
     const[project, setProject] = useState({});
-
 
     useEffect(() => {
         setProject({
-            name,
-            percentage
+            otherProjectName,
+            otherProjectPercentage
         }
         );
-    }, [name, percentage])
+    }, [otherProjectName, otherProjectPercentage])
 
     const addNewProject = () => {
-        // console.log("NEW PROJECT ADDED: " + project.name + project.percentage)
         addNewProjectProp(project)
     }
 
     return (
         <div id="special-input-member-projects-project">
-            <input value={name} className="special-input-input" placeholder="naziv projekta..." onChange={(e) => setName(e.target.value)}></input>
-            <input value={percentage} className="special-input-input" placeholder="postotak u projektu..." onChange={(e) => setPercentage(e.target.value)}></input>
+            <input 
+                value={otherProjectName}
+                className="special-input-input"
+                placeholder="naziv projekta..."
+                onChange={(e) => setOtherProjectName(e.target.value)}
+            />
+            <input
+                value={otherProjectPercentage}
+                className="special-input-input"
+                placeholder="postotak u projektu..."
+                onChange={(e) => setOtherProjectPercentage(e.target.value)}
+            />
             <button onClick={addNewProject}>ADD PROJECT</button>
         </div>
     );

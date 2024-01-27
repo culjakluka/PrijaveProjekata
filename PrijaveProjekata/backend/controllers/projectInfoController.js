@@ -32,19 +32,20 @@ const getProjectInfo = async (req, res) => {
 //create a ProjectInfo set
 const createProjectInfoSet = async (req, res) => {
     const fieldsToCheck = [
-        'userId', 'nameSurname', 'vocation', 'department', 'email', 'projectTitle',
-        'projectAcronym', 'applicationDeadline', 'projectSummary', 'applicationURL',
-        'projectApplicant', 'projectPartners', 'totalValue', 'fesbValuePart',
-        'newEmploymentBoolean', 'projectTeam', 'mobilePhoneNumber', 'workTimeThisPercetange',
-        'workTimeOtherPercetange', 'teamLeaderDisclaimer', 'sourceOfFunding',
-        'projectType', 'expectedProjectBeginning', 'expectedProjectDurationInMonths',
-        'economicSubjectInvolvement', 'currentPesonnelExpense', 'newPersonnelExpense',
-        'equipmentDescriptionAndExpense', 'equipmentAmortizationExpense', 'materialExpense',
-        'travelRegistrationEducationExpense', 'expenseDisclaimer', 'partnerExpense',
-        'requestedFunding', 'downPayment', 'personalFinancingExpense', 'consultantServices',
-        'consultantExpense', 'consultantExpenseSource', 'requiredDocumentationFESB', 'pdfDocuments'
+        // 'userId', 'nameSurname', 'vocation', 'department', 'email', 'projectTitle',
+        // 'projectAcronym', 'applicationDeadline', 'projectSummary', 'applicationURL',
+        // 'projectApplicant', 'projectPartners', 'totalValue', 'fesbValuePart',
+        // 'newEmploymentBoolean', 'projectTeam', 'mobilePhoneNumber', 'workTimeThisPercetange',
+        // 'workTimeOtherPercetange', 'teamLeaderDisclaimer', 'sourceOfFunding',
+        // 'projectType', 'expectedProjectBeginning', 'expectedProjectDurationInMonths',
+        // 'economicSubjectInvolvement', 'currentPesonnelExpense', 'newPersonnelExpense',
+        // 'equipmentDescriptionAndExpense', 'equipmentAmortizationExpense', 'materialExpense',
+        // 'travelRegistrationEducationExpense', 'expenseDisclaimer', 'partnerExpense',
+        // 'requestedFunding', 'downPayment', 'personalFinancingExpense', 'consultantServices',
+        // 'consultantExpense', 'consultantExpenseSource', 'requiredDocumentationFESB', 'pdfDocuments'
     ];
 
+    console.log(req.body)
     const projectData = {};
 
     let emptyFields = [];
@@ -82,7 +83,8 @@ const createProjectInfoSet = async (req, res) => {
 
     // Add doc to the database
     try {
-        const projectInfoSet = await ProjectInfoModel.create(projectData);
+        const projectInfoSet = await ProjectInfoModel.create(req.body);
+        console.log(projectData)
         res.status(200).json(projectInfoSet);
     } catch (error) {
         res.status(400).json({ error: error.message });
