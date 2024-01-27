@@ -2,16 +2,14 @@ import { useState, useEffect } from 'react'
 import { useLogout } from '../../hooks/useLogout'
 import React from 'react'
 import TextInput from '../TextInput/TextInput'
-import style from './InputForm.css'
-import DropdownMenuInput from '../DropdownMenuInput/DropdownMenuInput'
 import RadioButtonInput from '../RadioButtonInput/RadioButtonInput'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import Question from '../Question/Question'
 import SpecialInput from '../SpecialInput/SpecialInput'
 import TextInputWithoutTitle from '../TextInputWithoutTitle/TextInputWithoutTitle'
-import CompletedProject from '../CompletedProject/CompletedProject'
+import './FirstInputForm.css'
 
-const InputForm = () => {
+const FirstInputForm = () => {
     const { logout } = useLogout()
     const { user } = useAuthContext()
     const generateUniqueId = (name) => `${name}-${Math.random().toString(36).substring(7)}`;
@@ -155,4 +153,4 @@ const InputForm = () => {
 
 } 
 
-export default InputForm
+export default FirstInputForm
