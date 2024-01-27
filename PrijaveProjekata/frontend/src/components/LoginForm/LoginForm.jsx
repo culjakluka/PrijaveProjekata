@@ -1,10 +1,9 @@
 import React from "react";
 import styles from './LoginForm.css'
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
-import { Link } from "react-router-dom";
 import { useLogin } from "../../hooks/useLogin";
 
-const LoginForm = (props) => {
+const LoginForm = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const {login, error, isLoading} = useLogin()
