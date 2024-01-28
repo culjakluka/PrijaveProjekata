@@ -22,11 +22,24 @@ const SpecialInput = ({pitanje, sendProjectMembers}) => {
       // console.log(projectMembers)
     }
 
+    // first time when all components mounts,
+    // retrive data from sessionStorage stored
+    // by the key "projectMembers"
+    useEffect(() => {
+      const storedProjectMembers = sessionStorage.getItem('projectMembers');
+      //setProjectMembers(JSON.parse(storedProjectMembers));
+    })
+
+
     // keeping track of projectMembers
     useEffect(() => {
        console.log(projectMembers)
        sendProjectMembers(projectMembers)
     }, [projectMembers])
+
+    const saveProjectMembers = (projectMembers) => {
+      sessionStorage.setItem('projectMembers', JSON.stringify(projectMembers));
+    }
 
     
     return (

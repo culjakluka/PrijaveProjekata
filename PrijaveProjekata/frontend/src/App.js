@@ -29,7 +29,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={!loggedIn ? <Home /> : <Navigate to="/FirstInput" />}
+              element={!loggedIn ? <Home /> : <Navigate to="/SecondInput" />}
             />
             <Route
               path="/FirstInput"

@@ -1,4 +1,4 @@
-.input-container {
+.input-form-container {
     padding-left: 100px;
     padding-right: 100px;
     padding-top: 50px;
@@ -9,7 +9,7 @@
 
 .input-form {
     display: flex;
-    height: 100%;
+    height: 100%;       
     flex-direction: column;
     align-items: flex-start;
     background-color: white;

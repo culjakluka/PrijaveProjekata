@@ -9,7 +9,7 @@ import SpecialInput from '../SpecialInput/SpecialInput'
 import TextInputWithoutTitle from '../TextInputWithoutTitle/TextInputWithoutTitle'
 import './FirstInputForm.css'
 
-const FirstInputForm = () => {
+const FirstInputForm = () => {          
     const { logout } = useLogout()
     const { user } = useAuthContext()
     const generateUniqueId = (name) => `${name}-${Math.random().toString(36).substring(7)}`;
@@ -92,17 +92,20 @@ const FirstInputForm = () => {
     let questions = [
         "1. Prijavitelj projekta/voditelj projektnog tima sa strane FESB-a",
         "2. Naziv, akronim i rok za prijavu",
-        "3. Sažetak projekta (do 200 znakova)",
+        "3. Sažetak projekta (do 500 znakova)",
         "4. Poveznica za natječaj",
+        "5. Koordinator projekta",
+        "6. Ostali partneri na projektu",
+        "7. Proračun projekta",
         "8. Jesu li u okviru projekta planirana nova radna mjesta",
-        "9. Navedite ostale osobe koje će biti uključene u provedbu projekta"
+        "9. Navedite ostale osobe koje će biti uključene u provedbu projekta",
     ]
     
 
 
 
     return(
-        <div className="input-container">
+        <div className="input-form-container">
             {user && (
                 <div className='logout'>
                     <span>{user.username}</span>
@@ -147,7 +150,7 @@ const FirstInputForm = () => {
                 <SpecialInput pitanje={questions[8]} sendProjectMembers={updateProjectTeam}/>
                 
                 <button id="submit-button">SUBMIT</button>
-                </div>
+            </div>
         </div>
     )
 
