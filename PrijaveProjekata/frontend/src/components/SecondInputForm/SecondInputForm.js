@@ -87,8 +87,7 @@ const SecondInputForm = () => {
         "Drugi strukturni fondovi",
         "Erasmus +",
         "INTERREG",
-        "Jedinice lokalne samouprave",
-        "Ostalo (navesti)"
+        "Jedinice lokalne samouprave"
     ]
 
     let questions = [
