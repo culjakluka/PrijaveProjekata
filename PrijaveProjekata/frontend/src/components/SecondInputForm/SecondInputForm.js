@@ -1,10 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import { SecondInputFormDataConext } from '../../context/SecondInputFormDataContext' 
 import './SecondInputForm.css'
+
+//my components
 import Question from '../Question/Question'
 import TextInput from '../TextInput/TextInput.js'
 import TextInputWithoutTitle from '../TextInputWithoutTitle/TextInputWithoutTitle.js'
-import DropdownMenuInputOther from "../DropdownMenuInputOther/DropdownMenuInputOther.js";
+import DropdownMenuInputOther from '../DropdownMenuInputOther/DropdownMenuInputOther.js';
+import DropdownMenuInput from '../DropdownMenuInput/DropdownMenuInput.js'
 
 
 const SecondInputForm = () => {
@@ -24,14 +27,14 @@ const SecondInputForm = () => {
     const [projectSummary, setProjectSummary] = useState("");
     const [applicationURL, setApplicationURL] = useState("");
     const [sourceOfFunding, setSourceOfFunding] = useState('');
+    const [projectType, setProjectType] = useState('');
+    const [expectedProjectBeginning, setExpectedProjectBeginning] = useState('');
     const [projectApplicant, setProjectAplicant] = useState("");
     const [projectPartners, setProjectPartners] = useState("");
     const [totalValue, setTotalValue] = useState(0);
     const [fesbValuePart, setFesbValuePart] = useState(0);
     const [newEmploymentBoolean, setNewEmployment] = useState("");
     const [projectTeam, setProjectTeam] = useState([]);
-    const [projectType, setProjectType] = useState('');
-    const [expectedProjectBeginning, setExpectedProjectBeginning] = useState('');
     const [expectedProjectDurationInMonths, setExpectedProjectDurationInMonths] = useState('');
     const [economicSubjectInvolvement, setEconomicSubjectInvolvement] = useState('');
     const [currentPesonnelExpense, setCurrentPesonnelExpense] = useState('');
@@ -54,7 +57,7 @@ const SecondInputForm = () => {
 
 
     useEffect(() => {
-
+        // TO-DO
     }, [])
 
 
@@ -88,6 +91,18 @@ const SecondInputForm = () => {
         "Erasmus +",
         "INTERREG",
         "Jedinice lokalne samouprave"
+    ]
+
+    let projectTypesData = [
+        "Međunarodni znanstveni kompetitivni",
+        "Nacionalni znanstveni kompetitivni",
+        "Stručni projekt",
+        "Strateški projekt",
+        "Infrastrukturni projekt",
+        "Suradnja s gospodarstvom",
+        "Podizanje kapaciteta",
+        "Donacija",
+        "Ostalo"
     ]
 
     let questions = [
@@ -139,13 +154,13 @@ const SecondInputForm = () => {
                 <TextInput label={"LINK NA INTERNETSKU STRANICU NA KOJOJ SE NALAZI POTPUNA DOKUMENTACIJA S TEKSTOM NATJEČAJA"} name={"application_url"} setSpecificState={setApplicationURL}/>
 
                 <Question questionText={questions[4]}/>
-                    <DropdownMenuInputOther name={"source_of_funding"} data={sourceOfFundingData}/>
+                    <DropdownMenuInputOther name={"source_of_funding"} data={sourceOfFundingData} setSpecificState={setSourceOfFunding}/>
 
                 <Question questionText={questions[5]}/>
-
+                    <DropdownMenuInput name={"type_of_projects"} data={projectTypesData} setSpecificState={setProjectType}/>
 
                 <Question questionText={questions[6]}/>
-
+                    <TextInputWithoutTitle name={"expected_project_beginning"} setSpecificState={setExpectedProjectBeginning}/>
 
                 <Question questionText={questions[7]}/>
 
