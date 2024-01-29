@@ -8,6 +8,7 @@ import TextInput from '../TextInput/TextInput.js'
 import TextInputWithoutTitle from '../TextInputWithoutTitle/TextInputWithoutTitle.js'
 import DropdownMenuInputOther from '../DropdownMenuInputOther/DropdownMenuInputOther.js';
 import DropdownMenuInput from '../DropdownMenuInput/DropdownMenuInput.js'
+import RadioButtonInput from '../RadioButtonInput/RadioButtonInput.js'
 
 
 const SecondInputForm = () => {
@@ -29,14 +30,12 @@ const SecondInputForm = () => {
     const [sourceOfFunding, setSourceOfFunding] = useState('');
     const [projectType, setProjectType] = useState('');
     const [expectedProjectBeginning, setExpectedProjectBeginning] = useState('');
+    const [expectedProjectDurationInMonths, setExpectedProjectDurationInMonths] = useState('');
     const [projectApplicant, setProjectAplicant] = useState("");
     const [projectPartners, setProjectPartners] = useState("");
+    const [economicSubjectInvolvement, setEconomicSubjectInvolvement] = useState('');
     const [totalValue, setTotalValue] = useState(0);
     const [fesbValuePart, setFesbValuePart] = useState(0);
-    const [newEmploymentBoolean, setNewEmployment] = useState("");
-    const [projectTeam, setProjectTeam] = useState([]);
-    const [expectedProjectDurationInMonths, setExpectedProjectDurationInMonths] = useState('');
-    const [economicSubjectInvolvement, setEconomicSubjectInvolvement] = useState('');
     const [currentPesonnelExpense, setCurrentPesonnelExpense] = useState('');
     const [newPersonnelExpense, setNewPersonnelExpense] = useState('');
     const [equipmentDescriptionAndExpense, setEquipmentDescriptionAndExpense] = useState('');
@@ -44,6 +43,9 @@ const SecondInputForm = () => {
     const [materialExpense, setMaterialExpense] = useState('');
     const [travelRegistrationEducationExpense, setTravelRegistrationEducationExpense] = useState('');
     const [expenseDisclaimer, setExpenseDisclaimer] = useState('');
+
+
+    const [projectTeam, setProjectTeam] = useState([]);
     const [partnerExpense, setPartnerExpense] = useState('');
     const [requestedFunding,setRequestedFunding] = useState('');
     const [downPayment, setDownPayment] = useState('');
@@ -105,6 +107,10 @@ const SecondInputForm = () => {
         "Ostalo"
     ]
 
+    let radioButtonData1 = "UKOLIKO JE JEDAN OD PARTNERA U PROJEKTU TVRTKA I/ILI POSTOJI" +
+                            "PRIJENOS ZNANJA/TEHNOLOGIJE\n PREMA GOSPODARSTVU KOJE JE NUŽNO" +
+                            "OSTVARITI TIJEKOM PROVEDBE PROJEKTA ODABERITE DA"
+
     let questions = [
         "1. Prijavitelj projekta/voditelj projektnog tima sa strane FESB-a",
         "2. Naziv, akronim i rok za prijavu",
@@ -112,10 +118,11 @@ const SecondInputForm = () => {
         "4. Poveznica za natječaj",
         "5. Izvor financiranja",
         "6. Vrsta projekta",
-        "7. Očekivani početak projketa",
-        "9. Očekivano trajanje projekta u mjesecima",
+        "7. Očekivani početak projekta",
+        "8. Očekivano trajanje projekta u mjesecima",
+        "9 Koordinator projekta*",
         "10. Ostali partneri na projektu*",
-        "11. U projektu koa partner sudjeluju gospodarski subjekti",
+        "11. U projektu kao partner sudjeluju gospodarski subjekti",
         "12. Ukupna vrijednost projekta",
         "13. Proračun projekta (može se unositi vrijedost ili postotak ukupne vrijednosti projketa*)",
         "14. Proračun za ostale partnere",
@@ -163,14 +170,32 @@ const SecondInputForm = () => {
                     <TextInputWithoutTitle name={"expected_project_beginning"} setSpecificState={setExpectedProjectBeginning}/>
 
                 <Question questionText={questions[7]}/>
-
+                    <TextInputWithoutTitle name={"expected_project_duration_in_months"} setSpecificState={setExpectedProjectDurationInMonths}/>
 
                 <Question questionText={questions[8]}/>
+                    <TextInput  label={"PRIJAVITELJ PROJKETA/VODEĆI PARTNER (INSTITUCIJA, TVRTKA, ...)"} name={"project_applicant"} setSpecificState={setProjectAplicant}/>
 
                 <Question questionText={questions[9]}/>
+                    <TextInputWithoutTitle name={"project_partners"} setSpecificState={setProjectPartners}/>
+
                 <Question questionText={questions[10]}/>
+                    <RadioButtonInput name={"economic_subjet_involvment"} simpleQuestionValue={radioButtonData1} setSelectionState={setEconomicSubjectInvolvement} />
+
                 <Question questionText={questions[11]}/>
+                    <TextInputWithoutTitle name={"total_value"} setSpecificState={setTotalValue}/>
+
+                
                 <Question questionText={questions[12]}/>
+                    <TextInput label={"DIO PRORAČUNA KOJI PRIPADA FESB-u"} name={"fesb_value_part"} setSpecificState={setFesbValuePart}/>
+                    <TextInput label={"TROŠAK POSTOJEĆEG OSOBLJA"} name={"current_personnel_expense"} setSpecificState={setCurrentPesonnelExpense}/>
+                    <TextInput label={"TROŠAK NOVOZAOSLENOG OSOBLJA"} name={"new_personnel_expense"} setSpecificState={setNewPersonnelExpense}/>
+                    <TextInput label={"TROŠAK I POPIS OPREME KOJA SE NABAVLJA (OZNAČITI NABAVU IZNAD 26.544,00 E"} name={"equipment_description_and_expense"} setSpecificState={setEquipmentDescriptionAndExpense}/>
+                    <TextInput label={"TROŠAK AMORTIZACIJE OPREME"} name={"equipment_amortization_expense"} setSpecificState={setEquipmentAmortizationExpense}/>
+                    <TextInput label={"TROŠAK MATERIJALA I SITNOG INVENTARA"} name={"material_expense"} setSpecificState={setMaterialExpense}/>
+                    <TextInput label={"PUTNI TROŠAK/TROŠAK KOTIZACIJA/STRUČNOG USAVRŠAVANJA"} name={"travel_registration_education_expense"} setSpecificState={setTravelRegistrationEducationExpense}/>
+                    <p>Upozoriti ukoliko je zbroj stavki od 13.2 do 13.9 veći od 13.1</p>
+                    <TextInput label={"NAPOMENA"} name={"expense_disclaimer"} setSpecificState={setExpenseDisclaimer}/>
+
                 <Question questionText={questions[13]}/>
                 <Question questionText={questions[14]}/>
                 <Question questionText={questions[15]}/>

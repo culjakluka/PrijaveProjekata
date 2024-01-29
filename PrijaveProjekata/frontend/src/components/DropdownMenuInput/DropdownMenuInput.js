@@ -5,7 +5,6 @@ const DropdownMenuInput = ({name, data, setSpecificState}) => {
 
     const [selectionValue, setSelectionValue] = useState("");
     const [options, setOptions] = useState([]);
-    const [otherVisibility, setOtherVisibility] = useState(false);   
 
     const handleSelectionChange = (event) => {
 
@@ -17,7 +16,7 @@ const DropdownMenuInput = ({name, data, setSpecificState}) => {
     
 
     useEffect(() => {
-        setOptions([...data, "Ostalo (navesti)"]);
+        setOptions(data);
 
         
         // check if the selection value is stored in storage
