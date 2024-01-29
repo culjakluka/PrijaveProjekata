@@ -9,7 +9,7 @@ import TextInputWithoutTitle from '../TextInputWithoutTitle/TextInputWithoutTitl
 import DropdownMenuInputOther from '../DropdownMenuInputOther/DropdownMenuInputOther.js';
 import DropdownMenuInput from '../DropdownMenuInput/DropdownMenuInput.js'
 import RadioButtonInput from '../RadioButtonInput/RadioButtonInput.js'
-
+import SpecialInput from '../SpecialInput/SpecialInput.js'
 
 const SecondInputForm = () => {
 
@@ -44,12 +44,13 @@ const SecondInputForm = () => {
     const [travelRegistrationEducationExpense, setTravelRegistrationEducationExpense] = useState('');
     const [expenseDisclaimer, setExpenseDisclaimer] = useState('');
 
-
-    const [projectTeam, setProjectTeam] = useState([]);
     const [partnerExpense, setPartnerExpense] = useState('');
     const [requestedFunding,setRequestedFunding] = useState('');
     const [downPayment, setDownPayment] = useState('');
     const [personalFinancingExpense, setPersonalFinancingExpense] = useState('');
+
+
+    const [projectTeam, setProjectTeam] = useState([]);
     const [consultantServices, setConsultantServices] = useState('');
     const [consultantExpense, setConsultantExpense] = useState('');
     const [consultantExpenseSource, setConsultantExpenseSource] = useState('');
@@ -62,6 +63,11 @@ const SecondInputForm = () => {
         // TO-DO
     }, [])
 
+
+    // callback
+    const updateProjectTeam = (projectMembersList) => {
+        setProjectTeam(projectMembersList)
+    }
 
     // in the future could be the wa how we load data
     let inputFormTemplate = 
@@ -197,13 +203,30 @@ const SecondInputForm = () => {
                     <TextInput label={"NAPOMENA"} name={"expense_disclaimer"} setSpecificState={setExpenseDisclaimer}/>
 
                 <Question questionText={questions[13]}/>
+                    <TextInputWithoutTitle name={"partner_expense"} setSpecificState={setPartnerExpense}/>
+
                 <Question questionText={questions[14]}/>
+                    <TextInputWithoutTitle name={"requested_funding"} setSpecificState={setRequestedFunding}/>
+
                 <Question questionText={questions[15]}/>
+                    <TextInputWithoutTitle name={"down_payment"} setSpecificState={setDownPayment}/>
+
                 <Question questionText={questions[16]}/>
+                <p>Ukoliko projekt nije 100% financiran, kako planirate sufinancirati nefinancirani dio?</p>
+                    <TextInputWithoutTitle name={"personal_financing_expense"} setSpecificState={setPersonalFinancingExpense}/>
+
                 <Question questionText={questions[17]}/>
+                    <RadioButtonInput />
+
                 <Question questionText={questions[18]}/>
+                    <SpecialInput questionText={""} sendProjectMembers={updateProjectTeam}/>
+
                 <Question questionText={questions[19]}/>
+
+
                 <Question questionText={questions[20]}/>
+
+
                 <Question questionText={questions[21]}/>
 
 
