@@ -8,8 +8,16 @@ const RadioButtonInput = ({simpleQuestionValue, setSelectionState}) => {
     const [selection, setSelection] = useState('')
 
     const handleRadioChange = (value) => {
+        switch (value) {
+            case 'da':
+                setSelectionState(true)
+                break;
+            case 'ne':
+                setSelectionState(false)
+            default:
+                break;
+        }
         setSelection(value)
-        setSelectionState(value)
     }
 
     return(
