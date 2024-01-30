@@ -29,7 +29,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={!loggedIn ? <Home /> : <Navigate to="/SecondInput" />}
+              element={!loggedIn ? <Home /> : <Navigate to="/FirstInput" />}
             />
             <Route
               path="/FirstInput"
@@ -37,7 +37,7 @@ function App() {
             />
             <Route 
               path="/SecondInput"
-              element={loggedIn ? <SecondInputPage /> : <Navigate to="/" />}
+              element={<SecondInputPage />}
             />
             <Route 
               path="/PdfAttachTest"
