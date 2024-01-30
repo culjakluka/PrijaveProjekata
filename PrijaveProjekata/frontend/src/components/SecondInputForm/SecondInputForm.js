@@ -10,6 +10,9 @@ import DropdownMenuInputOther from '../DropdownMenuInputOther/DropdownMenuInputO
 import DropdownMenuInput from '../DropdownMenuInput/DropdownMenuInput.js'
 import RadioButtonInput from '../RadioButtonInput/RadioButtonInput.js'
 import SpecialInput from '../SpecialInput/SpecialInput.js'
+import GenerirajIzjavuPredstojnikaZavoda from "../GenerateHeadOfDepartmentStatement/GenerateHeadOfDepartmentStatement.js";
+import AttachAdditionalDocumentation from "../AttachAdditionalDocumentation/AttachAdditionalDocumentation.js";
+import AttachHeadOfDepartmentStatement from "../AttachHeadOfDepartmentStatement/AttachHeadOfDepartmentStatement.js";
 
 const SecondInputForm = () => {
 
@@ -48,7 +51,7 @@ const SecondInputForm = () => {
     const [requestedFunding,setRequestedFunding] = useState('');
     const [downPayment, setDownPayment] = useState('');
     const [personalFinancingExpense, setPersonalFinancingExpense] = useState('');
-
+    const [newEmploymentBoolean, setNewEmploymentBoolean] = useState('');
 
     const [projectTeam, setProjectTeam] = useState([]);
     const [consultantServices, setConsultantServices] = useState('');
@@ -137,7 +140,9 @@ const SecondInputForm = () => {
         "17. Iznos potrebnog vlastitog sufinanciranja projekta",
         "18. Jesu li u projektu planirana nova radna mjesta*",
         "19. Navedite ostale osobe koje će biti uključene u provedbu projekta",
-        "20. Planirate li koristiti konzultantsku pomoć prilikom prijave projekta?"
+        "20. Planirate li koristiti konzultantsku pomoć prilikom prijave projekta?",
+        "21. Navedite dokumentaciju koju je potrebno osigurati za prijavu projekta od strane FESB-a",
+        "22. Prilozi*"
     ]
 
     return ( 
@@ -216,18 +221,31 @@ const SecondInputForm = () => {
                     <TextInputWithoutTitle name={"personal_financing_expense"} setSpecificState={setPersonalFinancingExpense}/>
 
                 <Question questionText={questions[17]}/>
-                    <RadioButtonInput />
+                    <RadioButtonInput name={"new_employment_boolean"} setSelectionState={setNewEmploymentBoolean}/>
 
                 <Question questionText={questions[18]}/>
                     <SpecialInput questionText={""} sendProjectMembers={updateProjectTeam}/>
 
                 <Question questionText={questions[19]}/>
-
+                    <RadioButtonInput name={"consultant_services"} setSelectionState={setConsultantServices}/>
+                    <p>Ukoliko je odgovor DA:</p>
+                    <TextInputWithoutTitle name={"consultant_expense"} setSpecificState={setConsultantExpense}/>
+                    <TextInputWithoutTitle name={"consultant_expense_source"} setSpecificState={setConsultantExpenseSource}/>
 
                 <Question questionText={questions[20]}/>
-
+                    <p>Naznačite u kakvom obliku je potrebna dokumentacija (elektronski, preslika,ovjerena preslika, izvornik, i sl.)</p>
+                    <TextInputWithoutTitle name={"required_documentation_FESB"} setSpecificState={setRequiredDocumentationFESB}/>
+                
+                <GenerirajIzjavuPredstojnikaZavoda/>
 
                 <Question questionText={questions[21]}/>
+
+                    <AttachHeadOfDepartmentStatement/>
+
+                    <AttachAdditionalDocumentation/>
+            
+
+                <button id="podnesi-trazenje-suglasnosti">PODNESI TRAZENJE SUGLASNOSTI</button>
 
 
             </SecondInputFormDataConext.Provider>

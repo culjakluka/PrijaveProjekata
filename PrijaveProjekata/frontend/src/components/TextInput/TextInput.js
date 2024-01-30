@@ -23,6 +23,7 @@ const TextInput = ({label, name, setSpecificState}) => {
         // set inputValue to the retrived value if it exists
         if(storedValue) {
             setInputValue(storedValue)
+            setSpecificState(storedValue)
         }
     },[name])
 
