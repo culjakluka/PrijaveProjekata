@@ -1,10 +1,10 @@
-import InputForm from '../../components/InputForm/InputForm.js'
+import FirstInputForm from '../../components/FirstInputForm/FirstInputForm.js'
 
 const FirstInputPage = () => {
 
     return (
         <div className="FirstInputPage">
-            <InputForm/>
+            <FirstInputForm/>
         </div>
     )
 }
