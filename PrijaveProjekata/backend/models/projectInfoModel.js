@@ -155,6 +155,10 @@ const projectInfoSchema = new Schema({
         type: Number,
     //    required: true
     },
+    otherServicesExpense: {
+        type: Number // trošak vanjskih usluga
+        // required: true
+    },
     materialExpense: { // trošak materijala i sitnog inventara
         type: Number,
     //    required: true

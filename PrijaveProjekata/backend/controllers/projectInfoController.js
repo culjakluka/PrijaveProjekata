@@ -39,7 +39,7 @@ const createProjectInfoSet = async (req, res) => {
         // 'workTimeOtherPercetange', 'teamLeaderDisclaimer', 'sourceOfFunding',
         // 'projectType', 'expectedProjectBeginning', 'expectedProjectDurationInMonths',
         // 'economicSubjectInvolvement', 'currentPesonnelExpense', 'newPersonnelExpense',
-        // 'equipmentDescriptionAndExpense', 'equipmentAmortizationExpense', 'materialExpense',
+        // 'equipmentDescriptionAndExpense', 'equipmentAmortizationExpense', 'otherServicesExpense', 'materialExpense',
         // 'travelRegistrationEducationExpense', 'expenseDisclaimer', 'partnerExpense',
         // 'requestedFunding', 'downPayment', 'personalFinancingExpense', 'consultantServices',
         // 'consultantExpense', 'consultantExpenseSource', 'requiredDocumentationFESB', 'pdfDocuments'
