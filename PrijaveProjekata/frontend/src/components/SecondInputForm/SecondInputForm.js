@@ -10,6 +10,10 @@ import DropdownMenuInputOther from '../DropdownMenuInputOther/DropdownMenuInputO
 import DropdownMenuInput from '../DropdownMenuInput/DropdownMenuInput.js'
 import RadioButtonInput from '../RadioButtonInput/RadioButtonInput.js'
 import SpecialInput from '../SpecialInput/SpecialInput.js'
+import GenerirajIzjavuPredstojnikaZavoda from "../GenerateHeadOfDepartmentStatement/GenerateHeadOfDepartmentStatement.js";
+import AttachAdditionalDocumentation from "../AttachAdditionalDocumentation/AttachAdditionalDocumentation.js";
+import AttachHeadOfDepartmentStatement from "../AttachHeadOfDepartmentStatement/AttachHeadOfDepartmentStatement.js";
+import AutomaticInput from "../AutomaticInput/AutomaticInput.js";
 
 const SecondInputForm = () => {
 
@@ -38,17 +42,20 @@ const SecondInputForm = () => {
     const [fesbValuePart, setFesbValuePart] = useState(0);
     const [currentPesonnelExpense, setCurrentPesonnelExpense] = useState('');
     const [newPersonnelExpense, setNewPersonnelExpense] = useState('');
+    const [indirectExpenses, setIndirectExpenses] = useState(0);
     const [equipmentDescriptionAndExpense, setEquipmentDescriptionAndExpense] = useState('');
     const [equipmentAmortizationExpense, setEquipmentAmortizationExpense] = useState('');
+    const [otherServicesExpense, setOtherServicesExpense] = useState('')
     const [materialExpense, setMaterialExpense] = useState('');
     const [travelRegistrationEducationExpense, setTravelRegistrationEducationExpense] = useState('');
     const [expenseDisclaimer, setExpenseDisclaimer] = useState('');
+
 
     const [partnerExpense, setPartnerExpense] = useState('');
     const [requestedFunding,setRequestedFunding] = useState('');
     const [downPayment, setDownPayment] = useState('');
     const [personalFinancingExpense, setPersonalFinancingExpense] = useState('');
-
+    const [newEmploymentBoolean, setNewEmploymentBoolean] = useState('');
 
     const [projectTeam, setProjectTeam] = useState([]);
     const [consultantServices, setConsultantServices] = useState('');
@@ -64,6 +71,9 @@ const SecondInputForm = () => {
     }, [])
 
 
+    useEffect(() => {
+        setIndirectExpenses(0.15*fesbValuePart)
+    }, [fesbValuePart])
     // callback
     const updateProjectTeam = (projectMembersList) => {
         setProjectTeam(projectMembersList)
@@ -137,7 +147,9 @@ const SecondInputForm = () => {
         "17. Iznos potrebnog vlastitog sufinanciranja projekta",
         "18. Jesu li u projektu planirana nova radna mjesta*",
         "19. Navedite ostale osobe koje će biti uključene u provedbu projekta",
-        "20. Planirate li koristiti konzultantsku pomoć prilikom prijave projekta?"
+        "20. Planirate li koristiti konzultantsku pomoć prilikom prijave projekta?",
+        "21. Navedite dokumentaciju koju je potrebno osigurati za prijavu projekta od strane FESB-a",
+        "22. Prilozi*"
     ]
 
     return ( 
@@ -148,7 +160,7 @@ const SecondInputForm = () => {
                 <Question questionText={questions[0]}/>
                     <TextInput label={"IME I PREZIME*"} name={"name_and_surname_2"} setSpecificState={setNameSurname}/>
                     <TextInput label={"TITULA*"} name={"vocation_2"} setSpecificState={setVocation}/>
-                    <TextInput label={"ZAVOD (OD"} name={"department_2"} setSpecificState={setDepartment}/>
+                    <TextInput label={"ZAVOD (ODSJEK)"} name={"department_2"} setSpecificState={setDepartment}/>
                     <TextInput label={"E-MAIL*"} name={"email_2"} setSpecificState={setEmail}/>
                     <TextInput label={"MOBITEL*"} name={"phone_number_2"} setSpecificState={setMobilePhoneNumber}/>
                     <TextInput label={"POSTOTAK RADNOG VREMENA U OKVIRU PREDLOŽENOG PROJEKTA*"} name={"work_time_this_percentage"} setSpecificState={setWorkTimeThisPercentage}/>
@@ -194,9 +206,11 @@ const SecondInputForm = () => {
                 <Question questionText={questions[12]}/>
                     <TextInput label={"DIO PRORAČUNA KOJI PRIPADA FESB-u"} name={"fesb_value_part"} setSpecificState={setFesbValuePart}/>
                     <TextInput label={"TROŠAK POSTOJEĆEG OSOBLJA"} name={"current_personnel_expense"} setSpecificState={setCurrentPesonnelExpense}/>
-                    <TextInput label={"TROŠAK NOVOZAOSLENOG OSOBLJA"} name={"new_personnel_expense"} setSpecificState={setNewPersonnelExpense}/>
+                    <TextInput label={"TROŠAK NOVOZAPOSLENOG OSOBLJA"} name={"new_personnel_expense"} setSpecificState={setNewPersonnelExpense}/>
+                    <AutomaticInput label={"NEIZRAVNI TROŠKOVI (15% NA TROŠKOVE OSOBLJA)"} value={0.15*fesbValuePart}/>
                     <TextInput label={"TROŠAK I POPIS OPREME KOJA SE NABAVLJA (OZNAČITI NABAVU IZNAD 26.544,00 E"} name={"equipment_description_and_expense"} setSpecificState={setEquipmentDescriptionAndExpense}/>
                     <TextInput label={"TROŠAK AMORTIZACIJE OPREME"} name={"equipment_amortization_expense"} setSpecificState={setEquipmentAmortizationExpense}/>
+                    <TextInput label={"TROŠAK VANJSKIH USLUGA"} name={"other_services_expense"} setSpecificState={setOtherServicesExpense}/>
                     <TextInput label={"TROŠAK MATERIJALA I SITNOG INVENTARA"} name={"material_expense"} setSpecificState={setMaterialExpense}/>
                     <TextInput label={"PUTNI TROŠAK/TROŠAK KOTIZACIJA/STRUČNOG USAVRŠAVANJA"} name={"travel_registration_education_expense"} setSpecificState={setTravelRegistrationEducationExpense}/>
                     <p>Upozoriti ukoliko je zbroj stavki od 13.2 do 13.9 veći od 13.1</p>
@@ -216,18 +230,31 @@ const SecondInputForm = () => {
                     <TextInputWithoutTitle name={"personal_financing_expense"} setSpecificState={setPersonalFinancingExpense}/>
 
                 <Question questionText={questions[17]}/>
-                    <RadioButtonInput />
+                    <RadioButtonInput name={"new_employment_boolean"} setSelectionState={setNewEmploymentBoolean}/>
 
                 <Question questionText={questions[18]}/>
                     <SpecialInput questionText={""} sendProjectMembers={updateProjectTeam}/>
 
                 <Question questionText={questions[19]}/>
-
+                    <RadioButtonInput name={"consultant_services"} setSelectionState={setConsultantServices}/>
+                    <p>Ukoliko je odgovor DA:</p>
+                    <TextInputWithoutTitle name={"consultant_expense"} setSpecificState={setConsultantExpense}/>
+                    <TextInputWithoutTitle name={"consultant_expense_source"} setSpecificState={setConsultantExpenseSource}/>
 
                 <Question questionText={questions[20]}/>
-
+                    <p>Naznačite u kakvom obliku je potrebna dokumentacija (elektronski, preslika,ovjerena preslika, izvornik, i sl.)</p>
+                    <TextInputWithoutTitle name={"required_documentation_FESB"} setSpecificState={setRequiredDocumentationFESB}/>
+                
+                <GenerirajIzjavuPredstojnikaZavoda/>
 
                 <Question questionText={questions[21]}/>
+
+                    <AttachHeadOfDepartmentStatement/>
+
+                    <AttachAdditionalDocumentation/>
+            
+
+                <button id="podnesi-trazenje-suglasnosti">PODNESI TRAZENJE SUGLASNOSTI</button>
 
 
             </SecondInputFormDataConext.Provider>
