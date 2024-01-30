@@ -32,17 +32,17 @@ const getProjectInfo = async (req, res) => {
 //create a ProjectInfo set
 const createProjectInfoSet = async (req, res) => {
     const fieldsToCheck = [
-        'userId', 'nameSurname', 'vocation', 'department', 'email', 'projectTitle',
-        'projectAcronym', 'applicationDeadline', 'projectSummary', 'applicationURL',
-        'projectApplicant', 'projectPartners', 'totalValue', 'fesbValuePart',
-        'newEmploymentBoolean', 'projectTeam', 'mobilePhoneNumber', 'workTimeThisPercetange',
-        'workTimeOtherPercetange', 'teamLeaderDisclaimer', 'sourceOfFunding',
-        'projectType', 'expectedProjectBeginning', 'expectedProjectDurationInMonths',
-        'economicSubjectInvolvement', 'currentPesonnelExpense', 'newPersonnelExpense',
-        'equipmentDescriptionAndExpense', 'equipmentAmortizationExpense', 'materialExpense',
-        'travelRegistrationEducationExpense', 'expenseDisclaimer', 'partnerExpense',
-        'requestedFunding', 'downPayment', 'personalFinancingExpense', 'consultantServices',
-        'consultantExpense', 'consultantExpenseSource', 'requiredDocumentationFESB', 'pdfDocuments'
+    //     'userId', 'nameSurname', 'vocation', 'department', 'email', 'projectTitle',
+    //     'projectAcronym', 'applicationDeadline', 'projectSummary', 'applicationURL',
+    //     'projectApplicant', 'projectPartners', 'totalValue', 'fesbValuePart',
+    //     'newEmploymentBoolean', 'projectTeam', 'mobilePhoneNumber', 'workTimeThisPercetange',
+    //     'workTimeOtherPercetange', 'teamLeaderDisclaimer', 'sourceOfFunding',
+    //     'projectType', 'expectedProjectBeginning', 'expectedProjectDurationInMonths',
+    //     'economicSubjectInvolvement', 'currentPesonnelExpense', 'newPersonnelExpense',
+    //     'equipmentDescriptionAndExpense', 'equipmentAmortizationExpense', 'materialExpense',
+    //     'travelRegistrationEducationExpense', 'expenseDisclaimer', 'partnerExpense',
+    //     'requestedFunding', 'downPayment', 'personalFinancingExpense', 'consultantServices',
+    //     'consultantExpense', 'consultantExpenseSource', 'requiredDocumentationFESB', 'pdfDocuments'
     ];
 
     const projectData = {};
