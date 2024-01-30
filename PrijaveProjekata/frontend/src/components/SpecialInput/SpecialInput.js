@@ -1,14 +1,11 @@
 import React, {useState, useEffect} from "react";
 import styles from './SpecialInput.css'
-import SpecialInputMember from "./SpecialInputMember/SpecialInputMember";
-import SpecialInputProject from "./SpecialInputProject/SpecialInputProject";
 import SpecialInputMemberContainer from "./SpecialInputMemberContainer/SpecialInputMemberContainer";
 import './SpecialInput.css'
 import CompletedMember from "../CompletedMember/CompletedMember"
 
 
 const SpecialInput = ({pitanje, sendProjectMembers}) => {
-
     // projectMembers contains members that consist of this fields named: - newItemNameSurname
     //                                                                    - newItemEmail
     //                                                                    - newItemPercentage
@@ -22,48 +19,26 @@ const SpecialInput = ({pitanje, sendProjectMembers}) => {
       // console.log(projectMembers)
     }
 
-    // first time when all components mounts,
-    // retrive data from sessionStorage stored
-    // by the key "projectMembers"
-    useEffect(() => {
-      const storedProjectMembers = sessionStorage.getItem('projectMembers');
-      //setProjectMembers(JSON.parse(storedProjectMembers));
-    })
-
-
     // keeping track of projectMembers
     useEffect(() => {
        console.log(projectMembers)
        sendProjectMembers(projectMembers)
     }, [projectMembers])
-
-    const saveProjectMembers = (projectMembers) => {
-      sessionStorage.setItem('projectMembers', JSON.stringify(projectMembers));
-    }
-
     
     return (
         <div className="special-input-container">   
             <p className="question">{pitanje}</p>
-
-            {/* finilized project members are going to be added inside <div> below */}
             <div id="added-project-member">
-              {/* ...rendering components... */}
               <div style={{border:'solid purple'}}> 
-            {projectMembers.length > 0 ? projectMembers.map((member, index) => (
-                <CompletedMember key={index} fullName={member.newItemNameSurname} email={member.newItemEmail} percent={member.newItemPercentage} projects={member.projects} />
-                )) : (<p>you didn't add any member...</p>)
-              }
+                {projectMembers.length > 0 ? projectMembers.map((member, index) => (
+                  <CompletedMember key={index} fullName={member.nameSurname} email={member.email} percent={member.thisProjectPercentage} projects={member.otherProjects} />
+                  )) : <p>you didn't add any members...</p>}
               </div>
-              {/* ...end of rendering... */}
             </div>
-
             {/* // <SpecialInputMemberContainer> is actually input form for new element/memeber 
                 // it takes function addNewMember as a prop which is passed to another component
                 // all the way until destination component is reached - component that will trigger it
             */}
-
-    
             <SpecialInputMemberContainer addProjectMember={addNewMember}/>
             <button>+</button>
         </div>

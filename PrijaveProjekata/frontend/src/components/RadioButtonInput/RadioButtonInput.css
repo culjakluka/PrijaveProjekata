@@ -1,9 +1,9 @@
 .simple-question-text {
-    align-self: flex-start;
+    color: #A4A4A4;
+    font-size: 20px;
     font-weight: bold;
-    text-transform: uppercase;
-    color: #B0355E;
 }
+
 .radio-button-container {
 
 }
