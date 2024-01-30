@@ -1,28 +1,46 @@
-import React, {useEffect, useState} from 'react'
+import {useState, useEffect} from 'react'
+import './DropdownMenuInput.css'
 
-const DropdownMenuInput = ({label, data}) => {
+const DropdownMenuInput = ({name, data, setSpecificState}) => {
 
-    const[selectionValue, setSelectionValue] = useState("");
-    const[options, setOptions] = useState(data);
-
+    const [selectionValue, setSelectionValue] = useState("");
+    const [options, setOptions] = useState([]);
 
     const handleSelectionChange = (event) => {
-        setSelectionValue(event.target.value)
+
+        setSpecificState(event.target.value);
+
+        // save selection in sessionStorage
+        sessionStorage.setItem(name, event.target.value);
     }
+    
+
+    useEffect(() => {
+        setOptions(data);
+
+        
+        // check if the selection value is stored in storage
+        const selectionValueSessionStorage = sessionStorage.getItem(name);
+        // if it is stored, load it
+        if(selectionValueSessionStorage) {
+            setSelectionValue(selectionValueSessionStorage);
+        }
+
+    }, [data])
 
     return(
         <div className='dropdown-menu-container'>
+            <div className/>
             <select value={selectionValue} onChange={handleSelectionChange}>
                 <option value="">Select an option</option>
-                {data.map(
+                {options.map(
                     // takes all the data from "data" and maps it
                     // (data that we can take of each memeber of data) => (html element and us of data's data)
-                    (options, index) => (<option key={index} value={options}>{options}</option>)
+                    (member, index) => (<option key={index} value={member}>{member}</option>)
                 )}
             </select>
-            {selectionValue && <p>You selected: {selectionValue}</p>}
         </div>
     )
 }
-
-export default DropdownMenuInput
+ 
+export default DropdownMenuInput;

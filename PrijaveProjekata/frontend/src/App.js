@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // pages & components
-import InputForm from './components/InputForm/InputForm';
 import Home from './pages/Home';
 import FirstInputPage from './pages/FirstInputPage/FirstInputPage';
 import SecondInputPage from './pages/SecondInputPage/SecondInputPage';
@@ -30,7 +29,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={!loggedIn ? <Home /> : <Navigate to="/FirstInput" />}
+              element={!loggedIn ? <Home /> : <Navigate to="/SecondInput" />}
             />
             <Route
               path="/FirstInput"
