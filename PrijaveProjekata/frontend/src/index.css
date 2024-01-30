@@ -5,7 +5,10 @@
 :root {
   --primary: #1aac83;
   --error: #e7195a;
+  --input-underline-color: #B0355E;
+  --secondary-text-color: #A4A4A4;
 }
+
 body {
   background: #f1f1f1;
   margin: 0;
@@ -15,9 +18,7 @@ header {
   background: #fff;
 }
 header .container {
-  max-width: 1400px;
   margin: 0 auto;
-  padding: 10px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -27,16 +28,17 @@ header a {
   text-decoration: none;
 }
 .pages{
-  max-width: 1400px;
-  padding: 20px;
   margin: 0 auto;
 }
 
 /* homepage */
 .home {
+  /*removing this part because we won't need grid */
+  /*
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 100px;
+  */
 }
 .firstData-details {
   background: #fff;
@@ -67,19 +69,8 @@ header a {
   color: #333;
 }
 
-/* new firstData form */
-label, input {
-  display: block;
-}
-input {
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
+
+
 form button {
   background: var(--primary);
   border: 0;

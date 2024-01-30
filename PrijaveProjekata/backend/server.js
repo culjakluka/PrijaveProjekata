@@ -3,6 +3,8 @@ require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
 const firstData = require('./routes/firstData');
+const userRoutes = require('./routes/user')
+const projectInfo = require('./routes/projectInfo')
 
 // express app
 const app = express();
@@ -16,11 +18,13 @@ app.use((req, res, next) => {
 })
 
 // routes
-app.use('/api/firstDataSets',  firstData); // first submit data
+app.use('/api/firstDataSets',  firstData) // first submit data
+app.use('/api/user', userRoutes)
+app.use('/api/projectInfo', projectInfo)
 
 // connect to database
-const db_uri = toString(process.env.MONGO_URI);
-mongoose.connect(`${process.env.MONGO_URI}`)
+const db_uri = `${process.env.MONGO_URI}`;
+mongoose.connect(db_uri)
     .then(() => {
         // listen for requests
         app.listen(process.env.PORT, () => {
@@ -28,6 +32,5 @@ mongoose.connect(`${process.env.MONGO_URI}`)
         })
     })
     .catch((error) => {
-        console.log(error);
+        console.log(error)
     })
-

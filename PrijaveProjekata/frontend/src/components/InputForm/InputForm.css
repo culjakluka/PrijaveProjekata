@@ -1,0 +1,32 @@
+.input-container {
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+    background-color: #A4A4A4;
+}
+
+.input-form {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: white;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.document-title {
+    font-family: 'Segoe UI';
+    color: #A4A4A4;
+    align-self: center;
+}
+
+#submit-button {
+    align-self: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}

@@ -1,0 +1,31 @@
+    {
+        "data" :  [
+            {
+                "type" : "question",
+                "label" : "1. Prijavitelj projekta/projektnog tima sa strane fesba"
+            },
+            {
+                "type" : "TextInput",
+                "label" : "Ime i prezime",
+                "name" : "ime_prezime",
+                "required" : "da"
+            },
+            {
+                "type" : "RadioButton",
+                "label" : "Radio button",
+                "name" : "radio-button-1",
+                "selection" : "da"
+            },
+            {
+                "type" : "DropdownMenu",
+                "label" : "Dropdown menu",
+                "name" : "dropdown-menu-1",
+                "data" : [
+                    "option 1",
+                    "option 2",
+                    "option 3"
+                ]
+            }
+        ]
+
+    }
