@@ -32,7 +32,7 @@ const FirstInputForm = () => {
     const [projectTeam, setProjectTeam] = useState([]);
     const [firstInputMarker, setFirstInputMarker] = useState(true)
     const [secondInputMarker, setSecondInputMarker] = useState(false)
-    const[inputFormData, setInputFormData] = useState({});
+    const [inputFormData, setInputFormData] = useState({});
 
     // object will take all data from input
     // later it will be extracted and sent to databases
@@ -59,9 +59,9 @@ const FirstInputForm = () => {
         }
     };
 
-    // set inputFormData when component mount
     useEffect(() => {
         setInputFormData({
+            userId: user.userId,
             firstInputMarker,
             secondInputMarker,
             nameSurname,

@@ -33,8 +33,9 @@ const projectTeamMember = new Schema({
 
 const projectInfoSchema = new Schema({
     userId: { // id usera koji je loginan
-        type: Number,
-    //    required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'userModel',
+        required: true
     },
     firstInputMarker: { // jeli ispunjena forma obrasca namjere
         type: Boolean
@@ -107,11 +108,11 @@ const projectInfoSchema = new Schema({
         type: Number,
     //    required: true
     },
-    workTimeThisPercetange: { //POSTOTAK RADNOG VREMENA U OKVIRU PREDLOŽENOG PROJEKTA*
+    workTimeThisPercentage: { //POSTOTAK RADNOG VREMENA U OKVIRU PREDLOŽENOG PROJEKTA*
         type: Number,
     //    required: true
     },
-    workTimeOtherPercetange: { //POSTOTAK RADNOG VREMENA U OKVIRU OSTALIH PROJEKATA PROJEKTA*
+    workTimeOtherPercentage: { //POSTOTAK RADNOG VREMENA U OKVIRU OSTALIH PROJEKATA PROJEKTA*
         type: Number,
     //    required: true
     },

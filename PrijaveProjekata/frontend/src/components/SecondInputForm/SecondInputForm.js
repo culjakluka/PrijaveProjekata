@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { SecondInputFormDataConext } from '../../context/SecondInputFormDataContext' 
 import './SecondInputForm.css'
+import { useAuthContext } from "../../hooks/useAuthContext.js";
 
 //my components
 import Question from '../Question/Question'
@@ -16,16 +17,18 @@ import AttachHeadOfDepartmentStatement from "../AttachHeadOfDepartmentStatement/
 import AutomaticInput from "../AutomaticInput/AutomaticInput.js";
 
 const SecondInputForm = () => {
+    const { user } = useAuthContext()
 
     const [inputFormData, setInputFormData] = useState('');
+    const [secondInputMarker, setSecondInputMarker] = useState(true)
     const [nameSurname, setNameSurname] = useState("");
     const [vocation, setVocation] = useState("");
     const [department, setDepartment] = useState("");
     const [email, setEmail] = useState("");
-    const [mobilePhoneNumber, setMobilePhoneNumber] = useState('');
-    const [workTimeThisPercentage, setWorkTimeThisPercentage] = useState('');
-    const [workTimeOtherPercetange, setWorkTimeOTherPercentage] = useState('');
-    const [teamLeaderDisclamer, setTeamLeaderDisclamer] = useState('');
+    const [mobilePhoneNumber, setMobilePhoneNumber] = useState(0);
+    const [workTimeThisPercentage, setWorkTimeThisPercentage] = useState(0);
+    const [workTimeOtherPercentage, setWorkTimeOtherPercentage] = useState(0);
+    const [teamLeaderDisclaimer, setTeamLeaderDisclaimer] = useState('');
     const [projectTitle, setProjectTitle] = useState("");
     const [projectAcronym, setProjectAcronym] = useState("");
     const [applicationDeadline, setApplicationDeadline ] = useState("");
@@ -34,42 +37,96 @@ const SecondInputForm = () => {
     const [sourceOfFunding, setSourceOfFunding] = useState('');
     const [projectType, setProjectType] = useState('');
     const [expectedProjectBeginning, setExpectedProjectBeginning] = useState('');
-    const [expectedProjectDurationInMonths, setExpectedProjectDurationInMonths] = useState('');
+    const [expectedProjectDurationInMonths, setExpectedProjectDurationInMonths] = useState(0);
     const [projectApplicant, setProjectAplicant] = useState("");
     const [projectPartners, setProjectPartners] = useState("");
-    const [economicSubjectInvolvement, setEconomicSubjectInvolvement] = useState('');
+    const [economicSubjectInvolvement, setEconomicSubjectInvolvement] = useState(false);
     const [totalValue, setTotalValue] = useState(0);
     const [fesbValuePart, setFesbValuePart] = useState(0);
-    const [currentPesonnelExpense, setCurrentPesonnelExpense] = useState('');
-    const [newPersonnelExpense, setNewPersonnelExpense] = useState('');
+    const [currentPesonnelExpense, setCurrentPesonnelExpense] = useState(0);
+    const [newPersonnelExpense, setNewPersonnelExpense] = useState(0);
     const [indirectExpenses, setIndirectExpenses] = useState(0);
     const [equipmentDescriptionAndExpense, setEquipmentDescriptionAndExpense] = useState('');
-    const [equipmentAmortizationExpense, setEquipmentAmortizationExpense] = useState('');
-    const [otherServicesExpense, setOtherServicesExpense] = useState('')
-    const [materialExpense, setMaterialExpense] = useState('');
-    const [travelRegistrationEducationExpense, setTravelRegistrationEducationExpense] = useState('');
+    const [equipmentAmortizationExpense, setEquipmentAmortizationExpense] = useState(0);
+    const [otherServicesExpense, setOtherServicesExpense] = useState(0)
+    const [materialExpense, setMaterialExpense] = useState(0);
+    const [travelRegistrationEducationExpense, setTravelRegistrationEducationExpense] = useState(0);
     const [expenseDisclaimer, setExpenseDisclaimer] = useState('');
 
 
-    const [partnerExpense, setPartnerExpense] = useState('');
-    const [requestedFunding,setRequestedFunding] = useState('');
-    const [downPayment, setDownPayment] = useState('');
+    const [partnerExpense, setPartnerExpense] = useState(0);
+    const [requestedFunding,setRequestedFunding] = useState(0);
+    const [downPayment, setDownPayment] = useState(0);
     const [personalFinancingExpense, setPersonalFinancingExpense] = useState('');
-    const [newEmploymentBoolean, setNewEmploymentBoolean] = useState('');
+    const [newEmploymentBoolean, setNewEmploymentBoolean] = useState(false);
 
     const [projectTeam, setProjectTeam] = useState([]);
-    const [consultantServices, setConsultantServices] = useState('');
-    const [consultantExpense, setConsultantExpense] = useState('');
+    const [consultantServices, setConsultantServices] = useState(false);
+    const [consultantExpense, setConsultantExpense] = useState(0);
     const [consultantExpenseSource, setConsultantExpenseSource] = useState('');
     const [requiredDocumentationFESB, setRequiredDocumentationFESB] = useState('');
+    const [pdfDocuments, setPdfDocuments] = useState([])
 
-
-
+    let projectToUpdateId = "65b525221fc600addf86c79a" // hard codano dok ne smislim kako nac pravi id tablice za update
 
     useEffect(() => {
-        // TO-DO
-    }, [])
-
+        setInputFormData({
+            userId: user?.userId,
+            secondInputMarker,
+            nameSurname,
+            vocation,
+            department,
+            email,
+            projectTitle,
+            projectAcronym,
+            applicationDeadline,
+            projectSummary,
+            applicationURL,
+            projectApplicant,
+            projectPartners,    
+            totalValue,
+            fesbValuePart,
+            newEmploymentBoolean,
+            projectTeam,
+            mobilePhoneNumber,
+            workTimeThisPercentage,
+            workTimeOtherPercentage,
+            teamLeaderDisclaimer,
+            sourceOfFunding,
+            projectType,
+            expectedProjectBeginning,
+            expectedProjectDurationInMonths,
+            economicSubjectInvolvement,
+            currentPesonnelExpense,
+            newPersonnelExpense,
+            equipmentDescriptionAndExpense,
+            equipmentAmortizationExpense,
+            otherServicesExpense,
+            materialExpense,
+            travelRegistrationEducationExpense,
+            expenseDisclaimer,
+            partnerExpense,
+            requestedFunding,
+            downPayment,
+            personalFinancingExpense,
+            newEmploymentBoolean,
+            consultantServices,
+            consultantExpense,
+            consultantExpenseSource,
+            requiredDocumentationFESB,
+            pdfDocuments,
+        })
+        console.log(JSON.stringify(inputFormData));
+    }, [nameSurname, vocation, department, 
+        email, projectTitle, projectAcronym, applicationDeadline, projectSummary, applicationURL, 
+        projectApplicant, projectPartners,     totalValue, fesbValuePart, newEmploymentBoolean, 
+        projectTeam, mobilePhoneNumber, workTimeThisPercentage, workTimeOtherPercentage, teamLeaderDisclaimer, 
+        sourceOfFunding, projectType, expectedProjectBeginning, expectedProjectDurationInMonths, 
+        economicSubjectInvolvement, currentPesonnelExpense, newPersonnelExpense, 
+        equipmentDescriptionAndExpense, equipmentAmortizationExpense, otherServicesExpense, materialExpense, 
+        travelRegistrationEducationExpense, expenseDisclaimer, partnerExpense, requestedFunding, downPayment, 
+        personalFinancingExpense, newEmploymentBoolean, consultantServices, consultantExpense, 
+        consultantExpenseSource, requiredDocumentationFESB, pdfDocuments])    
 
     useEffect(() => {
         setIndirectExpenses(0.15*fesbValuePart)
@@ -77,6 +134,79 @@ const SecondInputForm = () => {
     // callback
     const updateProjectTeam = (projectMembersList) => {
         setProjectTeam(projectMembersList)
+    }
+
+    const handleFilesSelect = (selectedFile) => {
+        // Update the pdfDocuments state with the selected file
+        setPdfDocuments((prevDocuments) => [...prevDocuments, selectedFile]);
+    };
+
+    const handleSubmit = async () => {
+        const cleanData = {
+            userId: user?.userId,
+            secondInputMarker,
+            nameSurname,
+            vocation,
+            department,
+            email,
+            projectTitle,
+            projectAcronym,
+            applicationDeadline,
+            projectSummary,
+            applicationURL,
+            projectApplicant,
+            projectPartners,    
+            totalValue,
+            fesbValuePart,
+            newEmploymentBoolean,
+            projectTeam,
+            mobilePhoneNumber,
+            workTimeThisPercentage,
+            workTimeOtherPercentage,
+            teamLeaderDisclaimer,
+            sourceOfFunding,
+            projectType,
+            expectedProjectBeginning,
+            expectedProjectDurationInMonths,
+            economicSubjectInvolvement,
+            currentPesonnelExpense,
+            newPersonnelExpense,
+            equipmentDescriptionAndExpense,
+            equipmentAmortizationExpense,
+            otherServicesExpense,
+            materialExpense,
+            travelRegistrationEducationExpense,
+            expenseDisclaimer,
+            partnerExpense,
+            requestedFunding,
+            downPayment,
+            personalFinancingExpense,
+            newEmploymentBoolean,
+            consultantServices,
+            consultantExpense,
+            consultantExpenseSource,
+            requiredDocumentationFESB,
+            pdfDocuments,
+          };
+        try {
+            const response = await fetch(`/api/projectInfo/${projectToUpdateId}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(inputFormData),
+            });
+        
+            if (response.ok) {
+              const responseData = await response.json();
+              
+              console.log('Update successful:', responseData);
+            } else {
+              console.error('Error posting data:', response.status, response.statusText);
+            }
+          } catch (error) {
+            console.error('Error posting data:', error.message);
+          }
     }
 
     // in the future could be the wa how we load data
@@ -164,8 +294,8 @@ const SecondInputForm = () => {
                     <TextInput label={"E-MAIL*"} name={"email_2"} setSpecificState={setEmail}/>
                     <TextInput label={"MOBITEL*"} name={"phone_number_2"} setSpecificState={setMobilePhoneNumber}/>
                     <TextInput label={"POSTOTAK RADNOG VREMENA U OKVIRU PREDLOŽENOG PROJEKTA*"} name={"work_time_this_percentage"} setSpecificState={setWorkTimeThisPercentage}/>
-                    <TextInput label={"POSTOTAK RADNOG VREMENA U OKVIRU OSTALIH PROJEKATA U PROVEDBI"} name={"work_time_other_percentage"} setSpecificState={setWorkTimeOTherPercentage}/>
-                    <TextInput label={"NAPOMENA"} name={"team_leader_disclamer"} setSpecificState={setTeamLeaderDisclamer}/>
+                    <TextInput label={"POSTOTAK RADNOG VREMENA U OKVIRU OSTALIH PROJEKATA U PROVEDBI"} name={"work_time_other_percentage"} setSpecificState={setWorkTimeOtherPercentage}/>
+                    <TextInput label={"NAPOMENA"} name={"team_leader_disclamer"} setSpecificState={setTeamLeaderDisclaimer}/>
 
                 <Question questionText={questions[1]}/>
                     <TextInput label={"NAZIV PROJEKTA"} name={"project_title"} setSpecificState={setProjectTitle}/>
@@ -249,12 +379,12 @@ const SecondInputForm = () => {
 
                 <Question questionText={questions[21]}/>
 
-                    <AttachHeadOfDepartmentStatement/>
+                    <AttachHeadOfDepartmentStatement onFilesSelect={handleFilesSelect}/>
 
-                    <AttachAdditionalDocumentation/>
+                    <AttachAdditionalDocumentation onFilesSelect={handleFilesSelect}/>
             
 
-                <button id="podnesi-trazenje-suglasnosti">PODNESI TRAZENJE SUGLASNOSTI</button>
+                <button id="podnesi-trazenje-suglasnosti" onClick={handleSubmit}>PODNESI TRAZENJE SUGLASNOSTI</button>
 
 
             </SecondInputFormDataConext.Provider>
