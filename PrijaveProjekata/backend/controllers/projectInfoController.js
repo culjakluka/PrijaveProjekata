@@ -129,6 +129,8 @@ const updateProjectInfoSet = async (req, res) => {
     let pdfs = []
     let emptyFields = []
 
+    console.log(req.body)
+
     if(req.body.secondInputMarker){
         fieldsToCheck = [
             'userId', 'secondInputMarker', 'nameSurname', 'vocation', 'department', 'email', 'projectTitle',
@@ -145,11 +147,11 @@ const updateProjectInfoSet = async (req, res) => {
         ];
     }
 
-    if (req.files && req.files.length > 0) { // check if pdfs are in the request body
+    if (req.body.pdfDocuments && req.body.pdfDocuments.length > 0) { // check if pdfs are in the request body
+        console.log("entered function")
         const uploadPath = path.join(__dirname, '..', uploadDirectory);
-
-        for (const file of req.files) {
-            const filename = `${Date.now()}-${file.originalname}`;
+        for (const file of req.body.pdfDocuments) {
+            const filename = `${Date.now()}-${file.name}`;
             const filepath = path.join(uploadPath, filename);
 
             await fs.writeFile(filepath, file.buffer)

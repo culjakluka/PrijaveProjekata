@@ -9,6 +9,7 @@ const PdfAttach = ({ onFilesSelect }) => {
       const selectedFiles = e.target.files[0]
       setFile(selectedFiles);
       onFilesSelect(selectedFiles)
+      console.log(file)
     };
 
     return (

@@ -187,14 +187,17 @@ const SecondInputForm = () => {
             consultantExpenseSource,
             requiredDocumentationFESB,
             pdfDocuments,
-          };
+        };
+
+        console.log(cleanData)
+
         try {
             const response = await fetch(`/api/projectInfo/${projectToUpdateId}`, {
               method: 'PATCH',
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify(inputFormData),
+              body: JSON.stringify(cleanData),
             });
         
             if (response.ok) {
