@@ -180,7 +180,7 @@ const projectInfoSchema = new Schema({
     //    required: true
     },
     downPayment: { // predujam (iznos ili postotak)
-        type: String, // provjeri
+        type: Number, // provjeri
     //    required: true
     },
     personalFinancingExpense: { // kako se planira sufinancirati nefinancirani dio projekta

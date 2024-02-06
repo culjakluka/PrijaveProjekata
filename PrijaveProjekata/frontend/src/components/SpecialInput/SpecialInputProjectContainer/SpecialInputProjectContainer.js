@@ -7,7 +7,6 @@ const SpecialInputProjectContainer = ({addNewProjectProp}) => {
     return (  
         <div className='special-input-project-container'>
             <SpecialInputProject addNewProjectProp={addNewProjectProp}/>
-            <button>+</button>
         </div>
     );
 }

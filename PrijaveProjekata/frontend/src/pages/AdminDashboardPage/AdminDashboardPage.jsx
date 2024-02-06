@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "./AdminDashboardPage.module.css"
+import "./AdminDashboardPage.module.css"
 import AdminDashboard from "../../components/AdminDashboard/AdminDashboard";
 
 const AdminDashboardPage = () => {
     return (
         <>
-            <div className={styles.AdminDashboardPageContainer}>
+            <div className="admin-dashboard-page">
                 <AdminDashboard />
             </div>
         </>

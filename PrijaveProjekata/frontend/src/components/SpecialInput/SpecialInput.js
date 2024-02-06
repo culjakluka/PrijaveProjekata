@@ -28,8 +28,9 @@ const SpecialInput = ({pitanje, sendProjectMembers}) => {
     return (
         <div className="special-input-container">   
             <p className="question">{pitanje}</p>
+            <p>All members:</p>
             <div id="added-project-member">
-              <div style={{border:'solid purple'}}> 
+              <div id="special-input-completed-members"> 
                 {projectMembers.length > 0 ? projectMembers.map((member, index) => (
                   <CompletedMember key={index} fullName={member.nameSurname} email={member.email} percent={member.thisProjectPercentage} projects={member.otherProjects} />
                   )) : <p>you didn't add any members...</p>}
@@ -40,7 +41,7 @@ const SpecialInput = ({pitanje, sendProjectMembers}) => {
                 // all the way until destination component is reached - component that will trigger it
             */}
             <SpecialInputMemberContainer addProjectMember={addNewMember}/>
-            <button>+</button>
+            <button id="special-input-plus">+</button>
         </div>
       );
 }

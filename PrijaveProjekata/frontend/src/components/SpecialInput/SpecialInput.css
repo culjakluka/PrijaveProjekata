@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    border: solid yellow 2px;
 }
 
 .special-input-label {
@@ -12,18 +11,64 @@
     color: #B0355E;
 }
 
-#special-input-member-info {
-    display: flex;
-    flex-direction: row;
-    
-}
-
 #special-input-member-projects {
     display: flex;
     flex-direction: row;
 }
 
-.special-input-member
+.special-input-member {
+
+}
+
+#special-input-completed-members {
+    display: flex;
+    flex-direction: column;
+
+    
+}
+
+#completed-member-container {
+    display: flex;
+    flex-direction: column;
+    border: solid 2px #A4A4A4;
+    padding: 2px;
+    margin: 2px;
+    border-radius: 5px;
+}
+
+#completed-member-personal-details {
+    display: flex;
+    flex-direction: row;
+}
+
+.completed-member-data{
+    /* margin: top right bottom left */
+    margin: 5px 10px 5px 0px;
+    /* padding: top right bottom left */
+    padding: 5px 5px 5px 0px;
+}
+
+.completed-member-project {
+    color: black;
+    font-size: 15px;
+}
+
+#completed-member-projects {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+#completed-project-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.completed-project-member-data {
+    margin: 5px 10px 5px 10px;
+    padding: 5px;
+}
 
 #other-project-title {
     color: #A4A4A4;
@@ -40,7 +85,8 @@
 #special-input-member-info {
     display: flex;
     flex-direction: column;
-    border: solid red 2px;
+    border: solid #A4A4A4 2px;
+    border-radius: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 5px;
@@ -59,7 +105,6 @@
 }
 
 .special-input-project-container {
-    border: solid green 2px;
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 5px;
@@ -71,4 +116,29 @@
     flex-direction: row;
 }
 
+#special-input-plus {
+    align-self: center;
+    border: solid 1px gray;
+    border-radius: 2px;
+    font-size: 20px;
+    background-color: white;
+}
 
+#special-input-add-member {
+    background-color: white;
+    color: #a6a6a6;
+    margin-left: 70px;
+    margin-right: 70px;
+    border: solid 2px #A4A4A4;
+}
+
+#special-input-add-project {
+    background-color: white;
+    color: #a6a6a6;
+    border: solid 2px #A4A4A4;
+}
+
+.special-separator-line {
+    margin-left: 20px;
+    margin-right: 20px;
+}

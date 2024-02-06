@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ProjectInfoButton.module.css"
+import "./ProjectInfoButton.css"
 
 const ProjectInfoButton = ({projectInfo, selectProject}) => {
 
@@ -8,9 +8,7 @@ const ProjectInfoButton = ({projectInfo, selectProject}) => {
     }
     return (
         <>
-            <div className={styles.IntentionForm_Container}>
-                <button onClick={handleClick} ><span>{projectInfo.projectTitle}</span></button>
-            </div>
+            <button className="project-info-button" onClick={handleClick} ><span>{projectInfo.projectTitle}</span></button>
         </>
     )
 }

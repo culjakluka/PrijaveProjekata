@@ -1,0 +1,23 @@
+#automatic-input-label { 
+    align-self: flex-start;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #B0355E;
+}
+
+#automatic-input-container {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    height: 20px;
+    background-color: white;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#automatic-input-value {
+    border: none;
+    border-bottom: 1px solid #A4A4A4;
+    align-items: flex-start;
+    padding-right: 100px;
+}
