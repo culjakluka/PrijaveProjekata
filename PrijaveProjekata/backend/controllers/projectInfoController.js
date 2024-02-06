@@ -129,6 +129,7 @@ const updateProjectInfoSet = async (req, res) => {
     let pdfs = []
     let emptyFields = []
 
+    console.log("req.body: ")
     console.log(req.body)
 
     if(req.body.secondInputMarker){
@@ -191,7 +192,7 @@ const updateProjectInfoSet = async (req, res) => {
         );
 
         if(!projectInfoSet){
-            return res.status(404).json({error: 'No such ProjectInfo set.'});
+            return res.status(400).json({error: 'No such ProjectInfo set.'});
         }
 
         res.status(200).json(projectInfoSet);
@@ -204,16 +205,6 @@ const updateProjectInfoSet = async (req, res) => {
         console.error("Update error:", error);
         res.status(500).json({ error: "Internal server error" });
     }
-
-    // const projectInfoSet = await ProjectInfoModel.findOneAndUpdate({_id: id}, {
-    //     ...req.body
-    // })
-
-    // if(!projectInfoSet){
-    //     return res.status(400).json({error: 'No such ProjectInfo set.'})
-    // }
-
-    // res.status(200).json(projectInfoSet);
 }
 
 module.exports = {

@@ -24,6 +24,7 @@ app.use('/api/projectInfo', projectInfo)
 
 // connect to database
 const db_uri = `${process.env.MONGO_URI}`;
+
 mongoose.connect(db_uri)
     .then(() => {
         // listen for requests

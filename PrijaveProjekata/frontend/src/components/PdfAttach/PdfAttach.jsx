@@ -14,11 +14,11 @@ const PdfAttach = ({ onFilesSelect }) => {
 
     return (
         <>
-        <div className={styles.PdfAttachContainer}>
-            <span>Attach a PDF</span>
-            <input type="file" onChange={handleFileChange} multiple/>
-            <button>Upload PDF</button>
-        </div>
+            <div className={styles.PdfAttachContainer}>
+                <span>Attach a PDF</span>
+                <input type="file" onChange={handleFileChange} multiple/>
+                <button>Upload PDF</button>
+            </div>
         </>
     )
 }

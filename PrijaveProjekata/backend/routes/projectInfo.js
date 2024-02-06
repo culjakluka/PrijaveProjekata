@@ -23,12 +23,12 @@ router.get('/:id', getProjectInfo);
 
 // POST ProjectInfo data
 //router.post('/', createProjectInfoSet) stara ruta
-router.post('/', upload.array('pdfs', 10), createProjectInfoSet);
+router.post('/', createProjectInfoSet);
 
 // DELETE ProjectInfo data by id
 router.delete('/:id', deleteProjectInfoSet)
 
 // UPDATE ProjectInfo data by id
-router.patch('/:id', updateProjectInfoSet)
+router.patch('/:id', upload.array('pdfs', 10), updateProjectInfoSet)
 
 module.exports = router

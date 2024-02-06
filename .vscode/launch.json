@@ -1,0 +1,36 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Server",
+            "type": "node",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\PrijaveProjekata\\backend\\server.js",
+            "stopOnEntry": false,
+            "args": [],
+            "cwd": "${workspaceFolder}\\PrijaveProjekata\\backend",
+            "runtimeExecutable": "nodemon", // Use nodemon for automatic server restart
+            "runtimeArgs": ["--inspect"],
+            "env": {
+                "NODE_ENV": "development",
+                "PORT": "4000"
+            },
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Client",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "type": "msedge",
+            "webRoot": "${workspaceFolder}/frontend",
+            "userDataDir": "${workspaceFolder}/.vscode/chrome",
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/*"
+            }
+        }
+    ]
+}
