@@ -1,9 +1,9 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import styles from './RadioButtonInput.css'
 
-const RadioButtonInput = ({simpleQuestionValue, setSelectionState}) => {
+const RadioButtonInput = ({name, simpleQuestionValue, setSelectionState}) => {
 
     const [selection, setSelection] = useState('')
 
@@ -11,14 +11,32 @@ const RadioButtonInput = ({simpleQuestionValue, setSelectionState}) => {
         switch (value) {
             case 'da':
                 setSelectionState(true)
+                sessionStorage.setItem(name, 'da');
                 break;
             case 'ne':
                 setSelectionState(false)
+                sessionStorage.setItem(name, 'ne');
             default:
                 break;
         }
         setSelection(value)
     }
+
+    useEffect(() => {
+        let savedValue = sessionStorage.getItem(name);
+
+        if(savedValue) {
+            setSelection(savedValue)
+            if(savedValue == 'da') {
+                setSelectionState(true)
+            } else if (savedValue == 'ne') {
+                setSelectionState(false)
+            } else {
+                console.log("Radio button loading error")
+            }
+        }
+
+    }, [])
 
     return(
         <div className="radio-button-container">

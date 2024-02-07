@@ -1,0 +1,10 @@
+.question {
+    display: flex;
+    align-self: flex-start;
+}
+
+.question-text {
+    color: #6e6e6e;
+    font-size: 10px;
+    font-weight: bold;
+}

@@ -1,0 +1,31 @@
+.admin-text-input-container {
+    width: 80%;
+    display: flex;
+    color : #000000;
+    flex-direction: column;
+}
+
+.admin-text-input-label {
+    font-weight: bold;
+    text-transform: uppercase;
+    align-self: center;
+    color: #B0355E;
+    margin: 0px;
+}
+
+.admin-text-input {
+    height: 100%;
+    border: none;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px; 
+}
+
+.admin-text-input::placeholder {
+    color: #A4A4A4;
+    margin-left: 5px;
+}
+
+.admin-text-input:focus {
+    outline: none;
+}

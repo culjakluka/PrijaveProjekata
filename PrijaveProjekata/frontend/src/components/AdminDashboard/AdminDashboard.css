@@ -3,13 +3,14 @@
 .admin-dashboard-container {
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 .admin-dashboard {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: pink;
 }
 
@@ -28,11 +29,14 @@
 
 }
 
+/* THIRD SECTION */
+
 .single-application-container {
     background-color: #FDF9F9;
     flex: 1;
     height: 100%;
     padding: 10px 10px 0px 10px;
+    overflow-y: auto;
 }
 
 .section-title {
@@ -73,4 +77,8 @@
     color: #929292;
     font-weight: bold;
     text-align: start;
+}
+
+.admin-font {
+    font-size: 13px;
 }

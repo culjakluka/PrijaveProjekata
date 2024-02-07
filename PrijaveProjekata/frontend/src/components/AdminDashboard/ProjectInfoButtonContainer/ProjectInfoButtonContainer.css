@@ -1,6 +1,6 @@
 .project-info-button-container {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    margin: 5px 20px 5px 20px;
+    margin: 10px 20px 10px 20px;
+    background-color: #E3E3E3;
 }

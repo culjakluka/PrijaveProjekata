@@ -4,8 +4,10 @@ import ProjectInfoButtonContainer from "./ProjectInfoButtonContainer/ProjectInfo
 import ProjectInfo from "./ProjectInfo/ProjectInfo";
 import { useState, useEffect } from "react";
 import AdminDashboardHeader from "./AdminDashboardHeader/AdminDashboardHeader";
+import Context from '../../context/AdminContext'
 
 const AdminDashboard = () => {
+    
     const [projectSets, setProjectSets] = useState(null)
 
     // forms that hold form's data
@@ -19,8 +21,15 @@ const AdminDashboard = () => {
     const [intentionSelection, setIntentionSelection] = useState(false)
     const [approvalSelection, setApprovalSelection] = useState(false)
 
-    // selected OBRASCI NAMJERE or TRAŽENJE SUGLASNOSTI
+    // selected project inside second section 
+    // project is part of one of the groups -> either OBRASCI NAMJERE or TRAŽENJE SUGLASNOSTI
     const [selectedProject, setSelectedProject] = useState()
+
+
+    // project editable
+    const [projectEditable, setProjectEditable] = useState("");
+
+    // AdminContext
 
     
     // while component mounts
@@ -88,6 +97,7 @@ const AdminDashboard = () => {
     return(
         <>
             <div className="admin-dashboard-container">
+                
                 <AdminDashboardHeader/>
 
                 <div className="admin-dashboard">
