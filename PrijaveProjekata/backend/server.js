@@ -6,6 +6,8 @@ const firstData = require('./routes/firstData');
 const userRoutes = require('./routes/user')
 const projectInfo = require('./routes/projectInfo')
 
+require('express-async-errors');
+
 // express app
 const app = express();
 
@@ -21,6 +23,12 @@ app.use((req, res, next) => {
 app.use('/api/firstDataSets',  firstData) // first submit data
 app.use('/api/user', userRoutes)
 app.use('/api/projectInfo', projectInfo)
+
+// global error handler
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: 'Internal server error' });
+  });
 
 // connect to database
 const db_uri = `${process.env.MONGO_URI}`;

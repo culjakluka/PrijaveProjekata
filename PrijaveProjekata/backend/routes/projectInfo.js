@@ -1,5 +1,6 @@
 const express = require('express')
 const multer = require('multer')
+require('express-async-errors'); // Add this line
 
 // controller functions
 const {
@@ -13,7 +14,7 @@ const {
 const router = express.Router();
 
 //  multer storage
-const upload = multer({ storage: multer.memoryStorage()  })
+const upload = multer({ dest: 'uploads/' });
 
 // GET ProjectInfo sets
 router.get('/', getProjectInfoSets);
@@ -22,13 +23,12 @@ router.get('/', getProjectInfoSets);
 router.get('/:id', getProjectInfo);
 
 // POST ProjectInfo data
-//router.post('/', createProjectInfoSet) stara ruta
 router.post('/', createProjectInfoSet);
 
 // DELETE ProjectInfo data by id
 router.delete('/:id', deleteProjectInfoSet)
 
 // UPDATE ProjectInfo data by id
-router.patch('/:id', upload.array('pdfs', 10), updateProjectInfoSet)
+router.patch('/:id', upload.fields([{ name: 'pdfDocuments[0]', maxCount: 10 }]), updateProjectInfoSet);
 
 module.exports = router

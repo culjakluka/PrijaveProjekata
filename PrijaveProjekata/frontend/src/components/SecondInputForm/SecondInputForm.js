@@ -142,6 +142,8 @@ const SecondInputForm = () => {
     };
 
     const handleSubmit = async () => {
+        const formData = new FormData();
+
         const cleanData = {
             userId: user?.userId,
             secondInputMarker,
@@ -186,20 +188,24 @@ const SecondInputForm = () => {
             consultantExpense,
             consultantExpenseSource,
             requiredDocumentationFESB,
-            pdfDocuments,
         };
 
-        console.log(cleanData)
+        pdfDocuments.forEach((file, index) => {
+            formData.append(`pdfDocuments[${index}]`, file);
+        });
+
+        Object.entries(cleanData).forEach(([key, value]) => {
+            if (key !== 'pdfDocuments') {
+                formData.append(key, value);
+            }
+        });
 
         try {
             const response = await fetch(`/api/projectInfo/${projectToUpdateId}`, {
               method: 'PATCH',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(cleanData),
+              body: formData,
             });
-        
+            console.log(formData)
             if (response.ok) {
               const responseData = await response.json();
               

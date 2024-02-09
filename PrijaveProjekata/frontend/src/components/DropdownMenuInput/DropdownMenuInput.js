@@ -24,6 +24,7 @@ const DropdownMenuInput = ({name, data, setSpecificState}) => {
         // if it is stored, load it
         if(selectionValueSessionStorage) {
             setSelectionValue(selectionValueSessionStorage);
+            setSpecificState(selectionValueSessionStorage)
         }
 
     }, [data])

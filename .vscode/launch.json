@@ -25,7 +25,7 @@
             "name": "Client",
             "request": "launch",
             "url": "http://localhost:3000",
-            "type": "msedge",
+            "type": "firefox",
             "webRoot": "${workspaceFolder}/frontend",
             "userDataDir": "${workspaceFolder}/.vscode/chrome",
             "sourceMapPathOverrides": {
