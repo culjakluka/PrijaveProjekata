@@ -1,5 +1,6 @@
 /* MY PART */
 
+/* MAIN DASHBOARD - GENERAL */
 .admin-dashboard-container {
     display: flex;
     flex-direction: column;
@@ -14,6 +15,8 @@
     background-color: pink;
 }
 
+
+/* first section */
 .type-of-project-applications-section {
     background-color: #EAEAEA;
     flex:1;
@@ -21,6 +24,7 @@
     padding-top: 10px;
 }
 
+/* second section */
 .project-applications-container {
     background-color: #F6F6F6;
     flex: 1;
@@ -29,8 +33,7 @@
 
 }
 
-/* THIRD SECTION */
-
+/* third section*/
 .single-application-container {
     background-color: #FDF9F9;
     flex: 1;
@@ -81,4 +84,11 @@
 
 .admin-font {
     font-size: 13px;
+}
+
+/* edit button */
+.edit-button {
+    color: #4E4E4E;
+    outline:  #4E4E4E 1px;
+    border-radius: 3px;   
 }

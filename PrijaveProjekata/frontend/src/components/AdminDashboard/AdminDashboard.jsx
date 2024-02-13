@@ -4,7 +4,7 @@ import ProjectInfoButtonContainer from "./ProjectInfoButtonContainer/ProjectInfo
 import ProjectInfo from "./ProjectInfo/ProjectInfo";
 import { useState, useEffect } from "react";
 import AdminDashboardHeader from "./AdminDashboardHeader/AdminDashboardHeader";
-import Context from '../../context/AdminContext'
+import { AdminDashboardContext } from "./context/AdminDashboardContext";
 
 const AdminDashboard = () => {
     
@@ -25,12 +25,14 @@ const AdminDashboard = () => {
     // project is part of one of the groups -> either OBRASCI NAMJERE or TRAŽENJE SUGLASNOSTI
     const [selectedProject, setSelectedProject] = useState()
 
-
-    // project editable
-    const [projectEditable, setProjectEditable] = useState("");
-
     // AdminContext
 
+    // project editable
+    const [projectEditable, setProjectEditable] = useState(false);
+
+    const handleEditable = () => {
+        setProjectEditable(!projectEditable);
+    }
     
     // while component mounts
     useEffect(() => {
@@ -96,6 +98,7 @@ const AdminDashboard = () => {
 
     return(
         <>
+        <AdminDashboardContext.Provider value={{projectEditable, setProjectEditable}}>
             <div className="admin-dashboard-container">
                 
                 <AdminDashboardHeader/>
@@ -124,14 +127,14 @@ const AdminDashboard = () => {
 
                         {/* if selectedProject exists => show selected project's info */}
                     <div className="single-application-container">
-                        <button>UREDI</button>
-                        <button>ODOBRI</button>
+                        <button className="edit-button" onClick={handleEditable}>{projectEditable ? "ZAVRŠI UREĐIVANJE" : "UREDI"}</button>
                         {selectedProject && <ProjectInfo selectedProject={selectedProject}/>}
                     </div>
 
                 </div>
 
             </div>
+            </AdminDashboardContext.Provider>
         </>
     )
 }
