@@ -42,7 +42,7 @@ const DropdownMenuInputOther = ({name, name2, data, setSpecificState}) => {
         // if it is stored, load it
         if(selectionValueSessionStorage) {
             setSelectionValue(selectionValueSessionStorage);
-            setSpecificState(selectionValueSessionStorage);
+            setSpecificState(selectionValueSessionStorage)
 
             // if value of selected value equals 'Ostalo (navesti)', then make visible other options
             if(selectionValueSessionStorage === 'Ostalo (navesti)') {
@@ -50,7 +50,7 @@ const DropdownMenuInputOther = ({name, name2, data, setSpecificState}) => {
                 // check if there is something written in storage inside other selection
                 if(otherSelectionValueSessionStorage) {
                     setOtherSelectionValue(otherSelectionValueSessionStorage)
-                    setSpecificState(otherSelectionValueSessionStorage);
+                    setSpecificState(otherSelectionValueSessionStorage)
                 }
             }
         }

@@ -1,0 +1,16 @@
+[2024-02-07T18:16:12.116Z] [INFO] ========================================================================================================================
+[2024-02-07T18:16:12.116Z] [INFO] MAM Client v2.0.155.0
+[2024-02-07T18:16:12.116Z] [INFO] Telemetry session 19fd9cd5-56a2-4ebf-b0c9-9653669ae7cc.
+[2024-02-07T18:16:12.116Z] [INFO] Initializing cache (v1).
+[2024-02-07T18:16:12.140Z] [INFO] Registered UserID:e94a0d7d-7abe-4b56-af30-5ba36009bddf in the Azure public cloud.
+[2024-02-07T18:16:12.140Z] [INFO] Conditional Access is blocked for UserID:e94a0d7d-7abe-4b56-af30-5ba36009bddf pre-enrollment; compliance reporting will be accelerated to unblock the user.
+[2024-02-07T18:16:12.140Z] [INFO] Queuing enrollment for UserID:e94a0d7d-7abe-4b56-af30-5ba36009bddf to run as soon as possible.
+[2024-02-07T18:16:12.140Z] [INFO] Scheduler background thread starting for UserID:e94a0d7d-7abe-4b56-af30-5ba36009bddf.
+[2024-02-07T18:16:13.585Z] [INFO] Resolved MAM Location Service address "https://mamservice.manage.microsoft.com/api/Locations" for UserID:e94a0d7d-7abe-4b56-af30-5ba36009bddf.
+[2024-02-07T18:16:14.009Z] [ERROR] MAM Location Service request for UserID:e94a0d7d-7abe-4b56-af30-5ba36009bddf failed with a status (404) indicating the tenant has not completed onboarding, or the user is not licensed for Intune. (client-request-id:9939bbdf-d466-4e13-837d-6de506cfc88d)
+[2024-02-07T18:16:14.010Z] [ERROR] Unable to retrieve or validate the MAM Service address during enrollment for UserID:e94a0d7d-7abe-4b56-af30-5ba36009bddf; the operation will be reattempted at a later time.
+[2024-02-07T18:16:14.010Z] [INFO] Queuing enrollment retry for UserID:e94a0d7d-7abe-4b56-af30-5ba36009bddf to run at 2024-02-08T18:16:15.009Z.
+[2024-02-07T18:24:03.429Z] [INFO] Shutting down.
+[2024-02-07T18:24:03.429Z] [INFO] Stopping the task scheduler and canceling any outstanding work items...
+[2024-02-07T18:24:03.429Z] [INFO] Scheduler background thread for UserID:e94a0d7d-7abe-4b56-af30-5ba36009bddf is exiting after completing the last task.
+[2024-02-07T18:24:03.430Z] [INFO] Task scheduler has stopped, and all work has been canceled.

@@ -1,8 +1,10 @@
-const AttachHeadOfDepartmentStatement = () => {
+import PdfAttach from '../PdfAttach/PdfAttach'
+
+const AttachHeadOfDepartmentStatement = ({ onFilesSelect }) => {
     return ( 
         <div>
             <p> Izjava predstojnika zavoda, Privola za slanje osobnih podataka trećim stranama</p>
-            <button>ATTACH</button>
+            <PdfAttach onFilesSelect={onFilesSelect} />
         </div>
      );
 }
