@@ -1,10 +1,11 @@
 .question {
     display: flex;
     align-self: flex-start;
+    padding: 10px 40px 10px 40px;
 }
 
 .question-text {
     color: #6e6e6e;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './CompletedMember.css'
+import '../SpecialInput/SpecialInput.css'
 
 
 const CompletedMember = ({fullName, email, percent, projects}) => {
@@ -19,12 +19,16 @@ const CompletedMember = ({fullName, email, percent, projects}) => {
 
     return (
         <div id="completed-member-container">
-            <span className="completed-member-data" >{nameSurname}</span>
-            <span className="completed-member-data" >{eMail}</span>
-            <span className="completed-member-data" >{percentage}</span>
-            {projectArray.length > 0 ? projectArray.map((project, index) => {
-                return <span key={index} className="completed-member-data" > {project.otherProjectName} : {project.otherProjectPercentage}</span>
-            }) : <p> No projects for this member </p>}
+            <div id="completed-member-personal-details">
+                <span className="completed-member-data" >{nameSurname}</span>
+                <span className="completed-member-data" >{eMail}</span>
+                <span className="completed-member-data" >{percentage}</span>
+            </div>
+            <div id="completed-member-projects">
+                {projectArray.length > 0 ? projectArray.map((project, index) => {
+                    return <span key={index} className="completed-member-project" > {project.otherProjectName} : {project.otherProjectPercentage}</span>
+                }) : <p> No projects for this member </p>}
+            </div>
         </div>
       );
 }

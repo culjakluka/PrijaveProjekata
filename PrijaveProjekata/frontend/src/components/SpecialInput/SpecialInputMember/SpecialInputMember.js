@@ -56,11 +56,12 @@ const SpecialInputMember = ({addProjectMember}) => {
                 <p id="special-input-member-projects-title">MEMBER'S OTHER PROJECTS:</p>
                 <div id="special-input-member-projects-list">
                     {otherProjects.length > 0 ? otherProjects.map((component, index) => (
-                        <CompletedProject key={index} name={component.otherProjectName} percentage={component.otherProjectName}/>
+                        <CompletedProject key={index} name={component.otherProjectName} percentage={component.otherProjectPercentage}/>
                     )) : <p>you didn't add any projects to this member...</p>}
                 </div>
+                <hr className="special-separator-line"></hr>
                 <SpecialInputProjectContainer addNewProjectProp={addNewProject}/> 
-                <button onClick={addNewMember}>ADD MEMBER</button>
+                <button id="special-input-add-member" onClick={addNewMember}>ADD MEMBER</button>
             </div>
 
         </div>

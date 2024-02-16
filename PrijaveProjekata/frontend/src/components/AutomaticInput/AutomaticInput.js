@@ -1,9 +1,11 @@
+import './AutomaticInput.css'
+
 const AutomaticInput = ({label, value}) => {
-    return (  
+    return (
         <div id="automatic-input-container">
             <div id="automatic-input">
-                <label>{label}</label>
-                <div>{value}</div>
+                <label id="automatic-input-label">{label}</label>
+                <div id="automatic-input-value">{value} $</div>
             </div>
         </div>
     );

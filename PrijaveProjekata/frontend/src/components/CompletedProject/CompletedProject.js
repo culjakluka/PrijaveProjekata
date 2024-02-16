@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import './CompletedProject.css'
+import '../SpecialInput/SpecialInput.css'
 
 const CompletedProject = ({name, percentage}) => {
 
