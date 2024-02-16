@@ -5,9 +5,9 @@ const fs = require('fs/promises')
 
 const uploadDirectory = 'uploads'; // ruta za upload samog pdf-a
 
-const uploadPdf = async (req, res) => {
-    // ... (unchanged)
-};
+// const uploadPdf = async (req, res) => {
+//     // ... (unchanged)
+// };
 
 //get all ProjectInfo sets (sorted by time of creation)
 const getProjectInfoSets = async (req, res) => {
@@ -32,8 +32,6 @@ const getProjectInfo = async (req, res) => {
 //create a ProjectInfo set
 const createProjectInfoSet = async (req, res) => {
     let fieldsToCheck
-
-    console.log(req.body)
 
     if(req.body.firstInputMarker && !req.body.secondInputMarker){
         fieldsToCheck = [
@@ -91,24 +89,22 @@ const deleteProjectInfoSet = async (req, res) => {
 // update a ProjectInfo set
 const updateProjectInfoSet = async (req, res) => {
     const { id } = req.params;
-    
+    // console.log("req.body")
+    // console.log(req.body)
     try {
         const projectData = {}
         let fieldsToCheck = []
         let pdfs = []
         let emptyFields = []
         const pdfDocuments = req.files.pdfDocuments
-        console.log(req.headers);
-        console.log("req.body: ")
-        console.log(req.body)
 
         if(req.body.secondInputMarker){
             fieldsToCheck = [
                 'userId', 'secondInputMarker', 'nameSurname', 'vocation', 'department', 'email', 'projectTitle',
                 'projectAcronym', 'applicationDeadline', 'projectSummary', 'applicationURL',
                 'projectApplicant', 'projectPartners', 'totalValue', 'fesbValuePart',
-                'newEmploymentBoolean', 'projectTeam', 'mobilePhoneNumber', 'workTimeThisPercentage',
-                'workTimeOtherPercentage', 'teamLeaderDisclaimer', 'sourceOfFunding',
+                'newEmploymentBoolean', 'mobilePhoneNumber', 'workTimeThisPercentage',
+                'workTimeOtherPercentage', 'projectTeam', 'teamLeaderDisclaimer', 'sourceOfFunding',
                 'projectType', 'expectedProjectBeginning', 'expectedProjectDurationInMonths',
                 'economicSubjectInvolvement', 'currentPesonnelExpense', 'newPersonnelExpense',
                 'equipmentDescriptionAndExpense', 'equipmentAmortizationExpense', 'otherServicesExpense', 'materialExpense',
@@ -122,11 +118,9 @@ const updateProjectInfoSet = async (req, res) => {
             console.log("entered function")
             const uploadPath = path.join(__dirname, '..', uploadDirectory);
             for (const file of pdfDocuments) {
-                // const filename = `${Date.now()}-${file.name}`;
-                const filename = file.name
-                const filepath = path.join(uploadPath, filename)
+                const filename = file.originalname
+                const filepath = path.join(uploadPath, file.filename)
 
-                await fs.writeFile(filepath, file.buffer)
                 // Add PDF information to the array
                 pdfs.push({
                     filename,
@@ -135,26 +129,20 @@ const updateProjectInfoSet = async (req, res) => {
             }
             projectData.pdfDocuments = pdfs;
         }
-        // check for empty fields
-        // fieldsToCheck.forEach(field => {
-        //     const value = req.body[field];
-        //     if (!value) {
-        //         emptyFields.push(field);
-        //     } else {
-        //         projectData[field] = value;
-        //     }
-        // });
 
         fieldsToCheck.forEach(field => {
             const value = field === 'pdfDocuments' ? req.files : req.body[field];
-            if (!value) {
+            if(field === 'projectTeam'){
+                const projectTeam = JSON.parse(req.body.projectTeam);
+                projectData[field] = projectTeam 
+            }else if (!value) {
                 emptyFields.push(field);
             } else {
                 projectData[field] = value;
             }
         });
-
-        console.log('projectData:', projectData);
+        // console.log("projectData: ")
+        // console.log(projectData)
 
         if (emptyFields.length > 0) {
             return res.status(400).json({ error: 'Molimo popunite sva polja', emptyFields });
@@ -167,21 +155,28 @@ const updateProjectInfoSet = async (req, res) => {
         const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
             { _id: id },
             projectData,
-            { new: true } // To return the updated document
+            { new: true } // za vratit updateani dokument
         );
 
         if(!projectInfoSet){
             return res.status(400).json({error: 'No such ProjectInfo set.'});
         }
 
+        // DEBUGGIRAT
+        if (req.files.pdfDocuments.length > 0) {
+            req.files.pdfDocuments.forEach(async (pdf) => {
+                await fs.unlink(path.join(__dirname, '..', pdf.filepath));
+            });
+        }
+
         res.status(200).json(projectInfoSet);
     } catch (error) {
-        if (pdfs.length > 0) {
-            pdfs.forEach(async (pdf) => {
+        console.error("findOneAndUpdate error:", error);
+        if (req.files.pdfDocuments.length > 0) {
+            req.files.pdfDocuments.forEach(async (pdf) => {
                 await fs.unlink(pdf.filepath);
             });
         }
-        console.error("Update error:", error);
         res.status(500).json({ error: "Internal server error" });
     }
 }

@@ -29,6 +29,6 @@ router.post('/', createProjectInfoSet);
 router.delete('/:id', deleteProjectInfoSet)
 
 // UPDATE ProjectInfo data by id
-router.patch('/:id', upload.fields([{ name: 'pdfDocuments[0]', maxCount: 10 }]), updateProjectInfoSet);
+router.patch('/:id', upload.fields([{ name: 'pdfDocuments', maxCount: 10 }]), updateProjectInfoSet);
 
 module.exports = router

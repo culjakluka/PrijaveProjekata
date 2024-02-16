@@ -191,21 +191,23 @@ const SecondInputForm = () => {
         };
 
         pdfDocuments.forEach((file, index) => {
-            formData.append(`pdfDocuments[${index}]`, file);
+            formData.append(`pdfDocuments`, file);
         });
 
         Object.entries(cleanData).forEach(([key, value]) => {
-            if (key !== 'pdfDocuments') {
+            if(key === 'projectTeam'){
+                formData.append('projectTeam', JSON.stringify(projectTeam))
+            }else if (key !== 'pdfDocuments') {
                 formData.append(key, value);
             }
         });
-
+        console.log(formData)
+        
         try {
             const response = await fetch(`/api/projectInfo/${projectToUpdateId}`, {
               method: 'PATCH',
               body: formData,
             });
-            console.log(formData)
             if (response.ok) {
               const responseData = await response.json();
               
