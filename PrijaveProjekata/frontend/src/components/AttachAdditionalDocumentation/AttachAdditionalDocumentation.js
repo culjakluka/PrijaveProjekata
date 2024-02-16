@@ -1,8 +1,10 @@
-const AttachAdditionalDocumentation = () => {
+import PdfAttach from "../PdfAttach/PdfAttach";
+
+const AttachAdditionalDocumentation = ({ onFilesSelect }) => {
     return ( 
         <div>
             <p>Ukoliko postoji dodatna dokumentacija o projektu(prijavni obrazac, Tablica proračuna, i sl.) možete je priložiti</p>
-            <button>ATTACH</button>
+            <PdfAttach onFilesSelect={onFilesSelect} />
         </div>
      );
 }

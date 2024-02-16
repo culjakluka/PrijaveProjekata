@@ -7,31 +7,33 @@ const createToken = (_id) => {
 
 // login a user
 const loginUser = async (req, res) => {
-  const {username, password} = req.body
+  const { username, password } = req.body;
 
   try {
-    const user = await User.login(username, password)
+    const user = await User.login(username, password);
 
     // create a token
-    const token = createToken(user._id)
+    const token = createToken(user._id);
+    const userId = user._id;
 
-    res.status(200).json({username, token})
+    res.status(200).json({ username, userId, token }); // Include userId in the response
   } catch (error) {
-    res.status(400).json({error: error.message})
+    res.status(400).json({ error: error.message });
   }
-}
+};
 
 // signup a user
 const signupUser = async (req, res) => {
   const {username, password} = req.body
-
+  
   try {
     const user = await User.signup(username, password)
-
+    
     // create a jwtoken
     const token = createToken(user._id)
+    const userId = user._id
 
-    res.status(200).json({username, token})
+    res.status(200).json({username, userId, token})
   } catch (error) {
     res.status(400).json({error: error.message})
   }
