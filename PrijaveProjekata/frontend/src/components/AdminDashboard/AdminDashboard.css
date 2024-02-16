@@ -37,6 +37,8 @@
 .single-application-container {
     background-color: #FDF9F9;
     flex: 1;
+    display: flex;
+    flex-direction: column;
     height: 100%;
     padding: 10px 10px 0px 10px;
     overflow-y: auto;
@@ -88,7 +90,19 @@
 
 /* edit button */
 .edit-button {
-    color: #4E4E4E;
-    outline:  #4E4E4E 1px;
-    border-radius: 3px;   
+    color: #FDF9F9;
+    
+}
+
+.edit-button-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #6F6F6F;
+    box-shadow: none;
+    align-self: flex-end;
+    margin-right: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }

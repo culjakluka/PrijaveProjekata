@@ -1,7 +1,7 @@
 .question {
     display: flex;
     align-self: flex-start;
-    padding: 10px;
+    padding: 10px 40px 10px 40px;
 }
 
 .question-text {

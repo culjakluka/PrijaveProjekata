@@ -6,6 +6,11 @@ import { useState, useEffect } from "react";
 import AdminDashboardHeader from "./AdminDashboardHeader/AdminDashboardHeader";
 import { AdminDashboardContext } from "./context/AdminDashboardContext";
 
+// external components
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+
+
 const AdminDashboard = () => {
     
     const [projectSets, setProjectSets] = useState(null)
@@ -127,7 +132,10 @@ const AdminDashboard = () => {
 
                         {/* if selectedProject exists => show selected project's info */}
                     <div className="single-application-container">
-                        <button className="edit-button" onClick={handleEditable}>{projectEditable ? "ZAVRŠI UREĐIVANJE" : "UREDI"}</button>
+                        <div className="edit-button-container" onClick={handleEditable}> 
+                            <FontAwesomeIcon icon={faPencilAlt} style={{color: "#FDF9F9"}} />
+                            <div className="edit-button" >{projectEditable ? "ZAVRŠI UREĐIVANJE" : "UREDI"}</div>
+                        </div>
                         {selectedProject && <ProjectInfo selectedProject={selectedProject}/>}
                     </div>
 
