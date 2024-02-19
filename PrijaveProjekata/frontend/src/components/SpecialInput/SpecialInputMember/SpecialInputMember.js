@@ -53,7 +53,7 @@ const SpecialInputMember = ({addProjectMember}) => {
                     placeholder="postotak..."
                     onChange={(e) => setNewItemPercentage(e.target.value)}
                 />
-                <p id="special-input-member-projects-title">MEMBER'S OTHER PROJECTS:</p>
+                <p id="special-input-member-projects-title">OTHER PROJECTS:</p>
                 <div id="special-input-member-projects-list">
                     {otherProjects.length > 0 ? otherProjects.map((component, index) => (
                         <CompletedProject key={index} name={component.otherProjectName} percentage={component.otherProjectPercentage}/>
