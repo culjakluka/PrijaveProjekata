@@ -38,10 +38,12 @@ const projectInfoSchema = new Schema({
         required: true
     },
     firstInputMarker: { // jeli ispunjena forma obrasca namjere
-        type: Boolean
+        type: Boolean,
+        default: false
     },
     secondInputMarker: { // jeli ispunjena forma trazenja suglasnosti
-        type: Boolean
+        type: Boolean,
+        default: false
     },
     nameSurname: { // ime prezime voditelja projekta
         type: String,
@@ -204,6 +206,11 @@ const projectInfoSchema = new Schema({
     },
     pdfDocuments: {
         pdfs: [pdfSchema] // svi pdfovi koje user moze uploadati
+    },
+    state: { // stanje projekta
+        type: String,
+        enum: ['firstFormSubmitted', 'firstFormApproved', 'secondFormSubmitted', 'secondFormApproved'],
+        default: 'firstFormSubmitted',
     }
 }, { timestamps: true })
 

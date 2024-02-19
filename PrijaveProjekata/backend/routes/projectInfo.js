@@ -8,6 +8,8 @@ const {
     getProjectInfo,
     createProjectInfoSet,
     deleteProjectInfoSet,
+    approveFirstFormSubmit,
+    approveSecondFormSubmit,
     updateProjectInfoSet
 } = require('../controllers/projectInfoController')
 
@@ -27,6 +29,12 @@ router.post('/', createProjectInfoSet);
 
 // DELETE ProjectInfo data by id
 router.delete('/:id', deleteProjectInfoSet)
+
+// APPROVE firstFormSubmit data by id
+router.patch('/approveFirstFormSubmit/:id', approveFirstFormSubmit);
+
+// APPROVE secondFormSubmit data by id
+router.patch('/approveSecondFormSubmit/:id', approveSecondFormSubmit);
 
 // UPDATE ProjectInfo data by id
 router.patch('/:id', upload.fields([{ name: 'pdfDocuments', maxCount: 10 }]), updateProjectInfoSet);

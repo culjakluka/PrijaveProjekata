@@ -35,7 +35,7 @@ const createProjectInfoSet = async (req, res) => {
 
     if(req.body.firstInputMarker && !req.body.secondInputMarker){
         fieldsToCheck = [
-            'userId', 'firstInputMarker', 'secondInputMarker', 'nameSurname', 'vocation', 'department', 'email', 'projectTitle',
+            'userId', 'firstInputMarker', 'nameSurname', 'vocation', 'department', 'email', 'projectTitle',
             'projectAcronym', 'applicationDeadline', 'projectSummary', 'applicationURL',
             'projectApplicant', 'projectPartners', 'totalValue', 'fesbValuePart',
             'newEmploymentBoolean', 'projectTeam',
@@ -61,6 +61,7 @@ const createProjectInfoSet = async (req, res) => {
 
     // Add doc to the database
     try {
+        projectData.state = 'firstFormSubmitted';
         const projectInfoSet = await ProjectInfoModel.create(projectData);
         console.log(projectData)
         res.status(200).json(projectInfoSet);
@@ -86,6 +87,53 @@ const deleteProjectInfoSet = async (req, res) => {
     res.status(200).json(projectInfoSet);
 }
 
+
+// approve firstFormSubmit data by id
+const approveFirstFormSubmit = async (req, res) => {
+    const { id } = req.params;
+    const state = 'approvedFirstForm';
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        try{
+            const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
+                { _id: id },
+                state,
+                { new: true },
+            );
+            if(!projectInfoSet){
+                return res.status(400).json({error: 'No such ProjectInfo set.'})
+            }
+            res.status(200).json(projectInfoSet);
+        }catch(error) {
+            console.error("findOneAndUpdate error:", error);
+            res.status(500).json({ error: "Internal server error" });
+        }
+    }
+}
+
+// approve secondFormSubmit data by id
+const approveSecondFormSubmit = async (req, res) => {
+    const { id } = req.params;
+    const state = 'approvedSecondForm';
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        try{
+            const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
+                { _id: id },
+                state,
+                { new: true },
+            );
+            if(!projectInfoSet){
+                return res.status(400).json({error: 'No such ProjectInfo set.'})
+            }
+            res.status(200).json(projectInfoSet);
+        }catch(error) {
+            console.error("findOneAndUpdate error:", error);
+            res.status(500).json({ error: "Internal server error" });
+        }
+    }
+}
+
 // update a ProjectInfo set
 const updateProjectInfoSet = async (req, res) => {
     const { id } = req.params;
@@ -97,6 +145,7 @@ const updateProjectInfoSet = async (req, res) => {
         let pdfs = []
         let emptyFields = []
         const pdfDocuments = req.files.pdfDocuments
+        const state = 'secondFormSubmitted'
 
         if(req.body.secondInputMarker){
             fieldsToCheck = [
@@ -155,6 +204,7 @@ const updateProjectInfoSet = async (req, res) => {
         const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
             { _id: id },
             projectData,
+            state,
             { new: true } // za vratit updateani dokument
         );
 
@@ -179,5 +229,7 @@ module.exports = {
     getProjectInfo,
     createProjectInfoSet,
     deleteProjectInfoSet,
+    approveFirstFormSubmit,
+    approveSecondFormSubmit,
     updateProjectInfoSet
 }
