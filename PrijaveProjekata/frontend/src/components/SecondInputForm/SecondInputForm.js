@@ -67,7 +67,7 @@ const SecondInputForm = () => {
     const [requiredDocumentationFESB, setRequiredDocumentationFESB] = useState('');
     const [pdfDocuments, setPdfDocuments] = useState([])
 
-    let projectToUpdateId = "65b525221fc600addf86c79a" // hard codano dok ne smislim kako nac pravi id tablice za update
+    let projectToUpdateId = "65b525221fc600addf86c79a" // hard codano zasad
 
     useEffect(() => {
         setInputFormData({

@@ -162,19 +162,12 @@ const updateProjectInfoSet = async (req, res) => {
             return res.status(400).json({error: 'No such ProjectInfo set.'});
         }
 
-        // DEBUGGIRAT
-        if (req.files.pdfDocuments.length > 0) {
-            req.files.pdfDocuments.forEach(async (pdf) => {
-                await fs.unlink(path.join(__dirname, '..', pdf.filepath));
-            });
-        }
-
         res.status(200).json(projectInfoSet);
     } catch (error) {
         console.error("findOneAndUpdate error:", error);
         if (req.files.pdfDocuments.length > 0) {
             req.files.pdfDocuments.forEach(async (pdf) => {
-                await fs.unlink(pdf.filepath);
+                await fs.unlink(path.join(__dirname, '..', pdf.path));
             });
         }
         res.status(500).json({ error: "Internal server error" });
