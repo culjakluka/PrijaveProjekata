@@ -1,21 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import '../SpecialInput/SpecialInput.css'
+import { SpecialInputContext } from "../SpecialInput/SpecialInputContext";
+import CompletedProject from "../CompletedProject/CompletedProject";
 
-
-const CompletedMember = ({fullName, email, percent, projects}) => {
+const CompletedMember = ({memberIndex, fullName, email, percent, projectsArray, deleteSingleMember}) => {
     
     const[nameSurname, setNameSurname] = useState('');
     const[eMail, setEMail] = useState('');
     const[percentage, setPercentage] = useState('');
-    const[projectArray, setProjectArray] = useState([])
+    const[projects, setProjects] = useState([])
+    const[memberId, setMemberId] = useState("");
+
+    const { projectMembers, setProjectMembers } = useContext(SpecialInputContext); 
 
     useEffect(() => {
         setNameSurname(fullName);
         setEMail(email);
         setPercentage(percent);
-        setProjectArray(projects)
+        setProjects(projectsArray);
+        setMemberId(memberIndex);
     }, [fullName, email, percent, projects])
 
+    const handleDeleteMember = () => {
+        deleteSingleMember(memberId)
+    }
 
     return (
         <div id="completed-member-container">
@@ -25,10 +33,12 @@ const CompletedMember = ({fullName, email, percent, projects}) => {
                 <span className="completed-member-data" >{percentage}</span>
             </div>
             <div id="completed-member-projects">
-                {projectArray.length > 0 ? projectArray.map((project, index) => {
-                    return <span key={index} className="completed-member-project" > {project.otherProjectName} : {project.otherProjectPercentage}</span>
+                {projects.length > 0 ? projects.map((project, index) => {
+                    return <CompletedProject key={index} name={project.otherProjectName} percentage={project.otherProjectPercentage}/>
                 }) : <p> No projects for this member </p>}
             </div>
+
+            <button onClick={handleDeleteMember}>delete member</button>
         </div>
       );
 }

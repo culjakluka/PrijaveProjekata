@@ -1,7 +1,6 @@
 import react, { useState } from 'react'
 import '../SpecialInput.css'
 import SpecialInputProject from '../SpecialInputProject/SpecialInputProject';
-import { Button } from 'bootstrap';
 
 const SpecialInputProjectContainer = ({addNewProjectProp}) => {
     return (  
