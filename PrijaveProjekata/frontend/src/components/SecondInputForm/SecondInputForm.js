@@ -16,6 +16,7 @@ import AttachAdditionalDocumentation from "../AttachAdditionalDocumentation/Atta
 import AttachHeadOfDepartmentStatement from "../AttachHeadOfDepartmentStatement/AttachHeadOfDepartmentStatement.js";
 import AutomaticInput from "../AutomaticInput/AutomaticInput.js";
 
+
 const SecondInputForm = () => {
     const { user } = useAuthContext()
 
