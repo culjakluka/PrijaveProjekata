@@ -91,13 +91,14 @@ const deleteProjectInfoSet = async (req, res) => {
 // approve firstFormSubmit data by id
 const approveFirstFormSubmit = async (req, res) => {
     const { id } = req.params;
-    const state = 'approvedFirstForm';
+    const projectData = {};
+    projectData['state'] = 'firstFormApproved'
 
     if(!mongoose.Types.ObjectId.isValid(id)){
         try{
             const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
                 { _id: id },
-                state,
+                projectData,
                 { new: true },
             );
             if(!projectInfoSet){
@@ -114,13 +115,14 @@ const approveFirstFormSubmit = async (req, res) => {
 // approve secondFormSubmit data by id
 const approveSecondFormSubmit = async (req, res) => {
     const { id } = req.params;
-    const state = 'approvedSecondForm';
+    const projectData = {};
+    projectData['state'] = 'secondFormApproved'
 
     if(!mongoose.Types.ObjectId.isValid(id)){
         try{
             const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
                 { _id: id },
-                state,
+                projectData,
                 { new: true },
             );
             if(!projectInfoSet){
