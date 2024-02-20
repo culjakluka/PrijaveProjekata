@@ -37,6 +37,8 @@ const ProjectInfo = ({selectedProject}) => {
         <>
             <div className="project-info-container">
 
+                <h4>Document_id:{selectedProject._id}</h4>
+
                 <AdminQuestion questionText={questions[0]}/>
                     <AdminTextInput currentLabelValue={"IME I PREZIME"} currentInputValue={selectedProject.nameSurname}/>
                     <AdminTextInput currentLabelValue={"ZAVOD (ODJSEK)"} currentInputValue={selectedProject.department}/>
