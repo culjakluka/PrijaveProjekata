@@ -2,11 +2,11 @@ import {useState} from 'react'
 import SecondInputForm from '../../components/SecondInputForm/SecondInputForm'
 // importing context that is going to manage SecondInputForm
 
-const SecondInputPage = () => {
+const SecondInputPage = ( documentId ) => {
 
     return (
         <div className="SecondInputPage">
-            <SecondInputForm/>
+            <SecondInputForm docId={documentId}/>
         </div>
     )
 }

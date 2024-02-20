@@ -17,8 +17,9 @@ import AttachHeadOfDepartmentStatement from "../AttachHeadOfDepartmentStatement/
 import AutomaticInput from "../AutomaticInput/AutomaticInput.js";
 
 
-const SecondInputForm = () => {
+const SecondInputForm = ( docId ) => {
     const { user } = useAuthContext()
+    // const [projectToUpdateId, setProjectToUpdateId] = useState(documentId)
 
     const [inputFormData, setInputFormData] = useState('');
     const [secondInputMarker, setSecondInputMarker] = useState(true)
@@ -53,22 +54,17 @@ const SecondInputForm = () => {
     const [materialExpense, setMaterialExpense] = useState(0);
     const [travelRegistrationEducationExpense, setTravelRegistrationEducationExpense] = useState(0);
     const [expenseDisclaimer, setExpenseDisclaimer] = useState('');
-
-
     const [partnerExpense, setPartnerExpense] = useState(0);
     const [requestedFunding,setRequestedFunding] = useState(0);
     const [downPayment, setDownPayment] = useState(0);
     const [personalFinancingExpense, setPersonalFinancingExpense] = useState('');
     const [newEmploymentBoolean, setNewEmploymentBoolean] = useState(false);
-
     const [projectTeam, setProjectTeam] = useState([]);
     const [consultantServices, setConsultantServices] = useState(false);
     const [consultantExpense, setConsultantExpense] = useState(0);
     const [consultantExpenseSource, setConsultantExpenseSource] = useState('');
     const [requiredDocumentationFESB, setRequiredDocumentationFESB] = useState('');
     const [pdfDocuments, setPdfDocuments] = useState([])
-
-    let projectToUpdateId = "65b525221fc600addf86c79a" // hard codano zasad
 
     useEffect(() => {
         setInputFormData({
@@ -203,9 +199,8 @@ const SecondInputForm = () => {
             }
         });
         console.log(formData)
-        
         try {
-            const response = await fetch(`/api/projectInfo/${projectToUpdateId}`, {
+            const response = await fetch(`/api/projectInfo/${docId.docId.documentId}`, {
               method: 'PATCH',
               body: formData,
             });

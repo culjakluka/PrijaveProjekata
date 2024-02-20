@@ -166,7 +166,7 @@ const FirstInputForm = () => {
                 />
 
                 <Question questionText={questions[7]} />
-                <RadioButtonInput simpleQuestionValue={"no_value"} setSelectionState={setNewEmployment}/>
+                <RadioButtonInput simpleQuestionValue={""} setSelectionState={setNewEmployment}/>
 
                 <SpecialInput pitanje={questions[8]} sendProjectMembers={updateProjectTeam}/>
                 

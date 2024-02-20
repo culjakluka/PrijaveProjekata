@@ -145,7 +145,7 @@ const updateProjectInfoSet = async (req, res) => {
         let pdfs = []
         let emptyFields = []
         const pdfDocuments = req.files.pdfDocuments
-        const state = 'secondFormSubmitted'
+        projectData['state'] = 'secondFormSubmitted'
 
         if(req.body.secondInputMarker){
             fieldsToCheck = [
@@ -164,7 +164,6 @@ const updateProjectInfoSet = async (req, res) => {
         }
 
         if (req.files.pdfDocuments && req.files.pdfDocuments.length > 0) { // check if pdfs are in the request body
-            console.log("entered function")
             const uploadPath = path.join(__dirname, '..', uploadDirectory);
             for (const file of pdfDocuments) {
                 const filename = file.originalname
@@ -197,14 +196,14 @@ const updateProjectInfoSet = async (req, res) => {
             return res.status(400).json({ error: 'Molimo popunite sva polja', emptyFields });
         }
 
+        console.log(req.params.id)
         if(!mongoose.Types.ObjectId.isValid(id)){
             return res.status(404).json({error: 'No such ProjectInfo set.'});
         }
-    
+        
         const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
             { _id: id },
             projectData,
-            state,
             { new: true } // za vratit updateani dokument
         );
 
