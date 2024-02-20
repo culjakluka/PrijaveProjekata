@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext';
 import { useEffect, useState } from 'react';
 // bootstrap
@@ -11,7 +11,10 @@ import SecondInputPage from './pages/SecondInputPage/SecondInputPage';
 import AdminDashboardPage from './pages/AdminDashboardPage/AdminDashboardPage';
 import PdfAttach from './components/PdfAttach/PdfAttach';
 
-
+function SecondInputWrapper() {
+  const { id } = useParams();
+  return <SecondInputPage documentId={id} />;
+}
 
 function App() {
   const user = useAuthContext()
@@ -36,8 +39,8 @@ function App() {
               element={loggedIn ? <FirstInputPage/> : <Navigate to="/" />}
             />
             <Route 
-              path="/SecondInput"
-              element={<SecondInputPage />}
+              path="/SecondInput/:id"
+              element={<SecondInputWrapper />}
             />
             <Route 
               path="/PdfAttachTest"
