@@ -20,6 +20,7 @@ import AutomaticInput from "../AutomaticInput/AutomaticInput.js";
 const SecondInputForm = ( docId ) => {
     const { user } = useAuthContext()
     // const [projectToUpdateId, setProjectToUpdateId] = useState(documentId)
+    const [intentionFormToUpdate, setIntentionFormToUpdate] = useState(null)
 
     const [inputFormData, setInputFormData] = useState('');
     const [secondInputMarker, setSecondInputMarker] = useState(true)
@@ -124,6 +125,25 @@ const SecondInputForm = ( docId ) => {
         travelRegistrationEducationExpense, expenseDisclaimer, partnerExpense, requestedFunding, downPayment, 
         personalFinancingExpense, newEmploymentBoolean, consultantServices, consultantExpense, 
         consultantExpenseSource, requiredDocumentationFESB, pdfDocuments])    
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`/api/projectInfo/${docId.docId.documentId}`);
+                
+                if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                setIntentionFormToUpdate(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, []);
 
     useEffect(() => {
         setIndirectExpenses(0.15*fesbValuePart)
