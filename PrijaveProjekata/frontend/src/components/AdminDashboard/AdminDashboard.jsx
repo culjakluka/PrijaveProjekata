@@ -58,8 +58,8 @@ const AdminDashboard = () => {
                 
                 // filters response depending on marker - firstInputMarker - intentionForm
                 // filters each item of data depending on marker 
-                // -> if first marker equals true, then it's intention form
-                // -> if both markers equal true, then it's approval form
+                // -> if first marker equals true, then it's an intention form
+                // -> if both markers equal true, then it's an approval form
                 // seting up setIntentionForms and setApprovalForms state
                 setIntentionForms(data.filter(item => item.firstInputMarker === true && item.secondInputMarker === false));
 
