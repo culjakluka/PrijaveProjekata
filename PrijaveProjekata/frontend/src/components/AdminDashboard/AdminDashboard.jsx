@@ -23,7 +23,7 @@ const AdminDashboard = () => {
     const [selectedIntentionFormId, setSelectedIntentionFormId] = useState("")
     const [selectedApprovalFormId, setSelectedApprovalFormId] = useState("")
 
-    const [intentionSelection, setIntentionSelection] = useState(false)
+    const [intentionSelection, setIntentionSelection] = useState(true)
     const [approvalSelection, setApprovalSelection] = useState(false)
 
     // selected project inside second section 
@@ -39,7 +39,22 @@ const AdminDashboard = () => {
         setProjectEditable(!projectEditable);
     }
     
-    // while component mounts
+    // pending, approved buttons
+    const [pendingSelected, setPendingSelected] = useState(true);
+    const [approvedSelected, setApprovedSelected] = useState(false);
+
+    const handlePending = () => {
+        setPendingSelected(true);
+        setApprovedSelected(false);
+    }
+
+    const handleApproved = () => {
+        setApprovedSelected(true);
+        setPendingSelected(false);
+    }
+
+
+    // after component is mounted
     useEffect(() => {
         // fetch data
         const fetchData = async () => {
@@ -106,9 +121,9 @@ const AdminDashboard = () => {
         <AdminDashboardContext.Provider value={{projectEditable, setProjectEditable}}>
             <div className="admin-dashboard-container">
                 
-                <AdminDashboardHeader/>
-
                 <div className="admin-dashboard">
+
+                <AdminDashboardHeader/>
 
                     {/* FIRST SECTION */}
                     <div className="type-of-project-applications-section">
@@ -124,6 +139,10 @@ const AdminDashboard = () => {
                     {/* SECOND SECTION */}
                     <div className="project-applications-container">
                         {/* if intentionSelection == true => show INTENTION FORMS*/}
+                        <div className="progress-container">
+                            <button onClick={handlePending} className= { pendingSelected ? "pending-button-selected" : "pending-button-hidden" }>PENDING</button>
+                            <button onClick={handleApproved} className={ approvedSelected ? "pending-button-selected" : "pending-button-hidden" }>APPROVED</button>
+                        </div>
                         {intentionSelection && <ProjectInfoButtonContainer projectInfoSets={intentionForms} selectProject={setSelectedIntentionFormId}/>}
                         {approvalSelection && <ProjectInfoButtonContainer projectInfoSets={approvalForms} selectProject={setSelectedApprovalFormId}/>}
                     </div>
@@ -132,10 +151,23 @@ const AdminDashboard = () => {
 
                         {/* if selectedProject exists => show selected project's info */}
                     <div className="single-application-container">
-                        <div className="edit-button-container" onClick={handleEditable}> 
-                            <FontAwesomeIcon icon={faPencilAlt} style={{color: "#FDF9F9"}} />
-                            <div className="edit-button" >{projectEditable ? "ZAVRŠI UREĐIVANJE" : "UREDI"}</div>
-                        </div>
+                        {selectedProject != null && /*to prevent rendering if the project is not selected*/
+                            <div className="manage-project-container">
+                                <div className="edit-button-container manage-button-style" onClick={handleEditable}> 
+                                    <FontAwesomeIcon icon={faPencilAlt} style={{color: "#FDF9F9"}} />
+                                    <button className="edit-button" >{projectEditable ? "ZAVRŠI UREĐIVANJE" : "UREDI"}</button>
+                                </div>
+                                <div className="decision-buttons-container">
+                                    <div className="approve-button-container manage-button-style">
+                                        <button className="approve-button">APPROVE</button>
+                                    </div>
+
+                                    <div className="decline-button-container manage-button-style">
+                                        <button className="decline-button">DECLINE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                         {selectedProject && <ProjectInfo selectedProject={selectedProject}/>}
                     </div>
 

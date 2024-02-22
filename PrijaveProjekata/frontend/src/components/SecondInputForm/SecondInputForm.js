@@ -20,7 +20,7 @@ import AutomaticInput from "../AutomaticInput/AutomaticInput.js";
 const SecondInputForm = ( docId ) => {
     const { user } = useAuthContext()
     // const [projectToUpdateId, setProjectToUpdateId] = useState(documentId)
-    const [intentionFormToUpdate, setIntentionFormToUpdate] = useState(null)
+    const [intentionFormToUpdate, setIntentionFormToUpdate] = useState(null) // data loaded from document
 
     const [inputFormData, setInputFormData] = useState('');
     const [secondInputMarker, setSecondInputMarker] = useState(true)
@@ -137,13 +137,37 @@ const SecondInputForm = ( docId ) => {
 
                 const data = await response.json();
 
+                // setting up data loaded from document(_id)
                 setIntentionFormToUpdate(data);
+
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
         fetchData();
     }, []);
+
+    useEffect(() => {
+        if(intentionFormToUpdate?.nameSurname) {
+            setNameSurname(intentionFormToUpdate.nameSurname)
+            setVocation(intentionFormToUpdate?.vocation)
+            setDepartment(intentionFormToUpdate?.department)
+            setEmail(intentionFormToUpdate?.email)
+            setProjectTitle(intentionFormToUpdate?.projectTitle)
+            setProjectAcronym(intentionFormToUpdate?.projectAcronym)
+            setApplicationDeadline(intentionFormToUpdate?.applicationDeadline)
+            setProjectSummary(intentionFormToUpdate?.projectSummary)
+            setApplicationURL(intentionFormToUpdate?.applicationURL)
+            setProjectAplicant(intentionFormToUpdate?.projectApplicant)
+            setProjectPartners(intentionFormToUpdate?.projectPartners)
+            setTotalValue(intentionFormToUpdate?.totalValue)
+            setFesbValuePart(intentionFormToUpdate?.fesbValuePart)
+            setNewEmploymentBoolean(intentionFormToUpdate?.setNewEmploymentBoolean)
+            setProjectTeam(intentionFormToUpdate?.projectTeam)
+        }
+
+    }, [intentionFormToUpdate])
 
     useEffect(() => {
         setIndirectExpenses(0.15*fesbValuePart)
@@ -315,31 +339,31 @@ const SecondInputForm = ( docId ) => {
         <div className="input-form">
             <SecondInputFormDataConext.Provider>
                 <Question questionText={questions[0]}/>
-                    <TextInput label={"IME I PREZIME*"} name={"name_and_surname_2"} setSpecificState={setNameSurname}/>
-                    <TextInput label={"TITULA*"} name={"vocation_2"} setSpecificState={setVocation}/>
-                    <TextInput label={"ZAVOD (ODSJEK)"} name={"department_2"} setSpecificState={setDepartment}/>
-                    <TextInput label={"E-MAIL*"} name={"email_2"} setSpecificState={setEmail}/>
-                    <TextInput label={"MOBITEL*"} name={"phone_number_2"} setSpecificState={setMobilePhoneNumber}/>
-                    <TextInput label={"POSTOTAK RADNOG VREMENA U OKVIRU PREDLOŽENOG PROJEKTA*"} name={"work_time_this_percentage"} setSpecificState={setWorkTimeThisPercentage}/>
-                    <TextInput label={"POSTOTAK RADNOG VREMENA U OKVIRU OSTALIH PROJEKATA U PROVEDBI"} name={"work_time_other_percentage"} setSpecificState={setWorkTimeOtherPercentage}/>
-                    <TextInput label={"NAPOMENA"} name={"team_leader_disclamer"} setSpecificState={setTeamLeaderDisclaimer}/>
+                    <TextInput label={"IME I PREZIME*"} name={"name_and_surname_2"} setSpecificState={setNameSurname} initialValue={nameSurname}/>
+                    <TextInput label={"TITULA*"} name={"vocation_2"} setSpecificState={setVocation} initialValue={vocation}/>
+                    <TextInput label={"ZAVOD (ODSJEK)"} name={"department_2"} setSpecificState={setDepartment} initialValue={department}/>
+                    <TextInput label={"E-MAIL*"} name={"email_2"} setSpecificState={setEmail} initialValue={email}/>
+                    <TextInput label={"MOBITEL*"} name={"phone_number_2"} setSpecificState={setMobilePhoneNumber} initialValue={mobilePhoneNumber}/>
+                    <TextInput label={"POSTOTAK RADNOG VREMENA U OKVIRU PREDLOŽENOG PROJEKTA*"} name={"work_time_this_percentage"} setSpecificState={setWorkTimeThisPercentage} initialValue={workTimeThisPercentage}/>
+                    <TextInput label={"POSTOTAK RADNOG VREMENA U OKVIRU OSTALIH PROJEKATA U PROVEDBI"} name={"work_time_other_percentage"} setSpecificState={setWorkTimeOtherPercentage} initialValue={workTimeOtherPercentage}/>
+                    <TextInput label={"NAPOMENA"} name={"team_leader_disclamer"} setSpecificState={setTeamLeaderDisclaimer} initialValue={teamLeaderDisclaimer}/>
 
                 <Question questionText={questions[1]}/>
-                    <TextInput label={"NAZIV PROJEKTA"} name={"project_title"} setSpecificState={setProjectTitle}/>
-                    <TextInput label={"AKRONIM PROJEKTA"} name={"project_acronym_2"} setSpecificState={setProjectAcronym}/>
-                    <TextInput label={"ROK ZA PRIJAVU PROJEKTA"} name={"application_dead_line"} setSpecificState={setApplicationDeadline}/>
+                    <TextInput label={"NAZIV PROJEKTA"} name={"project_title"} setSpecificState={setProjectTitle} initialValue={projectTitle}/>
+                    <TextInput label={"AKRONIM PROJEKTA"} name={"project_acronym_2"} setSpecificState={setProjectAcronym} initialValue={projectAcronym}/>
+                    <TextInput label={"ROK ZA PRIJAVU PROJEKTA"} name={"application_dead_line"} setSpecificState={setApplicationDeadline} initialValue={applicationDeadline}/>
                     
                 <Question questionText={questions[2]}/>
-                <TextInputWithoutTitle name={"project_summary"} setSpecificState={setProjectSummary}/>
+                <TextInputWithoutTitle name={"project_summary"} setSpecificState={setProjectSummary} initialValue={projectSummary}/>
 
                 <Question questionText={questions[3]}/>
-                <TextInput label={"LINK NA INTERNETSKU STRANICU NA KOJOJ SE NALAZI POTPUNA DOKUMENTACIJA S TEKSTOM NATJEČAJA"} name={"application_url"} setSpecificState={setApplicationURL}/>
+                <TextInput label={"LINK NA INTERNETSKU STRANICU NA KOJOJ SE NALAZI POTPUNA DOKUMENTACIJA S TEKSTOM NATJEČAJA"} name={"application_url"} setSpecificState={setApplicationURL} initialValue={applicationURL}/>
 
                 <Question questionText={questions[4]}/>
-                    <DropdownMenuInputOther name={"source_of_funding"} data={sourceOfFundingData} setSpecificState={setSourceOfFunding}/>
+                    <DropdownMenuInputOther name={"source_of_funding"} data={sourceOfFundingData} setSpecificState={setSourceOfFunding} />
 
                 <Question questionText={questions[5]}/>
-                    <DropdownMenuInput name={"type_of_projects"} data={projectTypesData} setSpecificState={setProjectType}/>
+                    <DropdownMenuInput name={"type_of_projects"} data={projectTypesData} setSpecificState={setProjectType} />
 
                 <Question questionText={questions[6]}/>
                     <TextInputWithoutTitle name={"expected_project_beginning"} setSpecificState={setExpectedProjectBeginning}/>
@@ -348,20 +372,20 @@ const SecondInputForm = ( docId ) => {
                     <TextInputWithoutTitle name={"expected_project_duration_in_months"} setSpecificState={setExpectedProjectDurationInMonths}/>
 
                 <Question questionText={questions[8]}/>
-                    <TextInput  label={"PRIJAVITELJ PROJKETA/VODEĆI PARTNER (INSTITUCIJA, TVRTKA, ...)"} name={"project_applicant"} setSpecificState={setProjectAplicant}/>
+                    <TextInput  label={"PRIJAVITELJ PROJKETA/VODEĆI PARTNER (INSTITUCIJA, TVRTKA, ...)"} name={"project_applicant"} setSpecificState={setProjectAplicant} initialValue={projectApplicant}/>
 
                 <Question questionText={questions[9]}/>
-                    <TextInputWithoutTitle name={"project_partners"} setSpecificState={setProjectPartners}/>
+                    <TextInputWithoutTitle name={"project_partners"} setSpecificState={setProjectPartners} initialValue={projectPartners}/>
 
                 <Question questionText={questions[10]}/>
                     <RadioButtonInput name={"economic_subjet_involvment"} simpleQuestionValue={radioButtonData1} setSelectionState={setEconomicSubjectInvolvement} />
 
                 <Question questionText={questions[11]}/>
-                    <TextInputWithoutTitle name={"total_value"} setSpecificState={setTotalValue}/>
+                    <TextInputWithoutTitle name={"total_value"} setSpecificState={setTotalValue} initialValue={totalValue}/>
 
                 
                 <Question questionText={questions[12]}/>
-                    <TextInput label={"DIO PRORAČUNA KOJI PRIPADA FESB-u"} name={"fesb_value_part"} setSpecificState={setFesbValuePart}/>
+                    <TextInput label={"DIO PRORAČUNA KOJI PRIPADA FESB-u"} name={"fesb_value_part"} setSpecificState={setFesbValuePart} initialValue={fesbValuePart}/>
                     <TextInput label={"TROŠAK POSTOJEĆEG OSOBLJA"} name={"current_personnel_expense"} setSpecificState={setCurrentPesonnelExpense}/>
                     <TextInput label={"TROŠAK NOVOZAPOSLENOG OSOBLJA"} name={"new_personnel_expense"} setSpecificState={setNewPersonnelExpense}/>
                     <AutomaticInput label={"NEIZRAVNI TROŠKOVI (15% NA TROŠKOVE OSOBLJA)"} value={0.15*fesbValuePart}/>
@@ -387,10 +411,10 @@ const SecondInputForm = ( docId ) => {
                     <TextInputWithoutTitle name={"personal_financing_expense"} setSpecificState={setPersonalFinancingExpense}/>
 
                 <Question questionText={questions[17]}/>
-                    <RadioButtonInput name={"new_employment_boolean"} setSelectionState={setNewEmploymentBoolean}/>
+                    <RadioButtonInput name={"new_employment_boolean"} setSelectionState={setNewEmploymentBoolean} initialValue={newEmploymentBoolean}/>
 
                 <Question questionText={questions[18]}/>
-                    <SpecialInput questionText={""} sendProjectMembers={updateProjectTeam}/>
+                    <SpecialInput questionText={""} sendProjectMembers={updateProjectTeam} initialValue={projectTeam}/>
 
                 <Question questionText={questions[19]}/>
                     <RadioButtonInput name={"consultant_services"} setSelectionState={setConsultantServices}/>

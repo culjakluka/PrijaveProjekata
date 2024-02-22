@@ -5,7 +5,7 @@ import './SpecialInput.css'
 import CompletedMember from "../CompletedMember/CompletedMember"
 import { SpecialInputContext } from './SpecialInputContext'
 
-const SpecialInput = ({pitanje, sendProjectMembers}) => {
+const SpecialInput = ({pitanje, sendProjectMembers, initialValue}) => {
     // projectMembers contains members that consist of this fields named: - newItemNameSurname
     //                                                                    - newItemEmail
     //                                                                    - newItemPercentag
@@ -14,21 +14,37 @@ const SpecialInput = ({pitanje, sendProjectMembers}) => {
     // project members
     const[projectMembers, setProjectMembers] = useState([]);
     const[addMemberFormIsActive, setAddMemberFormIsActive] = useState(false);
+    const[initialValueCheck, setInitialValueCheck] = useState(true);
 
     // when component mounts
     useEffect(() => {
       const sessionStorageProjectMembers = sessionStorage.getItem("session_storage_project_members");
       const addMemberForm = sessionStorage.getItem("session_storage_add_member_form_is_active");
+      const initialValueCheckSessionStorage = sessionStorage.getItem("initial_value_check");
+      const initialValueSessionStorage = sessionStorage.getItem("initial_value");
+
 
       if(sessionStorageProjectMembers) {
         const serializedState = JSON.parse(sessionStorageProjectMembers);
-        setProjectMembers(serializedState);
-        sendProjectMembers(serializedState)
+        // setProjectMembers(serializedState);
+        // sendProjectMembers(serializedState)
       }
 
-      if(addMemberForm) {
-        setAddMemberFormIsActive(addMemberForm);
-      }
+      setProjectMembers(initialValue)
+
+      // if(initialValueCheck == true) {
+      //   setProjectMembers(initialValue);
+      //   sessionStorage.setItem("initial_value", initialValue);
+      //   sessionStorage.setItem("initial_value_check", false)
+      // } else if(initialValueCheckSessionStorage == false) {
+      //   setProjectMembers(initialValueSessionStorage)
+      // } else {
+
+      // }
+
+      // if(addMemberForm) {
+      //   setAddMemberFormIsActive(addMemberForm);
+      // }
 
     }, [])
 

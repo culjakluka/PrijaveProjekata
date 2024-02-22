@@ -7,12 +7,18 @@
     height: 100vh;
 }
 
+/* removing scrollbar at all */
+::-webkit-scrollbar {
+    display: none;
+}
+
 .admin-dashboard {
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 100%;
     background-color: pink;
+    overflow: hidden;  /* prevents element from scrolling */
 }
 
 
@@ -22,6 +28,7 @@
     flex:1;
     height: 100%;
     padding-top: 10px;
+    margin-top: 30px;
 }
 
 /* second section */
@@ -29,8 +36,63 @@
     background-color: #F6F6F6;
     flex: 1;
     height: 100%;
-    padding-top: 10px;
+    margin-top: 30px;
+    overflow-y: auto;
+}
 
+/* remove scroll bar */
+.project-applications-container::-webkit-scrollbar {
+    display: none;
+}
+
+
+.progress-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #cfcfcf;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.pending-button-hidden {
+    flex: 1;
+    background-color: #cfcfcf;
+    text-align: center;
+    color: #9c9c9c;
+    font-weight: bold;  
+    border: solid #cfcfcf;
+}
+
+.approved-button-hidden {
+    flex: 1;
+    background-color: #cfcfcf;
+    text-align: center;
+    color: #9c9c9c;
+    font-weight: bold;
+    border: solid #cfcfcf;
+}
+
+.pending-button-selected {
+    flex: 1;
+    text-align: center;
+    color: #4E4E4E;
+    background-color: #F6F6F6;
+    border: solid #F6F6F6;
+    font-weight: bold;
+    border-radius: 10px 10px 0px 0px;
+
+}
+
+.approved-button-selected {
+    flex: 1;
+    text-align: center;
+    color: #4E4E4E;
+    background-color: #F6F6F6;
+    border: solid #F6F6F6;
+    border-radius: 15px 15px 0px 0px;
+    font-weight: bold;
 }
 
 /* third section*/
@@ -42,7 +104,77 @@
     height: 100%;
     padding: 10px 10px 0px 10px;
     overflow-y: auto;
+    margin-top: 30px;
 }
+
+/* remove scrollbar */
+.single-application-container::-webkit-scrollbar {
+    display: none;
+}
+
+.manage-project-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0px 20px 10px 20px;
+}
+
+/* edit button */
+
+.manage-button-style {
+    display: flex;
+    flex-direction: row;
+    background-color: #6F6F6F;
+    box-shadow: none;
+    align-self: flex-end;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.edit-button-container {
+}
+
+.edit-button {
+    color: #FDF9F9;
+    margin-left: 8px;
+    font-weight: bold;
+    background-color: #ffffff00;
+    border: none;
+}
+
+.decision-buttons-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.approve-button-container {
+    margin: 0px 10px 0px 10px;
+}
+
+.decline-button-container {
+    margin: 0px 10px 0px 10px;
+}
+
+.approve-button {
+    color: #FDF9F9;
+    font-weight: bold;
+    background-color: #ffffff00;
+    border: none;
+}
+
+.decline-button {
+    color: #FDF9F9;
+    font-weight: bold;
+    background-color: #ffffff00;
+    border: none;
+}
+
+
+
+
 
 .section-title {
     text-align: center;
@@ -88,21 +220,3 @@
     font-size: 13px;
 }
 
-/* edit button */
-.edit-button {
-    color: #FDF9F9;
-    
-}
-
-.edit-button-container {
-    display: flex;
-    flex-direction: row;
-    background-color: #6F6F6F;
-    box-shadow: none;
-    align-self: flex-end;
-    margin-right: 50px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-}

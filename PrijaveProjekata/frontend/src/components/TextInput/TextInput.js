@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './TextInput.css'
 
 // component TextInput takes "label" and "name" as props
-const TextInput = ({label, name, setSpecificState}) => {
+const TextInput = ({label, name, setSpecificState, initialValue}) => {
 
     // useState to manage the input value state
     const [inputValue, setInputValue] = useState("");
@@ -13,6 +13,16 @@ const TextInput = ({label, name, setSpecificState}) => {
         setInputValue(event.target.value);
         setSpecificState(event.target.value);
     }
+
+    useEffect(() => {
+        setInputValue(initialValue)
+    }, [])
+
+    useEffect(() => {
+        setInputValue(initialValue)
+    }, [initialValue])
+
+
 
     // useEffect to retrive the value from sessionStorage when the component mounts or 'name' prop changes
     useEffect(() => {

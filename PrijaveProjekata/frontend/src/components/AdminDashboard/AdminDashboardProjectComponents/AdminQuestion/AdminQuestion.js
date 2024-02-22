@@ -6,7 +6,7 @@ const AdminQuestion = ({questionText}) => {
 
     return(
         <div className="admin-question">
-            <h2 className="admin-uestion-text">{questionText}</h2>
+            <h2 className="admin-question-text">{questionText}</h2>
         </div>
     )
 }
