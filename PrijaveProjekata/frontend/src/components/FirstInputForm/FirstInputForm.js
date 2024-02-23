@@ -168,7 +168,7 @@ const FirstInputForm = () => {
                 <Question questionText={questions[7]} />
                 <RadioButtonInput simpleQuestionValue={""} setSelectionState={setNewEmployment}/>
 
-                <SpecialInput pitanje={questions[8]} sendProjectMembers={updateProjectTeam}/>
+                <SpecialInput pitanje={questions[8]} sendProjectMembers={updateProjectTeam} initialValue={[]}/>
                 
                 <button id="submit-button" onClick={handleSubmit}>SUBMIT</button>
                 </div>

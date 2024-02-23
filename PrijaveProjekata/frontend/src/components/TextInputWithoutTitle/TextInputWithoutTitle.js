@@ -36,7 +36,7 @@ const TextInputWithoutTitle = ({label, name, setSpecificState}) => {
     }, [inputValue, name]); // re-run this effect when 'inputValue' or 'name' changes
 
     return(
-        <div className="text-input">
+        <div className="text-input-without-title">
             <input name={name} value={inputValue} onChange={handleInputChange} placeholder="empty..." type="text"></input>
         </div>
     )

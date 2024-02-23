@@ -31,6 +31,8 @@ const AdminDashboard = () => {
     const [selectedProject, setSelectedProject] = useState()
 
     // AdminContext
+    
+    ///////////////////////////////////////////////////////////////////
 
     // project editable
     const [projectEditable, setProjectEditable] = useState(false);
@@ -38,20 +40,58 @@ const AdminDashboard = () => {
     const handleEditable = () => {
         setProjectEditable(!projectEditable);
     }
-    
+
+
     // pending, approved buttons
     const [pendingSelected, setPendingSelected] = useState(true);
     const [approvedSelected, setApprovedSelected] = useState(false);
+    const [declinedSelected, setDeclinedSelected] = useState(false);
+
+    const[pendingIntentionFormList, setPendingIntentionFormList] = useState(null);
+    const[approvedIntentionFormList, setApprovedIntentionFormList] = useState(null);
+    const[pendingApprovalFormList, setPendingApprovalFormList] = useState(null);
+    const[approvedApprovalFormList, setApprovedApprovalFormList] = useState(null);
+
+    const[declinedProjectList, setDeclinedProjects] = useState(null)
 
     const handlePending = () => {
         setPendingSelected(true);
         setApprovedSelected(false);
+        setDeclinedSelected(false);
     }
 
     const handleApproved = () => {
         setApprovedSelected(true);
         setPendingSelected(false);
+        setDeclinedSelected(false);
     }
+
+    const handleDeclined = () => {
+        setApprovedSelected(false);
+        setPendingSelected(false)
+        setDeclinedSelected(true);
+    }
+
+    const approveFirstFormSubmit = async (projectId) => {
+        try {
+            // Make a PATCH request to the backend API using fetch
+            const response = await fetch(`/api/projectInfo/approveFirstFormSubmit/${projectId}`, {
+                method: 'PATCH'
+            });
+    
+            // Parse the JSON response
+            const responseData = await response.json();
+    
+            // Handle the response as needed
+            console.log(responseData); // Log the response data
+    
+        } catch (error) {
+            console.error('Error approving first form submit:', error);
+            // Handle errors as needed
+        }
+    };
+
+    /////////////////////////////////////////////////////////////////////
 
 
     // after component is mounted
@@ -80,6 +120,17 @@ const AdminDashboard = () => {
 
                 // filters response depending on marker - secondInputMarker - approvalForm
                 setApprovalForms(data.filter(item => item.firstInputMarker === true && item.secondInputMarker === true));
+
+                ////////////////////////////////////////////////////////////////////////
+                // checking state and that way filling the list with corresponding elements
+                setPendingIntentionFormList(intentionForms?.filter(item => item.state === "firstFormSubmitted"));
+
+                setApprovedIntentionFormList(intentionForms?.filter(item => item.state === "firstFormApproved"));
+
+                setPendingApprovalFormList(approvalForms?.filter(item => item.state === "secondFormSubmitted"));
+
+                setApprovedApprovalFormList(approvalForms?.filter(item => item.state === "secondFormApproved"));
+                /////////////////////////////////////////////////////////////////////////
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -121,18 +172,20 @@ const AdminDashboard = () => {
         <AdminDashboardContext.Provider value={{projectEditable, setProjectEditable}}>
             <div className="admin-dashboard-container">
                 
+            <AdminDashboardHeader/>
+
                 <div className="admin-dashboard">
 
-                <AdminDashboardHeader/>
+                
 
                     {/* FIRST SECTION */}
                     <div className="type-of-project-applications-section">
                         <h5 className="section-title">Pretraga projekata</h5>
                         {/* part that holds  */}
                         <div className="type-of-project-applications-container">
-                            <button className={`${intentionSelection ? 'project-type-form-button-selected' : 'project-type-form-button'}`} onClick={handleClickIntention}><span>Obrasci namjere</span></button>
+                            <button className={`${intentionSelection ? 'project-type-form-button-selected' : 'project-type-form-button'}`} onClick={handleClickIntention}><span>Obrasci namjere ({intentionForms?.length})</span></button>
 
-                            <button className={`${approvalSelection ? 'project-type-form-button-selected' : 'project-type-form-button'}`} onClick={handleClickApproval}><span>Traženje suglasnosti</span></button>
+                            <button className={`${approvalSelection ? 'project-type-form-button-selected' : 'project-type-form-button'}`} onClick={handleClickApproval}><span>Traženje suglasnosti ({approvalForms?.length})</span></button>
                         </div>
                     </div>
 
@@ -140,8 +193,9 @@ const AdminDashboard = () => {
                     <div className="project-applications-container">
                         {/* if intentionSelection == true => show INTENTION FORMS*/}
                         <div className="progress-container">
-                            <button onClick={handlePending} className= { pendingSelected ? "pending-button-selected" : "pending-button-hidden" }>PENDING</button>
-                            <button onClick={handleApproved} className={ approvedSelected ? "pending-button-selected" : "pending-button-hidden" }>APPROVED</button>
+                            <button onClick={handlePending} className= { pendingSelected ? "pending-button-selected" : "pending-button-hidden" }>PENDING    ({intentionSelection ? pendingIntentionFormList?.length :  pendingApprovalFormList?.length})</button>
+                            <button onClick={handleApproved} className={ approvedSelected ? "approved-button-selected" : "approved-button-hidden" }>APPROVED  ({intentionSelection ? approvedIntentionFormList?.length : approvedApprovalFormList?.length})</button>
+                            <button onClick={handleDeclined} className={ declinedSelected ? "declined-button-selected" : "declined-button-hidden" }>DECLINED  ({intentionSelection ? approvedIntentionFormList?.length : approvedApprovalFormList?.length})</button>
                         </div>
                         {intentionSelection && <ProjectInfoButtonContainer projectInfoSets={intentionForms} selectProject={setSelectedIntentionFormId}/>}
                         {approvalSelection && <ProjectInfoButtonContainer projectInfoSets={approvalForms} selectProject={setSelectedApprovalFormId}/>}
@@ -159,7 +213,7 @@ const AdminDashboard = () => {
                                 </div>
                                 <div className="decision-buttons-container">
                                     <div className="approve-button-container manage-button-style">
-                                        <button className="approve-button">APPROVE</button>
+                                        <button onClick={() => approveFirstFormSubmit(selectedProject._id)} className="approve-button">APPROVE</button>
                                     </div>
 
                                     <div className="decline-button-container manage-button-style">

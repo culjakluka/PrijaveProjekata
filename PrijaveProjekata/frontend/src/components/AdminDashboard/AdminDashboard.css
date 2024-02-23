@@ -74,10 +74,20 @@
     border: solid #cfcfcf;
 }
 
+.declined-button-hidden {
+    flex: 1;
+    background-color: #cfcfcf;
+    text-align: center;
+    color: #9c9c9c;
+    font-weight: bold;
+    border: solid #cfcfcf;
+}
+
+
 .pending-button-selected {
     flex: 1;
     text-align: center;
-    color: #4E4E4E;
+    color: #A9224F;
     background-color: #F6F6F6;
     border: solid #F6F6F6;
     font-weight: bold;
@@ -88,7 +98,17 @@
 .approved-button-selected {
     flex: 1;
     text-align: center;
-    color: #4E4E4E;
+    color: #A9224F;
+    background-color: #F6F6F6;
+    border: solid #F6F6F6;
+    border-radius: 15px 15px 0px 0px;
+    font-weight: bold;
+}
+
+.declined-button-selected {
+    flex: 1;
+    text-align: center;
+    color: #A9224F;
     background-color: #F6F6F6;
     border: solid #F6F6F6;
     border-radius: 15px 15px 0px 0px;
@@ -171,8 +191,6 @@
     background-color: #ffffff00;
     border: none;
 }
-
-
 
 
 
