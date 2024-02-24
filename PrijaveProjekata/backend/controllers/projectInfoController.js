@@ -133,6 +133,27 @@ const approveSecondFormSubmit = async (req, res) => {
     }
 }
 
+const rejectProjectInfoSet = async (req, res) => {
+    const { id } = req.params;
+    const projectData = {};
+    projectData['state'] = 'projectRejected'
+
+    try{
+        const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
+            { _id: id },
+            projectData,
+            { new: true },
+        );
+        if(!projectInfoSet){
+            return res.status(400).json({error: 'No such ProjectInfo set.'})
+        }
+        res.status(200).json(projectInfoSet);
+    }catch(error) {
+        console.error("findOneAndUpdate error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+
 // update a ProjectInfo set
 const updateProjectInfoSet = async (req, res) => {
     const { id } = req.params;
@@ -229,5 +250,6 @@ module.exports = {
     deleteProjectInfoSet,
     approveFirstFormSubmit,
     approveSecondFormSubmit,
+    rejectProjectInfoSet,
     updateProjectInfoSet
 }
