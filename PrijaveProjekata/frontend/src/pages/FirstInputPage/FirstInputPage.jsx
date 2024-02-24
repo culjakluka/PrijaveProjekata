@@ -1,4 +1,4 @@
-import FirstInputForm from '../../components/FirstInputForm/FirstInputForm.js'
+import FirstInputForm from '../../components/PageComponents/FirstInputForm/FirstInputForm.js'
 
 const FirstInputPage = () => {
 
