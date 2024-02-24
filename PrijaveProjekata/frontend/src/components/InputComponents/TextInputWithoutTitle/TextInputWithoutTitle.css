@@ -2,7 +2,7 @@
     width: 80%;
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 20px;
 }
 
@@ -16,7 +16,7 @@
     text-decoration-color: #424242;
 }
 
-.text-input input:focus {
+.text-input-without-title input:focus {
     outline: none;
 }
 

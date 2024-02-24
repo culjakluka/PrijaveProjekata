@@ -49,16 +49,23 @@ const AdminDashboard = () => {
 
     const[pendingIntentionFormList, setPendingIntentionFormList] = useState(null);
     const[approvedIntentionFormList, setApprovedIntentionFormList] = useState(null);
+    const[declinedIntentionFormList, setDeclinedIntentionFormList] = useState(null);
+
     const[pendingApprovalFormList, setPendingApprovalFormList] = useState(null);
     const[approvedApprovalFormList, setApprovedApprovalFormList] = useState(null);
-
-    const[declinedProjectList, setDeclinedProjects] = useState(null)
+    const[declinedApprovalFormList, setDeclinedApprovalFormList] = useState(null);
 
     useEffect(() => {
+        // OBRASCI NAMJERE
         setPendingIntentionFormList(intentionForms?.filter(item => item.state === "firstFormSubmitted"));
         setApprovedIntentionFormList(intentionForms?.filter(item => item.state === "firstFormApproved"));
+        setDeclinedIntentionFormList(intentionForms?.filter(item => item.state === "projectRejected"));
+
+        // TRAŽENJE SUGLASNOSTI
         setPendingApprovalFormList(approvalForms?.filter(item => item.state === "secondFormSubmitted"));
         setApprovedApprovalFormList(approvalForms?.filter(item => item.state === "secondFormApproved"));
+        setDeclinedApprovalFormList(approvalForms?.filter(item => item.state === "projectRejected"));
+        
     }, [intentionForms])
 
     const handlePending = () => {
@@ -79,6 +86,7 @@ const AdminDashboard = () => {
         setDeclinedSelected(true);
     }
 
+    // odobri first formu
     const approveFirstFormSubmit = async (projectId) => {
         try {
             // Make a PATCH request to the backend API using fetch
@@ -97,6 +105,11 @@ const AdminDashboard = () => {
             // Handle errors as needed
         }
     };
+
+    // odobri second formu
+    const approveSecondFormSubmit = async (projectId) => {
+
+    }
 
     ///////////////////////////////////////////////////////////////////// KRAJ
 
@@ -198,16 +211,22 @@ const AdminDashboard = () => {
 
                     {/* SECOND SECTION */}
                     <div className="project-applications-container">
-                        {/* if intentionSelection == true => show INTENTION FORMS*/}
+                        {/* PENDIND, APPROVED AND DECLINED FILTER*/}
                         <div className="progress-container">
                             <button onClick={handlePending} className= { pendingSelected ? "pending-button-selected" : "pending-button-hidden" }>PENDING     ({intentionSelection ? pendingIntentionFormList?.length :  pendingApprovalFormList?.length})</button>
                             <button onClick={handleApproved} className={ approvedSelected ? "approved-button-selected" : "approved-button-hidden" }>APPROVED  ({intentionSelection ? approvedIntentionFormList?.length : approvedApprovalFormList?.length})</button>
-                            <button onClick={handleDeclined} className={ declinedSelected ? "declined-button-selected" : "declined-button-hidden" }>DECLINED  ({intentionSelection ? approvedIntentionFormList?.length : approvedApprovalFormList?.length})</button>
+                            <button onClick={handleDeclined} className={ declinedSelected ? "declined-button-selected" : "declined-button-hidden" }>DECLINED  ({intentionSelection ? declinedIntentionFormList?.length : declinedApprovalFormList?.length})</button>
                         </div>
-                        {/* FILTERING depending on: intentionSelection(aka Obrasci namjere) or approvalSelection(aka Trazenje suglasnoti and pending,approved, declined) */}
+
+                        {/* OBRASCI NAMJERE */}
                         {intentionSelection && pendingSelected && <ProjectInfoButtonContainer projectInfoSets={pendingIntentionFormList} selectProject={setSelectedIntentionFormId}/>}
                         {intentionSelection && approvedSelected && <ProjectInfoButtonContainer projectInfoSets={approvedIntentionFormList} selectProject={setSelectedIntentionFormId}/>}
-                        {intentionSelection && declinedProjectList && <ProjectInfoButtonContainer projectInfoSets={null} selectProject={setSelectedIntentionFormId}/>}
+                        {intentionSelection && declinedSelected && <ProjectInfoButtonContainer projectInfoSets={declinedIntentionFormList} selectProject={setSelectedIntentionFormId}/>}
+                       
+                       {/* TRAŽENJE SUGLASNOSTI */}
+                        {approvalSelection && pendingSelected && <ProjectInfoButtonContainer projectInfoSets={pendingApprovalFormList} selectProject={setSelectedIntentionFormId}/>}
+                        {approvalSelection && approvedSelected && <ProjectInfoButtonContainer projectInfoSets={approvedApprovalFormList} selectProject={setSelectedIntentionFormId}/>}
+                        {approvalSelection && declinedSelected && <ProjectInfoButtonContainer projectInfoSets={declinedApprovalFormList} selectProject={setSelectedIntentionFormId}/>}
 
                         {approvalSelection && <ProjectInfoButtonContainer projectInfoSets={approvalForms} selectProject={setSelectedApprovalFormId}/>}
                     </div>
@@ -216,7 +235,7 @@ const AdminDashboard = () => {
 
                         {/* if selectedProject exists => show selected project's info */}
                     <div className="single-application-container">
-                        {selectedProject != null && /*to prevent rendering if the project is not selected*/
+                        {selectedProject != null && pendingSelected && /*to prevent rendering if the project is not selected*/
                             <div className="manage-project-container">
                                 <div className="edit-button-container manage-button-style" onClick={handleEditable}> 
                                     <FontAwesomeIcon icon={faPencilAlt} style={{color: "#FDF9F9"}} />

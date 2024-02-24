@@ -10,6 +10,7 @@ import Question from '../../InputComponents/Question/Question'
 import SpecialInput from '../../InputComponents/SpecialInput/SpecialInput'
 import TextInputWithoutTitle from '../../InputComponents/TextInputWithoutTitle/TextInputWithoutTitle'
 import CompletedProject from '../../InputComponents/CompletedProject/CompletedProject'
+import CalendarInput from '../../InputComponents/CalendarInput/CalendarInput'
 
 const FirstInputForm = () => {
     const { logout } = useLogout()
@@ -132,6 +133,7 @@ const FirstInputForm = () => {
                 <TextInput label={"NAZIV PROJEKTA"} name={"naziv_projekta"} setSpecificState={setProjectTitle}/>
                 <TextInput label={"AKRONIM PROJEKTA"} name={"akronim_projekta"} setSpecificState={setProjectAcronym}/>
                 <TextInput label={"ROK ZA PRIJAVU PROJKETA"} name={"rok_za_prijavu_projekta"} setSpecificState={setApplicationDeadline}/>
+                <CalendarInput label={"ROK ZA PRIJAVU CALENDAR"} name={"rok_za_prijavu_projekta_calendar"} />
 
                 <Question questionText={questions[2]}/>
                 <TextInputWithoutTitle name={"sazetak"} setSpecificState={setProjectSummary}/>
