@@ -19,7 +19,6 @@ const PdfAttach = ({ onFilesSelect }) => {
                 <form encType="multipart/form-data" name="pdfDocuments">
                     <input type="file" onChange={handleFileChange} multiple/>
                 </form>
-                <button>Upload PDF</button>
             </div>
         </>
     )

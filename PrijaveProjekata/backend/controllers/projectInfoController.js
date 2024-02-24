@@ -94,22 +94,21 @@ const approveFirstFormSubmit = async (req, res) => {
     const projectData = {};
     projectData['state'] = 'firstFormApproved'
 
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        try{
-            const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
-                { _id: id },
-                projectData,
-                { new: true },
-            );
-            if(!projectInfoSet){
-                return res.status(400).json({error: 'No such ProjectInfo set.'})
-            }
-            res.status(200).json(projectInfoSet);
-        }catch(error) {
-            console.error("findOneAndUpdate error:", error);
-            res.status(500).json({ error: "Internal server error" });
+    try{
+        const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
+            { _id: id },
+            projectData,
+            { new: true },
+        );
+        if(!projectInfoSet){
+            return res.status(400).json({error: 'No such ProjectInfo set.'})
         }
+        res.status(200).json(projectInfoSet);
+    }catch(error) {
+        console.error("findOneAndUpdate error:", error);
+        res.status(500).json({ error: "Internal server error" });
     }
+    res.status(404).json({error: 'No such ProjectInfo set.'});
 }
 
 // approve secondFormSubmit data by id
@@ -118,21 +117,19 @@ const approveSecondFormSubmit = async (req, res) => {
     const projectData = {};
     projectData['state'] = 'secondFormApproved'
 
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        try{
-            const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
-                { _id: id },
-                projectData,
-                { new: true },
-            );
-            if(!projectInfoSet){
-                return res.status(400).json({error: 'No such ProjectInfo set.'})
-            }
-            res.status(200).json(projectInfoSet);
-        }catch(error) {
-            console.error("findOneAndUpdate error:", error);
-            res.status(500).json({ error: "Internal server error" });
+    try{
+        const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
+            { _id: id },
+            projectData,
+            { new: true },
+        );
+        if(!projectInfoSet){
+            return res.status(400).json({error: 'No such ProjectInfo set.'})
         }
+        res.status(200).json(projectInfoSet);
+    }catch(error) {
+        console.error("findOneAndUpdate error:", error);
+        res.status(500).json({ error: "Internal server error" });
     }
 }
 

@@ -126,6 +126,7 @@ const SecondInputForm = ( docId ) => {
         personalFinancingExpense, newEmploymentBoolean, consultantServices, consultantExpense, 
         consultantExpenseSource, requiredDocumentationFESB, pdfDocuments])    
 
+    // fetching project data to update
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -148,6 +149,7 @@ const SecondInputForm = ( docId ) => {
     useEffect(() => {
         setIndirectExpenses(0.15*fesbValuePart)
     }, [fesbValuePart])
+    
     // callback
     const updateProjectTeam = (projectMembersList) => {
         setProjectTeam(projectMembersList)
@@ -237,24 +239,24 @@ const SecondInputForm = ( docId ) => {
     }
 
     // in the future could be the wa how we load data
-    let inputFormTemplate = 
-    {
+    // let inputFormTemplate = 
+    // {
 
-        name : "second_input_form",
-        questions : [
-            {
-                question : "1. Prijavitelj projekta/voditelj projektnog tima sa strane FESB-a",
-                content : [
-                    {
-                        type : "text",
-                        label : "IME I PREZIME*",
-                        name : "name_and_surname_2"
-                    }
-                ] 
-            },
+    //     name : "second_input_form",
+    //     questions : [
+    //         {
+    //             question : "1. Prijavitelj projekta/voditelj projektnog tima sa strane FESB-a",
+    //             content : [
+    //                 {
+    //                     type : "text",
+    //                     label : "IME I PREZIME*",
+    //                     name : "name_and_surname_2"
+    //                 }
+    //             ] 
+    //         },
             
-        ]
-    }
+    //     ]
+    // }
     
     // source of funding data
     let sourceOfFundingData = [
