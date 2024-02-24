@@ -32,7 +32,7 @@ const AdminDashboard = () => {
 
     // AdminContext
     
-    ///////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////// POČETAK
 
     // project editable
     const [projectEditable, setProjectEditable] = useState(false);
@@ -53,6 +53,13 @@ const AdminDashboard = () => {
     const[approvedApprovalFormList, setApprovedApprovalFormList] = useState(null);
 
     const[declinedProjectList, setDeclinedProjects] = useState(null)
+
+    useEffect(() => {
+        setPendingIntentionFormList(intentionForms?.filter(item => item.state === "firstFormSubmitted"));
+        setApprovedIntentionFormList(intentionForms?.filter(item => item.state === "firstFormApproved"));
+        setPendingApprovalFormList(approvalForms?.filter(item => item.state === "secondFormSubmitted"));
+        setApprovedApprovalFormList(approvalForms?.filter(item => item.state === "secondFormApproved"));
+    }, [intentionForms])
 
     const handlePending = () => {
         setPendingSelected(true);
@@ -91,7 +98,7 @@ const AdminDashboard = () => {
         }
     };
 
-    /////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////// KRAJ
 
 
     // after component is mounted
@@ -123,7 +130,7 @@ const AdminDashboard = () => {
 
                 ////////////////////////////////////////////////////////////////////////
                 // checking state and that way filling the list with corresponding elements
-                setPendingIntentionFormList(intentionForms?.filter(item => item.state === "firstFormSubmitted"));
+                setPendingIntentionFormList(intentionForms.filter(item => item.state === "firstFormSubmitted"));
 
                 setApprovedIntentionFormList(intentionForms?.filter(item => item.state === "firstFormApproved"));
 
@@ -197,7 +204,11 @@ const AdminDashboard = () => {
                             <button onClick={handleApproved} className={ approvedSelected ? "approved-button-selected" : "approved-button-hidden" }>APPROVED  ({intentionSelection ? approvedIntentionFormList?.length : approvedApprovalFormList?.length})</button>
                             <button onClick={handleDeclined} className={ declinedSelected ? "declined-button-selected" : "declined-button-hidden" }>DECLINED  ({intentionSelection ? approvedIntentionFormList?.length : approvedApprovalFormList?.length})</button>
                         </div>
-                        {intentionSelection && <ProjectInfoButtonContainer projectInfoSets={intentionForms} selectProject={setSelectedIntentionFormId}/>}
+                        {/* FILTERING depending on: intentionSelection(aka Obrasci namjere) or approvalSelection(aka Trazenje suglasnoti and pending,approved, declined) */}
+                        {intentionSelection && pendingSelected && <ProjectInfoButtonContainer projectInfoSets={pendingIntentionFormList} selectProject={setSelectedIntentionFormId}/>}
+                        {intentionSelection && approvedSelected && <ProjectInfoButtonContainer projectInfoSets={approvedIntentionFormList} selectProject={setSelectedIntentionFormId}/>}
+                        {intentionSelection && declinedProjectList && <ProjectInfoButtonContainer projectInfoSets={null} selectProject={setSelectedIntentionFormId}/>}
+
                         {approvalSelection && <ProjectInfoButtonContainer projectInfoSets={approvalForms} selectProject={setSelectedApprovalFormId}/>}
                     </div>
 
