@@ -1,20 +1,20 @@
 import { useState, useEffect, useContext } from "react";
-import { SecondInputFormDataConext } from '../../context/SecondInputFormDataContext' 
+import { SecondInputFormDataConext } from '../../../context/SecondInputFormDataContext.js' 
 import './SecondInputForm.css'
-import { useAuthContext } from "../../hooks/useAuthContext.js";
+import { useAuthContext } from "../../../hooks/useAuthContext.js";
 
 //my components
-import Question from '../Question/Question'
-import TextInput from '../TextInput/TextInput.js'
-import TextInputWithoutTitle from '../TextInputWithoutTitle/TextInputWithoutTitle.js'
-import DropdownMenuInputOther from '../DropdownMenuInputOther/DropdownMenuInputOther.js';
-import DropdownMenuInput from '../DropdownMenuInput/DropdownMenuInput.js'
-import RadioButtonInput from '../RadioButtonInput/RadioButtonInput.js'
-import SpecialInput from '../SpecialInput/SpecialInput.js'
-import GenerirajIzjavuPredstojnikaZavoda from "../GenerateHeadOfDepartmentStatement/GenerateHeadOfDepartmentStatement.js";
-import AttachAdditionalDocumentation from "../AttachAdditionalDocumentation/AttachAdditionalDocumentation.js";
-import AttachHeadOfDepartmentStatement from "../AttachHeadOfDepartmentStatement/AttachHeadOfDepartmentStatement.js";
-import AutomaticInput from "../AutomaticInput/AutomaticInput.js";
+import Question from '../../InputComponents/Question/Question.js'
+import TextInput from '../../InputComponents/TextInput/TextInput.js'
+import TextInputWithoutTitle from '../../InputComponents/TextInputWithoutTitle/TextInputWithoutTitle.js'
+import DropdownMenuInputOther from '../../InputComponents/DropdownMenuInputOther/DropdownMenuInputOther.js';
+import DropdownMenuInput from '../../InputComponents/DropdownMenuInput/DropdownMenuInput.js'
+import RadioButtonInput from '../../InputComponents/RadioButtonInput/RadioButtonInput.js'
+import SpecialInput from '../../InputComponents/SpecialInput/SpecialInput.js'
+import GenerirajIzjavuPredstojnikaZavoda from "../../InputComponents/GenerateHeadOfDepartmentStatement/GenerateHeadOfDepartmentStatement.js";
+import AttachAdditionalDocumentation from "../../InputComponents/AttachAdditionalDocumentation/AttachAdditionalDocumentation.js";
+import AttachHeadOfDepartmentStatement from "../../InputComponents/AttachHeadOfDepartmentStatement/AttachHeadOfDepartmentStatement.js";
+import AutomaticInput from "../../InputComponents/AutomaticInput/AutomaticInput.js";
 
 
 const SecondInputForm = ( docId ) => {

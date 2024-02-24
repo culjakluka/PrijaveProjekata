@@ -1,4 +1,4 @@
-import PdfAttach from "../PdfAttach/PdfAttach";
+import PdfAttach from "../../PageComponents/PdfAttach/PdfAttach";
 
 const AttachAdditionalDocumentation = ({ onFilesSelect }) => {
     return ( 

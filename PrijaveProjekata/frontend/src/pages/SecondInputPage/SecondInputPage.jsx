@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import SecondInputForm from '../../components/SecondInputForm/SecondInputForm'
+import SecondInputForm from '../../components/PageComponents/SecondInputForm/SecondInputForm'
 // importing context that is going to manage SecondInputForm
 
 const SecondInputPage = ( documentId ) => {

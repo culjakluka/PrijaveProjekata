@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import '../SpecialInput/SpecialInput.css'
 import { SpecialInputContext } from "../SpecialInput/SpecialInputContext";
-import CompletedProject from "../CompletedProject/CompletedProject";
+import CompletedProject from "../../InputComponents/CompletedProject/CompletedProject";
 
 const CompletedMember = ({memberIndex, fullName, email, percent, projectsArray, deleteSingleMember}) => {
     

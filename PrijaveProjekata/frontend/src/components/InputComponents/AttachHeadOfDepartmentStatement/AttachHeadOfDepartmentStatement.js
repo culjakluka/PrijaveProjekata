@@ -1,4 +1,4 @@
-import PdfAttach from '../PdfAttach/PdfAttach'
+import PdfAttach from '../../PageComponents/PdfAttach/PdfAttach'
 
 const AttachHeadOfDepartmentStatement = ({ onFilesSelect }) => {
     return ( 

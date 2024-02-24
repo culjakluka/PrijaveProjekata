@@ -9,7 +9,7 @@ import Home from './pages/Home';
 import FirstInputPage from './pages/FirstInputPage/FirstInputPage';
 import SecondInputPage from './pages/SecondInputPage/SecondInputPage';
 import AdminDashboardPage from './pages/AdminDashboardPage/AdminDashboardPage';
-import PdfAttach from './components/PdfAttach/PdfAttach';
+import PdfAttach from './components/PageComponents/PdfAttach/PdfAttach';
 
 function SecondInputWrapper() {
   const { id } = useParams();

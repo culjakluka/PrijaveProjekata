@@ -8,7 +8,7 @@ const ProjectInfoButton = ({projectInfo, selectProject}) => {
     }
     return (
         <>
-            <button className="project-info-button" onClick={handleClick} ><span>{projectInfo.projectTitle} STATE:{projectInfo.state}</span></button>
+            <button className="project-info-button" onClick={handleClick} ><span>{projectInfo.nameSurname} {projectInfo.projectAcronym} </span></button>
             </>
     )
 }

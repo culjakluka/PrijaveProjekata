@@ -193,7 +193,7 @@ const AdminDashboard = () => {
                     <div className="project-applications-container">
                         {/* if intentionSelection == true => show INTENTION FORMS*/}
                         <div className="progress-container">
-                            <button onClick={handlePending} className= { pendingSelected ? "pending-button-selected" : "pending-button-hidden" }>PENDING    ({intentionSelection ? pendingIntentionFormList?.length :  pendingApprovalFormList?.length})</button>
+                            <button onClick={handlePending} className= { pendingSelected ? "pending-button-selected" : "pending-button-hidden" }>PENDING     ({intentionSelection ? pendingIntentionFormList?.length :  pendingApprovalFormList?.length})</button>
                             <button onClick={handleApproved} className={ approvedSelected ? "approved-button-selected" : "approved-button-hidden" }>APPROVED  ({intentionSelection ? approvedIntentionFormList?.length : approvedApprovalFormList?.length})</button>
                             <button onClick={handleDeclined} className={ declinedSelected ? "declined-button-selected" : "declined-button-hidden" }>DECLINED  ({intentionSelection ? approvedIntentionFormList?.length : approvedApprovalFormList?.length})</button>
                         </div>

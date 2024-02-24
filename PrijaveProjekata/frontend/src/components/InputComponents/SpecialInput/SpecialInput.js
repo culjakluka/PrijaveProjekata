@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import styles from './SpecialInput.css'
 import SpecialInputMemberContainer from "./SpecialInputMemberContainer/SpecialInputMemberContainer";
 import './SpecialInput.css'
-import CompletedMember from "../CompletedMember/CompletedMember"
+import CompletedMember from "../CompletedMember/CompletedMember.js"
 import { SpecialInputContext } from './SpecialInputContext'
 
 const SpecialInput = ({pitanje, sendProjectMembers, initialValue}) => {

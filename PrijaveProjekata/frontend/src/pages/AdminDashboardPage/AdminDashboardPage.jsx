@@ -1,6 +1,6 @@
 import React from "react";
 import "./AdminDashboardPage.module.css"
-import AdminDashboard from "../../components/AdminDashboard/AdminDashboard";
+import AdminDashboard from "../../components/PageComponents/AdminDashboard/AdminDashboard"
 
 const AdminDashboardPage = () => {
     return (
