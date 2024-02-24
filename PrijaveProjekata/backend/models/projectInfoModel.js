@@ -209,7 +209,7 @@ const projectInfoSchema = new Schema({
     },
     state: { // stanje projekta
         type: String,
-        enum: ['firstFormSubmitted', 'firstFormApproved', 'secondFormSubmitted', 'secondFormApproved'],
+        enum: ['firstFormSubmitted', 'firstFormApproved', 'secondFormSubmitted', 'secondFormApproved', 'projectRejected'],
         default: 'firstFormSubmitted',
     }
 }, { timestamps: true })
