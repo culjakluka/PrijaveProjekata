@@ -78,7 +78,7 @@ const deleteProjectInfoSet = async (req, res) => {
         return res.status(404).json({error: 'No such ProjectInfo set.'});
     }
 
-    const projectInfoSet = await ProjectInfo.findOneAndDelete({_id: id});
+    const projectInfoSet = await ProjectInfoModel.findOneAndDelete({_id: id});
 
     if(!projectInfoSet){
         return res.status(400).json({error: 'No such ProjectInfo set.'})
