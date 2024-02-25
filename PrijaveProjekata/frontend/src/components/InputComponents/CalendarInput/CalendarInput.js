@@ -1,57 +1,83 @@
 import { useEffect, useState } from "react";
 import "./CalendarInput.css"
 
-const CalendarInput = ({name, label, initialDate}) => {
+const CalendarInput = ({name, label, setSpecificState, initialValue}) => {
     
-    const[date, setDate] = useState("");
-    const[title, setTitle] = useState("");
+    // useState to manage the input value state
+    const [inputValue, setInputValue] = useState("");
 
-    const handleDateChange = (event) => {
-        setDate(event.target.value); // update date when the user changes input
-    };
-
-    useEffect(() => {
-        setTitle(label);
+    // function to handle input changes
+    const handleInputChange = (event) => {
+        // update the inputValue state as the input changes
+        setInputValue(event.target.value);
         
-        // after component mounts
-        const savedDate = sessionStorage.getItem(name);
-        // if savedDate exists in sessionStorage, load it
-        if(savedDate) {
-            setDate(savedDate);
+        sessionStorage.setItem(name, event.target.value)
+
+
+        // callback that updates state in parent value
+        setSpecificState(event.target.value);
+    }
+
+    // after component mounts
+    useEffect(() => {
+        const savedValue = sessionStorage.getItem(name);
+
+        console.log("Retrived value from session storage: ", savedValue);
+
+        if(savedValue) {
+            setInputValue(savedValue);
+            
+            // callback that updates state in parent value
+            setSpecificState(savedValue);
         }
 
     }, [])
 
-
-    // managing initialDate
-    // initialDate is coming in ISO 8601 format -> 2025-10-09T22:00:00.000Z
+    // when initial value changes or when it is loaded
     useEffect(() => {
-        
-        const savedDate = sessionStorage.getItem(name);
-        
-        if (savedDate) {
-            // Load date from sessionStorage if available
-            setDate(savedDate);
-        } else if (initialDate) {
-            // If sessionStorage doesn't have a value, use the initialDate
-            const formattedDate = initialDate.split("T")[0];
-            setDate(formattedDate);
+
+        console.log("Initial value: ", initialValue);
+
+        const savedValue = sessionStorage.getItem(name);
+
+        if(savedValue) {
+            // if value is available in session storage, take if from there
+            setInputValue(savedValue);
+
+            // callback that updates state in parent component
+            setSpecificState(savedValue);
+
+        } else if(initialValue) {
+            
+            console.log("Formatted initial value: ",initialValue.split("T")[0])
+
+            setInputValue(initialValue.split("T")[0]);
+            
+            // callback that updates state in parent component
+            setSpecificState(initialValue.split("T")[0]);
+
+            sessionStorage.setItem(name, initialValue.split("T")[0]);
         }
-    }, [initialDate]);
+
+    }, [initialValue])
 
 
+    // useEffect to save input value to local session storage whenever it changes
     useEffect(() => {
-        sessionStorage.setItem(name, date)
-    }, [date])
+
+        // store the input value in local storage with the 'name' as the key
+        sessionStorage.setItem(name, inputValue);
+
+    }, [inputValue, name]); // re-run this effect when 'inputValue' or 'name' changes
 
     return (  
         <div className="calendar-input-container">
-            <label>{title}</label>
+            <label>{label}</label>
             <input 
             type="date"
             id={name}
-            value={date}
-            onChange={handleDateChange}
+            value={inputValue}
+            onChange={handleInputChange}
             ></input>
         </div>
     );

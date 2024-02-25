@@ -353,8 +353,7 @@ const SecondInputForm = ( docId ) => {
                 <Question questionText={questions[1]}/>
                     <TextInput label={"NAZIV PROJEKTA"} name={"project_title"} setSpecificState={setProjectTitle} initialValue={projectTitle}/>
                     <TextInput label={"AKRONIM PROJEKTA"} name={"project_acronym_2"} setSpecificState={setProjectAcronym} initialValue={projectAcronym}/>
-                    <TextInput label={"ROK ZA PRIJAVU PROJEKTA"} name={"application_dead_line"} setSpecificState={setApplicationDeadline} initialValue={applicationDeadline}/>
-                    <CalendarInput label={"ROK ZA PRIJAVU PROJEKTA CALENDAR"} name={"application_dead_line"} initialDate={applicationDeadline}/>
+                    <CalendarInput label={"ROK ZA PRIJAVU PROJEKTA CALENDAR"} name={"application_dead_line"} setSpecificState={setApplicationDeadline} initialValue={applicationDeadline}/>
                 <Question questionText={questions[2]}/>
                 <TextInputWithoutTitle name={"project_summary"} setSpecificState={setProjectSummary} initialValue={projectSummary}/>
 

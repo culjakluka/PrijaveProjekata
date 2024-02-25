@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './TextInput.css'
+import { setDate } from 'date-fns';
 
 // component TextInput takes "label" and "name" as props
 const TextInput = ({label, name, setSpecificState, initialValue}) => {
@@ -11,31 +12,51 @@ const TextInput = ({label, name, setSpecificState, initialValue}) => {
     const handleInputChange = (event) => {
         // update the inputValue state as the input changes
         setInputValue(event.target.value);
+        
+        sessionStorage.setItem(name, event.target.value)
+
+
+        // callback that updates state in parent value
         setSpecificState(event.target.value);
     }
 
+    // after component mounts
     useEffect(() => {
-        setInputValue(initialValue)
+        const savedValue = sessionStorage.getItem(name);
+
+        console.log("Retrived value from session storage: ", savedValue);
+
+        if(savedValue) {
+            setInputValue(savedValue);
+            
+            // callback that updates state in parent value
+            setSpecificState(savedValue);
+        }
+
     }, [])
 
     useEffect(() => {
-        setInputValue(initialValue)
+
+        const savedValue = sessionStorage.getItem(name);
+
+        if(savedValue) {
+            // if value is available in session storage, take if from there
+            setInputValue(savedValue);
+
+            // callback that updates state in parent component
+            setSpecificState(savedValue);
+
+        } else if(initialValue) {
+            setInputValue(initialValue);
+            
+            // callback that updates state in parent component
+            setSpecificState(initialValue);
+
+            sessionStorage.setItem(name, initialValue);
+        }
+
     }, [initialValue])
 
-
-
-    // useEffect to retrive the value from sessionStorage when the component mounts or 'name' prop changes
-    useEffect(() => {
-        
-        // retrive the value from the local storage if it exists for the provided 'name' key
-        const storedValue = sessionStorage.getItem(name);
-
-        // set inputValue to the retrived value if it exists
-        if(storedValue) {
-            setInputValue(storedValue)
-            setSpecificState(storedValue)
-        }
-    },[name])
 
     // useEffect to save input value to local session storage whenever it changes
     useEffect(() => {

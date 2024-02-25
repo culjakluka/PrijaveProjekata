@@ -132,8 +132,7 @@ const FirstInputForm = () => {
                 <Question questionText={questions[1]}/>
                 <TextInput label={"NAZIV PROJEKTA"} name={"naziv_projekta"} setSpecificState={setProjectTitle}/>
                 <TextInput label={"AKRONIM PROJEKTA"} name={"akronim_projekta"} setSpecificState={setProjectAcronym}/>
-                <TextInput label={"ROK ZA PRIJAVU PROJKETA"} name={"rok_za_prijavu_projekta"} setSpecificState={setApplicationDeadline}/>
-                <CalendarInput label={"ROK ZA PRIJAVU CALENDAR"} name={"rok_za_prijavu_projekta_calendar"} />
+                <CalendarInput label={"ROK ZA PRIJAVU PROJEKTA"} name={"rok_za_prijavu_projekta"} setSpecificState={setApplicationDeadline} initialDate={"2024-12-11"}/>
 
                 <Question questionText={questions[2]}/>
                 <TextInputWithoutTitle name={"sazetak"} setSpecificState={setProjectSummary}/>
