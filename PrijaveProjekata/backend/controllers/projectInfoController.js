@@ -1,9 +1,14 @@
+require('dotenv').config()
+
 const ProjectInfoModel = require('../models/projectInfoModel')
+const Dean = require('../models/deanModel')
 const mongoose = require('mongoose')
 const path = require('path')
 const fs = require('fs/promises')
+const EmailService = require('../services/emailService')
 
 const uploadDirectory = 'uploads'; // ruta za upload samog pdf-a
+const defaultEmail = process.env.DEFAULT_EMAIL
 
 // const uploadPdf = async (req, res) => {
 //     // ... (unchanged)
@@ -72,6 +77,7 @@ const createProjectInfoSet = async (req, res) => {
         projectData.state = 'firstFormSubmitted';
         const projectInfoSet = await ProjectInfoModel.create(projectData);
         console.log(projectData)
+        EmailService.sendEmail([defaultEmail], 'Project form submitted', 'A new project form has been submitted.');
         res.status(200).json(projectInfoSet);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -111,12 +117,12 @@ const approveFirstFormSubmit = async (req, res) => {
         if(!projectInfoSet){
             return res.status(400).json({error: 'No such ProjectInfo set.'})
         }
+        EmailService.sendEmail([defaultEmail, projectInfoSet.email], 'Project application approved', 'Your project application has been approved.');
         res.status(200).json(projectInfoSet);
     }catch(error) {
         console.error("findOneAndUpdate error:", error);
         res.status(500).json({ error: "Internal server error" });
     }
-    res.status(404).json({error: 'No such ProjectInfo set.'});
 }
 
 // approve secondFormSubmit data by id
@@ -124,8 +130,9 @@ const approveSecondFormSubmit = async (req, res) => {
     const { id } = req.params;
     const projectData = {};
     projectData['state'] = 'secondFormApproved'
-
+    
     try{
+        const dean = await Dean.findOne();
         const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
             { _id: id },
             projectData,
@@ -134,6 +141,7 @@ const approveSecondFormSubmit = async (req, res) => {
         if(!projectInfoSet){
             return res.status(400).json({error: 'No such ProjectInfo set.'})
         }
+        EmailService.sendEmail([defaultEmail, dean.email, projectInfoSet.email], 'Project application approved', 'Your project application has been approved.');
         res.status(200).json(projectInfoSet);
     }catch(error) {
         console.error("findOneAndUpdate error:", error);
@@ -155,6 +163,7 @@ const rejectProjectInfoSet = async (req, res) => {
         if(!projectInfoSet){
             return res.status(400).json({error: 'No such ProjectInfo set.'})
         }
+        EmailService.sendEmail([defaultEmail, projectInfoSet.email], 'Project application rejected', 'Your project application has been rejected.');
         res.status(200).json(projectInfoSet);
     }catch(error) {
         console.error("findOneAndUpdate error:", error);
@@ -238,7 +247,7 @@ const updateProjectInfoSet = async (req, res) => {
         if(!projectInfoSet){
             return res.status(400).json({error: 'No such ProjectInfo set.'});
         }
-
+        EmailService.sendEmail([defaultEmail], 'Project form submitted', 'A new project form has been submitted.');
         res.status(200).json(projectInfoSet);
     } catch (error) {
         console.error("findOneAndUpdate error:", error);
