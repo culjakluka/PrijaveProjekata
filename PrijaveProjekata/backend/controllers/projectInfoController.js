@@ -47,8 +47,15 @@ const createProjectInfoSet = async (req, res) => {
     let emptyFields = [];
 
     fieldsToCheck.forEach(field => {
-        const value = req.body[field];
-        if (!value) {
+        const value = field === 'newEmploymentBoolean' ? req.files : req.body[field];
+        if(field === 'newEmploymentBoolean'){
+            const newEmploymentBoolean = JSON.parse(req.body.newEmploymentBoolean);
+            if(newEmploymentBoolean === null){
+                emptyFields.push(field);
+            }else{
+                projectData[field] = newEmploymentBoolean;
+            }
+        }else if (!value) {
             emptyFields.push(field);
         } else {
             projectData[field] = value;
