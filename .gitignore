@@ -1,6 +1,7 @@
 #my files to ignore
 Test.js
 Test.css
+launch.json
 
 # Logs
 logs
