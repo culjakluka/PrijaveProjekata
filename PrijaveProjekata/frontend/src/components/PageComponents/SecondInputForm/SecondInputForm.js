@@ -1,7 +1,11 @@
 import { useState, useEffect, useContext } from "react";
-import { SecondInputFormDataConext } from '../../../context/SecondInputFormDataContext.js' 
-import './SecondInputForm.css'
+import Style from './SecondInputForm.module.css'
 import { useAuthContext } from "../../../hooks/useAuthContext.js";
+import { SecondInputFormDataConext } from '../../../context/SecondInputFormDataContext.js' 
+
+
+// styles
+import '../../../index.css'
 
 //my components
 import Question from '../../InputComponents/Question/Question.js'
@@ -16,6 +20,10 @@ import AttachAdditionalDocumentation from "../../InputComponents/AttachAdditiona
 import AttachHeadOfDepartmentStatement from "../../InputComponents/AttachHeadOfDepartmentStatement/AttachHeadOfDepartmentStatement.js";
 import AutomaticInput from "../../InputComponents/AutomaticInput/AutomaticInput.js";
 import CalendarInput from "../../InputComponents/CalendarInput/CalendarInput.js";
+
+// data
+import { sourceOfFundingData, projectTypesData } from "../../data/dropdownMenuData.js";
+import { questions, radioButtonData1 } from "../../data/secondInputFormData.js";
 
 const SecondInputForm = ( docId ) => {
     const { user } = useAuthContext()
@@ -114,7 +122,7 @@ const SecondInputForm = ( docId ) => {
             requiredDocumentationFESB,
             pdfDocuments,
         })
-        console.log(JSON.stringify(inputFormData));
+        //console.log(JSON.stringify(inputFormData));
     }, [nameSurname, vocation, department, 
         email, projectTitle, projectAcronym, applicationDeadline, projectSummary, applicationURL, 
         projectApplicant, projectPartners,     totalValue, fesbValuePart, newEmploymentBoolean, 
@@ -126,7 +134,7 @@ const SecondInputForm = ( docId ) => {
         personalFinancingExpense, newEmploymentBoolean, consultantServices, consultantExpense, 
         consultantExpenseSource, requiredDocumentationFESB, pdfDocuments])    
 
-    // fetching project data to update
+    // fetching initial data
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -149,6 +157,8 @@ const SecondInputForm = ( docId ) => {
         fetchData();
     }, []);
 
+
+    // after data is loaded completely, update states
     useEffect(() => {
         if(intentionFormToUpdate?.nameSurname) {
             setNameSurname(intentionFormToUpdate.nameSurname)
@@ -254,92 +264,45 @@ const SecondInputForm = ( docId ) => {
               const responseData = await response.json();
               
               console.log('Update successful:', responseData);
+
+              window.alert("Update successful!", responseData);
             } else {
-              console.error('Error posting data:', response.status, response.statusText);
+
+              // handle potentional non-JSON response
+            const errorData = await response.json().catch(() => null); 
+            // if response is not null
+            const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
+
+            console.error("Error posting data1: ", errorMessage);
+            window.alert(`Error posting data1: ${errorMessage}`);
+
+            // printing missing field if there are any and displaying them
+            if (errorData && errorData.emptyFields && errorData.emptyFields.length > 0) {
+
+                const missingFieldsMessage = `Missing fields: ${errorData.emptyFields.join(', ')}`;
+                console.error(missingFieldsMessage);
+                window.alert(missingFieldsMessage);
+
+            }
             }
           } catch (error) {
-            console.error('Error posting data:', error.message);
+            console.error('Error posting data2:', error.message);
+            window.alert(`Error posting data1: ${error.message}`);
           }
     }
 
-    // in the future could be the wa how we load data
-    // let inputFormTemplate = 
-    // {
 
-    //     name : "second_input_form",
-    //     questions : [
-    //         {
-    //             question : "1. Prijavitelj projekta/voditelj projektnog tima sa strane FESB-a",
-    //             content : [
-    //                 {
-    //                     type : "text",
-    //                     label : "IME I PREZIME*",
-    //                     name : "name_and_surname_2"
-    //                 }
-    //             ] 
-    //         },
-            
-    //     ]
-    // }
     
-    // source of funding data
-    let sourceOfFundingData = [
-        "HRZZ",
-        "Horizon Europe",
-        "Europski socijalni fond",
-        "Europski fond za regionalni razvoj",
-        "Drugi strukturni fondovi",
-        "Erasmus +",
-        "INTERREG",
-        "Jedinice lokalne samouprave"
-    ]
-
-    let projectTypesData = [
-        "Međunarodni znanstveni kompetitivni",
-        "Nacionalni znanstveni kompetitivni",
-        "Stručni projekt",
-        "Strateški projekt",
-        "Infrastrukturni projekt",
-        "Suradnja s gospodarstvom",
-        "Podizanje kapaciteta",
-        "Donacija",
-        "Ostalo"
-    ]
-
-    let radioButtonData1 = "UKOLIKO JE JEDAN OD PARTNERA U PROJEKTU TVRTKA I/ILI POSTOJI" +
-                            "PRIJENOS ZNANJA/TEHNOLOGIJE\n PREMA GOSPODARSTVU KOJE JE NUŽNO" +
-                            "OSTVARITI TIJEKOM PROVEDBE PROJEKTA ODABERITE DA"
-
-    let questions = [
-        "1. Prijavitelj projekta/voditelj projektnog tima sa strane FESB-a",
-        "2. Naziv, akronim i rok za prijavu",
-        "3. Sažetak projekta (do 500 znakova)",
-        "4. Poveznica za natječaj",
-        "5. Izvor financiranja",
-        "6. Vrsta projekta",
-        "7. Očekivani početak projekta",
-        "8. Očekivano trajanje projekta u mjesecima",
-        "9 Koordinator projekta*",
-        "10. Ostali partneri na projektu*",
-        "11. U projektu kao partner sudjeluju gospodarski subjekti",
-        "12. Ukupna vrijednost projekta",
-        "13. Proračun projekta (može se unositi vrijedost ili postotak ukupne vrijednosti projketa*)",
-        "14. Proračun za ostale partnere",
-        "15. Traženo financiranje",
-        "16. Predujam (iznos ili postotak",
-        "17. Iznos potrebnog vlastitog sufinanciranja projekta",
-        "18. Jesu li u projektu planirana nova radna mjesta*",
-        "19. Navedite ostale osobe koje će biti uključene u provedbu projekta",
-        "20. Planirate li koristiti konzultantsku pomoć prilikom prijave projekta?",
-        "21. Navedite dokumentaciju koju je potrebno osigurati za prijavu projekta od strane FESB-a",
-        "22. Prilozi*"
-    ]
 
     return ( 
     // all the child components inside SecondInputFormDataConext.Provide have access value data
-    <div className="input-form-container">
-        <div className="input-form">
-            <SecondInputFormDataConext.Provider>
+    <div className={Style.InputFormContainer}>
+        <div className={Style.InputForm}>
+            <SecondInputFormDataConext.Provider value={{projectTeam, setProjectTeam}}>
+
+                <h1 className='document-title'>NAMJERA PRIJAVE</h1>
+
+
                 <Question questionText={questions[0]}/>
                     <TextInput label={"IME I PREZIME*"} name={"name_and_surname_2"} setSpecificState={setNameSurname} initialValue={nameSurname}/>
                     <TextInput label={"TITULA*"} name={"vocation_2"} setSpecificState={setVocation} initialValue={vocation}/>
@@ -415,7 +378,7 @@ const SecondInputForm = ( docId ) => {
                     <RadioButtonInput name={"new_employment_boolean"} setSelectionState={setNewEmploymentBoolean} initialValue={newEmploymentBoolean}/>
 
                 <Question questionText={questions[18]}/>
-                    <SpecialInput questionText={""} sendProjectMembers={updateProjectTeam} initialValue={projectTeam}/>
+                    <SpecialInput name="project_team_members" questionText={""} />
 
                 <Question questionText={questions[19]}/>
                     <RadioButtonInput name={"consultant_services"} setSelectionState={setConsultantServices}/>
@@ -436,7 +399,7 @@ const SecondInputForm = ( docId ) => {
                     <AttachAdditionalDocumentation onFilesSelect={handleFilesSelect}/>
             
 
-                <button id="podnesi-trazenje-suglasnosti" onClick={handleSubmit}>PODNESI TRAZENJE SUGLASNOSTI</button>
+                <button className="default-button" onClick={handleSubmit}>PODNESI TRAZENJE SUGLASNOSTI</button>
 
 
             </SecondInputFormDataConext.Provider>
