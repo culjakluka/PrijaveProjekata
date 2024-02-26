@@ -52,11 +52,33 @@ const FirstInputForm = () => {
             const responseData = await response.json();
             
             console.log('Post successful:', responseData);
+
+            window.alert("Post successful");
+
           } else {
-            console.error('Error posting data:', response.status, response.statusText);
+            // handle potentional non-JSON response
+            const errorData = await response.json().catch(() => null); 
+            // if response is not null
+            const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
+
+            console.error("Error posting data: ", errorMessage);
+            window.alert(`Error posting data: ${errorMessage}`);
+
+            // printing missing field if there are any and displaying them
+            if (errorData && errorData.emptyFields && errorData.emptyFields.length > 0) {
+
+                const missingFieldsMessage = `Missing fields: ${errorData.emptyFields.join(', ')}`;
+                console.error(missingFieldsMessage);
+                window.alert(missingFieldsMessage);
+
+            }
+
           }
         } catch (error) {
-          console.error('Error posting data:', error.message);
+          console.error('Error posting data2:', error.message);
+
+          window.alert("Error posting data2: ", error.message);
+
         }
     };
 
