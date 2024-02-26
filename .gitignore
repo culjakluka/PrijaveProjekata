@@ -1,3 +1,7 @@
+#my files to ignore
+Test.js
+Test.css
+
 # Logs
 logs
 *.log

@@ -1,6 +1,7 @@
 .question {
     display: flex;
     align-self: flex-start;
+    margin: 20px 0px 0px 0px;
 }
 
 .question-text {

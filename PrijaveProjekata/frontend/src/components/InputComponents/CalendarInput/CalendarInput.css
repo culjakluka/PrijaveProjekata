@@ -1,0 +1,9 @@
+.calendar-input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-input-container label {
+    color: #B0355E;
+    font-weight: bold;
+}

@@ -10,6 +10,7 @@ import Question from '../../InputComponents/Question/Question'
 import SpecialInput from '../../InputComponents/SpecialInput/SpecialInput'
 import TextInputWithoutTitle from '../../InputComponents/TextInputWithoutTitle/TextInputWithoutTitle'
 import CompletedProject from '../../InputComponents/CompletedProject/CompletedProject'
+import CalendarInput from '../../InputComponents/CalendarInput/CalendarInput'
 
 const FirstInputForm = () => {
     const { logout } = useLogout()
@@ -51,11 +52,33 @@ const FirstInputForm = () => {
             const responseData = await response.json();
             
             console.log('Post successful:', responseData);
+
+            window.alert("Post successful");
+
           } else {
-            console.error('Error posting data:', response.status, response.statusText);
+            // handle potentional non-JSON response
+            const errorData = await response.json().catch(() => null); 
+            // if response is not null
+            const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
+
+            console.error("Error posting data: ", errorMessage);
+            window.alert(`Error posting data: ${errorMessage}`);
+
+            // printing missing field if there are any and displaying them
+            if (errorData && errorData.emptyFields && errorData.emptyFields.length > 0) {
+
+                const missingFieldsMessage = `Missing fields: ${errorData.emptyFields.join(', ')}`;
+                console.error(missingFieldsMessage);
+                window.alert(missingFieldsMessage);
+
+            }
+
           }
         } catch (error) {
-          console.error('Error posting data:', error.message);
+          console.error('Error posting data2:', error.message);
+
+          window.alert("Error posting data2: ", error.message);
+
         }
     };
 
@@ -131,7 +154,7 @@ const FirstInputForm = () => {
                 <Question questionText={questions[1]}/>
                 <TextInput label={"NAZIV PROJEKTA"} name={"naziv_projekta"} setSpecificState={setProjectTitle}/>
                 <TextInput label={"AKRONIM PROJEKTA"} name={"akronim_projekta"} setSpecificState={setProjectAcronym}/>
-                <TextInput label={"ROK ZA PRIJAVU PROJKETA"} name={"rok_za_prijavu_projekta"} setSpecificState={setApplicationDeadline}/>
+                <CalendarInput label={"ROK ZA PRIJAVU PROJEKTA"} name={"rok_za_prijavu_projekta"} setSpecificState={setApplicationDeadline} initialDate={"2024-12-11"}/>
 
                 <Question questionText={questions[2]}/>
                 <TextInputWithoutTitle name={"sazetak"} setSpecificState={setProjectSummary}/>

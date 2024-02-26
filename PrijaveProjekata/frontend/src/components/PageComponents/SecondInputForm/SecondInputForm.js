@@ -15,7 +15,7 @@ import GenerirajIzjavuPredstojnikaZavoda from "../../InputComponents/GenerateHea
 import AttachAdditionalDocumentation from "../../InputComponents/AttachAdditionalDocumentation/AttachAdditionalDocumentation.js";
 import AttachHeadOfDepartmentStatement from "../../InputComponents/AttachHeadOfDepartmentStatement/AttachHeadOfDepartmentStatement.js";
 import AutomaticInput from "../../InputComponents/AutomaticInput/AutomaticInput.js";
-
+import CalendarInput from "../../InputComponents/CalendarInput/CalendarInput.js";
 
 const SecondInputForm = ( docId ) => {
     const { user } = useAuthContext()
@@ -353,8 +353,7 @@ const SecondInputForm = ( docId ) => {
                 <Question questionText={questions[1]}/>
                     <TextInput label={"NAZIV PROJEKTA"} name={"project_title"} setSpecificState={setProjectTitle} initialValue={projectTitle}/>
                     <TextInput label={"AKRONIM PROJEKTA"} name={"project_acronym_2"} setSpecificState={setProjectAcronym} initialValue={projectAcronym}/>
-                    <TextInput label={"ROK ZA PRIJAVU PROJEKTA"} name={"application_dead_line"} setSpecificState={setApplicationDeadline} initialValue={applicationDeadline}/>
-                    
+                    <CalendarInput label={"ROK ZA PRIJAVU PROJEKTA CALENDAR"} name={"application_dead_line"} setSpecificState={setApplicationDeadline} initialValue={applicationDeadline}/>
                 <Question questionText={questions[2]}/>
                 <TextInputWithoutTitle name={"project_summary"} setSpecificState={setProjectSummary} initialValue={projectSummary}/>
 
@@ -368,7 +367,7 @@ const SecondInputForm = ( docId ) => {
                     <DropdownMenuInput name={"type_of_projects"} data={projectTypesData} setSpecificState={setProjectType} />
 
                 <Question questionText={questions[6]}/>
-                    <TextInputWithoutTitle name={"expected_project_beginning"} setSpecificState={setExpectedProjectBeginning}/>
+                    <TextInput name={"expected_project_beginning"} setSpecificState={setExpectedProjectBeginning}/>
 
                 <Question questionText={questions[7]}/>
                     <TextInputWithoutTitle name={"expected_project_duration_in_months"} setSpecificState={setExpectedProjectDurationInMonths}/>

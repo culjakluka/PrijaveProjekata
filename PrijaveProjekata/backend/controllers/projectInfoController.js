@@ -59,11 +59,12 @@ const createProjectInfoSet = async (req, res) => {
             emptyFields.push(field);
         } else {
             projectData[field] = value;
+            console.log("Field okay: [", field, "]")
         }
     });
 
     if (emptyFields.length > 0) {
-        return res.status(400).json({ error: 'Molimo popunite sva polja', emptyFields });
+        return res.status(400).json({ error: 'Molimo popunite sva polja. Missing fields:\n', emptyFields });
     }
 
     // Add doc to the database
