@@ -4,6 +4,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user')
 const projectInfo = require('./routes/projectInfo')
+const dean = require('./routes/dean')
+const department = require('./routes/department')
 
 require('express-async-errors');
 
@@ -21,6 +23,8 @@ app.use((req, res, next) => {
 // routes
 app.use('/api/user', userRoutes)
 app.use('/api/projectInfo', projectInfo)
+app.use('/api/dean', dean)
+app.use('/api/department', department)
 
 // global error handler
 app.use((err, req, res, next) => {

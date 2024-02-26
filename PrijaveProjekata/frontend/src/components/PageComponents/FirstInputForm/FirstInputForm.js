@@ -28,7 +28,7 @@ const FirstInputForm = () => {
     const [projectPartners, setProjectPartners] = useState("");
     const [totalValue, setTotalValue] = useState(0);
     const [fesbValuePart, setFesbValuePart] = useState(0);
-    const [newEmploymentBoolean, setNewEmployment] = useState("");
+    const [newEmploymentBoolean, setNewEmployment] = useState(null);
     const [projectTeam, setProjectTeam] = useState([]);
     const [firstInputMarker, setFirstInputMarker] = useState(true)
     const [secondInputMarker, setSecondInputMarker] = useState(false)
