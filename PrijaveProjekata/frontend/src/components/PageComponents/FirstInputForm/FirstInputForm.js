@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useLogout } from '../../../hooks/useLogout'
 import React from 'react'
 import TextInput from '../../InputComponents/TextInput/TextInput'
-import style from './FirstInputForm.css'
 import DropdownMenuInput from '../../InputComponents/DropdownMenuInput/DropdownMenuInput'
 import RadioButtonInput from '../../InputComponents/RadioButtonInput/RadioButtonInput'
 import { useAuthContext } from '../../../hooks/useAuthContext'
@@ -11,6 +10,10 @@ import SpecialInput from '../../InputComponents/SpecialInput/SpecialInput'
 import TextInputWithoutTitle from '../../InputComponents/TextInputWithoutTitle/TextInputWithoutTitle'
 import CompletedProject from '../../InputComponents/CompletedProject/CompletedProject'
 import CalendarInput from '../../InputComponents/CalendarInput/CalendarInput'
+
+// styles
+import Style from './FirstInputForm.module.css'
+import '../../../index.css'
 
 const FirstInputForm = () => {
     const { logout } = useLogout()
@@ -103,7 +106,7 @@ const FirstInputForm = () => {
             newEmploymentBoolean,
             projectTeam
         })
-        console.log(JSON.stringify(inputFormData));
+        //console.log(JSON.stringify(inputFormData));
     }, [nameSurname, vocation, department, email, projectTitle, projectAcronym,
         applicationDeadline, projectSummary, applicationURL, projectApplicant,
         projectPartners, totalValue, fesbValuePart, newEmploymentBoolean,
@@ -135,14 +138,14 @@ const FirstInputForm = () => {
     ]
     
     return(
-        <div className="input-container">
+        <div className={Style.InputContainer}>
             {user && (
                 <div className='logout'>
                     <span>{user.username}</span>
                     <button onClick={handleClick}>Log out</button>
                 </div>
             )}
-            <div className="input-form">
+            <div className={Style.InputForm}>
                 <h1 className='document-title'>NAMJERA PRIJAVE</h1>
 
                 <Question questionText={questions[0]}/>
@@ -191,9 +194,9 @@ const FirstInputForm = () => {
                 <Question questionText={questions[7]} />
                 <RadioButtonInput simpleQuestionValue={""} setSelectionState={setNewEmployment}/>
 
-                <SpecialInput pitanje={questions[8]} sendProjectMembers={updateProjectTeam} initialValue={[]}/>
+                <SpecialInput name="project_team_members" pitanje={questions[8]} sendProjectMembers={updateProjectTeam} initialValue={[]}/>
                 
-                <button id="submit-button" onClick={handleSubmit}>SUBMIT</button>
+                <button className="default-button" onClick={handleSubmit}>PODNESI OBRAZAC NAMJERE</button>
                 </div>
         </div>
     )

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './TextInputWithoutTitle.css'
 
 // component TextInput takes "label" and "name" as props
-const TextInputWithoutTitle = ({label, name, setSpecificState}) => {
+const TextInputWithoutTitle = ({ name, setSpecificState, initialValue}) => {
 
     // useState to manage the input value state
     const [inputValue, setInputValue] = useState("");
@@ -12,6 +12,8 @@ const TextInputWithoutTitle = ({label, name, setSpecificState}) => {
         // update the inputValue state as the input changes
         setInputValue(event.target.value);
         setSpecificState(event.target.value)
+
+        sessionStorage.setItem(name, event.target.value)
     }
 
     // useEffect to retrive the value from sessionStorage when the component mounts or 'name' prop changes
@@ -25,7 +27,32 @@ const TextInputWithoutTitle = ({label, name, setSpecificState}) => {
             setInputValue(storedValue)
             setSpecificState(storedValue)
         }
-    },[name])
+    },[])
+
+
+    // loading initial value
+    useEffect(() => {
+
+        const savedValue = sessionStorage.getItem(name);
+
+        if(savedValue) {
+            // if value is available in session storage, take if from there
+            setInputValue(savedValue);
+
+            // callback that updates state in parent component
+            setSpecificState(savedValue);
+
+        } else if(initialValue) {
+            setInputValue(initialValue);
+            
+            // callback that updates state in parent component
+            setSpecificState(initialValue);
+
+            sessionStorage.setItem(name, initialValue);
+        }
+
+    }, [initialValue])
+
 
     // useEffect to save input value to local session storage whenever it changes
     useEffect(() => {
