@@ -23,6 +23,8 @@
 
 /* first section */
 .type-of-project-applications-section {
+    display: flex;
+    flex-direction: column;
     background-color: #EAEAEA;
     flex:1;
     height: 100%;

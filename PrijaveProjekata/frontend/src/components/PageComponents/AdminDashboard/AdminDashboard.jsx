@@ -31,7 +31,7 @@ const AdminDashboard = () => {
     const [selectedProject, setSelectedProject] = useState()
 
     // AdminContext
-    
+
     /////////////////////////////////////////////////////////////////// POČETAK
 
     // project editable
@@ -65,7 +65,7 @@ const AdminDashboard = () => {
 
     }, [intentionForms])
 
-    useEffect(() => {
+    useEffect(() => {                               
         
         // TRAŽENJE SUGLASNOSTI
         setPendingApprovalFormList(approvalForms?.filter(item => item.state === "secondFormSubmitted"));
@@ -104,7 +104,17 @@ const AdminDashboard = () => {
             const responseData = await response.json();
     
             if(response.ok) {
-                window.alert("Obrazac namjere - approved!\n");
+                console.log("state='firstFormApproved' updated successfully!\n", responseData);
+                window.alert("state='firstFormApproved' updated successfully!\n", responseData);
+            } else {
+                 // handle potentional non-JSON response
+                const errorData = await response.json().catch(() => null); 
+                // if response is not null
+                const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
+
+                console.error("state='firstFormApproved' ERROR\nmessage:", errorMessage);
+                window.alert("state='firstFormApproved' ERROR\nmessage:", errorMessage);
+
             }
 
             // Handle the response as needed
@@ -112,6 +122,7 @@ const AdminDashboard = () => {
     
         } catch (error) {
             console.error('Error approving first form submit:', error);
+            window.alert('Error approving first form submit:', error);
             // Handle errors as needed
         }
     };
@@ -128,9 +139,18 @@ const AdminDashboard = () => {
             const responseData = await response.json();
     
             if(response.ok) {
-                window.alert("Trazenje suglasnosti - approved!\n");
-            }
+                console.log("state='secondFormApproved' updated successfully!\n", responseData);
+                window.alert("state='secondFormApproved' updated successfully!\n", responseData);
+            } else {
+                 // handle potentional non-JSON response
+                const errorData = await response.json().catch(() => null); 
+                // if response is not null
+                const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
 
+                console.error("state='secondFormApproved' ERROR\nmessage:", errorMessage);
+                window.alert("state='secondFormApproved' ERROR\nmessage:", errorMessage);
+
+            }
             // Handle the response as needed
             console.log(responseData); // Log the response data
     
@@ -239,9 +259,9 @@ const AdminDashboard = () => {
 
 
     // delete project
-    const deleteProject = async () => {
+    const deleteProject = async (project_id) => {
         try {
-            const response = await fetch(`/api/projectInfo/${projectId}`, {
+            const response = await fetch(`/api/projectInfo/${project_id}`, {
                 method: 'DELETE'
             });
 
@@ -260,6 +280,68 @@ const AdminDashboard = () => {
         }
     }
 
+     // firstFormSubmitted
+     const submitFirstForm = async (projectId) => {
+        try {
+            // Make a PATCH request to the backend API using fetch
+            const response = await fetch(`/api/projectInfo/submitFirstForm/${projectId}`, {
+                method: 'PATCH'
+            });
+    
+            // Parse the JSON response
+            const responseData = await response.json();
+    
+            if(response.ok) {
+                console.log("state='firstFormSubitted' updated successfully!\n", responseData);
+                window.alert("state='firstFormSubitted' updated successfully!\n", responseData);
+            } else {
+                 // handle potentional non-JSON response
+                const errorData = await response.json().catch(() => null); 
+                // if response is not null
+                const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
+
+                console.error("state='firstFormSubitted' ERROR\nmessage:", errorMessage);
+                window.alert("state='firstFormSubitted' ERROR\nmessage:", errorMessage);
+
+            }
+
+            // Handle the response as needed
+            console.log(responseData); // Log the response data
+    
+        } catch (error) {
+            console.error('Couldnt set up state="firstFormSubmitted!" error:', error);
+            window.alert('Couldnt set up state="firstFormSubmitted!" error:', error);
+            // Handle errors as needed
+        }
+    };
+
+    const submitSecondForm = async (projectId) => {
+        try {
+            const response = await fetch(`/api/projectInfo/submitSecondForm/${projectId}`, {
+                method: 'PATCH'
+            });
+
+            const responseData = await response.json();
+
+            if(response.ok) {
+                console.log("state='secondFormSubitted' updated successfully!\n", responseData);
+                window.alert("state='secondFormSubitted' updated successfully!\n", responseData);
+            } else {
+                // handle potentional non-JSON response
+                const errorData = await response.json().catch(() => null); 
+                // if response is not null
+                const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
+
+                console.error("state='secondFormSubitted' ERROR\nmessage:", errorMessage);
+                window.alert("state='secondFormSubitted' ERROR\nmessage:", errorMessage);
+            }
+
+        } catch(error) {
+            console.error('Couldnt set up state="secondFormSubmitted" error:', error);
+            window.alert('Couldnt set up state="secondFormSubmitted" error:', error);
+        }
+    }
+
     // TESTING END //
 
     return(
@@ -270,8 +352,6 @@ const AdminDashboard = () => {
             <AdminDashboardHeader/>
 
                 <div className="admin-dashboard">
-
-                
 
                     {/* FIRST SECTION */}
                     <div className="type-of-project-applications-section">
@@ -284,11 +364,17 @@ const AdminDashboard = () => {
                         </div>
 
                         {/* // TESTING START // */}
-                        <input placeholder="enter id to delete it..." value={projectId} onChange={handleProjectId} style={{marginTop: '50px', marginLeft: '50px'}}></input>
+                        <span style={{marginTop: '50px', marginLeft: '100px', marginRight: '100px', alignSelf: 'center'}}>TESTING</span>
+                        <input placeholder="enter id to delete it..." value={projectId} onChange={handleProjectId} style={{ marginLeft: '100px', marginRight: '100px'}}></input>
+                        
+                        {/* projecId is taken from a state initialized in testing section above */}
+                        <button onClick={() => deleteProject(projectId)} style={{ marginLeft: '100px', marginRight: '100px'}}>DELETE</button>
+                        <button onClick={() => approveFirstFormSubmit(projectId)} style={{ marginLeft: '100px', marginRight: '100px'}}>APPROVE FIRST</button>
+                        <button onClick={() => approveSecondFormSubmit(projectId)} style={{ marginLeft: '100px', marginRight: '100px'}}>APPROVE SECOND</button>
+                        <button onClick={() => rejectProject(projectId)} style={{ marginLeft: '100px', marginRight: '100px'}}>DECLINE PROJECT</button>
+                        <button onClick={() => submitFirstForm(projectId)} style={{ marginLeft: '100px', marginRight: '100px'}}>SUBMIT FIRST</button>
+                        <button onClick={() => submitSecondForm(projectId)} style={{ marginLeft: '100px', marginRight: '100px'}}>SUBMIT SECOND</button>
 
-                        <button onClick={deleteProject}>DELETE</button>
-                        <button onClick={() => approveFirstFormSubmit(projectId)}>APPROVE FIRST</button>
-                        <button onClick={() => approveSecondFormSubmit(projectId)}>APPROVE SECOND</button>
 
 
 

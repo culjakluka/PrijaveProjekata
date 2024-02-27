@@ -88,6 +88,7 @@ const FirstInputForm = () => {
         }
     };
 
+
     useEffect(() => {
         setInputFormData({
             userId: user.userId,
@@ -109,6 +110,8 @@ const FirstInputForm = () => {
             newEmploymentBoolean,
             projectTeam
         })
+
+        console.log(inputFormData)
         //console.log(JSON.stringify(inputFormData));
     }, [nameSurname, vocation, department, email, projectTitle, projectAcronym,
         applicationDeadline, projectSummary, applicationURL, projectApplicant,

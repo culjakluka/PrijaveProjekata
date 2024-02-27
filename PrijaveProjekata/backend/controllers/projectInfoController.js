@@ -98,6 +98,53 @@ const deleteProjectInfoSet = async (req, res) => {
 }
 
 
+// submit first form by id
+const submitFirstForm = async (req, res) => {
+    const { id } = req.params;
+    const projectData = {};
+    projectData['state'] = 'firstFormSubmitted'
+
+    try{
+        const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
+            { _id: id },
+            projectData,
+            { new: true },
+        );
+        if(!projectInfoSet){
+            return res.status(400).json({error: 'No such ProjectInfo set.'})
+        }
+
+        res.status(200).json(projectInfoSet);
+    }catch(error) {
+        console.error("findOneAndUpdate error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+
+// submit second form by id
+const submitSecondForm = async (req, res) => {
+    const { id } = req.params;
+    const projectData = {};
+    projectData['state'] = 'secondFormSubmitted'
+
+    try{
+        const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
+            { _id: id },
+            projectData,
+            { new: true },
+        );
+        if(!projectInfoSet){
+            return res.status(400).json({error: 'No such ProjectInfo set.'})
+        }
+
+        res.status(200).json(projectInfoSet);
+    }catch(error) {
+        console.error("findOneAndUpdate error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+
+
 // approve firstFormSubmit data by id
 const approveFirstFormSubmit = async (req, res) => {
     const { id } = req.params;
@@ -264,5 +311,7 @@ module.exports = {
     approveFirstFormSubmit,
     approveSecondFormSubmit,
     rejectProjectInfoSet,
-    updateProjectInfoSet
+    updateProjectInfoSet,
+    submitFirstForm,
+    submitSecondForm
 }
