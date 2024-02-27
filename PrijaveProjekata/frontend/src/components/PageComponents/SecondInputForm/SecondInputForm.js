@@ -18,6 +18,8 @@ import AttachAdditionalDocumentation from "../../InputComponents/AttachAdditiona
 import AttachHeadOfDepartmentStatement from "../../InputComponents/AttachHeadOfDepartmentStatement/AttachHeadOfDepartmentStatement.js";
 import AutomaticInput from "../../InputComponents/AutomaticInput/AutomaticInput.js";
 import CalendarInput from "../../InputComponents/CalendarInput/CalendarInput.js";
+import ProjectSummary from "../../InputComponents/ProjectSummary/ProjectSummary.js";
+
 
 // data
 import { sourceOfFundingData, projectTypesData } from "../../data/dropdownMenuData.js";
@@ -322,7 +324,7 @@ const SecondInputForm = ( docId ) => {
                     <TextInput label={"AKRONIM PROJEKTA"} name={"project_acronym_2"} setSpecificState={setProjectAcronym} initialValue={projectAcronym}/>
                     <CalendarInput label={"ROK ZA PRIJAVU PROJEKTA CALENDAR"} name={"application_dead_line"} setSpecificState={setApplicationDeadline} initialValue={applicationDeadline}/>
                 <Question questionText={questions[2]}/>
-                <TextInputWithoutTitle name={"project_summary"} setSpecificState={setProjectSummary} initialValue={projectSummary}/>
+                <ProjectSummary name={"project_summary"} initialValue={projectSummary} setSpecificState={setProjectSummary} />
 
                 <Question questionText={questions[3]}/>
                 <TextInput label={"LINK NA INTERNETSKU STRANICU NA KOJOJ SE NALAZI POTPUNA DOKUMENTACIJA S TEKSTOM NATJEČAJA"} name={"application_url"} setSpecificState={setApplicationURL} initialValue={applicationURL}/>

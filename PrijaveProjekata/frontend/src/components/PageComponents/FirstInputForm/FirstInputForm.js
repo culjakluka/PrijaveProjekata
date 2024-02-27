@@ -157,7 +157,7 @@ const FirstInputForm = () => {
                     <h1 className='document-title'>NAMJERA PRIJAVE</h1>
 
                     <Question questionText={questions[0]}/>
-                        <TextInput label={"IME I PREZIME"} name="ime_prezime" setSpecificState={setNameSurname} initialValue='Hello world'/>
+                        <TextInput label={"IME I PREZIME"} name="ime_prezime" setSpecificState={setNameSurname} />
                         <TextInput label={"TITULA"} name={"titula" } setSpecificState={setVocation}/>
                         <TextInput label={"ZAVOD (ODSJEK)"} name={"zavod"} setSpecificState={setDepartment}/>
                         <TextInput label={"E-MAIL"} name={"email"} setSpecificState={setEmail}/>
@@ -168,8 +168,7 @@ const FirstInputForm = () => {
                         <CalendarInput label={"ROK ZA PRIJAVU PROJEKTA"} name={"rok_za_prijavu_projekta"} setSpecificState={setApplicationDeadline} initialDate={"2024-12-11"}/>
 
                     <Question questionText={questions[2]}/>
-                        <TextInputWithoutTitle name={"sazetak"} setSpecificState={setProjectSummary}/>
-                        <ProjectSummary name="projectSummary"/>
+                        <ProjectSummary name={"sazetak"} setSpecificState={setProjectSummary}/>
 
                     <Question questionText={questions[3]}/>
                         <TextInput 

@@ -5,7 +5,7 @@ import './TextInputWithoutTitle.css'
 const TextInputWithoutTitle = ({ name, setSpecificState, initialValue}) => {
 
     // useState to manage the input value state
-    const [inputValue, setInputValue] = useState(initialValue);
+    const [inputValue, setInputValue] = useState("");
 
     // function to handle input changes
     const handleInputChange = (event) => {
@@ -29,6 +29,29 @@ const TextInputWithoutTitle = ({ name, setSpecificState, initialValue}) => {
         }
     },[])
 
+
+    // loading initial value
+    useEffect(() => {
+
+        const savedValue = sessionStorage.getItem(name);
+
+        if(savedValue) {
+            // if value is available in session storage, take if from there
+            setInputValue(savedValue);
+
+            // callback that updates state in parent component
+            setSpecificState(savedValue);
+
+        } else if(initialValue) {
+            setInputValue(initialValue);
+            
+            // callback that updates state in parent component
+            setSpecificState(initialValue);
+
+            sessionStorage.setItem(name, initialValue);
+        }
+
+    }, [initialValue])
 
 
     // useEffect to save input value to local session storage whenever it changes
