@@ -1,0 +1,156 @@
+.special-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #f9f9f9;
+    border-radius: 2px;
+    box-shadow: 1px 1px 2px 0px rgba(0,0,0,1);
+    padding: 20px;
+}
+
+.special-input-label {
+    font-weight: bold;
+    font-family: 'Segoe UI';
+    text-transform: uppercase;
+    color: #B0355E;
+}
+
+#special-input-member-projects {
+    display: flex;
+    flex-direction: row;
+}
+
+.special-input-member {
+
+}
+
+#special-input-completed-members {
+    display: flex;
+    flex-direction: column;
+
+    
+}
+
+#completed-member-container {
+    display: flex;
+    flex-direction: column;
+    border: solid 2px #a4a4a4;
+    padding: 2px;
+    margin: 2px;
+    border-radius: 5px;
+    background-color: #639ef2;
+}
+
+#completed-member-personal-details {
+    display: flex;
+    flex-direction: row;
+}
+
+.completed-member-data{
+    /* margin: top right bottom left */
+    margin: 5px 10px 5px 0px;
+    /* padding: top right bottom left */
+    padding: 5px 5px 5px 0px;
+}
+
+.completed-member-project {
+    color: black;
+    font-size: 15px;
+}
+
+#completed-member-projects {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+#completed-project-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #f6a7dd;
+    margin: 2px 5px 2px 5px;
+    border-radius: 3px;
+}
+
+.completed-project-member-data {
+    margin: 5px 10px 5px 10px;
+    padding: 5px;
+}
+
+#other-project-title {
+    color: #A4A4A4;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 10px;
+    align-self: flex-start;
+    margin-left: 5px;
+    
+}
+
+
+#special-input-member-info {
+    display: flex;
+    flex-direction: column;
+    border: solid #A4A4A4 2px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+
+}
+
+.special-input-input {
+    border: none;
+    border-bottom: 1px solid #A4A4A4;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.special-input-input:focus {
+    outline: none;
+}
+
+.special-input-project-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+
+}
+
+#special-input-member-projects-project {
+    display: flex;
+    flex-direction: row;
+}
+
+#special-input-member-projects-title {
+    margin-left: 5px;
+}
+
+#special-input-plus {
+    align-self: center;
+    border: solid 1px gray;
+    border-radius: 2px;
+    font-size: 20px;
+    background-color: white;
+}
+
+#special-input-add-member {
+    background-color: white;
+    color: #a6a6a6;
+    margin-left: 70px;
+    margin-right: 70px;
+    border: solid 2px #A4A4A4;
+}
+
+#special-input-add-project {
+    background-color: white;
+    color: #a6a6a6;
+    border: solid 2px #A4A4A4;
+}
+
+.special-separator-line {
+    margin-left: 20px;
+    margin-right: 20px;
+}

@@ -1,7 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import Style from './SecondInputForm.module.css'
-import { useAuthContext } from "../../../hooks/useAuthContext.js";
-import { SecondInputFormDataConext } from '../../../context/SecondInputFormDataContext.js' 
 
 
 // styles
@@ -24,6 +22,12 @@ import CalendarInput from "../../InputComponents/CalendarInput/CalendarInput.js"
 // data
 import { sourceOfFundingData, projectTypesData } from "../../data/dropdownMenuData.js";
 import { questions, radioButtonData1 } from "../../data/secondInputFormData.js";
+
+// context
+import { SecondInputFormDataConext } from '../../../context/SecondInputFormDataContext.js' 
+import { useAuthContext } from "../../../hooks/useAuthContext.js";
+
+
 
 const SecondInputForm = ( docId ) => {
     const { user } = useAuthContext()
