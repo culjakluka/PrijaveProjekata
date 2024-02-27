@@ -157,7 +157,7 @@ const FirstInputForm = () => {
                     <h1 className='document-title'>NAMJERA PRIJAVE</h1>
 
                     <Question questionText={questions[0]}/>
-                        <TextInput label={"IME I PREZIME"} name="ime_prezime" setSpecificState={setNameSurname}/>
+                        <TextInput label={"IME I PREZIME"} name="ime_prezime" setSpecificState={setNameSurname} initialValue='Hello world'/>
                         <TextInput label={"TITULA"} name={"titula" } setSpecificState={setVocation}/>
                         <TextInput label={"ZAVOD (ODSJEK)"} name={"zavod"} setSpecificState={setDepartment}/>
                         <TextInput label={"E-MAIL"} name={"email"} setSpecificState={setEmail}/>
