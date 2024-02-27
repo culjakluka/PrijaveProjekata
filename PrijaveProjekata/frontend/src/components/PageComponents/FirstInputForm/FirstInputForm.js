@@ -17,6 +17,7 @@ import '../../../index.css'
 
 // context
 import { FirstInputFormDataContext } from '../../../context/FirstInputFormDataContext.js'
+import ProjectSummary from '../../InputComponents/ProjectSummary/ProjectSummary.js'
 
 const FirstInputForm = () => {
     const { logout } = useLogout()
@@ -156,52 +157,53 @@ const FirstInputForm = () => {
                     <h1 className='document-title'>NAMJERA PRIJAVE</h1>
 
                     <Question questionText={questions[0]}/>
-                    <TextInput label={"IME I PREZIME"} name="ime_prezime" setSpecificState={setNameSurname}/>
-                    <TextInput label={"TITULA"} name={"titula" } setSpecificState={setVocation}/>
-                    <TextInput label={"ZAVOD (ODSJEK)"} name={"zavod"} setSpecificState={setDepartment}/>
-                    <TextInput label={"E-MAIL"} name={"email"} setSpecificState={setEmail}/>
+                        <TextInput label={"IME I PREZIME"} name="ime_prezime" setSpecificState={setNameSurname}/>
+                        <TextInput label={"TITULA"} name={"titula" } setSpecificState={setVocation}/>
+                        <TextInput label={"ZAVOD (ODSJEK)"} name={"zavod"} setSpecificState={setDepartment}/>
+                        <TextInput label={"E-MAIL"} name={"email"} setSpecificState={setEmail}/>
 
                     <Question questionText={questions[1]}/>
-                    <TextInput label={"NAZIV PROJEKTA"} name={"naziv_projekta"} setSpecificState={setProjectTitle}/>
-                    <TextInput label={"AKRONIM PROJEKTA"} name={"akronim_projekta"} setSpecificState={setProjectAcronym}/>
-                    <CalendarInput label={"ROK ZA PRIJAVU PROJEKTA"} name={"rok_za_prijavu_projekta"} setSpecificState={setApplicationDeadline} initialDate={"2024-12-11"}/>
+                        <TextInput label={"NAZIV PROJEKTA"} name={"naziv_projekta"} setSpecificState={setProjectTitle}/>
+                        <TextInput label={"AKRONIM PROJEKTA"} name={"akronim_projekta"} setSpecificState={setProjectAcronym}/>
+                        <CalendarInput label={"ROK ZA PRIJAVU PROJEKTA"} name={"rok_za_prijavu_projekta"} setSpecificState={setApplicationDeadline} initialDate={"2024-12-11"}/>
 
                     <Question questionText={questions[2]}/>
-                    <TextInputWithoutTitle name={"sazetak"} setSpecificState={setProjectSummary}/>
+                        <TextInputWithoutTitle name={"sazetak"} setSpecificState={setProjectSummary}/>
+                        <ProjectSummary name="projectSummary"/>
 
                     <Question questionText={questions[3]}/>
-                    <TextInput 
-                        label={"LINK NA STRANICU NA KOJOJ SE NALAZI POTPUNA DOKUMENTACIJA"}
-                        name={"link_na_stranicu_s_dokumentacijom"}
-                        setSpecificState={setApplicationURL}
-                    />
+                        <TextInput 
+                            label={"LINK NA STRANICU NA KOJOJ SE NALAZI POTPUNA DOKUMENTACIJA"}
+                            name={"link_na_stranicu_s_dokumentacijom"}
+                            setSpecificState={setApplicationURL}
+                        />
 
                     <Question questionText={questions[4]}/>
-                    <TextInput
-                        label={"PRIJAVITELJ PROJEKTA/VODEĆI PARTNER (institucija, tvrtka...)"}
-                        name={"prijavitelj_projekta"}
-                        setSpecificState={setProjectAplicant}
-                    />
+                        <TextInput
+                            label={"PRIJAVITELJ PROJEKTA/VODEĆI PARTNER (institucija, tvrtka...)"}
+                            name={"prijavitelj_projekta"}
+                            setSpecificState={setProjectAplicant}
+                        />
 
                     <Question questionText={questions[5]}/>
-                    <TextInputWithoutTitle name={"ostali_partneri_na_projektu"} setSpecificState={setProjectPartners}/>
+                        <TextInputWithoutTitle name={"ostali_partneri_na_projektu"} setSpecificState={setProjectPartners}/>
 
                     <Question questionText={questions[6]}/>
-                    <TextInput
-                        label={"UKUPNA VRIJEDNOST(ukoliko trenutno nije poznat točan iznos, navesti okviran iznos"}
-                        name={"ukupna_vrijednost_projekta"}
-                        setSpecificState={setTotalValue}
-                    />
-                    <TextInput
-                        label={"DIO PRORAČUNA KOJI PRIPADA FESB-u(vrijednost ili postotak ukupne vrijednosti"}
-                        name={"dio_proracuna_fesb"}
-                        setSpecificState={setFesbValuePart}
-                    />
+                        <TextInput
+                            label={"UKUPNA VRIJEDNOST(ukoliko trenutno nije poznat točan iznos, navesti okviran iznos"}
+                            name={"ukupna_vrijednost_projekta"}
+                            setSpecificState={setTotalValue}
+                        />
+                        <TextInput
+                            label={"DIO PRORAČUNA KOJI PRIPADA FESB-u(vrijednost ili postotak ukupne vrijednosti"}
+                            name={"dio_proracuna_fesb"}
+                            setSpecificState={setFesbValuePart}
+                        />
 
                     <Question questionText={questions[7]} />
-                    <RadioButtonInput simpleQuestionValue={""} setSelectionState={setNewEmployment}/>
+                        <RadioButtonInput simpleQuestionValue={""} setSelectionState={setNewEmployment}/>
 
-                    <SpecialInputFirstInputForm name="project_team_members" pitanje={questions[8]}/>
+                        <SpecialInputFirstInputForm name="project_team_members" pitanje={questions[8]}/>
                     
                     <button className="default-button" onClick={handleSubmit}>PODNESI OBRAZAC NAMJERE</button>
                     </div>
