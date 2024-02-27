@@ -10,10 +10,6 @@ const EmailService = require('../services/emailService')
 const uploadDirectory = 'uploads'; // ruta za upload samog pdf-a
 const defaultEmail = process.env.DEFAULT_EMAIL
 
-// const uploadPdf = async (req, res) => {
-//     // ... (unchanged)
-// };
-
 //get all ProjectInfo sets (sorted by time of creation)
 const getProjectInfoSets = async (req, res) => {
     const projectInfoSets = await ProjectInfoModel.find({}).sort({createdAt: -1})
