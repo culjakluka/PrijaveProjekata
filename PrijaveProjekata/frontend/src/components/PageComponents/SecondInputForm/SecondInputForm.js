@@ -28,6 +28,7 @@ import { questions, radioButtonData1 } from "../../data/secondInputFormData.js";
 // context
 import { SecondInputFormDataConext } from '../../../context/SecondInputFormDataContext.js' 
 import { useAuthContext } from "../../../hooks/useAuthContext.js";
+import NumberInput from "../../InputComponents/NumberInput/NumberInput.js";
 
 
 
@@ -355,15 +356,15 @@ const SecondInputForm = ( docId ) => {
 
                 
                 <Question questionText={questions[12]}/>
-                    <TextInput label={"DIO PRORAČUNA KOJI PRIPADA FESB-u"} name={"fesb_value_part"} setSpecificState={setFesbValuePart} initialValue={fesbValuePart}/>
-                    <TextInput label={"TROŠAK POSTOJEĆEG OSOBLJA"} name={"current_personnel_expense"} setSpecificState={setCurrentPesonnelExpense}/>
-                    <TextInput label={"TROŠAK NOVOZAPOSLENOG OSOBLJA"} name={"new_personnel_expense"} setSpecificState={setNewPersonnelExpense}/>
+                    <NumberInput label={"DIO PRORAČUNA KOJI PRIPADA FESB-u"} name={"fesb_value_part"} setSpecificState={setFesbValuePart} initialValue={fesbValuePart}/>
+                    <NumberInput label={"TROŠAK POSTOJEĆEG OSOBLJA"} name={"current_personnel_expense"} setSpecificState={setCurrentPesonnelExpense}/>
+                    <NumberInput label={"TROŠAK NOVOZAPOSLENOG OSOBLJA"} name={"new_personnel_expense"} setSpecificState={setNewPersonnelExpense}/>
                     <AutomaticInput label={"NEIZRAVNI TROŠKOVI (15% NA TROŠKOVE OSOBLJA)"} value={0.15*fesbValuePart}/>
-                    <TextInput label={"TROŠAK I POPIS OPREME KOJA SE NABAVLJA (OZNAČITI NABAVU IZNAD 26.544,00 E"} name={"equipment_description_and_expense"} setSpecificState={setEquipmentDescriptionAndExpense}/>
-                    <TextInput label={"TROŠAK AMORTIZACIJE OPREME"} name={"equipment_amortization_expense"} setSpecificState={setEquipmentAmortizationExpense}/>
-                    <TextInput label={"TROŠAK VANJSKIH USLUGA"} name={"other_services_expense"} setSpecificState={setOtherServicesExpense}/>
-                    <TextInput label={"TROŠAK MATERIJALA I SITNOG INVENTARA"} name={"material_expense"} setSpecificState={setMaterialExpense}/>
-                    <TextInput label={"PUTNI TROŠAK/TROŠAK KOTIZACIJA/STRUČNOG USAVRŠAVANJA"} name={"travel_registration_education_expense"} setSpecificState={setTravelRegistrationEducationExpense}/>
+                    <NumberInput label={"TROŠAK I POPIS OPREME KOJA SE NABAVLJA (OZNAČITI NABAVU IZNAD 26.544,00 E"} name={"equipment_description_and_expense"} setSpecificState={setEquipmentDescriptionAndExpense}/>
+                    <NumberInput label={"TROŠAK AMORTIZACIJE OPREME"} name={"equipment_amortization_expense"} setSpecificState={setEquipmentAmortizationExpense}/>
+                    <NumberInput label={"TROŠAK VANJSKIH USLUGA"} name={"other_services_expense"} setSpecificState={setOtherServicesExpense}/>
+                    <NumberInput label={"TROŠAK MATERIJALA I SITNOG INVENTARA"} name={"material_expense"} setSpecificState={setMaterialExpense}/>
+                    <NumberInput label={"PUTNI TROŠAK/TROŠAK KOTIZACIJA/STRUČNOG USAVRŠAVANJA"} name={"travel_registration_education_expense"} setSpecificState={setTravelRegistrationEducationExpense}/>
                     <p>Upozoriti ukoliko je zbroj stavki od 13.2 do 13.9 veći od 13.1</p>
                     <TextInput label={"NAPOMENA"} name={"expense_disclaimer"} setSpecificState={setExpenseDisclaimer}/>
 

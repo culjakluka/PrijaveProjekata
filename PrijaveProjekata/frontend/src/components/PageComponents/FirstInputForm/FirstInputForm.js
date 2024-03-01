@@ -15,9 +15,13 @@ import CalendarInput from '../../InputComponents/CalendarInput/CalendarInput'
 import Style from './FirstInputForm.module.css'
 import '../../../index.css'
 
+// data
+import { questions } from '../../data/firstInputFormData.js'
+
 // context
 import { FirstInputFormDataContext } from '../../../context/FirstInputFormDataContext.js'
 import ProjectSummary from '../../InputComponents/ProjectSummary/ProjectSummary.js'
+import NumberInput from '../../InputComponents/NumberInput/NumberInput.js'
 
 const FirstInputForm = () => {
     const { logout } = useLogout()
@@ -131,18 +135,7 @@ const FirstInputForm = () => {
     // 1st DropdownMenu's data
     let data = ["Pero Peric", "Ivo Ivic", "Mijo Mijic", "Mario Maric"]
 
-    // questions - input form
-    let questions = [
-        "1. Prijavitelj projekta/voditelj projektnog tima sa strane FESB-a",
-        "2. Naziv, akronim i rok za prijavu",
-        "3. Sažetak projekta (do 200 znakova)",
-        "4. Poveznica za natječaj",
-        "5. Koordinator projekta",
-        "6.Ostali partneri na projektu",
-        "7. Proračun projekta",
-        "8. Jesu li u okviru projekta planirana nova radna mjesta",
-        "9. Navedite ostale osobe koje će biti uključene u provedbu projekta"
-    ]
+ 
     
     return(
         <FirstInputFormDataContext.Provider value={{projectTeam, setProjectTeam}}>
@@ -193,6 +186,7 @@ const FirstInputForm = () => {
                             name={"ukupna_vrijednost_projekta"}
                             setSpecificState={setTotalValue}
                         />
+                        <NumberInput name="ukupna vrijednosti" label="ukupna vrijednost" setSpecificState={setTotalValue}/>
                         <TextInput
                             label={"DIO PRORAČUNA KOJI PRIPADA FESB-u(vrijednost ili postotak ukupne vrijednosti"}
                             name={"dio_proracuna_fesb"}
