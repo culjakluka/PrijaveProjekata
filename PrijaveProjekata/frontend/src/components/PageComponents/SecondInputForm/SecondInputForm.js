@@ -331,7 +331,7 @@ const SecondInputForm = ( docId ) => {
                 <TextInput label={"LINK NA INTERNETSKU STRANICU NA KOJOJ SE NALAZI POTPUNA DOKUMENTACIJA S TEKSTOM NATJEČAJA"} name={"application_url"} setSpecificState={setApplicationURL} initialValue={applicationURL}/>
 
                 <Question questionText={questions[4]}/>
-                    <DropdownMenuInputOther name={"source_of_funding"} data={sourceOfFundingData} setSpecificState={setSourceOfFunding} />
+                    <DropdownMenuInputOther label={""} name={"source_of_funding"} data={sourceOfFundingData} setSpecificState={setSourceOfFunding} />
 
                 <Question questionText={questions[5]}/>
                     <DropdownMenuInput name={"type_of_projects"} data={projectTypesData} setSpecificState={setProjectType} />
@@ -352,30 +352,30 @@ const SecondInputForm = ( docId ) => {
                     <RadioButtonInput name={"economic_subjet_involvment"} simpleQuestionValue={radioButtonData1} setSelectionState={setEconomicSubjectInvolvement} />
 
                 <Question questionText={questions[11]}/>
-                    <TextInputWithoutTitle name={"total_value"} setSpecificState={setTotalValue} initialValue={totalValue}/>
+                    <NumberInput label={""} name={"total_value"} setSpecificState={setTotalValue} initialValue={totalValue} currencyOrPercentage={"€"}/>
 
                 
                 <Question questionText={questions[12]}/>
-                    <NumberInput label={"DIO PRORAČUNA KOJI PRIPADA FESB-u"} name={"fesb_value_part"} setSpecificState={setFesbValuePart} initialValue={fesbValuePart}/>
-                    <NumberInput label={"TROŠAK POSTOJEĆEG OSOBLJA"} name={"current_personnel_expense"} setSpecificState={setCurrentPesonnelExpense}/>
-                    <NumberInput label={"TROŠAK NOVOZAPOSLENOG OSOBLJA"} name={"new_personnel_expense"} setSpecificState={setNewPersonnelExpense}/>
+                    <NumberInput label={"DIO PRORAČUNA KOJI PRIPADA FESB-u"} name={"fesb_value_part"} currencyOrPercentage={"€"} setSpecificState={setFesbValuePart} initialValue={fesbValuePart}/>
+                    <NumberInput label={"TROŠAK POSTOJEĆEG OSOBLJA"} name={"current_personnel_expense"} currencyOrPercentage={"€"} setSpecificState={setCurrentPesonnelExpense}/>
+                    <NumberInput label={"TROŠAK NOVOZAPOSLENOG OSOBLJA"} name={"new_personnel_expense"} currencyOrPercentage={"€"} setSpecificState={setNewPersonnelExpense}/>
                     <AutomaticInput label={"NEIZRAVNI TROŠKOVI (15% NA TROŠKOVE OSOBLJA)"} value={0.15*fesbValuePart}/>
-                    <NumberInput label={"TROŠAK I POPIS OPREME KOJA SE NABAVLJA (OZNAČITI NABAVU IZNAD 26.544,00 E"} name={"equipment_description_and_expense"} setSpecificState={setEquipmentDescriptionAndExpense}/>
-                    <NumberInput label={"TROŠAK AMORTIZACIJE OPREME"} name={"equipment_amortization_expense"} setSpecificState={setEquipmentAmortizationExpense}/>
-                    <NumberInput label={"TROŠAK VANJSKIH USLUGA"} name={"other_services_expense"} setSpecificState={setOtherServicesExpense}/>
-                    <NumberInput label={"TROŠAK MATERIJALA I SITNOG INVENTARA"} name={"material_expense"} setSpecificState={setMaterialExpense}/>
-                    <NumberInput label={"PUTNI TROŠAK/TROŠAK KOTIZACIJA/STRUČNOG USAVRŠAVANJA"} name={"travel_registration_education_expense"} setSpecificState={setTravelRegistrationEducationExpense}/>
+                    <NumberInput label={"TROŠAK I POPIS OPREME KOJA SE NABAVLJA (OZNAČITI NABAVU IZNAD 26.544,00 E"} currencyOrPercentage={"€"} name={"equipment_description_and_expense"} setSpecificState={setEquipmentDescriptionAndExpense}/>
+                    <NumberInput label={"TROŠAK AMORTIZACIJE OPREME"} name={"equipment_amortization_expense"} currencyOrPercentage={"€"} setSpecificState={setEquipmentAmortizationExpense}/>
+                    <NumberInput label={"TROŠAK VANJSKIH USLUGA"} name={"other_services_expense"} currencyOrPercentage={"€"} setSpecificState={setOtherServicesExpense}/>
+                    <NumberInput label={"TROŠAK MATERIJALA I SITNOG INVENTARA"} name={"material_expense"} currencyOrPercentage={"€"} setSpecificState={setMaterialExpense}/>
+                    <NumberInput label={"PUTNI TROŠAK/TROŠAK KOTIZACIJA/STRUČNOG USAVRŠAVANJA"} currencyOrPercentage={"€"} name={"travel_registration_education_expense"} setSpecificState={setTravelRegistrationEducationExpense}/>
                     <p>Upozoriti ukoliko je zbroj stavki od 13.2 do 13.9 veći od 13.1</p>
                     <TextInput label={"NAPOMENA"} name={"expense_disclaimer"} setSpecificState={setExpenseDisclaimer}/>
 
                 <Question questionText={questions[13]}/>
-                    <TextInputWithoutTitle name={"partner_expense"} setSpecificState={setPartnerExpense}/>
+                    <NumberInput label={""} name={"partner_expense"} setSpecificState={setPartnerExpense} currencyOrPercentage={"€"}/>
 
                 <Question questionText={questions[14]}/>
-                    <TextInputWithoutTitle name={"requested_funding"} setSpecificState={setRequestedFunding}/>
+                    <NumberInput label={""} name={"requested_funding"} setSpecificState={setPartnerExpense} currencyOrPercentage={"€"}/>
 
                 <Question questionText={questions[15]}/>
-                    <TextInputWithoutTitle name={"down_payment"} setSpecificState={setDownPayment}/>
+                    <NumberInput label={""} name={"down_payment"} setSpecificState={setPartnerExpense} currencyOrPercentage={"€"}/>
 
                 <Question questionText={questions[16]}/>
                 <p>Ukoliko projekt nije 100% financiran, kako planirate sufinancirati nefinancirani dio?</p>

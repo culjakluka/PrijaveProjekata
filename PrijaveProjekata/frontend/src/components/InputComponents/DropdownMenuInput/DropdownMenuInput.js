@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import './DropdownMenuInput.css'
 
-const DropdownMenuInput = ({name, data, setSpecificState}) => {
+const DropdownMenuInput = ({name, label, data, setSpecificState}) => {
 
     const [selectionValue, setSelectionValue] = useState("");
     const [options, setOptions] = useState([]);
@@ -32,6 +32,7 @@ const DropdownMenuInput = ({name, data, setSpecificState}) => {
     return(
         <div className='dropdown-menu-container'>
             <div className/>
+            <label>{label}</label>
             <select value={selectionValue} onChange={handleSelectionChange}>
                 <option value="">Select an option</option>
                 {options.map(

@@ -3,29 +3,23 @@ import React, { useEffect, useState } from 'react'
 // styles
 import Style from './NumberInput.module.css'
 
-const NumberInput = ({name, label, initialValue, setSpecificState, currencyCheck}) => {
+const NumberInput = ({name, label, initialValue, setSpecificState, currencyOrPercentage}) => {
 
     const[inputValue, setInputValue] = useState("");
-    const[isCurreny, setIsCurrency] = useState(true)
+    const[currency, setCurrency] = useState("")
 
     useEffect(() => {
-        
         try {
-            // check if there is value stored in sessionStorage
             const savedValue = sessionStorage.getItem(name);
 
             if(savedValue) {
                 setInputValue(savedValue)
             }
 
-        } catch(error) {
-            console.log("Value in sessionStorage not available for ", name);
         }
-
-        if(currencyCheck) {
-            setIsCurrency(currencyCheck);
+        catch(error) {
+            console.log("Value not available in sessionStorage!\n", error)
         }
-    
     }, [])
 
     useEffect(() => {
@@ -63,7 +57,7 @@ const NumberInput = ({name, label, initialValue, setSpecificState, currencyCheck
         <div className={Style.NumberInputContainer}>
             <label className={Style.NumberInputLabel}>{label}</label>
             <div className={Style.NumberInputHolder}>
-                <div className={Style.CurrencySign}>€</div>
+                <div className={Style.CurrencySign}>{currencyOrPercentage}</div>
                 <input type='number'
                     value={inputValue} 
                     onChange={handleChange} 

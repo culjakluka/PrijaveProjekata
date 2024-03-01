@@ -1,4 +1,14 @@
 .dropdown-menu-container {
     margin-top: 5px;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-menu-container label {
+    align-self: flex-start;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #B0355E;
+    margin-bottom: 5px;
 }

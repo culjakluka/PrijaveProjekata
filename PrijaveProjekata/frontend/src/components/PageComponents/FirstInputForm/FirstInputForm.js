@@ -135,6 +135,7 @@ const FirstInputForm = () => {
     // 1st DropdownMenu's data
     let data = ["Pero Peric", "Ivo Ivic", "Mijo Mijic", "Mario Maric"]
 
+    let departmentsData = ["Računarstvo", "Elektrotehnika", "Brodogradnja"]
  
     
     return(
@@ -152,7 +153,7 @@ const FirstInputForm = () => {
                     <Question questionText={questions[0]}/>
                         <TextInput label={"IME I PREZIME"} name="ime_prezime" setSpecificState={setNameSurname} />
                         <TextInput label={"TITULA"} name={"titula" } setSpecificState={setVocation}/>
-                        <TextInput label={"ZAVOD (ODSJEK)"} name={"zavod"} setSpecificState={setDepartment}/>
+                        <DropdownMenuInput label={"ZAVOD (ODSJEK)"} name={"zavod"} data={departmentsData} setSpecificState={setDepartment}/>
                         <TextInput label={"E-MAIL"} name={"email"} setSpecificState={setEmail}/>
 
                     <Question questionText={questions[1]}/>
@@ -181,10 +182,11 @@ const FirstInputForm = () => {
                         <TextInputWithoutTitle name={"ostali_partneri_na_projektu"} setSpecificState={setProjectPartners}/>
 
                     <Question questionText={questions[6]}/>
-                        <TextInput
+                        <NumberInput
                             label={"UKUPNA VRIJEDNOST(ukoliko trenutno nije poznat točan iznos, navesti okviran iznos"}
                             name={"ukupna_vrijednost_projekta"}
                             setSpecificState={setTotalValue}
+                            currencyOrPercentage={"$"}
                         />
                         <NumberInput name="ukupna vrijednosti" label="ukupna vrijednost" setSpecificState={setTotalValue}/>
                         <TextInput
