@@ -68,7 +68,7 @@ const DropdownMenuInputOther = ({name, name2, data, setSpecificState}) => {
     }
 
     return(
-        <div className='dropdown-menu-container'>
+        <div className='dropdown-menu-container-other'>
             <select value={selectionValue} onChange={handleSelectionChange}>
                 <option value="">Select an option</option>
                 {options.map(

@@ -1,0 +1,14 @@
+.ProjectSummaryContainer {
+    width: 60%;
+}
+
+.ProjectSummaryInput {
+  width: 100%;
+  height: 10vh;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  padding: 2px;
+  background-color: #f8f8f8;
+  resize: none;
+}
