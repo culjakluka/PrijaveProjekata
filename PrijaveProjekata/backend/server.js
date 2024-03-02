@@ -6,6 +6,8 @@ const userRoutes = require('./routes/user')
 const projectInfo = require('./routes/projectInfo')
 const dean = require('./routes/dean')
 const department = require('./routes/department')
+const pdf = require('./routes/pdf')
+const cors = require('cors');
 
 require('express-async-errors');
 
@@ -14,6 +16,8 @@ const app = express();
 
 // middleware
 app.use(express.json())
+app.use(cors())
+//body parser?
 
 app.use((req, res, next) => {
     console.log(req.path, req.method)
@@ -25,6 +29,7 @@ app.use('/api/user', userRoutes)
 app.use('/api/projectInfo', projectInfo)
 app.use('/api/dean', dean)
 app.use('/api/department', department)
+app.use('/api/pdf', pdf)
 
 // global error handler
 app.use((err, req, res, next) => {
