@@ -7,8 +7,9 @@ const path = require('path')
 const fs = require('fs/promises')
 const EmailService = require('../services/emailService')
 
-const uploadDirectory = 'uploads'; // ruta za upload samog pdf-a
 const defaultEmail = process.env.DEFAULT_EMAIL
+
+const uploadDirectory = 'uploads'; // ruta za upload samog pdf-a
 
 //get all ProjectInfo sets (sorted by time of creation)
 const getProjectInfoSets = async (req, res) => {
@@ -97,7 +98,6 @@ const deleteProjectInfoSet = async (req, res) => {
     res.status(200).json(projectInfoSet);
 }
 
-
 // submit first form by id
 const submitFirstForm = async (req, res) => {
     const { id } = req.params;
@@ -147,7 +147,6 @@ const submitSecondForm = async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 }
-
 
 // approve firstFormSubmit data by id
 const approveFirstFormSubmit = async (req, res) => {
