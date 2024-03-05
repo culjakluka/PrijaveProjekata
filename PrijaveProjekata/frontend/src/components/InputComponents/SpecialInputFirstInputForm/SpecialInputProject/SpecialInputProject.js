@@ -1,40 +1,41 @@
-import react, { useEffect, useState } from 'react'
-import '../SpecialInput.css'
+import React, { useEffect, useState } from 'react';
+import Style from '../SpecialInputFirstInputForm.module.css'; // Replace with the correct path
 
-const SpecialInputProject = ({addNewProjectProp}) => {
-    const[otherProjectName, setOtherProjectName] = useState('');
-    const[otherProjectPercentage, setOtherProjectPercentage] = useState('');
-    const[project, setProject] = useState({});
+const SpecialInputProject = ({ addNewProjectProp }) => {
+  const [otherProjectName, setOtherProjectName] = useState('');
+  const [otherProjectPercentage, setOtherProjectPercentage] = useState('');
+  const [project, setProject] = useState({});
 
-    useEffect(() => {
-        setProject({
-            otherProjectName,
-            otherProjectPercentage
-        }
-        );
-    }, [otherProjectName, otherProjectPercentage])
+  useEffect(() => {
+    setProject({
+      otherProjectName,
+      otherProjectPercentage,
+    });
+  }, [otherProjectName, otherProjectPercentage]);
 
-    const addNewProject = () => {
-        addNewProjectProp(project)
-    }
+  const addNewProject = () => {
+    addNewProjectProp(project);
+  };
 
-    return (
-        <div id="special-input-member-projects-project">
-            <input 
-                value={otherProjectName}
-                className="special-input-input"
-                placeholder="naziv projekta..."
-                onChange={(e) => setOtherProjectName(e.target.value)}
-            />
-            <input
-                value={otherProjectPercentage}
-                className="special-input-input"
-                placeholder="postotak u projektu..."
-                onChange={(e) => setOtherProjectPercentage(e.target.value)}
-            />
-            <button id="special-input-add-project" onClick={addNewProject}>ADD PROJECT</button>
-        </div>
-    );
-}
- 
+  return (
+    <div className={Style.SpecialInputMemberProjectsProject}>
+      <input
+        value={otherProjectName}
+        className={Style.SpecialInputInput}
+        placeholder="naziv projekta..."
+        onChange={(e) => setOtherProjectName(e.target.value)}
+      />
+      <input
+        value={otherProjectPercentage}
+        className={Style.SpecialInputInput}
+        placeholder="postotak u projektu..."
+        onChange={(e) => setOtherProjectPercentage(e.target.value)}
+      />
+      <button className={Style.SpecialInputAddProject} onClick={addNewProject}>
+        ADD PROJECT
+      </button>
+    </div>
+  );
+};
+
 export default SpecialInputProject;

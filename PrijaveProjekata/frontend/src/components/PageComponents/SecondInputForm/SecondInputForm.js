@@ -12,7 +12,7 @@ import TextInputWithoutTitle from '../../InputComponents/TextInputWithoutTitle/T
 import DropdownMenuInputOther from '../../InputComponents/DropdownMenuInputOther/DropdownMenuInputOther.js';
 import DropdownMenuInput from '../../InputComponents/DropdownMenuInput/DropdownMenuInput.js'
 import RadioButtonInput from '../../InputComponents/RadioButtonInput/RadioButtonInput.js'
-import SpecialInput from '../../InputComponents/SpecialInput/SpecialInput.js'
+import SpecialInputSecondInputForm from '../../InputComponents/SpecialInput/SpecialInputSecondInputForm.js'
 import GenerirajIzjavuPredstojnikaZavoda from "../../InputComponents/GenerateHeadOfDepartmentStatement/GenerateHeadOfDepartmentStatement.js";
 import AttachAdditionalDocumentation from "../../InputComponents/AttachAdditionalDocumentation/AttachAdditionalDocumentation.js";
 import AttachHeadOfDepartmentStatement from "../../InputComponents/AttachHeadOfDepartmentStatement/AttachHeadOfDepartmentStatement.js";
@@ -385,7 +385,7 @@ const SecondInputForm = ( docId ) => {
                     <RadioButtonInput name={"new_employment_boolean"} setSelectionState={setNewEmploymentBoolean} initialValue={newEmploymentBoolean}/>
 
                 <Question questionText={questions[18]}/>
-                    <SpecialInput name="project_team_members" questionText={""} />
+                    <SpecialInputSecondInputForm name="project_team_members" questionText={""} />
 
                 <Question questionText={questions[19]}/>
                     <RadioButtonInput name={"consultant_services"} setSelectionState={setConsultantServices}/>

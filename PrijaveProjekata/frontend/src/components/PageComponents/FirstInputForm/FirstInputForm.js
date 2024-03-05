@@ -30,6 +30,9 @@ const FirstInputForm = () => {
     const [nameSurname, setNameSurname] = useState("");
     const [vocation, setVocation] = useState("");
     const [department, setDepartment] = useState("");
+    // departments data
+    //const [departmentsData, setDepartmentsData] = useState([]);
+    //
     const [email, setEmail] = useState("");
     const [projectTitle, setProjectTitle] = useState("");
     const [projectAcronym, setProjectAcronym] = useState("");
@@ -129,7 +132,6 @@ const FirstInputForm = () => {
     }
 
 
-    // bzvze
     const handleClick = () => {
         logout()
     }
@@ -139,6 +141,30 @@ const FirstInputForm = () => {
 
     let departmentsData = ["Računarstvo", "Elektrotehnika", "Brodogradnja"]
  
+    let departmentDataServer = [];
+
+    const fetchDepartments = async () => {
+        try {
+            const response = await fetch('/api/department/');
+
+            if(response.ok) {
+                console.log("Departments: ", response);
+                window.alert("Departments: ", response);
+            } else {
+                const errorData = await response.json().catch(() => null);
+
+                // if response is not null
+                const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
+
+                console.error("Could't load departments! ", errorMessage);
+                window.alert("Could't load departments! ", errorMessage);
+            }
+
+        } catch(error) {
+            console.error("Couldn't load departments! Error!", error);
+            window.alert("Couldn't load departments! Error! ", error);
+        }
+    }
     
     return(
         <FirstInputFormDataContext.Provider value={{projectTeam, setProjectTeam}}>

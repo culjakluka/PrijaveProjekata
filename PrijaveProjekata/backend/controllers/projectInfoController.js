@@ -103,8 +103,8 @@ const submitFirstForm = async (req, res) => {
     const { id } = req.params;
     const projectData = {};
     projectData['state'] = 'firstFormSubmitted'
-    projectData['firstinputMarker'] = true;
-    projectData['secondinputMarker'] = false;
+    projectData['firstInputMarker'] = true;
+    projectData['secondInputMarker'] = false;
 
     try{
         const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(
@@ -128,8 +128,8 @@ const submitSecondForm = async (req, res) => {
     const { id } = req.params;
     const projectData = {};
     projectData['state'] = 'secondFormSubmitted'
-    projectData['firstinputMarker'] = true;
-    projectData['secondinputMarker'] = true;
+    projectData['firstInputMarker'] = true;
+    projectData['secondInputMarker'] = true;
 
     try{
         const projectInfoSet = await ProjectInfoModel.findOneAndUpdate(

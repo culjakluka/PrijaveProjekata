@@ -1,10 +1,11 @@
 import React, {useState, useEffect, useContext} from "react";
-import styles from './SpecialInput.css'
 import SpecialInputMemberContainer from "./SpecialInputMemberContainer/SpecialInputMemberContainer.js";
-import './SpecialInput.css'
 import CompletedMember from "../CompletedMember/CompletedMember.js"
 import { SpecialInputContext } from './SpecialInputContext.js'
 import { FirstInputFormDataContext } from "../../../context/FirstInputFormDataContext.js";
+
+// styles
+import Style from './SpecialInputFirstInputForm.module.css'
 
 const SpecialInputFirstInputForm = ({name, pitanje}) => {
     // projectMembers contains members that consist of this fields named: - newItemNameSurname
@@ -66,7 +67,7 @@ const SpecialInputFirstInputForm = ({name, pitanje}) => {
     
     return (
         <SpecialInputContext.Provider value={{projectMembers, setProjectMembers}}>
-          <div className="special-input-container">   
+          <div className={Style.SpecialInputContainers}>   
               <p className="question">{pitanje}</p>
               <p>All members:</p>
               <div id="added-project-member">

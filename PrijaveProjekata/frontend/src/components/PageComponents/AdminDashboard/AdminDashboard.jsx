@@ -10,6 +10,9 @@ import { AdminDashboardContext } from "./context/AdminDashboardContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
+// api requests
+import { approveFirstFormSubmit, approveSecondFormSubmit, submitFirstForm, submitSecondForm, rejectProject, deleteProject } from './ApiRequests.js'
+
 
 const AdminDashboard = () => {
     
@@ -30,17 +33,8 @@ const AdminDashboard = () => {
     // project is part of one of the groups -> either OBRASCI NAMJERE or TRAŽENJE SUGLASNOSTI
     const [selectedProject, setSelectedProject] = useState()
 
-    // AdminContext
-
-    /////////////////////////////////////////////////////////////////// POČETAK
-
     // project editable
     const [projectEditable, setProjectEditable] = useState(false);
-
-    const handleEditable = () => {
-        setProjectEditable(!projectEditable);
-    }
-
 
     // pending, approved buttons
     const [pendingSelected, setPendingSelected] = useState(true);
@@ -55,136 +49,8 @@ const AdminDashboard = () => {
     const[approvedApprovalFormList, setApprovedApprovalFormList] = useState(null);
     const[declinedApprovalFormList, setDeclinedApprovalFormList] = useState(null);
 
-    // when intentionForms changes
-    useEffect(() => {
 
-        // OBRASCI NAMJERE
-        setPendingIntentionFormList(intentionForms?.filter(item => item.state === "firstFormSubmitted"));
-        setApprovedIntentionFormList(intentionForms?.filter(item => item.state === "firstFormApproved"));
-        setDeclinedIntentionFormList(intentionForms?.filter(item => item.state === "projectRejected"));
-
-    }, [intentionForms])
-
-    useEffect(() => {                               
-        
-        // TRAŽENJE SUGLASNOSTI
-        setPendingApprovalFormList(approvalForms?.filter(item => item.state === "secondFormSubmitted"));
-        setApprovedApprovalFormList(approvalForms?.filter(item => item.state === "secondFormApproved"));
-        setDeclinedApprovalFormList(approvalForms?.filter(item => item.state === "projectRejected"));
-
-    }, [approvalForms])
-
-    const handlePending = () => {
-        setPendingSelected(true);
-        setApprovedSelected(false);
-        setDeclinedSelected(false);
-    }
-
-    const handleApproved = () => {
-        setApprovedSelected(true);
-        setPendingSelected(false);
-        setDeclinedSelected(false);
-    }
-
-    const handleDeclined = () => {
-        setApprovedSelected(false);
-        setPendingSelected(false)
-        setDeclinedSelected(true);
-    }
-
-    // odobri first formu
-    const approveFirstFormSubmit = async (projectId) => {
-        try {
-            // Make a PATCH request to the backend API using fetch
-            const response = await fetch(`/api/projectInfo/approveFirstFormSubmit/${projectId}`, {
-                method: 'PATCH'
-            });
-    
-            // Parse the JSON response
-            const responseData = await response.json();
-    
-            if(response.ok) {
-                console.log("state='firstFormApproved' updated successfully!\n", responseData);
-                window.alert("state='firstFormApproved' updated successfully!\n", responseData);
-            } else {
-                 // handle potentional non-JSON response
-                const errorData = await response.json().catch(() => null); 
-                // if response is not null
-                const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
-
-                console.error("state='firstFormApproved' ERROR\nmessage:", errorMessage);
-                window.alert("state='firstFormApproved' ERROR\nmessage:", errorMessage);
-
-            }
-
-            // Handle the response as needed
-            console.log(responseData); // Log the response data
-    
-        } catch (error) {
-            console.error('Error approving first form submit:', error);
-            window.alert('Error approving first form submit:', error);
-            // Handle errors as needed
-        }
-    };
-
-    // odobri second formu
-    const approveSecondFormSubmit = async (projectId) => {
-        try {
-            // Make a PATCH request to the backend API using fetch
-            const response = await fetch(`/api/projectInfo/approveSecondFormSubmit/${projectId}`, {
-                method: 'PATCH'
-            });
-    
-            // Parse the JSON response
-            const responseData = await response.json();
-    
-            if(response.ok) {
-                console.log("state='secondFormApproved' updated successfully!\n", responseData);
-                window.alert("state='secondFormApproved' updated successfully!\n", responseData);
-            } else {
-                 // handle potentional non-JSON response
-                const errorData = await response.json().catch(() => null); 
-                // if response is not null
-                const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
-
-                console.error("state='secondFormApproved' ERROR\nmessage:", errorMessage);
-                window.alert("state='secondFormApproved' ERROR\nmessage:", errorMessage);
-
-            }
-            // Handle the response as needed
-            console.log(responseData); // Log the response data
-    
-        } catch (error) {
-            console.error('Error approving second form submit:', error);
-            // Handle errors as needed
-        }
-    }
-    
-    const rejectProject = async (projectId) => {
-        try{
-            const response = await fetch(`/api/projectInfo/rejectProject/${projectId}`, {
-                method: "PATCH"
-            });
-
-            // Parse the JSON response
-            const responseData = await response.json();
-    
-            if(response.ok) {
-                window.alert("Project successfully declined\n");
-            }
-
-            // Handle the response as needed
-            console.log(responseData); // Log the response data
-    
-
-        } catch(error) {
-            console.error('Unable to decline probject, an error occured: ', error);
-            window.alert('Unable to decline probject, an error occured: ', error);
-            // Handle errors as needed
-        }
-    }
-    ///////////////////////////////////////////////////////////////////// KRAJ
-
+    // USE EFFECT
 
     // after component is mounted
     useEffect(() => {
@@ -238,6 +104,51 @@ const AdminDashboard = () => {
         }
     }, [selectedApprovalFormId])
 
+      // when intentionForms changes
+      useEffect(() => {
+
+        // OBRASCI NAMJERE
+        setPendingIntentionFormList(intentionForms?.filter(item => item.state === "firstFormSubmitted"));
+        setApprovedIntentionFormList(intentionForms?.filter(item => item.state === "firstFormApproved"));
+        setDeclinedIntentionFormList(intentionForms?.filter(item => item.state === "projectRejected"));
+
+    }, [intentionForms])
+
+    useEffect(() => {                               
+        
+        // TRAŽENJE SUGLASNOSTI
+        setPendingApprovalFormList(approvalForms?.filter(item => item.state === "secondFormSubmitted"));
+        setApprovedApprovalFormList(approvalForms?.filter(item => item.state === "secondFormApproved"));
+        setDeclinedApprovalFormList(approvalForms?.filter(item => item.state === "projectRejected"));
+
+    }, [approvalForms])
+
+
+    // FUNCTIONS
+
+    const handleEditable = () => {
+        setProjectEditable(!projectEditable);
+    }
+
+    const handlePending = () => {
+        setPendingSelected(true);
+        setApprovedSelected(false);
+        setDeclinedSelected(false);
+    }
+
+    const handleApproved = () => {
+        setApprovedSelected(true);
+        setPendingSelected(false);
+        setDeclinedSelected(false);
+    }
+
+    const handleDeclined = () => {
+        setApprovedSelected(false);
+        setPendingSelected(false)
+        setDeclinedSelected(true);
+    }
+
+
     // button OBRASCI NAMJERE clickes
     const handleClickIntention = () => {
         setIntentionSelection(true)
@@ -258,90 +169,7 @@ const AdminDashboard = () => {
     }
 
 
-    // delete project
-    const deleteProject = async (project_id) => {
-        try {
-            const response = await fetch(`/api/projectInfo/${project_id}`, {
-                method: 'DELETE'
-            });
-
-            const data = await response.json();
-
-            if(response.ok) {
-                console.log("Project deleted successfully!", data);
-                window.alert("Project deleted successfully!", data)
-            } else {
-                console.error("Error deleting project!", data.error);
-                window.alert("Error deleting project!", data.error)
-            }
-
-        } catch(error) {
-            console.log("Error: ", error.message);
-        }
-    }
-
-     // firstFormSubmitted
-     const submitFirstForm = async (projectId) => {
-        try {
-            // Make a PATCH request to the backend API using fetch
-            const response = await fetch(`/api/projectInfo/submitFirstForm/${projectId}`, {
-                method: 'PATCH'
-            });
-    
-            // Parse the JSON response
-            const responseData = await response.json();
-    
-            if(response.ok) {
-                console.log("state='firstFormSubitted' updated successfully!\n", responseData);
-                window.alert("state='firstFormSubitted' updated successfully!\n", responseData);
-            } else {
-                 // handle potentional non-JSON response
-                const errorData = await response.json().catch(() => null); 
-                // if response is not null
-                const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
-
-                console.error("state='firstFormSubitted' ERROR\nmessage:", errorMessage);
-                window.alert("state='firstFormSubitted' ERROR\nmessage:", errorMessage);
-
-            }
-
-            // Handle the response as needed
-            console.log(responseData); // Log the response data
-    
-        } catch (error) {
-            console.error('Couldnt set up state="firstFormSubmitted!" error:', error);
-            window.alert('Couldnt set up state="firstFormSubmitted!" error:', error);
-            // Handle errors as needed
-        }
-    };
-
-    const submitSecondForm = async (projectId) => {
-        try {
-            const response = await fetch(`/api/projectInfo/submitSecondForm/${projectId}`, {
-                method: 'PATCH'
-            });
-
-            const responseData = await response.json();
-
-            if(response.ok) {
-                console.log("state='secondFormSubitted' updated successfully!\n", responseData);
-                window.alert("state='secondFormSubitted' updated successfully!\n", responseData);
-            } else {
-                // handle potentional non-JSON response
-                const errorData = await response.json().catch(() => null); 
-                // if response is not null
-                const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
-
-                console.error("state='secondFormSubitted' ERROR\nmessage:", errorMessage);
-                window.alert("state='secondFormSubitted' ERROR\nmessage:", errorMessage);
-            }
-
-        } catch(error) {
-            console.error('Couldnt set up state="secondFormSubmitted" error:', error);
-            window.alert('Couldnt set up state="secondFormSubmitted" error:', error);
-        }
-    }
-
+   
     // TESTING END //
 
     return(

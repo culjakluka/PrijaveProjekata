@@ -1,17 +1,16 @@
-import react, { useEffect, useState } from 'react'
-import '../SpecialInput.css'
+import React, { useEffect, useState } from 'react';
+import Style from '../SpecialInputSecondInputForm.module.css';
 
-const SpecialInputProject = ({addNewProjectProp}) => {
-    const[otherProjectName, setOtherProjectName] = useState('');
-    const[otherProjectPercentage, setOtherProjectPercentage] = useState('');
-    const[project, setProject] = useState({});
+const SpecialInputProject = ({ addNewProjectProp }) => {
+    const [otherProjectName, setOtherProjectName] = useState('');
+    const [otherProjectPercentage, setOtherProjectPercentage] = useState('');
+    const [project, setProject] = useState({});
 
     useEffect(() => {
         setProject({
             otherProjectName,
             otherProjectPercentage
-        }
-        );
+        });
     }, [otherProjectName, otherProjectPercentage])
 
     const addNewProject = () => {
@@ -19,22 +18,22 @@ const SpecialInputProject = ({addNewProjectProp}) => {
     }
 
     return (
-        <div id="special-input-member-projects-project">
-            <input 
+        <div id={Style.SpecialInputMemberProjectsProject}>
+            <input
                 value={otherProjectName}
-                className="special-input-input"
+                className={Style.SpecialInputInput}
                 placeholder="naziv projekta..."
                 onChange={(e) => setOtherProjectName(e.target.value)}
             />
             <input
                 value={otherProjectPercentage}
-                className="special-input-input"
+                className={Style.SpecialInputInput}
                 placeholder="postotak u projektu..."
                 onChange={(e) => setOtherProjectPercentage(e.target.value)}
             />
-            <button id="special-input-add-project" onClick={addNewProject}>ADD PROJECT</button>
+            <button id={Style.SpecialInputAddProject} onClick={addNewProject}>ADD PROJECT</button>
         </div>
     );
 }
- 
+
 export default SpecialInputProject;

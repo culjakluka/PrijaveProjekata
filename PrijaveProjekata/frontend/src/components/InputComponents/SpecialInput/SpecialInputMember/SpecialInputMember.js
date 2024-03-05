@@ -1,17 +1,18 @@
-import react, { useEffect, useState } from 'react'
-import '../SpecialInput.css'
+import React, { useEffect, useState } from 'react';
 import SpecialInputProjectContainer from '../SpecialInputProjectContainer/SpecialInputProjectContainer';
 import CompletedProject from '../../CompletedProject/CompletedProject';
 
+// style
+import Style from '../SpecialInputSecondInputForm.module.css';
 
-const SpecialInputMember = ({addProjectMember}) => {
+const SpecialInputMember = ({ addProjectMember }) => {
 
-    const[newItemNameSurname, setNewItemNameSurname] = useState("");
-    const[newItemEmail, setNewItemEmail] = useState("");
-    const[newItemPercentage, setNewItemPercentage] = useState("");
-    const[member, setMember]=useState({});
+    const [newItemNameSurname, setNewItemNameSurname] = useState("");
+    const [newItemEmail, setNewItemEmail] = useState("");
+    const [newItemPercentage, setNewItemPercentage] = useState("");
+    const [member, setMember] = useState({});
     // member's projects that are going to be dynamically added by 
-    const[otherProjects, setProjects] = useState([]);
+    const [otherProjects, setProjects] = useState([]);
 
     // when any of those items changes - newItemNameSurname, newItemEmail, newItemPercentage - memeber updates
     useEffect(() => {
@@ -35,37 +36,37 @@ const SpecialInputMember = ({addProjectMember}) => {
         setProjects((previousMembers) => [...previousMembers, newProject]);
     }
 
-    return (  
+    return (
         <div>
-            <div id="special-input-member-info">
+            <div id={Style.SpecialInputMemberInfo}>
                 <input
-                    className="special-input-input" 
-                    placeholder="ime i prezime..." 
+                    className={Style.SpecialInputInput}
+                    placeholder="ime i prezime..."
                     onChange={(e) => setNewItemNameSurname(e.target.value)}
                 />
-                <input 
-                    className="special-input-input"
+                <input
+                    className={Style.SpecialInputInput}
                     placeholder="e-mail..."
                     onChange={(e) => setNewItemEmail(e.target.value)}
                 />
                 <input
-                    className="special-input-input"
+                    className={Style.SpecialInputInput}
                     placeholder="postotak..."
                     onChange={(e) => setNewItemPercentage(e.target.value)}
                 />
-                <p id="special-input-member-projects-title">OTHER PROJECTS:</p>
-                <div id="special-input-member-projects-list">
+                <p id={Style.SpecialInputMemberProjectsTitle}>OTHER PROJECTS:</p>
+                <div id={Style.SpecialInputMemberProjectsList}>
                     {otherProjects.length > 0 ? otherProjects.map((component, index) => (
-                        <CompletedProject key={index} name={component.otherProjectName} percentage={component.otherProjectPercentage}/>
+                        <CompletedProject key={index} name={component.otherProjectName} percentage={component.otherProjectPercentage} />
                     )) : <p>you didn't add any projects to this member...</p>}
                 </div>
-                <hr className="special-separator-line"></hr>
-                <SpecialInputProjectContainer addNewProjectProp={addNewProject}/> 
-                <button id="special-input-add-member" onClick={addNewMember}>ADD MEMBER</button>
+                <hr className={Style.SpecialSeparatorLine}></hr>
+                <SpecialInputProjectContainer addNewProjectProp={addNewProject} />
+                <button id={Style.SpecialInputAddMember} onClick={addNewMember}>ADD MEMBER</button>
             </div>
 
         </div>
     );
 }
- 
+
 export default SpecialInputMember;
