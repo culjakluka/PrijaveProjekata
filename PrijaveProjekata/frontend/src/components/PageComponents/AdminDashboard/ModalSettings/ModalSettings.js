@@ -1,8 +1,18 @@
 import React, { useEffect, useState, useContext} from 'react';
-import { AdminDashboardContext } from '../context/AdminDashboardContext';
+import { AdminDashboardContext } from '../../../../context/AdminDashboardContext';
 
 // style
 import Style from './ModalSettings.module.css'
+
+// external components
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+
+// my components
+import Dean from './Dean/Dean';
+import Department from './Department/Department';
+
 
 
 const ModalSettings = ({}) => {
@@ -17,10 +27,17 @@ const ModalSettings = ({}) => {
         <div className={Style.ModalContainerOverlay}>
             <div className={Style.Modal}>
                 <div className={Style.ModalTopBar}>
-                    <button onClick={() => closeModal()} className={Style.CloseModal}>X</button>
+                    <FontAwesomeIcon onClick={() => closeModal()} icon={faXmark} size='1x'/>
                 </div>
+
                 <div className={Style.ModalContent}>
-                    
+                    <div className={Style.DeanInfo}>
+                        <Dean />
+                    </div>
+
+                    <div className={Style.DepartmentsInfo}>
+                        <Department />
+                    </div>
                 </div>
             </div>
         </div>

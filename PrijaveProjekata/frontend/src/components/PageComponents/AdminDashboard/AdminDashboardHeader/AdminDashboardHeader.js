@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 // context
-import { AdminDashboardContext } from '../context/AdminDashboardContext';
+import { AdminDashboardContext } from '../../../../context/AdminDashboardContext.js';
 
 // style
 import './AdminDashboardHeader.css'

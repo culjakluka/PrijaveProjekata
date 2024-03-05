@@ -3,7 +3,7 @@ import "./AdminDashboard.css"
 import { useState, useEffect } from "react";
 
 // context
-import { AdminDashboardContext } from "./context/AdminDashboardContext";
+import { AdminDashboardContext } from '../../../context/AdminDashboardContext.js'
 
 // my components
 import ModalSettings from "./ModalSettings/ModalSettings.js";

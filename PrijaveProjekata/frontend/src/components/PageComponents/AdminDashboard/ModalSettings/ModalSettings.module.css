@@ -19,10 +19,19 @@
     width: 50%;
     height: 70%;
     background: #f1f1f1;
+    border-radius: 15px;
+    padding: 20px;
 }
 
 .ModalTopBar {
-    
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.ModalSeperatorLine {
+    width: 60%;
+    align-self: center;
 }
 
 .ModalContent {
@@ -30,8 +39,24 @@
     flex-direction: column;
 }
 
-
 .CloseModal {
-    background-color: #ffffff;
     color: #555454;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    font-size: 2vh;
+}
+
+.DeanContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.DeanProperties {
+
+}
+
+.DepartmentContainer {
+    display: flex;
+    flex-direction: row;
 }
