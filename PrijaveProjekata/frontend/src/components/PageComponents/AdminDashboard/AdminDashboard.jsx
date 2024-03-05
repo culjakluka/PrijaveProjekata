@@ -1,14 +1,21 @@
 import React from "react";
 import "./AdminDashboard.css"
-import ProjectInfoButtonContainer from "./ProjectInfoButtonContainer/ProjectInfoButtonContainer";
-import ProjectInfo from "./ProjectInfo/ProjectInfo";
 import { useState, useEffect } from "react";
-import AdminDashboardHeader from "./AdminDashboardHeader/AdminDashboardHeader";
+
+// context
 import { AdminDashboardContext } from "./context/AdminDashboardContext";
+
+// my components
+import ModalSettings from "./ModalSettings/ModalSettings.js";
+import AdminDashboardHeader from "./AdminDashboardHeader/AdminDashboardHeader";
+import ProjectInfo from "./ProjectInfo/ProjectInfo";
+import ProjectInfoButtonContainer from "./ProjectInfoButtonContainer/ProjectInfoButtonContainer";
+
 
 // external components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+
 
 // api requests
 import { approveFirstFormSubmit, approveSecondFormSubmit, submitFirstForm, submitSecondForm, rejectProject, deleteProject } from './ApiRequests.js'
@@ -48,6 +55,8 @@ const AdminDashboard = () => {
     const[pendingApprovalFormList, setPendingApprovalFormList] = useState(null);
     const[approvedApprovalFormList, setApprovedApprovalFormList] = useState(null);
     const[declinedApprovalFormList, setDeclinedApprovalFormList] = useState(null);
+
+    const[modalIsOpen, setModalIsOpen] = useState(false);
 
 
     // USE EFFECT
@@ -130,6 +139,7 @@ const AdminDashboard = () => {
         setProjectEditable(!projectEditable);
     }
 
+    
     const handlePending = () => {
         setPendingSelected(true);
         setApprovedSelected(false);
@@ -174,8 +184,10 @@ const AdminDashboard = () => {
 
     return(
         <>
-        <AdminDashboardContext.Provider value={{projectEditable, setProjectEditable}}>
+        <AdminDashboardContext.Provider value={{projectEditable, setProjectEditable, modalIsOpen, setModalIsOpen}}>
             <div className="admin-dashboard-container">
+
+            {modalIsOpen && <ModalSettings/>}    
                 
             <AdminDashboardHeader/>
 

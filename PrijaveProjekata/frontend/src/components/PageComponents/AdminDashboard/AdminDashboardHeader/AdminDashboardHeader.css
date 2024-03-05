@@ -10,7 +10,6 @@
     background-color: #A9224F;
     position: fixed;
     top: 0;
-    z-index: 10000;     /* to ensure that header is above other elements */
 }
 
 .header-logo {

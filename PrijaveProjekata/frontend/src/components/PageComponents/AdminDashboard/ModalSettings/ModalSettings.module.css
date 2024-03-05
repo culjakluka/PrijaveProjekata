@@ -1,8 +1,37 @@
 .ModalContainerOverlay {
     position: fixed;
+    height: 100vh;
+    width: 100vw;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     background-color: #00000059;
+    z-index: 1000;
+}
+
+.Modal {
+    width: 50%;
+    height: 70%;
+    background: #f1f1f1;
+}
+
+.ModalTopBar {
+    
+}
+
+.ModalContent {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.CloseModal {
+    background-color: #ffffff;
+    color: #555454;
 }
