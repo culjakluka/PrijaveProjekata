@@ -65,4 +65,19 @@
 .DepartmentContainer {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #55545436;
+    margin: 5px 0px 5px 0px;
+    padding: 0px 8px 0px 8px;
+    border-radius: 5px;
+}
+
+.DepartmentInfo {
+    display: flex;
+    flex-direction: row;
+}
+
+.DepartmentInfoElement {
+    margin: 2px 5px 2px 5px;
 }

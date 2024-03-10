@@ -116,6 +116,10 @@ const ModalSettings = ({}) => {
         fetchDepartmentData();
     }, [])
 
+    useEffect(() => {
+        fetchDepartmentData();
+    }, [departments])
+
     return (  
         <ModalSettingsContext.Provider value={{dean, setDean, handleUpdateDean}}>
             <div className={Style.ModalContainerOverlay}>
