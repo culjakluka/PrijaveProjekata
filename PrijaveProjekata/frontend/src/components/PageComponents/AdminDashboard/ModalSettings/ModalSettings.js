@@ -100,18 +100,6 @@ const ModalSettings = ({}) => {
         }
     };
 
-    // Delete an existing department
-    const handleDeleteDepartment = async (id) => {
-        try {
-            const deletedDepartment = await deleteDepartment(id);
-            console.log('Department deleted successfully:', deletedDepartment);
-            // Optionally, update the state or perform any other actions after deleting the department
-        } catch (error) {
-            console.error('Error deleting department:', error);
-            window.alert('Failed to delete department!');
-        }
-    };
-
 
 
     const closeModal = () => {
@@ -166,6 +154,7 @@ const ModalSettings = ({}) => {
                                 headName={department.headName}
                                 departmentName={department.name}
                                 headOfDepartmentName={department.headName}
+                                departmentIdNumber={department._id}
                             />
                             ))}
                         </div>
