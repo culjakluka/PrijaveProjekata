@@ -23,6 +23,12 @@
     padding: 20px;
 }
 
+.ModalLine {
+    height: 2px;
+    width: 100%;
+    background-color: var(--secondary-text-color);
+}
+
 .ModalTopBar {
     display: flex;
     flex-direction: row;

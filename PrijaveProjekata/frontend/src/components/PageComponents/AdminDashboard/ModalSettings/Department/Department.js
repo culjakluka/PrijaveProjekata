@@ -1,11 +1,18 @@
 import React from "react";
+
+
 import Style from '../ModalSettings.module.css'
 
-const Department = () => {
+// external components
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
+const Department = ({departmentName, headOfDepartmentName}) => {
     return (  
         <div className={Style.DepartmentContainer}>
-            <div>Naziv zavoda</div>
-            <div>Predstojnik zavoda</div>
+            <div>{departmentName}</div>
+            <div>{headOfDepartmentName}</div>
+            <FontAwesomeIcon icon={faTrash} />
         </div>
     );
 }

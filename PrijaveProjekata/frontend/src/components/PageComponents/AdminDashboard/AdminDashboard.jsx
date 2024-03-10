@@ -58,7 +58,6 @@ const AdminDashboard = () => {
 
     const[modalIsOpen, setModalIsOpen] = useState(false);
 
-
     // USE EFFECT
 
     // after component is mounted
@@ -178,9 +177,7 @@ const AdminDashboard = () => {
         setProjectId(event.target.value);
     }
 
-
-   
-    // TESTING END //
+    
 
     return(
         <>
