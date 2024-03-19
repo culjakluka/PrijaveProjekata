@@ -35,6 +35,7 @@ const Department = ({departmentName, headOfDepartmentName, departmentIdNumber}) 
         <div className={Style.DepartmentContainer}>
             <div className={Style.DepartmentInfo}>
                 <div className={Style.DepartmentInfoElement} >{departmentName}</div>
+                <div> - </div>
                 <div className={Style.DepartmentInfoElement}>{headOfDepartmentName}</div>
             </div>
             <FontAwesomeIcon onClick={() => handleDeleteDepartment()} icon={faTrash} />

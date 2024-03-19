@@ -23,9 +23,9 @@ const Dean = () => {
 
     return (
         <div className={Style.DeanContainer}>
-            <input placeholder="ime i prezime..." value={dean?.name} onChange={handleNameChange}></input>
-            <input placeholder="mail..." value={dean?.email} onChange={handleEmailChange}></input>
-            <button onClick={() =>handleUpdateDean("65da41591ff862ef5d60d354", dean)}>UPDATE</button>
+            <input className={Style.DeanProperties} placeholder="ime i prezime..." value={dean?.name} onChange={handleNameChange}></input>
+            <input className={Style.DeanProperties} placeholder="mail..." value={dean?.email} onChange={handleEmailChange}></input>
+            <button className={Style.UpdateDeanButton} onClick={() =>handleUpdateDean("65da41591ff862ef5d60d354", dean)}>AŽURIRAJ</button>
         </div>
       );
 }

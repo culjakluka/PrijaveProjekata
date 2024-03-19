@@ -23,6 +23,9 @@ import { FirstInputFormDataContext } from '../../../context/FirstInputFormDataCo
 import ProjectSummary from '../../InputComponents/ProjectSummary/ProjectSummary.js'
 import NumberInput from '../../InputComponents/NumberInput/NumberInput.js'
 
+// API requests
+import { getDepartments } from './firstInputFormApi.js'
+
 const FirstInputForm = () => {
     const { logout } = useLogout()
     const { user } = useAuthContext()
@@ -96,7 +99,6 @@ const FirstInputForm = () => {
         }
     };
 
-
     useEffect(() => {
         setInputFormData({
             userId: user.userId,
@@ -136,36 +138,33 @@ const FirstInputForm = () => {
         logout()
     }
 
-    // 1st DropdownMenu's data
-    let data = ["Pero Peric", "Ivo Ivic", "Mijo Mijic", "Mario Maric"]
 
-    let departmentsData = ["Računarstvo", "Elektrotehnika", "Brodogradnja"]
- 
-    let departmentDataServer = [];
+    // loading departments data
 
-    const fetchDepartments = async () => {
+    const handleGetDepartments = async () => {
         try {
-            const response = await fetch('/api/department/');
+            const departments = await getDepartments();
+            
+            console.log(departments)
 
-            if(response.ok) {
-                console.log("Departments: ", response);
-                window.alert("Departments: ", response);
-            } else {
-                const errorData = await response.json().catch(() => null);
-
-                // if response is not null
-                const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
-
-                console.error("Could't load departments! ", errorMessage);
-                window.alert("Could't load departments! ", errorMessage);
-            }
-
-        } catch(error) {
-            console.error("Couldn't load departments! Error!", error);
-            window.alert("Couldn't load departments! Error! ", error);
+            const fetchedDepartments = departments.map(department => department.name);
+            // Update state with fetched department names
+            setDepartmentsData(fetchedDepartments);
+          
+            console.log(fetchedDepartments);
+        } catch (error) {
+            console.error('Error fetching department data:', error);
+            window.alert('Failed to fetch department data!');
         }
-    }
-    
+    };
+
+    useEffect(() => {
+        handleGetDepartments();
+    }, []);
+
+    const [departmentsData, setDepartmentsData] = useState([]);
+
+
     return(
         <FirstInputFormDataContext.Provider value={{projectTeam, setProjectTeam}}>
             <div className={Style.InputContainer}>

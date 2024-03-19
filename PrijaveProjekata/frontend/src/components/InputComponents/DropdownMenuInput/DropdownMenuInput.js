@@ -9,7 +9,8 @@ const DropdownMenuInput = ({name, label, data, setSpecificState}) => {
     const handleSelectionChange = (event) => {
 
         setSpecificState(event.target.value);
-
+        
+        setSelectionValue(event.target.value);
         // save selection in sessionStorage
         sessionStorage.setItem(name, event.target.value);
     }
@@ -38,7 +39,7 @@ const DropdownMenuInput = ({name, label, data, setSpecificState}) => {
                 {options.map(
                     // takes all the data from "data" and maps it
                     // (data that we can take of each memeber of data) => (html element and us of data's data)
-                    (member, index) => (<option key={index} value={member}>{member}</option>)
+                    (member, index) => (<option key={index} value={member.name}>{member}</option>)
                 )}
             </select>
         </div>

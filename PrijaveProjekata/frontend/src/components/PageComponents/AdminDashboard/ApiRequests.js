@@ -177,18 +177,4 @@ const rejectProject = async (projectId) => {
 }
 
 
-// create new dean
-const createDean = async () => {
-
-}
-
-
-const updateDean = async () => {
-
-}
-
-const deleteDean = async () => {
-
-}
-
 export { submitFirstForm, submitSecondForm, approveFirstFormSubmit, approveSecondFormSubmit, rejectProject, deleteProject }

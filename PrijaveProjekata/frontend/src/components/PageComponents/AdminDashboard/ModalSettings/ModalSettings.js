@@ -27,6 +27,9 @@ const ModalSettings = ({}) => {
     const [dean, setDean] = useState([]);
     const [departments, setDepartments] = useState([]);
 
+    // new department
+    const [newDepartmentData, setNewDepartmentData] = useState([]);
+
     // fetching data
     const fetchDeanData = async () => {
         try {
@@ -39,7 +42,7 @@ const ModalSettings = ({}) => {
         }
     }
 
-    // Create a new dean
+    // Create a new dean 
     const handleCreateDean = async (newDeanData) => {
         try {
             const createdDean = await createDean(newDeanData);
@@ -55,6 +58,7 @@ const ModalSettings = ({}) => {
             const updatedDean = await updateDean(id, updatedDeanData);
             console.log('Dean updated successfully:', updatedDean);
             // Optionally, update the state or perform any other actions after updating the dean
+            window.alert("Dekan uspješno ažuriran")
         } catch (error) {
             console.error('Error updating dean:', error);
             window.alert('Failed to update dean!');
@@ -109,19 +113,29 @@ const ModalSettings = ({}) => {
     useEffect(() => {
         if(modalIsOpen) {
             fetchDeanData();
+            fetchDepartmentData();
         }
     }, [modalIsOpen])
 
     useEffect(() => {
-        fetchDepartmentData();
+        // TO-DO
     }, [])
 
     useEffect(() => {
         fetchDepartmentData();
     }, [departments])
 
+    const handleDepartmentName = (event) => {
+        setNewDepartmentData({...newDepartmentData, name : event.target.value});
+    }
+
+    const handleDepartmentHead = (event) => {
+        setNewDepartmentData({...newDepartmentData, headName : event.target.value});
+    }
+
+
     return (  
-        <ModalSettingsContext.Provider value={{dean, setDean, handleUpdateDean}}>
+        <ModalSettingsContext.Provider value={{dean, setDean, handleUpdateDean, newDepartmentData, setNewDepartmentData}}>
             <div className={Style.ModalContainerOverlay}>
                 <div className={Style.Modal}>
                     <div className={Style.ModalTopBar}>
@@ -161,6 +175,13 @@ const ModalSettings = ({}) => {
                                 departmentIdNumber={department._id}
                             />
                             ))}
+
+                            {/* ADDIG NEW DEPARTMENT */}
+                            <div className={Style.NewDepartmentContainer}>
+                                <input className={Style.NewDepartmentName} onChange={handleDepartmentName} type="text" placeholder='ime zavoda...'></input>
+                                <input className={Style.NewDepartmentHead} onChange={handleDepartmentHead} type="text" placeholder='ime nositelja zavoda...'></input>
+                                <button className={Style.AddNewDepartmentButton} onClick={() => handleCreateDepartment(newDepartmentData)}>DODAJ NOVI ZAVOD</button>
+                            </div>
                         </div>
                     </div>
                 </div>

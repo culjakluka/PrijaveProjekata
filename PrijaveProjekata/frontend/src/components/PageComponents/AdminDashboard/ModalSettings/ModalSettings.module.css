@@ -59,7 +59,10 @@
 }
 
 .DeanProperties {
-
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .DepartmentContainer {
@@ -80,4 +83,42 @@
 
 .DepartmentInfoElement {
     margin: 2px 5px 2px 5px;
+}
+
+.NewDepartmentContainer {
+    display: flex;
+}
+
+.NewDepartmentName {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.NewDepartmentHead {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.AddNewDepartmentButton {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    outline: none;
+    background-color: #4e4e4ee3;
+    color: white;
+    border: none;
+}
+
+.UpdateDeanButton {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    outline: none;
+    background-color: #4e4e4ee3;
+    color: white;   
+    border: none;
 }
