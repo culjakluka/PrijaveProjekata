@@ -176,7 +176,7 @@ const FirstInputForm = () => {
                 )}
                 <div className={Style.InputForm}>
                     <h1 className='document-title'>NAMJERA PRIJAVE</h1>
-
+                    <h3>{user.userId}</h3>
                     <Question questionText={questions[0]}/>
                         <TextInput label={"IME I PREZIME"} name="ime_prezime" setSpecificState={setNameSurname} />
                         <TextInput label={"TITULA"} name={"titula" } setSpecificState={setVocation}/>

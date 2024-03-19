@@ -26,6 +26,7 @@ const approveFirstFormSubmit = async (projectId) => {
 
         // Handle the response as needed
         console.log(responseData); // Log the response data
+        window.location.reload()
 
     } catch (error) {
         console.error('Error approving first form submit:', error);
@@ -60,6 +61,9 @@ const approveFirstFormSubmit = async (projectId) => {
         }
         // Handle the response as needed
         console.log(responseData); // Log the response data
+
+        window.location.reload()
+
 
     } catch (error) {
         console.error('Error approving second form submit:', error);
