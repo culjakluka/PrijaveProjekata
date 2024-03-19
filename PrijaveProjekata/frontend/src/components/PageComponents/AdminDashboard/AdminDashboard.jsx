@@ -58,6 +58,8 @@ const AdminDashboard = () => {
 
     const[modalIsOpen, setModalIsOpen] = useState(false);
 
+    const[selectedProjectId, setSelectedProjectId] = useState("");
+
     // USE EFFECT
 
     // after component is mounted
@@ -181,7 +183,7 @@ const AdminDashboard = () => {
 
     return(
         <>
-        <AdminDashboardContext.Provider value={{projectEditable, setProjectEditable, modalIsOpen, setModalIsOpen}}>
+        <AdminDashboardContext.Provider value={{projectEditable, setProjectEditable, modalIsOpen, setModalIsOpen, selectedProjectId, setSelectedProjectId}}>
             <div className="admin-dashboard-container">
 
             {modalIsOpen && <ModalSettings/>}    
@@ -250,6 +252,7 @@ const AdminDashboard = () => {
                                     <FontAwesomeIcon icon={faPencilAlt} style={{color: "#FDF9F9"}} />
                                     <button className="edit-button" >{projectEditable ? "ZAVRŠI UREĐIVANJE" : "UREDI"}</button>
                                 </div>
+
                                 <div className="decision-buttons-container">
                                     <div className="approve-button-container manage-button-style">
                                         <button onClick={intentionSelection ?  () => approveFirstFormSubmit(selectedProject._id) :  () => approveSecondFormSubmit(selectedProject._id)} className="approve-button">APPROVE</button>
