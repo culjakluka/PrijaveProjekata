@@ -6,7 +6,7 @@ import ProjectInfoButton from "../ProjectInfoButton/ProjectInfoButton";
 // 
 const ProjectInfoContainer = ({projectInfoSets, selectProject}) => {
 
-    const [projectInfos, setProjectInfos] = useState([])
+    const [projectInfos, setProjectInfos] = useState([]);
 
     useEffect(() => {
         setProjectInfos(projectInfoSets)    

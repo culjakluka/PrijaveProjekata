@@ -1,12 +1,13 @@
 /* google font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 /* layout */
 :root {
   --primary: #1aac83;
   --error: #e7195a;
   --secondary-text-color: #A4A4A4;
-  --purple-theme-color: #B0355E;
+  --content-color: #4E4E4E;
 }
 
 body {
@@ -29,6 +30,11 @@ header a {
 }
 .pages{
   margin: 0 auto;
+}
+
+.title-font {
+  font-family: "Open Sans", sans-serif;
+  color: var(--secondary-text-color);
 }
 
 /* homepage */
@@ -72,6 +78,7 @@ form button {
   border-radius: 4px;
   cursor: pointer;
 }
+
 div.error {
   padding: 10px;
   background: #ffefef;

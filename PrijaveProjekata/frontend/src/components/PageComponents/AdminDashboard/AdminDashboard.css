@@ -51,9 +51,6 @@
     flex-direction: row;
     justify-content: space-around;
     background-color: #cfcfcf;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 }
 
 .pending-button-hidden {

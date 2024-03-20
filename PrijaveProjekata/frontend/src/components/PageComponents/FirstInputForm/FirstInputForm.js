@@ -23,6 +23,9 @@ import { FirstInputFormDataContext } from '../../../context/FirstInputFormDataCo
 import ProjectSummary from '../../InputComponents/ProjectSummary/ProjectSummary.js'
 import NumberInput from '../../InputComponents/NumberInput/NumberInput.js'
 
+// API requests
+import { getDepartments } from './firstInputFormApi.js'
+
 const FirstInputForm = () => {
     const { logout } = useLogout()
     const { user } = useAuthContext()
@@ -30,6 +33,9 @@ const FirstInputForm = () => {
     const [nameSurname, setNameSurname] = useState("");
     const [vocation, setVocation] = useState("");
     const [department, setDepartment] = useState("");
+    // departments data
+    //const [departmentsData, setDepartmentsData] = useState([]);
+    //
     const [email, setEmail] = useState("");
     const [projectTitle, setProjectTitle] = useState("");
     const [projectAcronym, setProjectAcronym] = useState("");
@@ -93,7 +99,6 @@ const FirstInputForm = () => {
         }
     };
 
-
     useEffect(() => {
         setInputFormData({
             userId: user.userId,
@@ -128,16 +133,38 @@ const FirstInputForm = () => {
         setProjectTeam(projectMembersList)
     }
 
+
     const handleClick = () => {
         logout()
     }
 
-    // 1st DropdownMenu's data
-    let data = ["Pero Peric", "Ivo Ivic", "Mijo Mijic", "Mario Maric"]
 
-    let departmentsData = ["Računarstvo", "Elektrotehnika", "Brodogradnja"]
- 
-    
+    // loading departments data
+
+    const handleGetDepartments = async () => {
+        try {
+            const departments = await getDepartments();
+            
+            console.log(departments)
+
+            const fetchedDepartments = departments.map(department => department.name);
+            // Update state with fetched department names
+            setDepartmentsData(fetchedDepartments);
+          
+            console.log(fetchedDepartments);
+        } catch (error) {
+            console.error('Error fetching department data:', error);
+            window.alert('Failed to fetch department data!');
+        }
+    };
+
+    useEffect(() => {
+        handleGetDepartments();
+    }, []);
+
+    const [departmentsData, setDepartmentsData] = useState([]);
+
+
     return(
         <FirstInputFormDataContext.Provider value={{projectTeam, setProjectTeam}}>
             <div className={Style.InputContainer}>
@@ -149,7 +176,7 @@ const FirstInputForm = () => {
                 )}
                 <div className={Style.InputForm}>
                     <h1 className='document-title'>NAMJERA PRIJAVE</h1>
-
+                    <h3>{user.userId}</h3>
                     <Question questionText={questions[0]}/>
                         <TextInput label={"IME I PREZIME"} name="ime_prezime" setSpecificState={setNameSurname} />
                         <TextInput label={"TITULA"} name={"titula" } setSpecificState={setVocation}/>

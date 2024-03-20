@@ -1,438 +1,451 @@
 import React from "react";
-import "./AdminDashboard.css"
-import ProjectInfoButtonContainer from "./ProjectInfoButtonContainer/ProjectInfoButtonContainer";
-import ProjectInfo from "./ProjectInfo/ProjectInfo";
+import "./AdminDashboard.css";
 import { useState, useEffect } from "react";
+
+// context
+import { AdminDashboardContext } from "../../../context/AdminDashboardContext.js";
+
+// my components
+import ModalSettings from "./ModalSettings/ModalSettings.js";
 import AdminDashboardHeader from "./AdminDashboardHeader/AdminDashboardHeader";
-import { AdminDashboardContext } from "./context/AdminDashboardContext";
+import ProjectInfo from "./ProjectInfo/ProjectInfo";
+import ProjectInfoButtonContainer from "./ProjectInfoButtonContainer/ProjectInfoButtonContainer";
 
 // external components
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
+// api requests
+import {
+  approveFirstFormSubmit,
+  approveSecondFormSubmit,
+  submitFirstForm,
+  submitSecondForm,
+  rejectProject,
+  deleteProject,
+  adminUpdateProjectInfoSet,
+} from "./ApiRequests.js";
 
 const AdminDashboard = () => {
-    
-    const [projectSets, setProjectSets] = useState(null)
+  const [projectSets, setProjectSets] = useState(null);
 
-    // forms that hold form's data
-    // each one holds project applications
-    const [intentionForms, setIntentionForms] = useState(null)
-    const [approvalForms, setApprovalForms] = useState(null)
+  // forms that hold form's data
+  // each one holds project applications
+  const [intentionForms, setIntentionForms] = useState(null);
+  const [approvalForms, setApprovalForms] = useState(null);
 
-    const [selectedIntentionFormId, setSelectedIntentionFormId] = useState("")
-    const [selectedApprovalFormId, setSelectedApprovalFormId] = useState("")
+  const [selectedIntentionFormId, setSelectedIntentionFormId] = useState("");
+  const [selectedApprovalFormId, setSelectedApprovalFormId] = useState("");
 
-    const [intentionSelection, setIntentionSelection] = useState(true)
-    const [approvalSelection, setApprovalSelection] = useState(false)
+  const [intentionSelection, setIntentionSelection] = useState(true);
+  const [approvalSelection, setApprovalSelection] = useState(false);
 
-    // selected project inside second section 
-    // project is part of one of the groups -> either OBRASCI NAMJERE or TRAŽENJE SUGLASNOSTI
-    const [selectedProject, setSelectedProject] = useState()
+  // selected project inside second section
+  // project is part of one of the groups -> either OBRASCI NAMJERE or TRAŽENJE SUGLASNOSTI
+  const [selectedProject, setSelectedProject] = useState();
 
-    // AdminContext
+  // project editable
+  const [projectEditable, setProjectEditable] = useState(false);
 
-    /////////////////////////////////////////////////////////////////// POČETAK
+  // pending, approved buttons
+  const [pendingSelected, setPendingSelected] = useState(true);
+  const [approvedSelected, setApprovedSelected] = useState(false);
+  const [declinedSelected, setDeclinedSelected] = useState(false);
 
-    // project editable
-    const [projectEditable, setProjectEditable] = useState(false);
+  const [pendingIntentionFormList, setPendingIntentionFormList] =
+    useState(null);
+  const [approvedIntentionFormList, setApprovedIntentionFormList] =
+    useState(null);
+  const [declinedIntentionFormList, setDeclinedIntentionFormList] =
+    useState(null);
 
-    const handleEditable = () => {
-        setProjectEditable(!projectEditable);
-    }
+  const [pendingApprovalFormList, setPendingApprovalFormList] = useState(null);
+  const [approvedApprovalFormList, setApprovedApprovalFormList] =
+    useState(null);
+  const [declinedApprovalFormList, setDeclinedApprovalFormList] =
+    useState(null);
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    // pending, approved buttons
-    const [pendingSelected, setPendingSelected] = useState(true);
-    const [approvedSelected, setApprovedSelected] = useState(false);
-    const [declinedSelected, setDeclinedSelected] = useState(false);
+  const [selectedProjectId, setSelectedProjectId] = useState("");
 
-    const[pendingIntentionFormList, setPendingIntentionFormList] = useState(null);
-    const[approvedIntentionFormList, setApprovedIntentionFormList] = useState(null);
-    const[declinedIntentionFormList, setDeclinedIntentionFormList] = useState(null);
+  // USE EFFECT
 
-    const[pendingApprovalFormList, setPendingApprovalFormList] = useState(null);
-    const[approvedApprovalFormList, setApprovedApprovalFormList] = useState(null);
-    const[declinedApprovalFormList, setDeclinedApprovalFormList] = useState(null);
+  // after component is mounted
+  useEffect(() => {
+    // fetch data
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/projectInfo");
 
-    // when intentionForms changes
-    useEffect(() => {
-
-        // OBRASCI NAMJERE
-        setPendingIntentionFormList(intentionForms?.filter(item => item.state === "firstFormSubmitted"));
-        setApprovedIntentionFormList(intentionForms?.filter(item => item.state === "firstFormApproved"));
-        setDeclinedIntentionFormList(intentionForms?.filter(item => item.state === "projectRejected"));
-
-    }, [intentionForms])
-
-    useEffect(() => {                               
-        
-        // TRAŽENJE SUGLASNOSTI
-        setPendingApprovalFormList(approvalForms?.filter(item => item.state === "secondFormSubmitted"));
-        setApprovedApprovalFormList(approvalForms?.filter(item => item.state === "secondFormApproved"));
-        setDeclinedApprovalFormList(approvalForms?.filter(item => item.state === "projectRejected"));
-
-    }, [approvalForms])
-
-    const handlePending = () => {
-        setPendingSelected(true);
-        setApprovedSelected(false);
-        setDeclinedSelected(false);
-    }
-
-    const handleApproved = () => {
-        setApprovedSelected(true);
-        setPendingSelected(false);
-        setDeclinedSelected(false);
-    }
-
-    const handleDeclined = () => {
-        setApprovedSelected(false);
-        setPendingSelected(false)
-        setDeclinedSelected(true);
-    }
-
-    // odobri first formu
-    const approveFirstFormSubmit = async (projectId) => {
-        try {
-            // Make a PATCH request to the backend API using fetch
-            const response = await fetch(`/api/projectInfo/approveFirstFormSubmit/${projectId}`, {
-                method: 'PATCH'
-            });
-    
-            // Parse the JSON response
-            const responseData = await response.json();
-    
-            if(response.ok) {
-                console.log("state='firstFormApproved' updated successfully!\n", responseData);
-                window.alert("state='firstFormApproved' updated successfully!\n", responseData);
-            } else {
-                 // handle potentional non-JSON response
-                const errorData = await response.json().catch(() => null); 
-                // if response is not null
-                const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
-
-                console.error("state='firstFormApproved' ERROR\nmessage:", errorMessage);
-                window.alert("state='firstFormApproved' ERROR\nmessage:", errorMessage);
-
-            }
-
-            // Handle the response as needed
-            console.log(responseData); // Log the response data
-    
-        } catch (error) {
-            console.error('Error approving first form submit:', error);
-            window.alert('Error approving first form submit:', error);
-            // Handle errors as needed
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
+        // load response into data
+        const data = await response.json();
+
+        // load all data into projectSets
+        setProjectSets(data);
+
+        // filters response depending on marker - firstInputMarker - intentionForm
+        // filters each item of data depending on marker
+        // -> if first marker equals true, then it's an intention form
+        // -> if both markers equal true, then it's an approval form
+        // seting up setIntentionForms and setApprovalForms state
+        setIntentionForms(
+          data.filter(
+            (item) =>
+              item.firstInputMarker === true && item.secondInputMarker === false
+          )
+        );
+
+        // filters response depending on marker - secondInputMarker - approvalForm
+        setApprovalForms(
+          data.filter(
+            (item) =>
+              item.firstInputMarker === true && item.secondInputMarker === true
+          )
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
-    // odobri second formu
-    const approveSecondFormSubmit = async (projectId) => {
-        try {
-            // Make a PATCH request to the backend API using fetch
-            const response = await fetch(`/api/projectInfo/approveSecondFormSubmit/${projectId}`, {
-                method: 'PATCH'
-            });
-    
-            // Parse the JSON response
-            const responseData = await response.json();
-    
-            if(response.ok) {
-                console.log("state='secondFormApproved' updated successfully!\n", responseData);
-                window.alert("state='secondFormApproved' updated successfully!\n", responseData);
-            } else {
-                 // handle potentional non-JSON response
-                const errorData = await response.json().catch(() => null); 
-                // if response is not null
-                const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
+    fetchData();
+  }, []);
 
-                console.error("state='secondFormApproved' ERROR\nmessage:", errorMessage);
-                window.alert("state='secondFormApproved' ERROR\nmessage:", errorMessage);
-
-            }
-            // Handle the response as needed
-            console.log(responseData); // Log the response data
-    
-        } catch (error) {
-            console.error('Error approving second form submit:', error);
-            // Handle errors as needed
-        }
+  // if selectedIntentionFormId changes
+  useEffect(() => {
+    if (intentionForms) {
+      setSelectedProject(
+        intentionForms.find((element) => element._id == selectedIntentionFormId)
+      );
     }
-    
-    const rejectProject = async (projectId) => {
-        try{
-            const response = await fetch(`/api/projectInfo/rejectProject/${projectId}`, {
-                method: "PATCH"
-            });
+  }, [selectedIntentionFormId]);
 
-            // Parse the JSON response
-            const responseData = await response.json();
-    
-            if(response.ok) {
-                window.alert("Project successfully declined\n");
-            }
-
-            // Handle the response as needed
-            console.log(responseData); // Log the response data
-    
-
-        } catch(error) {
-            console.error('Unable to decline probject, an error occured: ', error);
-            window.alert('Unable to decline probject, an error occured: ', error);
-            // Handle errors as needed
-        }
+  // if selectedApprovalFormId changes
+  useEffect(() => {
+    if (approvalForms) {
+      setSelectedProject(
+        approvalForms.find((element) => element._id == selectedApprovalFormId)
+      );
     }
-    ///////////////////////////////////////////////////////////////////// KRAJ
+  }, [selectedApprovalFormId]);
 
+  // when intentionForms changes
+  useEffect(() => {
+    // OBRASCI NAMJERE
+    setPendingIntentionFormList(
+      intentionForms?.filter((item) => item.state === "firstFormSubmitted")
+    );
+    setApprovedIntentionFormList(
+      intentionForms?.filter((item) => item.state === "firstFormApproved")
+    );
+    setDeclinedIntentionFormList(
+      intentionForms?.filter((item) => item.state === "projectRejected")
+    );
+  }, [intentionForms]);
 
-    // after component is mounted
-    useEffect(() => {
-        // fetch data
-        const fetchData = async () => {
-            try {
-                const response = await fetch('/api/projectInfo');
-                
-                if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-                }
+  useEffect(() => {
+    // TRAŽENJE SUGLASNOSTI
+    setPendingApprovalFormList(
+      approvalForms?.filter((item) => item.state === "secondFormSubmitted")
+    );
+    setApprovedApprovalFormList(
+      approvalForms?.filter((item) => item.state === "secondFormApproved")
+    );
+    setDeclinedApprovalFormList(
+      approvalForms?.filter((item) => item.state === "projectRejected")
+    );
+  }, [approvalForms]);
 
-                // load response into data
-                const data = await response.json();
+  // FUNCTIONS
 
-                // load all data into projectSets
-                setProjectSets(data);
-                
-                // filters response depending on marker - firstInputMarker - intentionForm
-                // filters each item of data depending on marker 
-                // -> if first marker equals true, then it's an intention form
-                // -> if both markers equal true, then it's an approval form
-                // seting up setIntentionForms and setApprovalForms state
-                setIntentionForms(data.filter(item => item.firstInputMarker === true && item.secondInputMarker === false));
+  const handleEditable = () => {
+    setProjectEditable(!projectEditable);
+  };
 
-                // filters response depending on marker - secondInputMarker - approvalForm
-                setApprovalForms(data.filter(item => item.firstInputMarker === true && item.secondInputMarker === true));
+  const handlePending = () => {
+    setPendingSelected(true);
+    setApprovedSelected(false);
+    setDeclinedSelected(false);
+  };
 
-                
+  const handleApproved = () => {
+    setApprovedSelected(true);
+    setPendingSelected(false);
+    setDeclinedSelected(false);
+  };
 
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
+  const handleDeclined = () => {
+    setApprovedSelected(false);
+    setPendingSelected(false);
+    setDeclinedSelected(true);
+  };
 
-        fetchData();
+  // button OBRASCI NAMJERE clickes
+  const handleClickIntention = () => {
+    setIntentionSelection(true);
+    setApprovalSelection(false);
+  };
 
-    }, []);
+  // button TRAŽENJE SUGLASNOSTI clicked
+  const handleClickApproval = () => {
+    setApprovalSelection(true);
+    setIntentionSelection(false);
+  };
 
-    // if selectedIntentionFormId changes
-    useEffect(() => {
-        if(intentionForms){
-            setSelectedProject(intentionForms.find((element) => element._id == selectedIntentionFormId))
-        }
-    }, [selectedIntentionFormId])
+  // TESTING START //
 
-    // if selectedApprovalFormId changes
-    useEffect(() => {
-        if(approvalForms){
-            setSelectedProject(approvalForms.find((element) => element._id == selectedApprovalFormId))
-        }
-    }, [selectedApprovalFormId])
+  const [projectId, setProjectId] = useState("");
 
-    // button OBRASCI NAMJERE clickes
-    const handleClickIntention = () => {
-        setIntentionSelection(true)
-        setApprovalSelection(false)
-    }
+  const handleProjectId = (event) => {
+    setProjectId(event.target.value);
+  };
 
-    // button TRAŽENJE SUGLASNOSTI clicked
-    const handleClickApproval = () => {
-        setApprovalSelection(true)
-        setIntentionSelection(false)
-    }
+  return (
+    <>
+      <AdminDashboardContext.Provider
+        value={{
+          projectEditable,
+          setProjectEditable,
+          modalIsOpen,
+          setModalIsOpen,
+          selectedProjectId,
+          setSelectedProjectId,
+        }}
+      >
+        <div className="admin-dashboard-container">
+          {modalIsOpen && <ModalSettings />}
 
-    // TESTING START //
+          <AdminDashboardHeader />
 
-    const[projectId, setProjectId] = useState("");
-    const handleProjectId = (event) => {
-        setProjectId(event.target.value);
-    }
+          <div className="admin-dashboard">
+            {/* FIRST SECTION */}
+            <div className="type-of-project-applications-section">
+              <h5 className="section-title">Pretraga projekata</h5>
+              {/* part that holds  */}
+              <div className="type-of-project-applications-container">
+                <button
+                  className={`${intentionSelection ? "project-type-form-button-selected" : "project-type-form-button"}`}
+                  onClick={handleClickIntention}
+                >
+                  <span>Obrasci namjere ({intentionForms?.length})</span>
+                </button>
 
+                <button
+                  className={`${approvalSelection ? "project-type-form-button-selected" : "project-type-form-button"}`}
+                  onClick={handleClickApproval}
+                >
+                  <span>Traženje suglasnosti ({approvalForms?.length})</span>
+                </button>
+              </div>
 
-    // delete project
-    const deleteProject = async (project_id) => {
-        try {
-            const response = await fetch(`/api/projectInfo/${project_id}`, {
-                method: 'DELETE'
-            });
+              {/* // TESTING START // */}
+              <span
+                style={{
+                  marginTop: "50px",
+                  marginLeft: "100px",
+                  marginRight: "100px",
+                  alignSelf: "center",
+                }}
+              >
+                TESTING
+              </span>
+              <input
+                placeholder="enter id to delete it..."
+                value={projectId}
+                onChange={handleProjectId}
+                style={{ marginLeft: "100px", marginRight: "100px" }}
+              ></input>
 
-            const data = await response.json();
+              {/* projecId is taken from a state initialized in testing section above */}
+              <button
+                onClick={() => deleteProject(projectId)}
+                style={{ marginLeft: "100px", marginRight: "100px" }}
+              >
+                DELETE
+              </button>
+              <button
+                onClick={() => approveFirstFormSubmit(projectId)}
+                style={{ marginLeft: "100px", marginRight: "100px" }}
+              >
+                APPROVE FIRST
+              </button>
+              <button
+                onClick={() => approveSecondFormSubmit(projectId)}
+                style={{ marginLeft: "100px", marginRight: "100px" }}
+              >
+                APPROVE SECOND
+              </button>
+              <button
+                onClick={() => rejectProject(projectId)}
+                style={{ marginLeft: "100px", marginRight: "100px" }}
+              >
+                DECLINE PROJECT
+              </button>
+              <button
+                onClick={() => submitFirstForm(projectId)}
+                style={{ marginLeft: "100px", marginRight: "100px" }}
+              >
+                SUBMIT FIRST
+              </button>
+              <button
+                onClick={() => submitSecondForm(projectId)}
+                style={{ marginLeft: "100px", marginRight: "100px" }}
+              >
+                SUBMIT SECOND
+              </button>
 
-            if(response.ok) {
-                console.log("Project deleted successfully!", data);
-                window.alert("Project deleted successfully!", data)
-            } else {
-                console.error("Error deleting project!", data.error);
-                window.alert("Error deleting project!", data.error)
-            }
-
-        } catch(error) {
-            console.log("Error: ", error.message);
-        }
-    }
-
-     // firstFormSubmitted
-     const submitFirstForm = async (projectId) => {
-        try {
-            // Make a PATCH request to the backend API using fetch
-            const response = await fetch(`/api/projectInfo/submitFirstForm/${projectId}`, {
-                method: 'PATCH'
-            });
-    
-            // Parse the JSON response
-            const responseData = await response.json();
-    
-            if(response.ok) {
-                console.log("state='firstFormSubitted' updated successfully!\n", responseData);
-                window.alert("state='firstFormSubitted' updated successfully!\n", responseData);
-            } else {
-                 // handle potentional non-JSON response
-                const errorData = await response.json().catch(() => null); 
-                // if response is not null
-                const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
-
-                console.error("state='firstFormSubitted' ERROR\nmessage:", errorMessage);
-                window.alert("state='firstFormSubitted' ERROR\nmessage:", errorMessage);
-
-            }
-
-            // Handle the response as needed
-            console.log(responseData); // Log the response data
-    
-        } catch (error) {
-            console.error('Couldnt set up state="firstFormSubmitted!" error:', error);
-            window.alert('Couldnt set up state="firstFormSubmitted!" error:', error);
-            // Handle errors as needed
-        }
-    };
-
-    const submitSecondForm = async (projectId) => {
-        try {
-            const response = await fetch(`/api/projectInfo/submitSecondForm/${projectId}`, {
-                method: 'PATCH'
-            });
-
-            const responseData = await response.json();
-
-            if(response.ok) {
-                console.log("state='secondFormSubitted' updated successfully!\n", responseData);
-                window.alert("state='secondFormSubitted' updated successfully!\n", responseData);
-            } else {
-                // handle potentional non-JSON response
-                const errorData = await response.json().catch(() => null); 
-                // if response is not null
-                const errorMessage = errorData ? errorData.error : `Error: ${response.status} ${response.statusText}`;
-
-                console.error("state='secondFormSubitted' ERROR\nmessage:", errorMessage);
-                window.alert("state='secondFormSubitted' ERROR\nmessage:", errorMessage);
-            }
-
-        } catch(error) {
-            console.error('Couldnt set up state="secondFormSubmitted" error:', error);
-            window.alert('Couldnt set up state="secondFormSubmitted" error:', error);
-        }
-    }
-
-    // TESTING END //
-
-    return(
-        <>
-        <AdminDashboardContext.Provider value={{projectEditable, setProjectEditable}}>
-            <div className="admin-dashboard-container">
-                
-            <AdminDashboardHeader/>
-
-                <div className="admin-dashboard">
-
-                    {/* FIRST SECTION */}
-                    <div className="type-of-project-applications-section">
-                        <h5 className="section-title">Pretraga projekata</h5>
-                        {/* part that holds  */}
-                        <div className="type-of-project-applications-container">
-                            <button className={`${intentionSelection ? 'project-type-form-button-selected' : 'project-type-form-button'}`} onClick={handleClickIntention}><span>Obrasci namjere ({intentionForms?.length})</span></button>
-
-                            <button className={`${approvalSelection ? 'project-type-form-button-selected' : 'project-type-form-button'}`} onClick={handleClickApproval}><span>Traženje suglasnosti ({approvalForms?.length})</span></button>
-                        </div>
-
-                        {/* // TESTING START // */}
-                        <span style={{marginTop: '50px', marginLeft: '100px', marginRight: '100px', alignSelf: 'center'}}>TESTING</span>
-                        <input placeholder="enter id to delete it..." value={projectId} onChange={handleProjectId} style={{ marginLeft: '100px', marginRight: '100px'}}></input>
-                        
-                        {/* projecId is taken from a state initialized in testing section above */}
-                        <button onClick={() => deleteProject(projectId)} style={{ marginLeft: '100px', marginRight: '100px'}}>DELETE</button>
-                        <button onClick={() => approveFirstFormSubmit(projectId)} style={{ marginLeft: '100px', marginRight: '100px'}}>APPROVE FIRST</button>
-                        <button onClick={() => approveSecondFormSubmit(projectId)} style={{ marginLeft: '100px', marginRight: '100px'}}>APPROVE SECOND</button>
-                        <button onClick={() => rejectProject(projectId)} style={{ marginLeft: '100px', marginRight: '100px'}}>DECLINE PROJECT</button>
-                        <button onClick={() => submitFirstForm(projectId)} style={{ marginLeft: '100px', marginRight: '100px'}}>SUBMIT FIRST</button>
-                        <button onClick={() => submitSecondForm(projectId)} style={{ marginLeft: '100px', marginRight: '100px'}}>SUBMIT SECOND</button>
-
-
-
-
-                        {/* // TESTING END // */}
-
-                    </div>
-
-                    {/* SECOND SECTION */}
-                    <div className="project-applications-container">
-                        {/* PENDIND, APPROVED AND DECLINED FILTER*/}
-                        <div className="progress-container">
-                            <button onClick={handlePending} className= { pendingSelected ? "pending-button-selected" : "pending-button-hidden" }>PENDING     ({intentionSelection ? pendingIntentionFormList?.length :  pendingApprovalFormList?.length})</button>
-                            <button onClick={handleApproved} className={ approvedSelected ? "approved-button-selected" : "approved-button-hidden" }>APPROVED  ({intentionSelection ? approvedIntentionFormList?.length : approvedApprovalFormList?.length})</button>
-                            <button onClick={handleDeclined} className={ declinedSelected ? "declined-button-selected" : "declined-button-hidden" }>DECLINED  ({intentionSelection ? declinedIntentionFormList?.length : declinedApprovalFormList?.length})</button>
-                        </div>
-
-                        {/* OBRASCI NAMJERE */}
-                        {intentionSelection && pendingSelected && <ProjectInfoButtonContainer projectInfoSets={pendingIntentionFormList} selectProject={setSelectedIntentionFormId}/>}
-                        {intentionSelection && approvedSelected && <ProjectInfoButtonContainer projectInfoSets={approvedIntentionFormList} selectProject={setSelectedIntentionFormId}/>}
-                        {intentionSelection && declinedSelected && <ProjectInfoButtonContainer projectInfoSets={declinedIntentionFormList} selectProject={setSelectedIntentionFormId}/>}
-                       
-                       {/* TRAŽENJE SUGLASNOSTI */}
-                        {approvalSelection && pendingSelected && <ProjectInfoButtonContainer projectInfoSets={pendingApprovalFormList} selectProject={setSelectedApprovalFormId}/>}
-                        {approvalSelection && approvedSelected && <ProjectInfoButtonContainer projectInfoSets={approvedApprovalFormList} selectProject={setSelectedApprovalFormId}/>}
-                        {approvalSelection && declinedSelected && <ProjectInfoButtonContainer projectInfoSets={declinedApprovalFormList} selectProject={setSelectedApprovalFormId}/>}
-
-                    </div>
-
-                    {/* THIRD SECTION */}
-
-                        {/* if selectedProject exists => show selected project's info */}
-                    <div className="single-application-container">
-                        {selectedProject != null && pendingSelected && /*to prevent rendering if the project is not selected*/
-                            <div className="manage-project-container">
-                                <div className="edit-button-container manage-button-style" onClick={handleEditable}> 
-                                    <FontAwesomeIcon icon={faPencilAlt} style={{color: "#FDF9F9"}} />
-                                    <button className="edit-button" >{projectEditable ? "ZAVRŠI UREĐIVANJE" : "UREDI"}</button>
-                                </div>
-                                <div className="decision-buttons-container">
-                                    <div className="approve-button-container manage-button-style">
-                                        <button onClick={intentionSelection ?  () => approveFirstFormSubmit(selectedProject._id) :  () => approveSecondFormSubmit(selectedProject._id)} className="approve-button">APPROVE</button>
-                                    </div>
-
-                                    <div className="decline-button-container manage-button-style">
-                                        <button onClick={() => rejectProject(selectedProject._id)}className="decline-button">DECLINE</button>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                        {selectedProject && <ProjectInfo selectedProject={selectedProject}/>}
-                    </div>
-
-                </div>
-
+              {/* // TESTING END // */}
             </div>
-            </AdminDashboardContext.Provider>
-        </>
-    )
-}
 
-export default AdminDashboard
+            {/* SECOND SECTION */}
+            <div className="project-applications-container">
+              {/* PENDIND, APPROVED AND DECLINED FILTER*/}
+              <div className="progress-container">
+                <button
+                  onClick={handlePending}
+                  className={
+                    pendingSelected
+                      ? "pending-button-selected"
+                      : "pending-button-hidden"
+                  }
+                >
+                  PENDING (
+                  {intentionSelection
+                    ? pendingIntentionFormList?.length
+                    : pendingApprovalFormList?.length}
+                  )
+                </button>
+                <button
+                  onClick={handleApproved}
+                  className={
+                    approvedSelected
+                      ? "approved-button-selected"
+                      : "approved-button-hidden"
+                  }
+                >
+                  APPROVED (
+                  {intentionSelection
+                    ? approvedIntentionFormList?.length
+                    : approvedApprovalFormList?.length}
+                  )
+                </button>
+                <button
+                  onClick={handleDeclined}
+                  className={
+                    declinedSelected
+                      ? "declined-button-selected"
+                      : "declined-button-hidden"
+                  }
+                >
+                  DECLINED (
+                  {intentionSelection
+                    ? declinedIntentionFormList?.length
+                    : declinedApprovalFormList?.length}
+                  )
+                </button>
+              </div>
+
+              {/* OBRASCI NAMJERE */}
+              {intentionSelection && pendingSelected && (
+                <ProjectInfoButtonContainer
+                  projectInfoSets={pendingIntentionFormList}
+                  selectProject={setSelectedIntentionFormId}
+                />
+              )}
+              {intentionSelection && approvedSelected && (
+                <ProjectInfoButtonContainer
+                  projectInfoSets={approvedIntentionFormList}
+                  selectProject={setSelectedIntentionFormId}
+                />
+              )}
+              {intentionSelection && declinedSelected && (
+                <ProjectInfoButtonContainer
+                  projectInfoSets={declinedIntentionFormList}
+                  selectProject={setSelectedIntentionFormId}
+                />
+              )}
+
+              {/* TRAŽENJE SUGLASNOSTI */}
+              {approvalSelection && pendingSelected && (
+                <ProjectInfoButtonContainer
+                  projectInfoSets={pendingApprovalFormList}
+                  selectProject={setSelectedApprovalFormId}
+                />
+              )}
+              {approvalSelection && approvedSelected && (
+                <ProjectInfoButtonContainer
+                  projectInfoSets={approvedApprovalFormList}
+                  selectProject={setSelectedApprovalFormId}
+                />
+              )}
+              {approvalSelection && declinedSelected && (
+                <ProjectInfoButtonContainer
+                  projectInfoSets={declinedApprovalFormList}
+                  selectProject={setSelectedApprovalFormId}
+                />
+              )}
+            </div>
+
+            {/* THIRD SECTION */}
+
+            {/* if selectedProject exists => show selected project's info */}
+            <div className="single-application-container">
+              {selectedProject != null &&
+                pendingSelected /*to prevent rendering if the project is not selected*/ && (
+                  <div className="manage-project-container">
+                    <div
+                      className="edit-button-container manage-button-style"
+                      onClick={handleEditable}
+                    >
+                      <FontAwesomeIcon
+                        icon={faPencilAlt}
+                        style={{ color: "#FDF9F9" }}
+                      />
+                      <button className="edit-button">
+                        {projectEditable ? "ZAVRŠI UREĐIVANJE" : "UREDI"}
+                      </button>
+                    </div>
+
+                    <div className="decision-buttons-container">
+                      <div className="approve-button-container manage-button-style">
+                        <button
+                          onClick={
+                            intentionSelection
+                              ? () =>
+                                  approveFirstFormSubmit(selectedProject._id)
+                              : () =>
+                                  approveSecondFormSubmit(selectedProject._id)
+                          }
+                          className="approve-button"
+                        >
+                          APPROVE
+                        </button>
+                      </div>
+
+                      <div className="decline-button-container manage-button-style">
+                        <button
+                          onClick={() => rejectProject(selectedProject._id)}
+                          className="decline-button"
+                        >
+                          DECLINE
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              {selectedProject && (
+                <ProjectInfo selectedProject={selectedProject} />
+              )}
+            </div>
+          </div>
+        </div>
+      </AdminDashboardContext.Provider>
+    </>
+  );
+};
+
+export default AdminDashboard;

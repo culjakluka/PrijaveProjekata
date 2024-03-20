@@ -1,0 +1,124 @@
+.ModalContainerOverlay {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #00000059;
+    z-index: 1000;
+}
+
+.Modal {
+    width: 50%;
+    height: 70%;
+    background: #f1f1f1;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.ModalLine {
+    height: 2px;
+    width: 100%;
+    background-color: var(--secondary-text-color);
+}
+
+.ModalTopBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.ModalSeperatorLine {
+    width: 60%;
+    align-self: center;
+}
+
+.ModalContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.CloseModal {
+    color: #555454;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    font-size: 2vh;
+}
+
+.DeanContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.DeanProperties {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.DepartmentContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #55545436;
+    margin: 5px 0px 5px 0px;
+    padding: 0px 8px 0px 8px;
+    border-radius: 5px;
+}
+
+.DepartmentInfo {
+    display: flex;
+    flex-direction: row;
+}
+
+.DepartmentInfoElement {
+    margin: 2px 5px 2px 5px;
+}
+
+.NewDepartmentContainer {
+    display: flex;
+}
+
+.NewDepartmentName {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.NewDepartmentHead {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.AddNewDepartmentButton {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    outline: none;
+    background-color: #4e4e4ee3;
+    color: white;
+    border: none;
+}
+
+.UpdateDeanButton {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    outline: none;
+    background-color: #4e4e4ee3;
+    color: white;   
+    border: none;
+}

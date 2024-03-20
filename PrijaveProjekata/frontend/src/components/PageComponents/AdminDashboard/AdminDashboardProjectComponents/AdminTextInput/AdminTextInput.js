@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import './AdminTextInput.css';
 import '../../AdminDashboard.css';
-import { AdminDashboardContext } from "../../context/AdminDashboardContext";
+
+// context
+import { AdminDashboardContext } from '../../../../../context/AdminDashboardContext.js'
 
 const AdminTextInput = ({ currentInputValue, currentLabelValue, editable}) => {
     const [inputValue, setInputValue] = useState("");

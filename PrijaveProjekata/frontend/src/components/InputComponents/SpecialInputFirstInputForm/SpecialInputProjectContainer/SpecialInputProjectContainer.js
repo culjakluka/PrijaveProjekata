@@ -1,13 +1,15 @@
-import react, { useState } from 'react'
-import '../SpecialInput.css'
+import React from 'react';
 import SpecialInputProject from '../SpecialInputProject/SpecialInputProject';
 
-const SpecialInputProjectContainer = ({addNewProjectProp}) => {
-    return (  
-        <div className='special-input-project-container'>
-            <SpecialInputProject addNewProjectProp={addNewProjectProp}/>
-        </div>
-    );
-}
- 
-export default SpecialInputProjectContainer;
+//style 
+import Style from '../SpecialInputFirstInputForm.module.css'
+
+const SpecialInputProjectContainer = ({ addNewProjectProp }) => {
+  return (
+    <div className={Style.SpecialInputProjectContainer}>
+      <SpecialInputProject addNewProjectProp={addNewProjectProp} />
+    </div>
+  );
+};
+
+export default SpecialInputProjectContainer

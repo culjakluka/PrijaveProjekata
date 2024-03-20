@@ -1,37 +1,33 @@
-.special-input-container {
+.SpecialInputContainer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     background-color: #f9f9f9;
-    border-radius: 2px;
-    box-shadow: 1px 1px 2px 0px rgba(0,0,0,1);
     padding: 20px;
 }
 
-.special-input-label {
+.SpecialInputLabel {
     font-weight: bold;
     font-family: 'Segoe UI';
     text-transform: uppercase;
     color: #B0355E;
 }
 
-#special-input-member-projects {
+#SpecialInputMemberProjects {
     display: flex;
     flex-direction: row;
 }
 
-.special-input-member {
+.SpecialInputMember {
 
 }
 
-#special-input-completed-members {
+#SpecialInputCompletedMember {
     display: flex;
     flex-direction: column;
-
-    
 }
 
-#completed-member-container {
+#CompletedMemberContainer {
     display: flex;
     flex-direction: column;
     border: solid 2px #a4a4a4;
@@ -41,31 +37,30 @@
     background-color: #639ef2;
 }
 
-#completed-member-personal-details {
+#CompletedMemberPersonalDetails {
     display: flex;
     flex-direction: row;
 }
 
-.completed-member-data{
+.CompletedMemberData {
     /* margin: top right bottom left */
     margin: 5px 10px 5px 0px;
     /* padding: top right bottom left */
     padding: 5px 5px 5px 0px;
 }
 
-.completed-member-project {
+.CompletedMemberProject {
     color: black;
     font-size: 15px;
 }
 
-#completed-member-projects {
+#CompletedMemberProjects {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-
-#completed-project-container {
+#CompletedProjectContainer {
     display: flex;
     flex-direction: row;
     background-color: #f6a7dd;
@@ -73,12 +68,12 @@
     border-radius: 3px;
 }
 
-.completed-project-member-data {
+.CompletedProjectMemberData {
     margin: 5px 10px 5px 10px;
     padding: 5px;
 }
 
-#other-project-title {
+#OtherProjectTitle {
     color: #A4A4A4;
     font-size: 15px;
     font-weight: bold;
@@ -86,11 +81,9 @@
     margin-top: 10px;
     align-self: flex-start;
     margin-left: 5px;
-    
 }
 
-
-#special-input-member-info {
+#SpecialInputMemberInfo {
     display: flex;
     flex-direction: column;
     border: solid #A4A4A4 2px;
@@ -98,37 +91,35 @@
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 5px;
-
 }
 
-.special-input-input {
+.SpecialInputInput {
     border: none;
     border-bottom: 1px solid #A4A4A4;
     margin-left: 5px;
     margin-right: 5px;
 }
 
-.special-input-input:focus {
+.SpecialInputInput:focus {
     outline: none;
 }
 
-.special-input-project-container {
+.SpecialInputProjectContainer {
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 5px;
-
 }
 
-#special-input-member-projects-project {
+#SpecialInputMemberProjectsProject {
     display: flex;
     flex-direction: row;
 }
 
-#special-input-member-projects-title {
+#SpecialInputMemberProjectsTitle {
     margin-left: 5px;
 }
 
-#special-input-plus {
+#SpecialInputPlus {
     align-self: center;
     border: solid 1px gray;
     border-radius: 2px;
@@ -136,7 +127,7 @@
     background-color: white;
 }
 
-#special-input-add-member {
+#SpecialInputAddMember {
     background-color: white;
     color: #a6a6a6;
     margin-left: 70px;
@@ -144,13 +135,13 @@
     border: solid 2px #A4A4A4;
 }
 
-#special-input-add-project {
+#SpecialInputAddProject {
     background-color: white;
     color: #a6a6a6;
     border: solid 2px #A4A4A4;
 }
 
-.special-separator-line {
+.SpecialSeparatorLine {
     margin-left: 20px;
     margin-right: 20px;
 }
