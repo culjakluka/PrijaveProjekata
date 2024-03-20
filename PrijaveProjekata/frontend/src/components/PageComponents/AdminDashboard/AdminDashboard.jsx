@@ -184,7 +184,7 @@ const AdminDashboard = () => {
 
     return(
         <>
-        <AdminDashboardContext.Provider value={{projectEditable, setProjectEditable, modalIsOpen, setModalIsOpen, selectedProjectId, setSelectedProjectId}}>
+        <AdminDashboardContext.Provider value={{projectEditable, setProjectEditable, modalIsOpen, setModalIsOpen, selectedProjectId, setSelectedProjectId, intentionSelection}}>
             <div className="admin-dashboard-container">
 
             {modalIsOpen && <ModalSettings/>}    

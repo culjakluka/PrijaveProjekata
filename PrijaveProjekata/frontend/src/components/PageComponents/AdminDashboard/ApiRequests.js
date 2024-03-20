@@ -175,6 +175,8 @@ const rejectProject = async (projectId) => {
             window.alert("Error deleting project!", data.error)
         }
 
+        window.location.reload()
+
     } catch(error) {
         console.log("Error: ", error.message);
     }
