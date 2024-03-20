@@ -1,8 +1,9 @@
-const express = require('express');
-const pdfController = require('../controllers/pdfController');
+const express = require("express");
+const { generatePDF, downloadPDF } = require("../controllers/pdfController");
 
 const router = express.Router();
 
-router.get('/generatePdf', pdfController.generatePDF);
+router.get("/generatePdf", generatePDF);
+router.get("/downloadPdf/:filepath", downloadPDF);
 
 module.exports = router;
