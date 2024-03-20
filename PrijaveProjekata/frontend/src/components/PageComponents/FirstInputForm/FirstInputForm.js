@@ -215,7 +215,7 @@ const FirstInputForm = () => {
                             setSpecificState={setTotalValue}
                             currencyOrPercentage={"$"}
                         />
-                        <NumberInput name="ukupna vrijednosti" label="ukupna vrijednost" setSpecificState={setTotalValue}/>
+ 
                         <TextInput
                             label={"DIO PRORAČUNA KOJI PRIPADA FESB-u(vrijednost ili postotak ukupne vrijednosti"}
                             name={"dio_proracuna_fesb"}

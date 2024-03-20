@@ -11,12 +11,13 @@ import { AdminDashboardContext } from "../../../../context/AdminDashboardContext
 // my components
 import AdminQuestion from '../AdminDashboardProjectComponents/AdminQuestion/AdminQuestion.js'
 import AdminTextInput from '../AdminDashboardProjectComponents/AdminTextInput/AdminTextInput.js'
+import SpecialInputSecondInputForm from "../../../InputComponents/SpecialInput/SpecialInputSecondInputForm.js";
 
 const ProjectInfo = ({selectedProject}) => {
 
     const [selectedProjectData, setSelectedProjectData] = useState();
 
-    const { intentionSelection } = useContext(AdminDashboardContext);
+    const { intentionSelection, approvalSelection } = useContext(AdminDashboardContext);
 
     useEffect(() => {
         setSelectedProjectData(selectedProject);
@@ -63,10 +64,6 @@ const ProjectInfo = ({selectedProject}) => {
                         <AdminTextInput currentLabelValue={"ZAVOD (ODJSEK)"} currentInputValue={selectedProject.department}/>
                         <AdminTextInput currentLabelValue={"TITULA"} currentInputValue={selectedProject.vocation}/>
                         <AdminTextInput currentLabelValue={"E-MAIL"} currentInputValue={selectedProject.email}/>
-                        <AdminTextInput currentLabelValue={""} currentInputValue={""}/>
-                        <AdminTextInput currentLabelValue={""} currentInputValue={""}/>
-                        <AdminTextInput currentLabelValue={""} currentInputValue={""}/>
-                        <AdminTextInput currentLabelValue={""} currentInputValue={""}/>
 
                     <AdminQuestion questionText={questions[1]}/>
                         <AdminTextInput currentLabelValue={"NAZIV PROJEKTA"} currentInputValue={selectedProject.projectTitle}/>
@@ -90,24 +87,23 @@ const ProjectInfo = ({selectedProject}) => {
                         <AdminTextInput currentLabelValue={"DIO PRORAČUNA FESB"} currentInputValue={selectedProject.fesbValuePart}/>
 
                     <AdminQuestion questionText={questions[7]}/>
-                        
+                        <AdminTextInput currentLabelValue={""} currentInputValue={selectedProject.newEmploymentBoolean}/>
+
                     <AdminQuestion questionText={questions[8]}/>
-
-
-                    <AdminQuestion questionText={questions[9]}/>
+                    <div>{JSON.stringify(selectedProject.projectTeam)}</div>
                     </>
                 }
 
-                {!intentionSelection && <>
+                {approvalSelection && <>
                     <AdminQuestion questionText={questions[0]}/>
                         <AdminTextInput currentLabelValue={"IME I PREZIME"} currentInputValue={selectedProject.nameSurname}/>
                         <AdminTextInput currentLabelValue={"ZAVOD (ODJSEK)"} currentInputValue={selectedProject.department}/>
                         <AdminTextInput currentLabelValue={"TITULA"} currentInputValue={selectedProject.vocation}/>
                         <AdminTextInput currentLabelValue={"E-MAIL"} currentInputValue={selectedProject.email}/>
-                        <AdminTextInput currentLabelValue={""} currentInputValue={""}/>
-                        <AdminTextInput currentLabelValue={""} currentInputValue={""}/>
-                        <AdminTextInput currentLabelValue={""} currentInputValue={""}/>
-                        <AdminTextInput currentLabelValue={""} currentInputValue={""}/>
+                        <AdminTextInput currentLabelValue={"MOBITEL*"} currentInputValue={selectedProject.mobilePhoneNumber}/>
+                        <AdminTextInput currentLabelValue={"POSTOTAK RADNOG VREMENA U OKVIRU PREDLOŽENOG PROJEKTA*"} currentInputValue={selectedProject.workTimeThisPercentage}/>
+                        <AdminTextInput currentLabelValue={"POSTOTAK RADNOG VREMENA U OKVIRU OSTALIH PROJEKATA U PROVEDBI"} currentInputValue={selectedProject.workTimeOtherPercentage}/>
+                        <AdminTextInput currentLabelValue={"NAPOMENA"} currentInputValue={selectedProject.teamLeaderDisclaimer}/>
 
                     <AdminQuestion questionText={questions[1]}/>
                         <AdminTextInput currentLabelValue={"NAZIV PROJEKTA"} currentInputValue={selectedProject.projectTitle}/>
@@ -121,45 +117,62 @@ const ProjectInfo = ({selectedProject}) => {
                         <AdminTextInput currentLabelValue={"LINK NA STRANICU"} currentInputValue={selectedProject.applicationURL}/>
                         
                     <AdminQuestion questionText={questions[4]}/>
-                        <AdminTextInput currentLabelValue={"PRIJAVITELJ PROJEKTA/VODEĆI PARTNER (institucija, tvrtka..."} currentInputValue={selectedProject.projectApplicant}/>
+                        <AdminTextInput currentLabelValue={""} currentInputValue={selectedProject.sourceOfFunding}/>
 
-                    <AdminQuestion questionText={questions[5]}/>
-                        <AdminTextInput currentLabelValue={"others"} currentInputValue={selectedProject.projectPartners}/>
+                        <AdminQuestion questionText={questions[5]}/>
+                    <AdminTextInput currentLabelValue={"TIP PROJEKTA"} currentInputValue={selectedProject.projectType}/>
 
                     <AdminQuestion questionText={questions[6]}/>
-                        <AdminTextInput currentLabelValue={"UKUPNA VRIJEDNOST"} currentInputValue={selectedProject.totalValue}/>
-                        <AdminTextInput currentLabelValue={"DIO PRORAČUNA FESB"} currentInputValue={selectedProject.fesbValuePart}/>
+                        <AdminTextInput currentLabelValue={"OČEKIVANI POČETAK PROJEKTA"} currentInputValue={selectedProject.expectedProjectBeginning}/>
 
                     <AdminQuestion questionText={questions[7]}/>
-                        
-                    <AdminQuestion questionText={questions[8]}/>
+                        <AdminTextInput currentLabelValue={"TRAJANJE PROJEKTA (U MJESECIMA)"} currentInputValue={selectedProject.expectedProjectDurationInMonths}/>
 
+                    <AdminQuestion questionText={questions[8]}/>
+                        <AdminTextInput currentLabelValue={"PRIJAVITELJ PROJEKTA/VODEĆI PARTNER"} currentInputValue={selectedProject.projectApplicant}/>
 
                     <AdminQuestion questionText={questions[9]}/>
+                        <AdminTextInput currentLabelValue={"PARTNERI NA PROJEKTU"} currentInputValue={selectedProject.projectPartners}/>
 
                     <AdminQuestion questionText={questions[10]}/>
+                        <AdminTextInput currentLabelValue={"UKLJUČENOST GOSPODARSKOG SUBJEKTA"} currentInputValue={selectedProject.economicSubjectInvolvement}/>
 
                     <AdminQuestion questionText={questions[11]}/>
+                        <AdminTextInput currentLabelValue={"UKUPNA VRIJEDNOST"} currentInputValue={selectedProject.totalValue}/>
 
                     <AdminQuestion questionText={questions[12]}/>
+                        <AdminTextInput currentLabelValue={"DIO PRORAČUNA KOJI PRIPADA FESB-u"} currentInputValue={selectedProject.fesbValuePart}/>
+                        <AdminTextInput currentLabelValue={"TROŠAK POSTOJEĆEG OSOBLJA"} currentInputValue={selectedProject.currentPersonnelExpense}/>
+                        <AdminTextInput currentLabelValue={"TROŠAK NOVOZAPOSLENOG OSOBLJA"} currentInputValue={selectedProject.newPersonnelExpense}/>
+                        <AdminTextInput currentLabelValue={"NEIZRAVNI TROŠKOVI"} currentInputValue={`${0.15 * selectedProject.fesbValuePart}`}/> {/* Calculated as 15% of FESB value part */}
+                        <AdminTextInput currentLabelValue={"TROŠAK I POPIS OPREME"} currentInputValue={selectedProject.equipmentDescriptionAndExpense}/>
+                        <AdminTextInput currentLabelValue={"TROŠAK AMORTIZACIJE OPREME"} currentInputValue={selectedProject.equipmentAmortizationExpense}/>
+                        <AdminTextInput currentLabelValue={"TROŠAK VANJSKIH USLUGA"} currentInputValue={selectedProject.otherServicesExpense}/>
+                        <AdminTextInput currentLabelValue={"TROŠAK MATERIJALA I SITNOG INVENTARA"} currentInputValue={selectedProject.materialExpense}/>
+                        <AdminTextInput currentLabelValue={"PUTNI TROŠAK"} currentInputValue={selectedProject.travelRegistrationEducationExpense}/>
+                        <AdminTextInput currentLabelValue={"NAPOMENA O TROŠKOVIMA"} currentInputValue={selectedProject.expenseDisclaimer}/>
 
                     <AdminQuestion questionText={questions[13]}/>
+                        <AdminTextInput currentLabelValue={"TROŠKOVI PARTNERA"} currentInputValue={selectedProject.partnerExpense}/>
 
                     <AdminQuestion questionText={questions[14]}/>
+                        <AdminTextInput currentLabelValue={"ZAHTIJEVANO FINANCIRANJE"} currentInputValue={selectedProject.requestedFunding}/>
 
                     <AdminQuestion questionText={questions[15]}/>
+                        <AdminTextInput currentLabelValue={"AVANSNO PLAĆANJE"} currentInputValue={selectedProject.downPayment}/>
 
                     <AdminQuestion questionText={questions[16]}/>
+                        <AdminTextInput currentLabelValue={"PLAN SUFINANCIRANJA"} currentInputValue={selectedProject.personalFinancingExpense}/>
 
                     <AdminQuestion questionText={questions[17]}/>
+                        {/* Assuming 'newEmploymentBoolean' is a boolean, converting it to a more readable format for display */}
+                        <AdminTextInput currentLabelValue={"NOVOZAPOSLENJE"} currentInputValue={selectedProject.newEmploymentBoolean ? "Da" : "Ne"}/>
 
                     <AdminQuestion questionText={questions[18]}/>
+                        {/* Special case, might not have a direct mapping or requires a component to list team members */}
+                        <div>{JSON.stringify(selectedProject.projectTeam)}</div>
 
-                    <AdminQuestion questionText={questions[19]}/>
 
-                    <AdminQuestion questionText={questions[20]}/>
-
-                    <AdminQuestion questionText={questions[21]}/>
                     </>
                 }
 

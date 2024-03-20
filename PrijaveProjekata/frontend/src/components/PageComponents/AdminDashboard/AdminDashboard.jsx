@@ -214,6 +214,8 @@ const AdminDashboard = () => {
           setModalIsOpen,
           selectedProjectId,
           setSelectedProjectId,
+          intentionSelection,
+          approvalSelection
         }}
       >
         <div className="admin-dashboard-container">
