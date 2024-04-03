@@ -235,7 +235,8 @@ const AdminDashboard = () => {
           modalUpdateProjectInfoIsOpen, 
           setModalUpdateProjectInfoIsOpen,
           updateProjectData,
-          setUpdateProjectData
+          setUpdateProjectData,
+          selectedProject
         }}
       >
         <div className="admin-dashboard-container">
