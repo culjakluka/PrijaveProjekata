@@ -14,10 +14,10 @@ import { faAmbulance, faCog } from '@fortawesome/free-solid-svg-icons'; // Impor
 
 const AdminDashboardHeader = () => {
 
-    const { modalIsOpen, setModalIsOpen } = useContext(AdminDashboardContext);
+    const { modalSettingsIsOpen, setModalSettingsIsOpen } = useContext(AdminDashboardContext);
 
     const openModal = () => {
-        setModalIsOpen(true);
+        setModalSettingsIsOpen(true);
     }
 
     return (  

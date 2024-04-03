@@ -6,10 +6,11 @@ import { useState, useEffect } from "react";
 import { AdminDashboardContext } from "../../../context/AdminDashboardContext.js";
 
 // my components
-import ModalSettings from "./ModalSettings/ModalSettings.js";
+import ModalSettings from "./AdminDashboardComponents/ModalSettings/ModalSettings.js";
+import ModalUpdateProjectInfo from "./AdminDashboardComponents/ModalUpdateProjectInfo/ModalUpdateProjectInfo.js";
 import AdminDashboardHeader from "./AdminDashboardHeader/AdminDashboardHeader";
-import ProjectInfo from "./ProjectInfo/ProjectInfo";
-import ProjectInfoButtonContainer from "./ProjectInfoButtonContainer/ProjectInfoButtonContainer";
+import ProjectInfo from "./AdminDashboardComponents/ProjectInfo/ProjectInfo";
+import ProjectInfoButtonContainer from "./AdminDashboardComponents/ProjectInfoButtonContainer/ProjectInfoButtonContainer";
 
 // external components
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -44,9 +45,6 @@ const AdminDashboard = () => {
   // project is part of one of the groups -> either OBRASCI NAMJERE or TRAŽENJE SUGLASNOSTI
   const [selectedProject, setSelectedProject] = useState();
 
-  // project editable
-  const [projectEditable, setProjectEditable] = useState(false);
-
   // pending, approved buttons
   const [pendingSelected, setPendingSelected] = useState(true);
   const [approvedSelected, setApprovedSelected] = useState(false);
@@ -65,7 +63,18 @@ const AdminDashboard = () => {
   const [declinedApprovalFormList, setDeclinedApprovalFormList] =
     useState(null);
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  // modal - settings
+  const [modalSettingsIsOpen, setModalSettingsIsOpen] = useState(false);
+
+  // modal - update project info
+  const [modalUpdateProjectInfoIsOpen, setModalUpdateProjectInfoIsOpen] = useState(false);
+
+  // project editable
+  const [projectEditable, setProjectEditable] = useState(false);
+
+  
+  const [updateProjectData, setUpdateProjectData] = useState({});
+
 
   const [selectedProjectId, setSelectedProjectId] = useState("");
 
@@ -133,7 +142,8 @@ const AdminDashboard = () => {
     }
   }, [selectedApprovalFormId]);
 
-  // when intentionForms changes
+  // when INTENTION FORMS changes
+  // filter them by state
   useEffect(() => {
     // OBRASCI NAMJERE
     setPendingIntentionFormList(
@@ -147,6 +157,8 @@ const AdminDashboard = () => {
     );
   }, [intentionForms]);
 
+  // when APPROVAL FORMS change
+  // filter them by state
   useEffect(() => {
     // TRAŽENJE SUGLASNOSTI
     setPendingApprovalFormList(
@@ -196,6 +208,8 @@ const AdminDashboard = () => {
     setIntentionSelection(false);
   };
 
+  
+
   // TESTING START //
 
   const [projectId, setProjectId] = useState("");
@@ -204,20 +218,31 @@ const AdminDashboard = () => {
     setProjectId(event.target.value);
   };
 
+
   return (
     <>
       <AdminDashboardContext.Provider
         value={{
           projectEditable,
           setProjectEditable,
-          modalIsOpen,
-          setModalIsOpen,
+          modalSettingsIsOpen,
+          setModalSettingsIsOpen,
           selectedProjectId,
           setSelectedProjectId,
+          intentionSelection,
+          approvalSelection,
+          handleEditable,
+          modalUpdateProjectInfoIsOpen, 
+          setModalUpdateProjectInfoIsOpen,
+          updateProjectData,
+          setUpdateProjectData
         }}
       >
         <div className="admin-dashboard-container">
-          {modalIsOpen && <ModalSettings />}
+          {/* MODAL COMPONENTS */}
+          {modalSettingsIsOpen && <ModalSettings />}
+
+          {modalUpdateProjectInfoIsOpen && <ModalUpdateProjectInfo/>}
 
           <AdminDashboardHeader />
 
@@ -297,6 +322,7 @@ const AdminDashboard = () => {
               >
                 SUBMIT SECOND
               </button>
+              <div style={{ marginTop: "100px" , marginLeft: "100px", marginLeft: "100px"}}>UPDATE PROJECT DATA:{JSON.stringify(updateProjectData)}</div>
 
               {/* // TESTING END // */}
             </div>
@@ -399,7 +425,7 @@ const AdminDashboard = () => {
                   <div className="manage-project-container">
                     <div
                       className="edit-button-container manage-button-style"
-                      onClick={handleEditable}
+                      onClick={!projectEditable ?  () => setProjectEditable(true) : () => setModalUpdateProjectInfoIsOpen(true)}
                     >
                       <FontAwesomeIcon
                         icon={faPencilAlt}

@@ -5,13 +5,13 @@ import '../../AdminDashboard.css';
 // context
 import { AdminDashboardContext } from '../../../../../context/AdminDashboardContext.js'
 
-const AdminTextInput = ({ currentInputValue, currentLabelValue, editable}) => {
+const AdminTextInput = ({ currentInputValue, currentLabelValue, editable, projectUpdateName}) => {
     const [inputValue, setInputValue] = useState("");
     const [labelValue, setLabelValue] = useState("");
     const [isEditable, setIsEditable] = useState(false);
 
     // context
-    const {projectEditable, setProjectEditable} = useContext(AdminDashboardContext);
+    const {projectEditable, setProjectEditable, updateProjectData, setUpdateProjectData} = useContext(AdminDashboardContext);
 
     useEffect(() => {
         setLabelValue(currentLabelValue);
@@ -24,6 +24,10 @@ const AdminTextInput = ({ currentInputValue, currentLabelValue, editable}) => {
 
     const handleChange = (e) => {
         setInputValue(e.target.value);
+        setUpdateProjectData(prevState => ({
+            ...prevState,
+             [projectUpdateName] : currentInputValue
+        }))
     }
 
     return (
