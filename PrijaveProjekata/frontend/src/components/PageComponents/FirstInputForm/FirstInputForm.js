@@ -71,6 +71,10 @@ const FirstInputForm = () => {
         console.log("Post successful:", responseData);
 
         window.alert("Post successful");
+
+        // clearing session storage and refreshing browser
+        sessionStorage.clear();
+        window.location.reload();
       } else {
         // handle potentional non-JSON response
         const errorData = await response.json().catch(() => null);

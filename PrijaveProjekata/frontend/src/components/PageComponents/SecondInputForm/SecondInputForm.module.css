@@ -24,3 +24,23 @@
     color: #A4A4A4;
     align-self: center;
 }
+
+.NameSurnameLabel {
+    align-self: flex-start;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #B0355E;
+}
+
+.NameSurnameData {
+    border: none;
+    margin-top: 8px;
+    color:#424242;
+    text-decoration-color: #424242;
+    background-color: rgba(142, 142, 142, 0.296);
+    padding: 3px 10px 3px 10px;
+    border-radius: 5px;
+}
+
+.NameSurnameContainer {
+}
