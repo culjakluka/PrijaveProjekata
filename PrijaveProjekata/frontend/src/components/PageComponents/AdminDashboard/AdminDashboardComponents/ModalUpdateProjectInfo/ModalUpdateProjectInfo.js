@@ -12,11 +12,15 @@ import Style from './ModalUpdateProjectInfo.module.css'
 // context
 import { AdminDashboardContext } from "../../../../../context/AdminDashboardContext";
 
+// api
+import { adminUpdateProjectInfoSet } from '../../ApiRequests.js'
+
 const ModalUpdateProjectInfo = () => {
 
-    const {modalUpdateProjectInfoIsOpen, setModalUpdateProjectInfoIsOpen, handleEditable, updateProjectData, setUpdateProjectData} = useContext(AdminDashboardContext)
+    const {modalUpdateProjectInfoIsOpen, setModalUpdateProjectInfoIsOpen, handleEditable, updateProjectData, setUpdateProjectData, selectedProject} = useContext(AdminDashboardContext)
 
     const handleYesButton = () => {
+        adminUpdateProjectInfoSet(selectedProject._id, updateProjectData);
         handleEditable();
         setModalUpdateProjectInfoIsOpen(false);
         setUpdateProjectData({})
@@ -29,6 +33,7 @@ const ModalUpdateProjectInfo = () => {
     const closeModal = () => {
         setModalUpdateProjectInfoIsOpen(false);
     }
+
 
     return (  
         <div className={Style.ModalContainerOverlay}>

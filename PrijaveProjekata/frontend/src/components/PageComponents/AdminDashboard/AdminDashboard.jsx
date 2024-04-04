@@ -232,6 +232,7 @@ const AdminDashboard = () => {
           setModalUpdateProjectInfoIsOpen,
           updateProjectData,
           setUpdateProjectData,
+          selectedProject,
         }}
       >
         <div className="admin-dashboard-container">

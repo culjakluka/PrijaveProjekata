@@ -24,11 +24,14 @@ const AdminTextInput = ({ currentInputValue, currentLabelValue, editable, projec
 
     const handleChange = (e) => {
         setInputValue(e.target.value);
+
         setUpdateProjectData(prevState => ({
             ...prevState,
-             [projectUpdateName] : currentInputValue
+             [projectUpdateName] : e.target.value
         }))
     }
+
+
 
     return (
         <div className="admin-text-input-container">

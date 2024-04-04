@@ -8,7 +8,7 @@ const approveFirstFormSubmit = async (projectId) => {
       {
         method: "PATCH",
       }
-    );
+    );  
 
     // Parse the JSON response
     const responseData = await response.json();
