@@ -67,14 +67,13 @@ const AdminDashboard = () => {
   const [modalSettingsIsOpen, setModalSettingsIsOpen] = useState(false);
 
   // modal - update project info
-  const [modalUpdateProjectInfoIsOpen, setModalUpdateProjectInfoIsOpen] = useState(false);
+  const [modalUpdateProjectInfoIsOpen, setModalUpdateProjectInfoIsOpen] =
+    useState(false);
 
   // project editable
   const [projectEditable, setProjectEditable] = useState(false);
 
-  
   const [updateProjectData, setUpdateProjectData] = useState({});
-
 
   const [selectedProjectId, setSelectedProjectId] = useState("");
 
@@ -208,8 +207,6 @@ const AdminDashboard = () => {
     setIntentionSelection(false);
   };
 
-  
-
   // TESTING START //
 
   const [projectId, setProjectId] = useState("");
@@ -217,7 +214,6 @@ const AdminDashboard = () => {
   const handleProjectId = (event) => {
     setProjectId(event.target.value);
   };
-
 
   return (
     <>
@@ -232,17 +228,17 @@ const AdminDashboard = () => {
           intentionSelection,
           approvalSelection,
           handleEditable,
-          modalUpdateProjectInfoIsOpen, 
+          modalUpdateProjectInfoIsOpen,
           setModalUpdateProjectInfoIsOpen,
           updateProjectData,
-          setUpdateProjectData
+          setUpdateProjectData,
         }}
       >
         <div className="admin-dashboard-container">
           {/* MODAL COMPONENTS */}
           {modalSettingsIsOpen && <ModalSettings />}
 
-          {modalUpdateProjectInfoIsOpen && <ModalUpdateProjectInfo/>}
+          {modalUpdateProjectInfoIsOpen && <ModalUpdateProjectInfo />}
 
           <AdminDashboardHeader />
 
@@ -322,7 +318,15 @@ const AdminDashboard = () => {
               >
                 SUBMIT SECOND
               </button>
-              <div style={{ marginTop: "100px" , marginLeft: "100px", marginLeft: "100px"}}>UPDATE PROJECT DATA:{JSON.stringify(updateProjectData)}</div>
+              <div
+                style={{
+                  marginTop: "100px",
+                  marginLeft: "100px",
+                  marginLeft: "100px",
+                }}
+              >
+                UPDATE PROJECT DATA:{JSON.stringify(updateProjectData)}
+              </div>
 
               {/* // TESTING END // */}
             </div>
@@ -339,7 +343,7 @@ const AdminDashboard = () => {
                       : "pending-button-hidden"
                   }
                 >
-                  PENDING (
+                  U TIJEKU (
                   {intentionSelection
                     ? pendingIntentionFormList?.length
                     : pendingApprovalFormList?.length}
@@ -353,7 +357,7 @@ const AdminDashboard = () => {
                       : "approved-button-hidden"
                   }
                 >
-                  APPROVED (
+                  ODOBRENO (
                   {intentionSelection
                     ? approvedIntentionFormList?.length
                     : approvedApprovalFormList?.length}
@@ -367,7 +371,7 @@ const AdminDashboard = () => {
                       : "declined-button-hidden"
                   }
                 >
-                  DECLINED (
+                  ODBIJENO (
                   {intentionSelection
                     ? declinedIntentionFormList?.length
                     : declinedApprovalFormList?.length}
@@ -425,7 +429,11 @@ const AdminDashboard = () => {
                   <div className="manage-project-container">
                     <div
                       className="edit-button-container manage-button-style"
-                      onClick={!projectEditable ?  () => setProjectEditable(true) : () => setModalUpdateProjectInfoIsOpen(true)}
+                      onClick={
+                        !projectEditable
+                          ? () => setProjectEditable(true)
+                          : () => setModalUpdateProjectInfoIsOpen(true)
+                      }
                     >
                       <FontAwesomeIcon
                         icon={faPencilAlt}
@@ -448,7 +456,7 @@ const AdminDashboard = () => {
                           }
                           className="approve-button"
                         >
-                          APPROVE
+                          ODOBRI
                         </button>
                       </div>
 
@@ -457,7 +465,7 @@ const AdminDashboard = () => {
                           onClick={() => rejectProject(selectedProject._id)}
                           className="decline-button"
                         >
-                          DECLINE
+                          ODBIJ
                         </button>
                       </div>
                     </div>

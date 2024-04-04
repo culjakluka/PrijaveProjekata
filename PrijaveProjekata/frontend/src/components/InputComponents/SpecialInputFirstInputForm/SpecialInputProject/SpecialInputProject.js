@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import Style from '../SpecialInputFirstInputForm.module.css'; // Replace with the correct path
+import React, { useEffect, useState } from "react";
+import Style from "../SpecialInputFirstInputForm.module.css"; // Replace with the correct path
 
 const SpecialInputProject = ({ addNewProjectProp }) => {
-  const [otherProjectName, setOtherProjectName] = useState('');
-  const [otherProjectPercentage, setOtherProjectPercentage] = useState('');
+  const [otherProjectName, setOtherProjectName] = useState("");
+  const [otherProjectPercentage, setOtherProjectPercentage] = useState("");
   const [project, setProject] = useState({});
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const SpecialInputProject = ({ addNewProjectProp }) => {
         onChange={(e) => setOtherProjectPercentage(e.target.value)}
       />
       <button className={Style.SpecialInputAddProject} onClick={addNewProject}>
-        ADD PROJECT
+        DODAJ PROJEKT
       </button>
     </div>
   );

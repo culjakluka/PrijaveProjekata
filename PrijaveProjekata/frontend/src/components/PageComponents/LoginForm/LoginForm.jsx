@@ -1,49 +1,50 @@
 import React from "react";
-import styles from './LoginForm.css'
-import { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import styles from "./LoginForm.css";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { useLogin } from "../../../hooks/useLogin";
 
 const LoginForm = () => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const {login, error, isLoading} = useLogin()
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { login, error, isLoading } = useLogin();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-    
-        await login(username, password)
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    return (
-        <div className={styles.loginScreenContainer}>
-            <h1>Log in</h1>
-            <form className={styles.loginForm} onSubmit={handleSubmit} >
-                <label htmlFor="username">Username</label>
-                <input 
-                    type="text"
-                    placeholder="Username"
-                    name="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                    >
-                </input>
+    await login(username, password);
+  };
 
-                <label htmlFor="password">Password</label>
-                <input 
-                    type="password" 
-                    placeholder="Password" 
-                    name="password" 
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    >
-                </input>
-                <button disabled={isLoading} type="submit" className={styles.button}> Login </button>
-                {error && <div className="error">{error}</div>}
-            </form>
-        </div>
-    );
-}
+  return (
+    <div className={styles.loginScreenContainer}>
+      <h1>Prijava</h1>
+      <form className={styles.loginForm} onSubmit={handleSubmit}>
+        <label htmlFor="username">Korisničko ime</label>
+        <input
+          type="text"
+          placeholder="Username"
+          name="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        ></input>
 
-export default LoginForm
+        <label htmlFor="password">Lozinka</label>
+        <input
+          type="password"
+          placeholder="Password"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        ></input>
+        <button disabled={isLoading} type="submit" className={styles.button}>
+          {" "}
+          Login{" "}
+        </button>
+        {error && <div className="error">{error}</div>}
+      </form>
+    </div>
+  );
+};
+
+export default LoginForm;
