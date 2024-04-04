@@ -1,26 +1,47 @@
 import React from "react";
-import "./ProjectInfoButtonContainer.css"
+import "./ProjectInfoButtonContainer.css";
 import { useState, useEffect } from "react";
 import ProjectInfoButton from "../ProjectInfoButton/ProjectInfoButton";
 
-// 
-const ProjectInfoContainer = ({projectInfoSets, selectProject}) => {
+//
+const ProjectInfoContainer = ({ projectInfoSets, selectProject }) => {
+  const [projectInfos, setProjectInfos] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
-    const [projectInfos, setProjectInfos] = useState([]);
+  const filteredProjectInfoSets = projectInfoSets?.filter(
+    (component) =>
+      component.nameSurname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      component.projectTitle.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
-    useEffect(() => {
-        setProjectInfos(projectInfoSets)    
-    }, [projectInfoSets])
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
-    return (
-        <>
-            {projectInfos?.map((projectInfo) => (
-                <div className="project-info-button-container">
-                    <ProjectInfoButton key={projectInfo._id} projectInfo={projectInfo} selectProject={selectProject} />
-                </div>
-            ))}
-        </>
-    )
-}
+  useEffect(() => {
+    setProjectInfos(projectInfoSets);
+  }, [projectInfoSets]);
 
-export default ProjectInfoContainer
+  return (
+    <>
+      <input
+        className="search"
+        type="text"
+        value={searchQuery}
+        onChange={handleSearchChange}
+        placeholder="Pretraga..."
+      />
+      {filteredProjectInfoSets?.map((projectInfo) => (
+        <div className="project-info-button-container">
+          <ProjectInfoButton
+            key={projectInfo._id}
+            projectInfo={projectInfo}
+            selectProject={selectProject}
+          />
+        </div>
+      ))}
+    </>
+  );
+};
+
+export default ProjectInfoContainer;

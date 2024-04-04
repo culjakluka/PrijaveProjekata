@@ -370,6 +370,11 @@ const ProjectInfo = ({ selectedProject }) => {
             <AdminQuestion questionText={questions[18]} />
             {/* Special case, might not have a direct mapping or requires a component to list team members */}
             <div>{JSON.stringify(selectedProject.projectTeam)}</div>
+            <AdminTextInput
+              currentLabelValue={"POTREBNA DOKUMENTACIJA"}
+              currentInputValue={selectedProject.requiredDocumentationFESB}
+              projectUpdateName={"newEmploymentBoolean"}
+            />
           </>
         )}
       </div>

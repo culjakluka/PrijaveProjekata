@@ -4,3 +4,11 @@
     margin: 10px 50px 10px 50px;
     background-color: #E3E3E3;
 }
+
+.search{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-self: center;
+    margin: 10px 50px 10px 50px;
+}
