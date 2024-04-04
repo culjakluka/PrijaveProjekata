@@ -46,7 +46,7 @@ const SpecialInputMember = ({ addProjectMember }) => {
           onChange={(e) => setNewItemPercentage(e.target.value)}
         />
         
-        <hr className={Style.SpecialSeparatorLine}></hr>
+        
         <SpecialInputProjectContainer addNewProjectProp={addNewProject} />
 
         {/* LISTA OSTALIH PROJEKATA */}

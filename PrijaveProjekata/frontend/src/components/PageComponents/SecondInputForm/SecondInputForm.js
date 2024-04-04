@@ -311,7 +311,10 @@ const SecondInputForm = ( docId ) => {
 
 
                 <Question questionText={questions[0]}/>
-                    <TextInput label={"IME I PREZIME*"} name={"name_and_surname_2"} setSpecificState={setNameSurname} initialValue={nameSurname}/>
+                     <div className={Style.NameSurnameContainer}>
+                        <label className={Style.NameSurnameLabel}>IME I PREZIME*</label>
+                        <p className={Style.NameSurnameData}>{nameSurname}</p>
+                     </div>
                     <TextInput label={"TITULA*"} name={"vocation_2"} setSpecificState={setVocation} initialValue={vocation}/>
                     <TextInput label={"ZAVOD (ODSJEK)"} name={"department_2"} setSpecificState={setDepartment} initialValue={department}/>
                     <TextInput label={"E-MAIL*"} name={"email_2"} setSpecificState={setEmail} initialValue={email}/>
