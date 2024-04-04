@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import SpecialInputMemberContainer from "./SpecialInputMemberContainer/SpecialInputMemberContainer.js";
-import Style from './SpecialInputSecondInputForm.module.css';
+import Style from "./SpecialInputSecondInputForm.module.css";
 import CompletedMember from "../CompletedMember/CompletedMember.js";
-import { SpecialInputContext } from './SpecialInputContext.js';
-import { SecondInputFormDataConext } from '../../../context/SecondInputFormDataContext.js';
+import { SpecialInputContext } from "./SpecialInputContext.js";
+import { SecondInputFormDataConext } from "../../../context/SecondInputFormDataContext.js";
 
 const SpecialInputSecondInputForm = ({ name, pitanje }) => {
   // projectMembers contains members that consist of this fields named: - newItemNameSurname
@@ -17,7 +17,7 @@ const SpecialInputSecondInputForm = ({ name, pitanje }) => {
   const [projectMembers, setProjectMembers] = useState([]);
   const [addMemberFormIsActive, setAddMemberFormIsActive] = useState(false);
 
-  // when component mounts 
+  // when component mounts
   useEffect(() => {
     const sessionStorageProjectMembers = sessionStorage.getItem(name);
 
@@ -26,7 +26,6 @@ const SpecialInputSecondInputForm = ({ name, pitanje }) => {
       const serializedState = JSON.parse(sessionStorageProjectMembers);
       setProjectTeam(serializedState);
     }
-
   }, []);
 
   // add new member
@@ -42,7 +41,7 @@ const SpecialInputSecondInputForm = ({ name, pitanje }) => {
       // Return the new state
       return updatedMembers;
     });
-  }
+  };
 
   // delete member
   const deleteMember = (memberId) => {
@@ -55,31 +54,47 @@ const SpecialInputSecondInputForm = ({ name, pitanje }) => {
   };
 
   function manageInputForm() {
-    setAddMemberFormIsActive(!addMemberFormIsActive)
-    sessionStorage.setItem("member_form_is_active", addMemberFormIsActive)
+    setAddMemberFormIsActive(!addMemberFormIsActive);
+    sessionStorage.setItem("member_form_is_active", addMemberFormIsActive);
   }
 
   return (
     <SpecialInputContext.Provider value={{ projectMembers, setProjectMembers }}>
       <div className={Style.specialInputContainer}>
         <p className={Style.question}>{pitanje}</p>
-        <p>All members:</p>
+        <p>Svi članovi:</p>
         <div id={Style.addedProjectMember}>
           <div id={Style.specialInputCompletedMembers}>
             {/* GENERATING COMPLETED PROJECT MEMBERS */}
-            {projectTeam.length > 0 ? projectTeam.map((member, index) => (
-              <CompletedMember key={index} memberId={index} fullName={member.nameSurname} email={member.email} percent={member.thisProjectPercentage} projectsArray={member.otherProjects} deleteSingleMember={deleteMember} />
-            )) : <p>you didn't add any members...</p>}
+            {projectTeam.length > 0 ? (
+              projectTeam.map((member, index) => (
+                <CompletedMember
+                  key={index}
+                  memberId={index}
+                  fullName={member.nameSurname}
+                  email={member.email}
+                  percent={member.thisProjectPercentage}
+                  projectsArray={member.otherProjects}
+                  deleteSingleMember={deleteMember}
+                />
+              ))
+            ) : (
+              <p>niste dodali niti jednog člana...</p>
+            )}
           </div>
         </div>
 
         {/* INPUT FORM FOR NEW MEMBER */}
-        {addMemberFormIsActive ? <SpecialInputMemberContainer addProjectMember={addNewMember} /> : null}
+        {addMemberFormIsActive ? (
+          <SpecialInputMemberContainer addProjectMember={addNewMember} />
+        ) : null}
 
-        <button onClick={manageInputForm} id={Style.specialInputPlus}>{addMemberFormIsActive ? "-" : "ADD NEW MEMBER"}</button>
+        <button onClick={manageInputForm} id={Style.specialInputPlus}>
+          {addMemberFormIsActive ? "-" : "DODAJ NOVOG ČLANA"}
+        </button>
       </div>
     </SpecialInputContext.Provider>
   );
-}
+};
 
 export default SpecialInputSecondInputForm;
