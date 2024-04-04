@@ -62,11 +62,22 @@ const SpecialInputFirstInputForm = ({ name, pitanje }) => {
 
   return (
     <SpecialInputContext.Provider value={{ projectMembers, setProjectMembers }}>
-      <div className={Style.SpecialInputContainers}>
+      <div className={Style.SpecialInputContainer}>
         <p className="question">{pitanje}</p>
+
+        {/* INPUT FORM FOR NEW MEMBER */}
+        {addMemberFormIsActive ? (
+          <SpecialInputMemberContainer addProjectMember={addNewMember} />
+        ) : null}
+
+        <button onClick={manageInputForm} id="special-input-plus">
+          {addMemberFormIsActive ? "-" : "DODAJ NOVOG ČLANA"}
+        </button>
+      </div>
+
+      {/* ALL MEMBERS */}
         <p>Svi članovi:</p>
-        <div id="added-project-member">
-          <div id="special-input-completed-members">
+          <div className={Style.SpecialInputCompletedMembers}>
             {/* GENERATING COMPLETED PROJECT MEMBERS */}
             {projectTeam.length > 0 ? (
               projectTeam.map((member, index) => (
@@ -84,17 +95,6 @@ const SpecialInputFirstInputForm = ({ name, pitanje }) => {
               <p>niste dodali niti jednog člana...</p>
             )}
           </div>
-        </div>
-
-        {/* INPUT FORM FOR NEW MEMBER */}
-        {addMemberFormIsActive ? (
-          <SpecialInputMemberContainer addProjectMember={addNewMember} />
-        ) : null}
-
-        <button onClick={manageInputForm} id="special-input-plus">
-          {addMemberFormIsActive ? "-" : "DODAJ NOVOG ČLANA"}
-        </button>
-      </div>
     </SpecialInputContext.Provider>
   );
 };

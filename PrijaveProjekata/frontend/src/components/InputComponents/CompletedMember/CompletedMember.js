@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Style from "../SpecialInput/SpecialInputSecondInputForm.module.css";
+import Style from "../SpecialInputFirstInputForm/SpecialInputFirstInputForm.module.css";
 import { SpecialInputContext } from "../SpecialInput/SpecialInputContext";
 import CompletedProject from "../../InputComponents/CompletedProject/CompletedProject";
 
@@ -33,10 +33,11 @@ const CompletedMember = ({
 
   return (
     <div id={Style.CompletedMemberContainer}>
-      <div id={Style.CompletedMemberData}>
+      <div id={Style.CompletedMemberPersonalDetails}>
         <span className={Style.CompletedMemberData}>{nameSurname}</span>
         <span className={Style.CompletedMemberData}>{eMail}</span>
         <span className={Style.CompletedMemberData}>{percentage}</span>
+        <button className={Style.DeleteMember} onClick={handleDeleteMember}>X</button>
       </div>
       <div id={Style.completedMemberProjects}>
         {projects.length > 0 ? (
@@ -54,7 +55,7 @@ const CompletedMember = ({
         )}
       </div>
 
-      <button onClick={handleDeleteMember}>izbriši člana</button>
+      
     </div>
   );
 };

@@ -45,6 +45,11 @@ const SpecialInputMember = ({ addProjectMember }) => {
           placeholder="postotak..."
           onChange={(e) => setNewItemPercentage(e.target.value)}
         />
+        
+        <hr className={Style.SpecialSeparatorLine}></hr>
+        <SpecialInputProjectContainer addNewProjectProp={addNewProject} />
+
+        {/* LISTA OSTALIH PROJEKATA */}
         <p className={Style.SpecialInputMemberProjectsTitle}>
           OSTALI PROJEKTI:
         </p>
@@ -61,8 +66,7 @@ const SpecialInputMember = ({ addProjectMember }) => {
             <p>niste dodali niti jedan projekt ovom članu...</p>
           )}
         </div>
-        <hr className={Style.SpecialSeparatorLine}></hr>
-        <SpecialInputProjectContainer addNewProjectProp={addNewProject} />
+
         <button className={Style.SpecialInputAddMember} onClick={addNewMember}>
           DODAJ ČLANA
         </button>
