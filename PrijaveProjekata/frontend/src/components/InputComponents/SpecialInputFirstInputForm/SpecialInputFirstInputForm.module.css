@@ -27,14 +27,18 @@
     flex-direction: column;
 }
 
+.SpecialInputCompletedMembers {
+    width: 100%;
+}
+
 #CompletedMemberContainer {
     display: flex;
     flex-direction: column;
+    width: 100%;
     border: solid 2px #a4a4a4;
     padding: 2px;
     margin: 2px;
     border-radius: 5px;
-    background-color: #639ef2;
 }
 
 #CompletedMemberPersonalDetails {
@@ -43,10 +47,24 @@
 }
 
 .CompletedMemberData {
+    flex: 1;
+    align-self: center;
     /* margin: top right bottom left */
     margin: 5px 10px 5px 0px;
     /* padding: top right bottom left */
     padding: 5px 5px 5px 0px;
+}
+
+.DeleteMember {
+    flex: 1;
+    align-self: flex-end;
+    /* margin: top right bottom left */
+    margin: 5px 10px 5px 0px;
+    /* padding: top right bottom left */
+    padding: 5px 5px 5px 0px;
+    outline: none;
+    border: none;
+    background: none;
 }
 
 .CompletedMemberProject {
@@ -83,7 +101,7 @@
     margin-left: 5px;
 }
 
-#SpecialInputMemberInfo {
+.SpecialInputMemberInfo {
     display: flex;
     flex-direction: column;
     border: solid #A4A4A4 2px;

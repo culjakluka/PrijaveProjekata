@@ -141,7 +141,7 @@ const ModalSettings = ({}) => {
             <div className={Style.ModalContainerOverlay}>
                 <div className={Style.Modal}>
                     <div className={Style.ModalTopBar}>
-                        <FontAwesomeIcon onClick={() => closeModal()} icon={faXmark} size='1x'/>
+                        <button><FontAwesomeIcon onClick={() => closeModal()} icon={faXmark} size='1x'/></button>
                     </div>
 
                     <h2 className="title-font">Postavke</h2>
