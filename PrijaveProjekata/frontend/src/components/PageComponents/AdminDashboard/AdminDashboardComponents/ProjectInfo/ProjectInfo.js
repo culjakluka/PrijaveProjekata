@@ -373,7 +373,7 @@ const ProjectInfo = ({ selectedProject }) => {
             <AdminTextInput
               currentLabelValue={"POTREBNA DOKUMENTACIJA"}
               currentInputValue={selectedProject.requiredDocumentationFESB}
-              projectUpdateName={"newEmploymentBoolean"}
+              projectUpdateName={"requiredDocumentationFESB"}
             />
           </>
         )}
