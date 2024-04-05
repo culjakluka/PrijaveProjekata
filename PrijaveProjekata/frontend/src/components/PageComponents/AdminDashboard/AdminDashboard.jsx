@@ -420,11 +420,10 @@ const AdminDashboard = () => {
                 />
               )}
 
-              <div>{JSON.stringify(selectedProject)}</div>
             </div>
 
             {/* THIRD SECTION */}
-
+                    
             {/* if selectedProject exists => show selected project's info */}
             <div className="single-application-container">
               {selectedProject != null &&
