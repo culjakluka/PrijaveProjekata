@@ -419,6 +419,8 @@ const AdminDashboard = () => {
                   selectProject={setSelectedApprovalFormId}
                 />
               )}
+
+              <div>{JSON.stringify(selectedProject)}</div>
             </div>
 
             {/* THIRD SECTION */}

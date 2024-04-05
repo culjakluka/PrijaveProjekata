@@ -51,12 +51,11 @@ const CalendarInput = ({name, label, setSpecificState, initialValue}) => {
             
             console.log("Formatted initial value: ",initialValue.split("T")[0])
 
-            setInputValue(initialValue.split("T")[0]);
-            
-            // callback that updates state in parent component
-            setSpecificState(initialValue.split("T")[0]);
-
-            sessionStorage.setItem(name, initialValue.split("T")[0]);
+            const [year, month, day] = initialValue.split("-"); // Split the ISO date
+            const formattedInitialValue = `${day}/${month}/${year}`; // Reformat to dd/mm/yyyy
+            setInputValue(formattedInitialValue);
+            setSpecificState(formattedInitialValue);
+            sessionStorage.setItem(name, formattedInitialValue);
         }
 
     }, [initialValue])
@@ -75,6 +74,7 @@ const CalendarInput = ({name, label, setSpecificState, initialValue}) => {
             <label>{label}</label>
             <input 
             type="date"
+            
             id={name}
             value={inputValue}
             onChange={handleInputChange}
