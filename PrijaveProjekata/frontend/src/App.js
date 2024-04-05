@@ -52,8 +52,8 @@ function App() {
               path="/Test"
               element={
                 <PdfDownload
-                  filename="ELE - Formule 1_2013.pdf"
-                  filepath="a5d15a68e0ec90b41ce5fafa9bc750c6"
+                  filename="Statistika teorija - 1 kolokvij.pdf"
+                  filepath="Statistika teorija - 1 kolokvij.pdf"
                 />
               }
             />

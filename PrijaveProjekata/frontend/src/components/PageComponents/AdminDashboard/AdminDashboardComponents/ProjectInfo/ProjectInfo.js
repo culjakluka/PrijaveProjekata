@@ -11,6 +11,9 @@ import { AdminDashboardContext } from "../../../../../context/AdminDashboardCont
 import AdminQuestion from "../../AdminDashboardProjectComponents/AdminQuestion/AdminQuestion.js";
 import AdminTextInput from "../../AdminDashboardProjectComponents/AdminTextInput/AdminTextInput.js";
 import SpecialInputSecondInputForm from "../../../../InputComponents/SpecialInput/SpecialInputSecondInputForm.js";
+import PdfDownload from "../../../../test/PdfDownload.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
 
 const ProjectInfo = ({ selectedProject }) => {
   const [selectedProjectData, setSelectedProjectData] = useState();
@@ -155,6 +158,23 @@ const ProjectInfo = ({ selectedProject }) => {
 
         {approvalSelection && (
           <>
+            <div className="pdfContainer">
+              {Array.isArray(selectedProject?.pdfDocuments) &&
+                selectedProject.pdfDocuments.map((pdf) => (
+                  <div className="pdfDivInside" key={pdf._id}>
+                    <FontAwesomeIcon
+                      className="pdfIcon"
+                      icon={faFilePdf}
+                      size="2xl"
+                    />
+                    <PdfDownload
+                      filename={pdf.filename}
+                      filepath={pdf.filepath}
+                      className="pdfDownloadLink"
+                    />
+                  </div>
+                ))}
+            </div>
             <AdminQuestion questionText={questions[0]} />
             <AdminTextInput
               currentLabelValue={"IME I PREZIME"}
