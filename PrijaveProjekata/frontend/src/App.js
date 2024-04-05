@@ -17,6 +17,7 @@ import SecondInputPage from "./pages/SecondInputPage/SecondInputPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage/AdminDashboardPage";
 import PdfAttach from "./components/PageComponents/PdfAttach/PdfAttach";
 import PdfDownload from "./components/test/PdfDownload";
+import ParlovTestPage from "./pages/ParlovTestPage/ParlovTestPage"
 
 function SecondInputWrapper() {
   const { id } = useParams();
@@ -48,6 +49,8 @@ function App() {
             <Route path="/SecondInput/:id" element={<SecondInputWrapper />} />
             <Route path="/PdfAttachTest" element={<PdfAttach />} />
             <Route path="/AdminDashboard" element={<AdminDashboardPage />} />
+
+            <Route path="/parlov-test" element={<ParlovTestPage/>} />
             <Route
               path="/Test"
               element={

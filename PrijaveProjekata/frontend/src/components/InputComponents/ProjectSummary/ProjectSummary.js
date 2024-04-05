@@ -1,6 +1,5 @@
     import React, {useState, useEffect} from 'react'
     import Style from './ProjectSummary.module.css'
-import { ca } from 'date-fns/locale';
 
     const ProjectSummary = ({name, initialValue, length, setSpecificState}) => {
 
@@ -12,6 +11,8 @@ import { ca } from 'date-fns/locale';
             const newValue = event.target.value
             setProjectSummary(newValue);
             setSpecificState(newValue);
+
+            setMaxlength((200 + (newValue.length - newValue.replace(/[\s\n]/g, '').length)));
 
             try{
                 sessionStorage.setItem(name, newValue)
@@ -62,7 +63,13 @@ import { ca } from 'date-fns/locale';
 
         return (  
             <div className={Style.ProjectSummaryContainer}>
-                <textarea className={Style.ProjectSummaryInput} maxLength={maxLength} type="text" onChange={handleInput} value={projectSummary} placeholder="opis projekta..." ></textarea>
+                <textarea 
+                className={Style.ProjectSummaryInput} 
+                maxLength={maxLength} type="text" 
+                onChange={handleInput} 
+                value={projectSummary} 
+                placeholder="opis projekta..." />
+                <p style={{alignSelf : "flex-end", marginRight:"10px"}}>{projectSummary.replace(/[\s\n]/g, '').length}</p>
             </div>
         );
     }
