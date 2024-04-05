@@ -4,9 +4,9 @@ import styles from "./PdfDownload.module.css";
 const PdfDownload = ({ filename, filepath }) => {
   const handleDownload = async () => {
     try {
-      console.log(filename);
+      console.log("filename: " + filename);
       console.log(filepath);
-      const response = await fetch(`/api/pdf/downloadPdf/${filepath}`);
+      const response = await fetch(`/api/pdf/downloadPdf/${filename}`);
       const blob = await response.blob();
 
       const link = document.createElement("a");
@@ -18,9 +18,11 @@ const PdfDownload = ({ filename, filepath }) => {
     }
   };
   return (
-    <div classname={styles.pdfDownloadContainer}>
-      <h1>PDF Download</h1>
-      <button onClick={handleDownload}>Download PDF</button>
+    <div className={styles.pdfDownloadContainer}>
+      <p>{filename}</p>
+      <button className={styles.downloadButton} onClick={handleDownload}>
+        Preuzmi
+      </button>
     </div>
   );
 };

@@ -11,7 +11,10 @@ const ProjectInfoContainer = ({ projectInfoSets, selectProject }) => {
   const filteredProjectInfoSets = projectInfoSets?.filter(
     (component) =>
       component.nameSurname.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      component.projectTitle.toLowerCase().includes(searchQuery.toLowerCase())
+      component.projectTitle
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
+      component.projectAcronym.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleSearchChange = (e) => {

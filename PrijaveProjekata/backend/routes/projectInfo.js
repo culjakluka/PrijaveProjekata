@@ -20,7 +20,15 @@ const {
 const router = express.Router();
 
 //  multer storage
-const upload = multer({ dest: "uploads/" });
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
 
 // GET ProjectInfo sets
 router.get("/", getProjectInfoSets);

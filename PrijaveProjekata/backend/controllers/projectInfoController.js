@@ -264,10 +264,10 @@ const adminUpdateProjectInfoSet = async (req, res) => {
   try {
     const updatedData = {};
     let updatedFields = [];
-    Object.keys(req.body).forEach(key => {
+    Object.keys(req.body).forEach((key) => {
       updatedFields.push(key);
       updatedData[key] = req.body[key];
-    })
+    });
     if (updatedFields.length === 0) {
       return res.status(400).json({ error: "No fields to update." });
     }
