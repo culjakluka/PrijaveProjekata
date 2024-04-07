@@ -10,6 +10,9 @@ import { useEffect, useState } from "react";
 // bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 
+
+
+
 // pages & components
 import Home from "./pages/Home";
 import FirstInputPage from "./pages/FirstInputPage/FirstInputPage";
@@ -27,6 +30,7 @@ function SecondInputWrapper() {
 function App() {
   const user = useAuthContext();
   const [loggedIn, setLoggedIn] = useState(null);
+
 
   useEffect(() => {
     const loggedUser = localStorage.getItem("user");

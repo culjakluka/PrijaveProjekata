@@ -13,8 +13,10 @@ import ProjectInfo from "./AdminDashboardComponents/ProjectInfo/ProjectInfo";
 import ProjectInfoButtonContainer from "./AdminDashboardComponents/ProjectInfoButtonContainer/ProjectInfoButtonContainer";
 
 // external components
+
+// FontAwesome 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { faPencilAlt, faFilePdf, faDownload } from "@fortawesome/free-solid-svg-icons";
 
 // api requests
 import {
@@ -26,6 +28,11 @@ import {
   deleteProject,
   adminUpdateProjectInfoSet,
 } from "./ApiRequests.js";
+
+// pdf components
+import FirstInputFormPDF from "../../InputComponents/PDF/FirstInputFormPDF.js";
+import { pdf } from "@react-pdf/renderer";
+import { firstInputFormData } from '../../InputComponents/PDF/data.js'
 
 const AdminDashboard = () => {
   const [projectSets, setProjectSets] = useState(null);
@@ -77,6 +84,8 @@ const AdminDashboard = () => {
 
   const [selectedProjectId, setSelectedProjectId] = useState("");
 
+  // data used to generate PDF out of selected project
+  const [formattedData, setFormattedData] = useState(firstInputFormData);
   // USE EFFECT
 
   // after component is mounted
@@ -171,6 +180,36 @@ const AdminDashboard = () => {
     );
   }, [approvalForms]);
 
+  // when selectedProject changes,
+  // fill project's data into formattedData
+  // which will be used to generate PDF
+  useEffect(() => { 
+    console.log(selectedProject);
+
+    formattedData[0].elements[0].value = JSON.stringify(selectedProject?.nameSurname);
+    formattedData[0].elements[1].value = JSON.stringify(selectedProject?.vocation);
+    formattedData[0].elements[2].value = JSON.stringify(selectedProject?.department);  
+    formattedData[0].elements[3].value = JSON.stringify(selectedProject?.email);
+
+    formattedData[1].elements[0].value = JSON.stringify(selectedProject?.projectTitle);
+    formattedData[1].elements[1].value = JSON.stringify(selectedProject?.projectAcronym);
+    formattedData[1].elements[2].value = JSON.stringify(selectedProject?.applicationDeadline);
+
+    formattedData[2].elements[0].value = JSON.stringify(selectedProject?.projectSummary);
+
+    formattedData[3].elements[0].value = JSON.stringify(selectedProject?.applicationURL);
+
+    formattedData[4].elements[0].value = JSON.stringify(selectedProject?.projectApplicant);
+
+    formattedData[5].elements[0].value = JSON.stringify(selectedProject?.projectPartners);
+
+    formattedData[6].elements[0].value = JSON.stringify(selectedProject?.totalValue);
+    formattedData[6].elements[1].value = JSON.stringify(selectedProject?.fesbValuePart);
+
+    formattedData[7].elements[0].value = JSON.stringify(selectedProject?.newEmploymentBoolean);
+
+  }, [selectedProject]);
+
   // FUNCTIONS
 
   const handleEditable = () => {
@@ -206,6 +245,31 @@ const AdminDashboard = () => {
     setApprovalSelection(true);
     setIntentionSelection(false);
   };
+
+  // handling PDF
+
+  // handle pdf new tab
+  const handlePDF = (projectData) => {
+    // Generate the document
+    const doc = <FirstInputFormPDF data={projectData} />;
+  
+    // Create a PDF blob
+    pdf(doc).toBlob().then(blob => {
+      // Create a Blob URL
+      const url = URL.createObjectURL(blob);
+  
+      // Open the PDF in a new tab
+      // _blank means it will open in a new tab
+      window.open(url, '_blank');
+  
+      // Optional: Release the Blob URL to free up resources
+      URL.revokeObjectURL(url);
+    }).catch(err => {
+      console.error(err);
+    });
+
+  }
+
 
   // TESTING START //
 
@@ -473,8 +537,21 @@ const AdminDashboard = () => {
                     </div>
                   </div>
                 )}
+              
+
               {selectedProject && (
+                <>
+                {/* PDF SECTION */}
+                <div class="project-to-pdf-container">
+                  <p>Dohvati projekt u obliku pdf dokumenta:</p>
+                  <button onClick={() => handlePDF(formattedData)} class="project-to-pdf-button">
+                    <div class="project-to-pdf-txt">PREUZMI</div>
+                    <FontAwesomeIcon icon={faDownload} style={{color: "#ffffff"}}/>
+                  </button>
+                </div>
+                {/* PDF SECTION END */}
                 <ProjectInfo selectedProject={selectedProject} />
+                </>
               )}
             </div>
           </div>

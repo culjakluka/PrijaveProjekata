@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
-import { firstInputFormData } from './data.js';
 
 const styles = StyleSheet.create({
     page: {
@@ -46,13 +45,18 @@ const styles = StyleSheet.create({
     }
 });
 
-const FirstInputFormPDF = () => {
+const FirstInputFormPDF = ({data}) => {
+
+    useEffect(() => {
+        console.log(data); 
+    }, [])
+
     return (
         <Document>
             <Page size="A4" style={styles.page}>
                 <View style={styles.section}>
                     <Text style={styles.documentTitle}>NAMJERA PRIJAVE</Text>
-                    {firstInputFormData.map((element, index) => {
+                    {data.map((element, index) => {
                         return (
                             <View key={index}>
                                 <Text style={styles.question}>{element.question}</Text>
