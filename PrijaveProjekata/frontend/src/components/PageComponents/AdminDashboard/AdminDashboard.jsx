@@ -16,7 +16,7 @@ import ProjectInfoButtonContainer from "./AdminDashboardComponents/ProjectInfoBu
 
 // FontAwesome 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt, faFilePdf, faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faPencilAlt, faFilePdf, faDownload, faLock, faLockOpen } from "@fortawesome/free-solid-svg-icons";
 
 // api requests
 import {
@@ -86,6 +86,10 @@ const AdminDashboard = () => {
 
   // data used to generate PDF out of selected project
   const [formattedData, setFormattedData] = useState(firstInputFormData);
+
+  // project locked
+  const[projectLocked, setProjectLocked] = useState(true);
+
   // USE EFFECT
 
   // after component is mounted
@@ -246,6 +250,12 @@ const AdminDashboard = () => {
     setIntentionSelection(false);
   };
 
+  const manageEditing = () => {
+    setProjectEditable(true);
+    setProjectLocked(false);
+  }
+
+
   // handling PDF
 
   // handle pdf new tab
@@ -297,6 +307,8 @@ const AdminDashboard = () => {
           updateProjectData,
           setUpdateProjectData,
           selectedProject,
+          setProjectLocked,
+          projectLocked
         }}
       >
         <div className="admin-dashboard-container">
@@ -489,7 +501,13 @@ const AdminDashboard = () => {
             {/* THIRD SECTION */}
                     
             {/* if selectedProject exists => show selected project's info */}
-            <div className="single-application-container">
+            <div className={projectLocked ? "single-application-container-locked" : "single-application-container-unlocked"}>
+
+              {selectedProject != null && (
+                projectLocked ? <FontAwesomeIcon icon={faLock} style={{alignSelf : "flex-start", marginBottom : "5px"}}/>
+                : <FontAwesomeIcon icon={faLockOpen} style={{alignSelf : "flex-start", marginBottom : "5px"}}/>
+              )}
+
               {selectedProject != null &&
                 pendingSelected /*to prevent rendering if the project is not selected*/ && (
                   <div className="manage-project-container">
@@ -497,7 +515,7 @@ const AdminDashboard = () => {
                       className="edit-button-container manage-button-style"
                       onClick={
                         !projectEditable
-                          ? () => setProjectEditable(true)
+                          ? () => manageEditing()
                           : () => setModalUpdateProjectInfoIsOpen(true)
                       }
                     >
@@ -543,7 +561,7 @@ const AdminDashboard = () => {
                 <>
                 {/* PDF SECTION */}
                 <div class="project-to-pdf-container">
-                  <p>Dohvati projekt u obliku pdf dokumenta:</p>
+                  <p style={{color:"#515151", fontWeight:"bold"}}>Dohvati projekt u obliku pdf dokumenta:</p>
                   <button onClick={() => handlePDF(formattedData)} class="project-to-pdf-button">
                     <div class="project-to-pdf-txt">PREUZMI</div>
                     <FontAwesomeIcon icon={faDownload} style={{color: "#ffffff"}}/>
@@ -553,6 +571,7 @@ const AdminDashboard = () => {
                 <ProjectInfo selectedProject={selectedProject} />
                 </>
               )}
+
             </div>
           </div>
         </div>

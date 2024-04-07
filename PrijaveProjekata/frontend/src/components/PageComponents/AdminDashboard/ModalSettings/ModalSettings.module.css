@@ -85,6 +85,10 @@
     margin: 2px 5px 2px 5px;
 }
 
+.DepartmentDeleteIcon:hover {
+    background-color: #cecece;
+}
+
 .NewDepartmentContainer {
     display: flex;
 }
@@ -121,4 +125,8 @@
     background-color: #4e4e4ee3;
     color: white;   
     border: none;
+}
+
+.UpdateDeanButton:hover {
+    background-color: #cecece;
 }

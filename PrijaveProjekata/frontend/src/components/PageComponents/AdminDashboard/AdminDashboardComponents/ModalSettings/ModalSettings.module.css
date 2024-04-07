@@ -113,6 +113,10 @@
     border: none;
 }
 
+.AddNewDepartmentButton:hover {
+    background-color: #cecece;
+}   
+
 .UpdateDeanButton {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -122,4 +126,8 @@
     background-color: #4e4e4ee3;
     color: white;   
     border: none;
+}
+
+.UpdateDeanButton:hover {
+    background-color: #cecece;
 }

@@ -63,6 +63,10 @@
     border: solid #cfcfcf;
 }
 
+.pending-button-hidden:hover {
+    background-color: #ffffff;
+}   
+
 .approved-button-hidden {
     flex: 1;
     background-color: #cfcfcf;
@@ -72,6 +76,10 @@
     border: solid #cfcfcf;
 }
 
+.approved-button-hidden:hover {
+    background-color: #ffffff;
+}
+
 .declined-button-hidden {
     flex: 1;
     background-color: #cfcfcf;
@@ -79,6 +87,10 @@
     color: #9c9c9c;
     font-weight: bold;
     border: solid #cfcfcf;
+}
+
+.declined-button-hidden:hover {
+    background-color: #ffffff;
 }
 
 
@@ -114,13 +126,23 @@
 }
 
 /* third section*/
-.single-application-container {
+.single-application-container-unlocked {
     background-color: #FDF9F9;
     flex: 1;
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 10px 20px 100px 20px;
+    padding: 10px 30px 100px 30px;
+    overflow-y: auto;
+}
+
+.single-application-container-locked {
+    background-color: #edebeb;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px 30px 100px 30px;
     overflow-y: auto;
 }
 
@@ -149,6 +171,10 @@
     padding-right: 10px;
     padding-top: 3px;
     padding-bottom: 3px;
+}
+
+.manage-button-style:hover {
+    background-color: #cecece;
 }
 
 .edit-button-container {
@@ -231,6 +257,11 @@
     text-align: start;
 }
 
+.project-type-form-button:hover {
+    scale: 1.01;
+    background-color: #cecece;
+}
+
 .admin-font {
     font-size: 13px;
 }
@@ -263,6 +294,10 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 500;
     background-color: #6F6F6F;
+}
+
+.project-to-pdf-button:hover {
+    background-color: #cecece;
 }
 
 .project-to-pdf-txt {

@@ -8,6 +8,12 @@
     color: #515151;
     font-weight: bold;
     background-color: #e8e6e6;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.project-info-button:hover{
+    background-color: #cecece;
 }
 
 .project-info-button-is-selected{
@@ -20,5 +26,7 @@
     color: #4E4E4E;
     font-weight: bold;
     background-color: #4e4e4e5f;
+    width: 100%;
+    margin-top: 10px;
 }
 

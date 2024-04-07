@@ -38,7 +38,7 @@ const Department = ({departmentName, headOfDepartmentName, departmentIdNumber}) 
                 <div> - </div>
                 <div className={Style.DepartmentInfoElement}>{headOfDepartmentName}</div>
             </div>
-            <FontAwesomeIcon onClick={() => handleDeleteDepartment()} icon={faTrash} />
+            <FontAwesomeIcon className={Style.DepartmentDeleteIcon} onClick={() => handleDeleteDepartment()} icon={faTrash} />
         </div>
     );
 }

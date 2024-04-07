@@ -1,8 +1,5 @@
 .pdfDownloadContainer{
-    padding: 10px;
-    border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #f9f9f9;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,19 +7,28 @@
 
 .pdfDownloadContainer p {
     margin: 0;
+    color: #515151;
     font-weight: bold;
     margin-right: 10px;
 }
 
 .downloadButton {
-    padding: 8px 16px;
-    background-color: #ff0000;
-    color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    background-color: #6F6F6F;
+}
+
+.downloadButtonText {
+    color: #ffffff;
+    font-size: 1em;
+    margin-right: 10px;
 }
 
 .pdfDownloadContainer button:hover {
-    background-color: #0056b3;
+    background-color: #cecece;
 }
