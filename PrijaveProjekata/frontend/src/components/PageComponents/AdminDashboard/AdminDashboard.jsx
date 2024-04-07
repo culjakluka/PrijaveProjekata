@@ -52,6 +52,8 @@ const AdminDashboard = () => {
   // project is part of one of the groups -> either OBRASCI NAMJERE or TRAŽENJE SUGLASNOSTI
   const [selectedProject, setSelectedProject] = useState();
 
+  const [tempSelectedProject, setTempSelectedProject] = useState();
+
   // pending, approved buttons
   const [pendingSelected, setPendingSelected] = useState(true);
   const [approvedSelected, setApprovedSelected] = useState(false);
@@ -250,9 +252,20 @@ const AdminDashboard = () => {
     setIntentionSelection(false);
   };
 
+
+  // editing part
   const manageEditing = () => {
     setProjectEditable(true);
     setProjectLocked(false);
+    setTempSelectedProject(selectedProject);
+  }
+
+  const discardChanges = () => { 
+    setProjectEditable(false);
+    setProjectLocked(true);
+
+    setSelectedProject(tempSelectedProject);
+    window.location.reload();
   }
 
 
@@ -395,7 +408,7 @@ const AdminDashboard = () => {
               >
                 SUBMIT SECOND
               </button>
-              <div
+              {/* <div
                 style={{
                   marginTop: "100px",
                   marginLeft: "100px",
@@ -403,7 +416,7 @@ const AdminDashboard = () => {
                 }}
               >
                 UPDATE PROJECT DATA:{JSON.stringify(updateProjectData)}
-              </div>
+              </div> */}
 
               {/* // TESTING END // */}
             </div>
@@ -528,6 +541,10 @@ const AdminDashboard = () => {
                       </button>
                     </div>
 
+                    {projectEditable && !projectLocked && 
+                      <button className="discard-changes-button manage-button-style" onClick={() => discardChanges()}>ODBACI PROMJENE</button>}
+
+                    { !projectEditable &&  
                     <div className="decision-buttons-container">
                       <div className="approve-button-container manage-button-style">
                         <button
@@ -553,6 +570,8 @@ const AdminDashboard = () => {
                         </button>
                       </div>
                     </div>
+                    }
+
                   </div>
                 )}
               

@@ -188,6 +188,19 @@
     border: none;
 }
 
+.discard-changes-button {
+    flex-direction: row;
+    background-color: #6F6F6F;
+    box-shadow: none;
+    align-self: flex-end;
+    color : #ffffff;
+    border: none;
+    font-size: 1em;
+    font-weight: bold;
+    align-items: center;
+    padding: 3px 10px;
+}
+
 .decision-buttons-container {
     display: flex;
     flex-direction: row;
@@ -214,6 +227,7 @@
     background-color: #ffffff00;
     border: none;
 }
+
 
 
 

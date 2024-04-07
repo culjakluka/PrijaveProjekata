@@ -15,7 +15,7 @@ import PdfDownload from "../../../../test/PdfDownload.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
 
-const ProjectInfo = ({ selectedProject }) => {
+const ProjectInfo = ({selectedProject}) => {
   const [selectedProjectData, setSelectedProjectData] = useState();
 
   const { intentionSelection, approvalSelection } = useContext(
@@ -23,8 +23,12 @@ const ProjectInfo = ({ selectedProject }) => {
   );
 
   useEffect(() => {
-    setSelectedProjectData(selectedProject);
-  }, []);
+
+  }, [selectedProject]);
+
+  useEffect(() => {
+    
+  }, [selectedProject]);
 
   // DATA
 
