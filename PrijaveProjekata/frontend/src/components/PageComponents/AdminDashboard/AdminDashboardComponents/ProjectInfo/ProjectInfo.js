@@ -12,6 +12,7 @@ import AdminQuestion from "../../AdminDashboardProjectComponents/AdminQuestion/A
 import AdminTextInput from "../../AdminDashboardProjectComponents/AdminTextInput/AdminTextInput.js";
 import SpecialInputSecondInputForm from "../../../../InputComponents/SpecialInput/SpecialInputSecondInputForm.js";
 import PdfDownload from "../../../../test/PdfDownload.jsx";
+import CsvConverter from "../../../../test/csv/CsvConverter.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
 
@@ -64,6 +65,8 @@ const ProjectInfo = ({selectedProject}) => {
         <h2>
           {selectedProject.nameSurname} - {selectedProject.projectAcronym}
         </h2>
+
+        <CsvConverter jsonData={selectedProject} />
 
         {intentionSelection && (
           <>
