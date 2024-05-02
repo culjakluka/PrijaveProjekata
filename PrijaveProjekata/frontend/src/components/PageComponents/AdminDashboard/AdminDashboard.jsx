@@ -13,8 +13,10 @@ import ProjectInfo from "./AdminDashboardComponents/ProjectInfo/ProjectInfo";
 import ProjectInfoButtonContainer from "./AdminDashboardComponents/ProjectInfoButtonContainer/ProjectInfoButtonContainer";
 
 // external components
+
+// FontAwesome 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { faPencilAlt, faFilePdf, faDownload, faLock, faLockOpen } from "@fortawesome/free-solid-svg-icons";
 
 // api requests
 import {
@@ -26,6 +28,11 @@ import {
   deleteProject,
   adminUpdateProjectInfoSet,
 } from "./ApiRequests.js";
+
+// pdf components
+import FirstInputFormPDF from "../../InputComponents/PDF/FirstInputFormPDF.js";
+import { pdf } from "@react-pdf/renderer";
+import { firstInputFormData } from '../../InputComponents/PDF/data.js'
 
 const AdminDashboard = () => {
   const [projectSets, setProjectSets] = useState(null);
@@ -44,6 +51,8 @@ const AdminDashboard = () => {
   // selected project inside second section
   // project is part of one of the groups -> either OBRASCI NAMJERE or TRAŽENJE SUGLASNOSTI
   const [selectedProject, setSelectedProject] = useState();
+
+  const [tempSelectedProject, setTempSelectedProject] = useState();
 
   // pending, approved buttons
   const [pendingSelected, setPendingSelected] = useState(true);
@@ -76,6 +85,12 @@ const AdminDashboard = () => {
   const [updateProjectData, setUpdateProjectData] = useState({});
 
   const [selectedProjectId, setSelectedProjectId] = useState("");
+
+  // data used to generate PDF out of selected project
+  const [formattedData, setFormattedData] = useState(firstInputFormData);
+
+  // project locked
+  const[projectLocked, setProjectLocked] = useState(true);
 
   // USE EFFECT
 
@@ -171,6 +186,36 @@ const AdminDashboard = () => {
     );
   }, [approvalForms]);
 
+  // when selectedProject changes,
+  // fill project's data into formattedData
+  // which will be used to generate PDF
+  useEffect(() => { 
+    console.log(selectedProject);
+
+    formattedData[0].elements[0].value = JSON.stringify(selectedProject?.nameSurname);
+    formattedData[0].elements[1].value = JSON.stringify(selectedProject?.vocation);
+    formattedData[0].elements[2].value = JSON.stringify(selectedProject?.department);  
+    formattedData[0].elements[3].value = JSON.stringify(selectedProject?.email);
+
+    formattedData[1].elements[0].value = JSON.stringify(selectedProject?.projectTitle);
+    formattedData[1].elements[1].value = JSON.stringify(selectedProject?.projectAcronym);
+    formattedData[1].elements[2].value = JSON.stringify(selectedProject?.applicationDeadline);
+
+    formattedData[2].elements[0].value = JSON.stringify(selectedProject?.projectSummary);
+
+    formattedData[3].elements[0].value = JSON.stringify(selectedProject?.applicationURL);
+
+    formattedData[4].elements[0].value = JSON.stringify(selectedProject?.projectApplicant);
+
+    formattedData[5].elements[0].value = JSON.stringify(selectedProject?.projectPartners);
+
+    formattedData[6].elements[0].value = JSON.stringify(selectedProject?.totalValue);
+    formattedData[6].elements[1].value = JSON.stringify(selectedProject?.fesbValuePart);
+
+    formattedData[7].elements[0].value = JSON.stringify(selectedProject?.newEmploymentBoolean);
+
+  }, [selectedProject]);
+
   // FUNCTIONS
 
   const handleEditable = () => {
@@ -207,6 +252,48 @@ const AdminDashboard = () => {
     setIntentionSelection(false);
   };
 
+
+  // editing part
+  const manageEditing = () => {
+    setProjectEditable(true);
+    setProjectLocked(false);
+    setTempSelectedProject(selectedProject);
+  }
+
+  const discardChanges = () => { 
+    setProjectEditable(false);
+    setProjectLocked(true);
+
+    setSelectedProject(tempSelectedProject);
+    window.location.reload();
+  }
+
+
+  // handling PDF
+
+  // handle pdf new tab
+  const handlePDF = (projectData) => {
+    // Generate the document
+    const doc = <FirstInputFormPDF data={projectData} />;
+  
+    // Create a PDF blob
+    pdf(doc).toBlob().then(blob => {
+      // Create a Blob URL
+      const url = URL.createObjectURL(blob);
+  
+      // Open the PDF in a new tab
+      // _blank means it will open in a new tab
+      window.open(url, '_blank');
+  
+      // Optional: Release the Blob URL to free up resources
+      URL.revokeObjectURL(url);
+    }).catch(err => {
+      console.error(err);
+    });
+
+  }
+
+
   // TESTING START //
 
   const [projectId, setProjectId] = useState("");
@@ -233,6 +320,8 @@ const AdminDashboard = () => {
           updateProjectData,
           setUpdateProjectData,
           selectedProject,
+          setProjectLocked,
+          projectLocked
         }}
       >
         <div className="admin-dashboard-container">
@@ -319,7 +408,7 @@ const AdminDashboard = () => {
               >
                 SUBMIT SECOND
               </button>
-              <div
+              {/* <div
                 style={{
                   marginTop: "100px",
                   marginLeft: "100px",
@@ -327,7 +416,7 @@ const AdminDashboard = () => {
                 }}
               >
                 UPDATE PROJECT DATA:{JSON.stringify(updateProjectData)}
-              </div>
+              </div> */}
 
               {/* // TESTING END // */}
             </div>
@@ -420,13 +509,18 @@ const AdminDashboard = () => {
                 />
               )}
 
-              <div>{JSON.stringify(selectedProject)}</div>
             </div>
 
             {/* THIRD SECTION */}
-
+                    
             {/* if selectedProject exists => show selected project's info */}
-            <div className="single-application-container">
+            <div className={projectLocked ? "single-application-container-locked" : "single-application-container-unlocked"}>
+
+              {selectedProject != null && (
+                projectLocked ? <FontAwesomeIcon icon={faLock} style={{alignSelf : "flex-start", marginBottom : "5px"}}/>
+                : <FontAwesomeIcon icon={faLockOpen} style={{alignSelf : "flex-start", marginBottom : "5px"}}/>
+              )}
+
               {selectedProject != null &&
                 pendingSelected /*to prevent rendering if the project is not selected*/ && (
                   <div className="manage-project-container">
@@ -434,7 +528,7 @@ const AdminDashboard = () => {
                       className="edit-button-container manage-button-style"
                       onClick={
                         !projectEditable
-                          ? () => setProjectEditable(true)
+                          ? () => manageEditing()
                           : () => setModalUpdateProjectInfoIsOpen(true)
                       }
                     >
@@ -447,6 +541,10 @@ const AdminDashboard = () => {
                       </button>
                     </div>
 
+                    {projectEditable && !projectLocked && 
+                      <button className="discard-changes-button manage-button-style" onClick={() => discardChanges()}>ODBACI PROMJENE</button>}
+
+                    { !projectEditable &&  
                     <div className="decision-buttons-container">
                       <div className="approve-button-container manage-button-style">
                         <button
@@ -472,11 +570,27 @@ const AdminDashboard = () => {
                         </button>
                       </div>
                     </div>
+                    }
+
                   </div>
                 )}
+              
+
               {selectedProject && (
+                <>
+                {/* PDF SECTION */}
+                <div class="project-to-pdf-container">
+                  <p style={{color:"#515151", fontWeight:"bold"}}>Dohvati projekt u obliku pdf dokumenta:</p>
+                  <button onClick={() => handlePDF(formattedData)} class="project-to-pdf-button">
+                    <div class="project-to-pdf-txt">PREUZMI</div>
+                    <FontAwesomeIcon icon={faDownload} style={{color: "#ffffff"}}/>
+                  </button>
+                </div>
+                {/* PDF SECTION END */}
                 <ProjectInfo selectedProject={selectedProject} />
+                </>
               )}
+
             </div>
           </div>
         </div>

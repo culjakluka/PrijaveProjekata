@@ -25,7 +25,7 @@ const ProjectInfoButton = ({projectInfo, selectProject}) => {
 
     return (
         <>
-            <button className={isSelected ? "project-info-button-is-selected" : "project-info-button"} onClick={handleClick} ><span>{projectInfo.nameSurname} {projectInfo.projectAcronym} </span></button>
+            <button className={isSelected ? "project-info-button-is-selected" : "project-info-button"} onClick={handleClick} ><span>{projectInfo.nameSurname} - {projectInfo.projectAcronym} </span></button>
             </>
     )
 }

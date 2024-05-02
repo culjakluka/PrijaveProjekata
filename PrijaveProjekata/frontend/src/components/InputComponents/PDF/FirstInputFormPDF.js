@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
-import { firstInputFormData } from './data.js';
 
 const styles = StyleSheet.create({
     page: {
         flexDirection: "row",
-        backgroundColor: "#ffffff"
+        backgroundColor: "#ffffff",
+        
     },
     section: {
         margin: 20,
@@ -14,69 +14,64 @@ const styles = StyleSheet.create({
         alignSelf: "flex-start",
         fontSize : "15px"
     },
-    documenttitle : {        
+    documentTitle : {        
         color: '#A4A4A4',
         alignSelf: 'center',
         fontSize : '30px',
         marginBottom : '10px'
-    },
-    questio : {
 
+    },
+    question : {
+        marginTop : "10px",
+        marginBottom : "10px",
+        color : "#6e6e6e"
+    },
+    elementInfo : {
+        display: "flex",
+        flexDirection: "row",
+        alignContent : "center"
     },
     label: {
         fontWeight: "bold",
         textTransform: "uppercase",
         color: "#B0355E",
-        margin: 0,
+        marginLeft : "10px"
     },
     value: {
         marginBottom: 10,
-        fontWeight : "bold"
+        fontWeight : "bold",
+        underline : "true",
+        marginLeft : "10px"
     }
 });
 
-const FirstInputFormPDF = () => {
+const FirstInputFormPDF = ({data}) => {
+
+    useEffect(() => {
+        console.log(data); 
+    }, [])
+
     return (
         <Document>
             <Page size="A4" style={styles.page}>
                 <View style={styles.section}>
-                    <Text style={styles.documenttitle}>NAMJERA PRIJAVE</Text>
+                    <Text style={styles.documentTitle}>NAMJERA PRIJAVE</Text>
+                    {data.map((element, index) => {
+                        return (
+                            <View key={index}>
+                                <Text style={styles.question}>{element.question}</Text>
+                                {element.elements.map((element, index) => {
+                                    return (
+                                        <View style={styles.elementInfo} key={index}>
+                                            <Text style={styles.label}>{element.title} :</Text>
+                                            <Text style={styles.value}>{element.value}</Text>
+                                        </View>
+                                    );
+                                })}
+                            </View>
+                        );
+                    })}
 
-                    <Text style={styles.question}>{firstInputFormData[0].question}</Text>   
-                    <Text style={styles.label}>{firstInputFormData[0].title}</Text>        
-                    <Text style={styles.value}>{firstInputFormData[0].value}</Text>
-
-                    <Text style={styles.question}>{firstInputFormData[1].question}</Text>
-                    <Text style={styles.label}>{firstInputFormData[1].title}</Text>        
-                    <Text style={styles.value}>{firstInputFormData[1].value}</Text>
-
-                    <Text style={styles.question}>{firstInputFormData[2].question}</Text>
-                    <Text style={styles.label}>{firstInputFormData[2].title}</Text>        
-                    <Text style={styles.value}>{firstInputFormData[2].value}</Text>
-
-                    <Text style={styles.question}>{firstInputFormData[3].question}</Text>
-                    <Text style={styles.label}>{firstInputFormData[3].title}</Text>        
-                    <Text style={styles.value}>{firstInputFormData[3].value}</Text>
-
-                    <Text style={styles.question}>{firstInputFormData[4].question}</Text>
-                    <Text style={styles.label}>{firstInputFormData[4].title}</Text>        
-                    <Text style={styles.value}>{firstInputFormData[4].value}</Text>
-
-                    <Text style={styles.question}>{firstInputFormData[5].question}</Text>
-                    <Text style={styles.label}>{firstInputFormData[5].title}</Text>        
-                    <Text style={styles.value}>{firstInputFormData[5].value}</Text>
-
-                    <Text style={styles.question}>{firstInputFormData[6].question}</Text>
-                    <Text style={styles.label}>{firstInputFormData[6].title}</Text>        
-                    <Text style={styles.value}>{firstInputFormData[6].value}</Text>
-
-                    <Text style={styles.question}>{firstInputFormData[7].question}</Text>
-                    <Text style={styles.label}>{firstInputFormData[7].title}</Text>        
-                    <Text style={styles.value}>{firstInputFormData[7].value}</Text>
-
-                    <Text style={styles.question}>{firstInputFormData[8].question}</Text>
-                    <Text style={styles.label}>{firstInputFormData[8].title}</Text>        
-                    <Text style={styles.value}>{firstInputFormData[8].value}</Text>
                 </View>
             </Page>
         </Document>

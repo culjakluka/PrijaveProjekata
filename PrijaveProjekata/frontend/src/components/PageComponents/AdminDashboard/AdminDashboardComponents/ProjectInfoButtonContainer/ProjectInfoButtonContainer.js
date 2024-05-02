@@ -1,10 +1,12 @@
 import React from "react";
-import "./ProjectInfoButtonContainer.css";
 import { useState, useEffect } from "react";
 import ProjectInfoButton from "../ProjectInfoButton/ProjectInfoButton";
 
-//
-const ProjectInfoContainer = ({ projectInfoSets, selectProject }) => {
+
+// styles
+import Style from "./ProjectInfoButtonContainer.module.css";
+
+const ProjectInfoButtonContainer = ({ projectInfoSets, selectProject }) => {
   const [projectInfos, setProjectInfos] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -26,25 +28,23 @@ const ProjectInfoContainer = ({ projectInfoSets, selectProject }) => {
   }, [projectInfoSets]);
 
   return (
-    <>
-      <input
-        className="search"
-        type="text"
-        value={searchQuery}
-        onChange={handleSearchChange}
-        placeholder="Pretraga..."
-      />
-      {filteredProjectInfoSets?.map((projectInfo) => (
-        <div className="project-info-button-container">
-          <ProjectInfoButton
-            key={projectInfo._id}
-            projectInfo={projectInfo}
-            selectProject={selectProject}
-          />
-        </div>
-      ))}
-    </>
+      <div className={Style.ProjectInfoContainer}>
+        <input
+          className={Style.SearchInput}
+          type="text"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          placeholder="Pretraga..."
+        />
+        {filteredProjectInfoSets?.map((projectInfo) => (
+            <ProjectInfoButton
+              key={projectInfo._id}
+              projectInfo={projectInfo}
+              selectProject={selectProject}
+            />
+        ))}
+      </div>
   );
 };
 
-export default ProjectInfoContainer;
+export default ProjectInfoButtonContainer;

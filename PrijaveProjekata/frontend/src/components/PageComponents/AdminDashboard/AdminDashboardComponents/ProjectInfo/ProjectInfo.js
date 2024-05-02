@@ -15,7 +15,7 @@ import PdfDownload from "../../../../test/PdfDownload.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
 
-const ProjectInfo = ({ selectedProject }) => {
+const ProjectInfo = ({selectedProject}) => {
   const [selectedProjectData, setSelectedProjectData] = useState();
 
   const { intentionSelection, approvalSelection } = useContext(
@@ -23,8 +23,12 @@ const ProjectInfo = ({ selectedProject }) => {
   );
 
   useEffect(() => {
-    setSelectedProjectData(selectedProject);
-  }, []);
+
+  }, [selectedProject]);
+
+  useEffect(() => {
+    
+  }, [selectedProject]);
 
   // DATA
 
@@ -58,7 +62,7 @@ const ProjectInfo = ({ selectedProject }) => {
       <div className="project-info-container">
         <h4>Document_id:{selectedProject._id}</h4>
         <h2>
-          {selectedProject.nameSurname} {selectedProject.projectAcronym}
+          {selectedProject.nameSurname} - {selectedProject.projectAcronym}
         </h2>
 
         {intentionSelection && (
@@ -159,21 +163,24 @@ const ProjectInfo = ({ selectedProject }) => {
         {approvalSelection && (
           <>
             <div className="pdfContainer">
-              {Array.isArray(selectedProject?.pdfDocuments) &&
-                selectedProject.pdfDocuments.map((pdf) => (
-                  <div className="pdfDivInside" key={pdf._id}>
-                    <FontAwesomeIcon
-                      className="pdfIcon"
-                      icon={faFilePdf}
-                      size="2xl"
-                    />
-                    <PdfDownload
-                      filename={pdf.filename}
-                      filepath={pdf.filepath}
-                      className="pdfDownloadLink"
-                    />
-                  </div>
-                ))}
+              <div className="pdfTitle">Projektna dokumentacija:</div>
+              <div className="pdfContent">
+                {Array.isArray(selectedProject?.pdfDocuments) &&
+                  selectedProject.pdfDocuments.map((pdf) => (
+                    <div className="pdfDivInside" key={pdf._id}>
+                      <FontAwesomeIcon
+                        icon={faFilePdf}
+                        size="xl"
+                        style={{color: "#6F6F6F"}}
+                      />
+                      <PdfDownload
+                        filename={pdf.filename}
+                        filepath={pdf.filepath}
+                        className="pdfDownloadLink"
+                      />
+                    </div>
+                  ))}
+                </div>
             </div>
             <AdminQuestion questionText={questions[0]} />
             <AdminTextInput

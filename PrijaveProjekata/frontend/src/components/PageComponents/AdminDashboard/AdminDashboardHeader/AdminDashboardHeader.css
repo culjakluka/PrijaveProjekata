@@ -15,3 +15,7 @@
 .header-logo {
 
 }
+
+.admin-dashboard-settings-icon:hover {
+    scale: 1.2;
+}

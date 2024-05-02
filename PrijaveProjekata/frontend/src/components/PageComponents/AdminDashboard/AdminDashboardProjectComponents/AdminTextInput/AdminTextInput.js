@@ -11,7 +11,7 @@ const AdminTextInput = ({ currentInputValue, currentLabelValue, editable, projec
     const [isEditable, setIsEditable] = useState(false);
 
     // context
-    const {projectEditable, setProjectEditable, updateProjectData, setUpdateProjectData} = useContext(AdminDashboardContext);
+    const {projectEditable, setProjectEditable, updateProjectData, setUpdateProjectData, selectedProject} = useContext(AdminDashboardContext);
 
     useEffect(() => {
         setLabelValue(currentLabelValue);
@@ -21,6 +21,10 @@ const AdminTextInput = ({ currentInputValue, currentLabelValue, editable, projec
     useEffect(() => {
         setInputValue(currentInputValue);
     }, [currentInputValue]);
+
+    useEffect(() => {
+        
+    }, [selectedProject]);
 
     const handleChange = (e) => {
         setInputValue(e.target.value);

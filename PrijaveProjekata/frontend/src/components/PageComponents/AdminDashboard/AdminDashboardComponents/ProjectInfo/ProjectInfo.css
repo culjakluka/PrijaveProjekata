@@ -6,8 +6,9 @@
 
 .pdfContainer{
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    overflow-x: auto;
+    width: 100%;
 }
 
 .pdfDivInside {
@@ -16,16 +17,23 @@
     align-items: center;
     gap: 10px;
     padding: 10px;
-    border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-.pdfIcon {
-    color: red;
-}
 
 .pdfDownloadLink {
     text-decoration: none;
     color: #333;
+    font-weight: bold;
+}
+
+.pdfContent {
+    display: flex;
+    flex-direction: row;
+}
+
+.pdfTitle {
+    font-size: 1.2em;
+    color:#515151;
     font-weight: bold;
 }

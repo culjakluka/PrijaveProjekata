@@ -17,13 +17,23 @@ import { adminUpdateProjectInfoSet } from '../../ApiRequests.js'
 
 const ModalUpdateProjectInfo = () => {
 
-    const {modalUpdateProjectInfoIsOpen, setModalUpdateProjectInfoIsOpen, handleEditable, updateProjectData, setUpdateProjectData, selectedProject} = useContext(AdminDashboardContext)
+    const {
+        modalUpdateProjectInfoIsOpen, 
+        setModalUpdateProjectInfoIsOpen,
+        handleEditable, 
+        updateProjectData, 
+        setUpdateProjectData, 
+        selectedProject,
+        projectLocked,
+        setProjectLocked
+    } = useContext(AdminDashboardContext)
 
     const handleYesButton = () => {
         adminUpdateProjectInfoSet(selectedProject._id, updateProjectData);
         handleEditable();
         setModalUpdateProjectInfoIsOpen(false);
         setUpdateProjectData({})
+        setProjectLocked(true);
     }
 
     const handleNoButton = () => {

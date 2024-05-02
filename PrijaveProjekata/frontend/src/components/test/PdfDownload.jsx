@@ -1,6 +1,11 @@
 import react from "react";
 import styles from "./PdfDownload.module.css";
 
+// external components
+// FontAwesome 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
+
 const PdfDownload = ({ filename, filepath }) => {
   const handleDownload = async () => {
     try {
@@ -20,8 +25,9 @@ const PdfDownload = ({ filename, filepath }) => {
   return (
     <div className={styles.pdfDownloadContainer}>
       <p>{filename}</p>
-      <button className={styles.downloadButton} onClick={handleDownload}>
-        Preuzmi
+      <button onClick={handleDownload} className={styles.downloadButton}>
+        <div className={styles.downloadButtonText}>PREUZMI</div>
+        <FontAwesomeIcon icon={faDownload} style={{color: "#ffffff"}}/>
       </button>
     </div>
   );
