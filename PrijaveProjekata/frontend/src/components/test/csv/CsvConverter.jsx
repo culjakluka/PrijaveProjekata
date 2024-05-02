@@ -15,18 +15,14 @@ const CsvConverter = ({ jsonData }) => {
         throw new Error("Network response was not ok");
       }
 
-      // Get response data as blob
       const blob = await response.blob();
 
-      // Create a temporary URL for the blob response
       const url = window.URL.createObjectURL(blob);
 
-      // Create a link element to trigger the download
       const link = document.createElement("a");
       link.href = url;
       link.setAttribute("download", "download.csv");
 
-      // Trigger the download
       document.body.appendChild(link);
       link.click();
 
