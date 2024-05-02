@@ -16,7 +16,7 @@ const downloadPDF = async (req, res) => {
   console.log("Downloading PDF");
   const { filepath } = req.params;
   try {
-    const filePath = `./uploads/${filepath}`; //makni hardcode
+    const filePath = `./uploads/${filepath}`;
 
     if (!fs.existsSync(filePath)) {
       console.error("File not found:", filePath);
@@ -24,10 +24,7 @@ const downloadPDF = async (req, res) => {
     }
 
     res.setHeader("Content-Type", "application/pdf");
-    res.setHeader(
-      "Content-Disposition",
-      `attachment; filename=${filepath}` //makni hardcode
-    );
+    res.setHeader("Content-Disposition", `attachment; filename=${filepath}`);
 
     const fileStream = fs.createReadStream(filePath);
     fileStream.on("error", (error) => {
