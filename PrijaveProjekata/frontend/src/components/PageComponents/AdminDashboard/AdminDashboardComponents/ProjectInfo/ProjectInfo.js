@@ -15,8 +15,9 @@ import PdfDownload from "../../../../test/PdfDownload.jsx";
 import CsvConverter from "../../../../test/csv/CsvConverter.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
+import { set } from "mongoose";
 
-const ProjectInfo = ({selectedProject}) => {
+const ProjectInfo = ({ selectedProject }) => {
   const [selectedProjectData, setSelectedProjectData] = useState();
 
 
@@ -24,12 +25,18 @@ const ProjectInfo = ({selectedProject}) => {
     AdminDashboardContext
   );
 
+<<<<<<< HEAD
+  useEffect(() => {
+    setSelectedProjectData(selectedProject);
+  }, []);
+=======
   
 
 
   useEffect(() => {
 
   }, [selectedProject]);
+>>>>>>> main
 
   // DATA
 
@@ -175,7 +182,7 @@ const ProjectInfo = ({selectedProject}) => {
                       <FontAwesomeIcon
                         icon={faFilePdf}
                         size="xl"
-                        style={{color: "#6F6F6F"}}
+                        style={{ color: "#6F6F6F" }}
                       />
                       <PdfDownload
                         filename={pdf.filename}
@@ -184,7 +191,7 @@ const ProjectInfo = ({selectedProject}) => {
                       />
                     </div>
                   ))}
-                </div>
+              </div>
             </div>
             <AdminQuestion questionText={questions[0]} />
             <AdminTextInput
@@ -228,8 +235,8 @@ const ProjectInfo = ({selectedProject}) => {
             />
             <AdminTextInput
               currentLabelValue={"NAPOMENA"}
-              currentInputValue={selectedProject.teamLeaderDisclaimer}
-              projectUpdateName={"teamLeaderDisclaimer"}
+              currentInputValue={selectedProject.teamLeaderNote}
+              projectUpdateName={"teamLeaderNote"}
             />
             <AdminQuestion questionText={questions[1]} />
             <AdminTextInput
@@ -362,8 +369,8 @@ const ProjectInfo = ({selectedProject}) => {
             />
             <AdminTextInput
               currentLabelValue={"NAPOMENA O TROŠKOVIMA"}
-              currentInputValue={selectedProject.expenseDisclaimer}
-              projectUpdateName={"expenseDisclaimer"}
+              currentInputValue={selectedProject.expenseNote}
+              projectUpdateName={"expenseNote"}
             />
             <AdminQuestion questionText={questions[13]} />
             <AdminTextInput
