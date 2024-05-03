@@ -54,7 +54,7 @@ function flattenProjectInfo(projectInfo) {
     mobilePhoneNumber: projectInfo.mobilePhoneNumber,
     workTimeThisPercentage: projectInfo.workTimeThisPercentage,
     workTimeOtherPercentage: projectInfo.workTimeOtherPercentage,
-    teamLeaderDisclaimer: projectInfo.teamLeaderDisclaimer,
+    teamLeaderNote: projectInfo.teamLeaderNote,
     sourceOfFunding: projectInfo.sourceOfFunding,
     projectType: projectInfo.projectType,
     expectedProjectBeginning: projectInfo.expectedProjectBeginning,
@@ -69,7 +69,7 @@ function flattenProjectInfo(projectInfo) {
     materialExpense: projectInfo.materialExpense,
     travelRegistrationEducationExpense:
       projectInfo.travelRegistrationEducationExpense,
-    expenseDisclaimer: projectInfo.expenseDisclaimer,
+    expenseNote: projectInfo.expenseNote,
     partnerExpense: projectInfo.partnerExpense,
     requestedFunding: projectInfo.requestedFunding,
     downPayment: projectInfo.downPayment,
