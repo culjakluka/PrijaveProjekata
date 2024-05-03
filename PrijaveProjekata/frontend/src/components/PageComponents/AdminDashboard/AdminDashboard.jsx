@@ -79,7 +79,7 @@ const AdminDashboard = () => {
     useState(false);
 
     // modal - discard changes
-    const[modalDiscardChangesIsOpen, setModalDiscardChangesIsOpen] = useState(true); 
+    const[modalDiscardChangesIsOpen, setModalDiscardChangesIsOpen] = useState(false); 
 
   // project editable
   const [projectEditable, setProjectEditable] = useState(false);
@@ -229,7 +229,7 @@ const AdminDashboard = () => {
       formattedData2[0].elements[4].value = selectedProject?.mobilePhoneNumber || "";
       formattedData2[0].elements[5].value = selectedProject?.workTimeThisPercentage || "";
       formattedData2[0].elements[6].value = selectedProject?.workTimeOtherPercentage || "";
-      formattedData2[0].elements[7].value = selectedProject?.teamLeaderDisclaimer || "";
+      formattedData2[0].elements[7].value = selectedProject?.teamLeaderNote || "";
   
       formattedData2[1].elements[0].value = selectedProject?.projectTitle || "";
       formattedData2[1].elements[1].value = selectedProject?.projectAcronym || "";
@@ -263,7 +263,7 @@ const AdminDashboard = () => {
       formattedData2[12].elements[5].value = selectedProject?.equipmentAmortizationExpense || "";
       formattedData2[12].elements[6].value = selectedProject?.otherServicesExpense || "";
       formattedData2[12].elements[7].value = selectedProject?.travelExpense || "";
-      formattedData2[12].elements[8].value = selectedProject?.expenseDisclaimer || "";
+      formattedData2[12].elements[8].value = selectedProject?.expenseNote || "";
   
       formattedData2[13].elements[0].value = selectedProject?.partnerExpense || "";
   

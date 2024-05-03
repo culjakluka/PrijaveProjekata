@@ -15,7 +15,6 @@ import PdfDownload from "../../../../test/PdfDownload.jsx";
 import CsvConverter from "../../../../test/csv/CsvConverter.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
-import { set } from "mongoose";
 
 const ProjectInfo = ({ selectedProject }) => {
   const [selectedProjectData, setSelectedProjectData] = useState();
@@ -25,18 +24,9 @@ const ProjectInfo = ({ selectedProject }) => {
     AdminDashboardContext
   );
 
-<<<<<<< HEAD
   useEffect(() => {
     setSelectedProjectData(selectedProject);
   }, []);
-=======
-  
-
-
-  useEffect(() => {
-
-  }, [selectedProject]);
->>>>>>> main
 
   // DATA
 

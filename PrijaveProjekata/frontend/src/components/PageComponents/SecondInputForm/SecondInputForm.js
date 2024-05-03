@@ -557,7 +557,7 @@ const SecondInputForm = (docId) => {
           <p>Upozoriti ukoliko je zbroj stavki od 13.2 do 13.9 veći od 13.1</p>
           <TextInput
             label={"NAPOMENA"}
-            name={"expense_disclaimer"}
+            name={"expense_note"}
             setSpecificState={setExpenseNote}
           />
 
