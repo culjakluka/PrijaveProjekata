@@ -1,21 +1,36 @@
-const { Parser } = require('json2csv');
+const { Parser } = require("json2csv");
 
 const convertToCSV = async (req, res) => {
   try {
-    const projectInfo = req.body; 
-    const flattenedData = flattenProjectInfo(projectInfo);
-
-    const json2csvParser = new Parser();
-    const csv = json2csvParser.parse(flattenedData);
+    const projectInfo = req.body; // Assuming req.body contains the projectInfo object
+    const csv = jsonToCsv(projectInfo);
 
     res.setHeader("Content-Type", "text/csv");
-    res.setHeader("Content-Disposition", `attachment; filename=${flattenedData.projectTitle}.csv`);
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename=${projectInfo.projectTitle}.csv`
+    );
     res.send(csv);
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
   }
 };
+
+function jsonToCsv(projectInfo) {
+  // Flatten the projectInfo object
+  const flattenedData = flattenProjectInfo(projectInfo);
+
+  // Generate CSV string
+  let csv = "";
+  for (const key in flattenedData) {
+    if (flattenedData.hasOwnProperty(key)) {
+      csv += `${key},${flattenedData[key]}\n`; // Append field name and value separated by comma
+    }
+  }
+
+  return csv;
+}
 
 function flattenProjectInfo(projectInfo) {
   const flattenedData = {
@@ -43,7 +58,8 @@ function flattenProjectInfo(projectInfo) {
     sourceOfFunding: projectInfo.sourceOfFunding,
     projectType: projectInfo.projectType,
     expectedProjectBeginning: projectInfo.expectedProjectBeginning,
-    expectedProjectDurationInMonths: projectInfo.expectedProjectDurationInMonths,
+    expectedProjectDurationInMonths:
+      projectInfo.expectedProjectDurationInMonths,
     economicSubjectInvolvement: projectInfo.economicSubjectInvolvement,
     currentPesonnelExpense: projectInfo.currentPesonnelExpense,
     newPersonnelExpense: projectInfo.newPersonnelExpense,
@@ -51,7 +67,8 @@ function flattenProjectInfo(projectInfo) {
     equipmentAmortizationExpense: projectInfo.equipmentAmortizationExpense,
     otherServicesExpense: projectInfo.otherServicesExpense,
     materialExpense: projectInfo.materialExpense,
-    travelRegistrationEducationExpense: projectInfo.travelRegistrationEducationExpense,
+    travelRegistrationEducationExpense:
+      projectInfo.travelRegistrationEducationExpense,
     expenseDisclaimer: projectInfo.expenseDisclaimer,
     partnerExpense: projectInfo.partnerExpense,
     requestedFunding: projectInfo.requestedFunding,
@@ -61,7 +78,7 @@ function flattenProjectInfo(projectInfo) {
     consultantExpense: projectInfo.consultantExpense,
     consultantExpenseSource: projectInfo.consultantExpenseSource,
     requiredDocumentationFESB: projectInfo.requiredDocumentationFESB,
-    state: projectInfo.state
+    state: projectInfo.state,
   };
 
   // Flatten projectTeam if present
@@ -70,15 +87,18 @@ function flattenProjectInfo(projectInfo) {
       const memberPrefix = `projectTeam_${index}_`;
       flattenedData[`${memberPrefix}nameSurname`] = member.nameSurname;
       flattenedData[`${memberPrefix}email`] = member.email;
-      flattenedData[`${memberPrefix}thisProjectPercentage`] = member.thisProjectPercentage;
+      flattenedData[`${memberPrefix}thisProjectPercentage`] =
+        member.thisProjectPercentage;
       if (member.otherProjects && Array.isArray(member.otherProjects)) {
         member.otherProjects.forEach((project, projectIndex) => {
           const projectPrefix = `${memberPrefix}otherProjects_${projectIndex}_`;
           if (project.otherProjectName) {
-            flattenedData[`${projectPrefix}otherProjectName`] = project.otherProjectName;
+            flattenedData[`${projectPrefix}otherProjectName`] =
+              project.otherProjectName;
           }
           if (project.otherProjectPercentage) {
-            flattenedData[`${projectPrefix}otherProjectPercentage`] = project.otherProjectPercentage;
+            flattenedData[`${projectPrefix}otherProjectPercentage`] =
+              project.otherProjectPercentage;
           }
         });
       }
@@ -86,7 +106,11 @@ function flattenProjectInfo(projectInfo) {
   }
 
   // Flatten pdfDocuments if present
-  if (projectInfo.pdfDocuments && projectInfo.pdfDocuments.pdfs && Array.isArray(projectInfo.pdfDocuments.pdfs)) {
+  if (
+    projectInfo.pdfDocuments &&
+    projectInfo.pdfDocuments.pdfs &&
+    Array.isArray(projectInfo.pdfDocuments.pdfs)
+  ) {
     projectInfo.pdfDocuments.pdfs.forEach((pdf, index) => {
       const pdfPrefix = `pdfDocuments_${index}_`;
       if (pdf.filename) {
@@ -99,17 +123,18 @@ function flattenProjectInfo(projectInfo) {
   }
 
   // Remove empty fields
-  Object.keys(flattenedData).forEach(key => {
-    if (flattenedData[key] === undefined || flattenedData[key] === null || flattenedData[key] === '') {
+  Object.keys(flattenedData).forEach((key) => {
+    if (
+      flattenedData[key] === undefined ||
+      flattenedData[key] === null ||
+      flattenedData[key] === ""
+    ) {
       delete flattenedData[key];
     }
   });
 
   return flattenedData;
 }
-
-
-
 
 module.exports = {
   convertToCSV,
