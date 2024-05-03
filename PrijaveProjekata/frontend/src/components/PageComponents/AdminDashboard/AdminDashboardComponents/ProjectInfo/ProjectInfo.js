@@ -20,13 +20,23 @@ import { set } from "mongoose";
 const ProjectInfo = ({ selectedProject }) => {
   const [selectedProjectData, setSelectedProjectData] = useState();
 
+
   const { intentionSelection, approvalSelection } = useContext(
     AdminDashboardContext
   );
 
+<<<<<<< HEAD
   useEffect(() => {
     setSelectedProjectData(selectedProject);
   }, []);
+=======
+  
+
+
+  useEffect(() => {
+
+  }, [selectedProject]);
+>>>>>>> main
 
   // DATA
 
@@ -72,6 +82,7 @@ const ProjectInfo = ({ selectedProject }) => {
               currentLabelValue={"IME I PREZIME"}
               currentInputValue={selectedProject.nameSurname}
               projectUpdateName={"nameSurname"}
+              
             />
             <AdminTextInput
               currentLabelValue={"ZAVOD (ODJSEK)"}
