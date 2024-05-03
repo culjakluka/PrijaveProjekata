@@ -5,14 +5,14 @@ const styles = StyleSheet.create({
     page: {
         flexDirection: "row",
         backgroundColor: "#ffffff",
-        
+        padding: "30px 20px 30px 20px",
+        fontFamily : "Helvetica"
     },
     section: {
         margin: 20,
-        padding: 20,
         flexGrow: 1,
         alignSelf: "flex-start",
-        fontSize : "15px"
+        fontSize : "12px"
     },
     documentTitle : {        
         color: '#A4A4A4',
@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
     question : {
         marginTop : "10px",
         marginBottom : "10px",
-        color : "#6e6e6e"
+        color : "#6e6e6e",
+        fontSize : "13px",
     },
     elementInfo : {
         display: "flex",
@@ -45,17 +46,17 @@ const styles = StyleSheet.create({
     }
 });
 
-const FirstInputFormPDF = ({data}) => {
+const FirstInputFormPDF = ({data, title}) => {
 
     useEffect(() => {
         console.log(data); 
     }, [])
-
+    
     return (
         <Document>
             <Page size="A4" style={styles.page}>
                 <View style={styles.section}>
-                    <Text style={styles.documentTitle}>NAMJERA PRIJAVE</Text>
+                    <Text style={styles.documentTitle}>{title}</Text>
                     {data.map((element, index) => {
                         return (
                             <View key={index}>
@@ -63,7 +64,7 @@ const FirstInputFormPDF = ({data}) => {
                                 {element.elements.map((element, index) => {
                                     return (
                                         <View style={styles.elementInfo} key={index}>
-                                            <Text style={styles.label}>{element.title} :</Text>
+                                            <Text style={styles.label}> {element.title ? element.title + ":" : ""}</Text>
                                             <Text style={styles.value}>{element.value}</Text>
                                         </View>
                                     );

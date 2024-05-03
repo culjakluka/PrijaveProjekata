@@ -8,10 +8,9 @@ import { AdminDashboardContext } from '../../../../../context/AdminDashboardCont
 const AdminTextInput = ({ currentInputValue, currentLabelValue, editable, projectUpdateName}) => {
     const [inputValue, setInputValue] = useState("");
     const [labelValue, setLabelValue] = useState("");
-    const [isEditable, setIsEditable] = useState(false);
 
     // context
-    const {projectEditable, setProjectEditable, updateProjectData, setUpdateProjectData, selectedProject} = useContext(AdminDashboardContext);
+    const {projectEditable, setProjectEditable, updateProjectData, setUpdateProjectData, selectedProject, projectLocked} = useContext(AdminDashboardContext);
 
     useEffect(() => {
         setLabelValue(currentLabelValue);
@@ -25,6 +24,10 @@ const AdminTextInput = ({ currentInputValue, currentLabelValue, editable, projec
     useEffect(() => {
         
     }, [selectedProject]);
+
+    useEffect(() => {
+        setInputValue(currentInputValue);
+    }, [projectLocked]);
 
     const handleChange = (e) => {
         setInputValue(e.target.value);
