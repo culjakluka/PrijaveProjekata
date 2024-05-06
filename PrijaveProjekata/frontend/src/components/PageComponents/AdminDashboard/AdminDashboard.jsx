@@ -9,6 +9,8 @@ import { AdminDashboardContext } from "../../../context/AdminDashboardContext.js
 import ModalSettings from "./AdminDashboardComponents/ModalSettings/ModalSettings.js";
 import ModalUpdateProjectInfo from "./AdminDashboardComponents/ModalUpdateProjectInfo/ModalUpdateProjectInfo.js";
 import ModalDiscardChanges from "./AdminDashboardComponents/ModalDiscardChanges/ModalDiscardChanges.js";
+import ModalApproveProject from "./AdminDashboardComponents/ModalApproveProject/ModalApproveProject.js";
+import ModalDeclineProject from "./AdminDashboardComponents/ModalDeclineProject/ModalDeclineProject.js";
 import AdminDashboardHeader from "./AdminDashboardHeader/AdminDashboardHeader";
 import ProjectInfo from "./AdminDashboardComponents/ProjectInfo/ProjectInfo";
 import ProjectInfoButtonContainer from "./AdminDashboardComponents/ProjectInfoButtonContainer/ProjectInfoButtonContainer";
@@ -80,6 +82,13 @@ const AdminDashboard = () => {
 
     // modal - discard changes
     const[modalDiscardChangesIsOpen, setModalDiscardChangesIsOpen] = useState(false); 
+
+
+    // modal - approve project
+    const[modalApproveProjectIsOpen, setModalApproveProjectIsOpen] = useState(false);
+
+    // modal - decline project
+    const[modalDeclineProjectIsOpen, setModalDeclineProjectIsOpen] = useState(false);
 
   // project editable
   const [projectEditable, setProjectEditable] = useState(false);
@@ -394,10 +403,15 @@ const AdminDashboard = () => {
           updateProjectData,
           setUpdateProjectData,
           selectedProject,  
+          setSelectedProject,
           setProjectLocked,
           projectLocked,
           modalDiscardChangesIsOpen,
-          setModalDiscardChangesIsOpen
+          setModalDiscardChangesIsOpen,
+          modalApproveProjectIsOpen,
+          setModalApproveProjectIsOpen,
+          modalDeclineProjectIsOpen,
+          setModalDeclineProjectIsOpen
         }}
       >
         <div className="admin-dashboard-container">
@@ -407,6 +421,12 @@ const AdminDashboard = () => {
           {modalUpdateProjectInfoIsOpen && <ModalUpdateProjectInfo />}
 
           {modalDiscardChangesIsOpen && <ModalDiscardChanges />}
+
+          {modalApproveProjectIsOpen && <ModalApproveProject />}
+
+          {modalDeclineProjectIsOpen && <ModalDeclineProject />}
+
+          
 
           <AdminDashboardHeader />
 
@@ -626,13 +646,7 @@ const AdminDashboard = () => {
                     <div className="decision-buttons-container">
                       <div className="approve-button-container manage-button-style">
                         <button
-                          onClick={
-                            intentionSelection
-                              ? () =>
-                                  approveFirstFormSubmit(selectedProject._id)
-                              : () =>
-                                  approveSecondFormSubmit(selectedProject._id)
-                          }
+                          onClick={() => setModalApproveProjectIsOpen(true)}
                           className="approve-button"
                         >
                           ODOBRI

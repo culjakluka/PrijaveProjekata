@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import ProjectInfoButton from "../ProjectInfoButton/ProjectInfoButton";
 
+// context
+import { AdminDashboardContext } from '../../../../../context/AdminDashboardContext';
 
 // styles
 import Style from "./ProjectInfoButtonContainer.module.css";
@@ -9,6 +11,8 @@ import Style from "./ProjectInfoButtonContainer.module.css";
 const ProjectInfoButtonContainer = ({ projectInfoSets, selectProject }) => {
   const [projectInfos, setProjectInfos] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const { projectLocked } = useContext(AdminDashboardContext);
 
   const filteredProjectInfoSets = projectInfoSets?.filter(
     (component) =>
@@ -26,6 +30,10 @@ const ProjectInfoButtonContainer = ({ projectInfoSets, selectProject }) => {
   useEffect(() => {
     setProjectInfos(projectInfoSets);
   }, [projectInfoSets]);
+
+  useEffect(() => {
+    //TO-DO
+  }, [projectLocked]);
 
   return (
       <div className={Style.ProjectInfoContainer}>
