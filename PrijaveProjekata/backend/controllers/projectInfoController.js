@@ -35,7 +35,7 @@ const getProjectInfo = async (req, res) => {
   res.status(200).json(projectInfoSet);
 };
 
-//create a ProjectInfo set
+//create a ProjectInfo set (submit prve forme)
 const createProjectInfoSet = async (req, res) => {
   let fieldsToCheck;
 
@@ -294,11 +294,10 @@ const adminUpdateProjectInfoSet = async (req, res) => {
   }
 };
 
-// update a ProjectInfo set
+// update a ProjectInfo set (submit druge forme)
 const updateProjectInfoSet = async (req, res) => {
   const { id } = req.params;
-  // console.log("req.body")
-  // console.log(req.body)
+
   try {
     const projectData = {};
     let fieldsToCheck = [];

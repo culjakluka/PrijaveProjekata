@@ -15,28 +15,17 @@ import PdfDownload from "../../../../test/PdfDownload.jsx";
 import CsvConverter from "../../../../test/csv/CsvConverter.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
-import { set } from "mongoose";
 
 const ProjectInfo = ({ selectedProject }) => {
   const [selectedProjectData, setSelectedProjectData] = useState();
-
 
   const { intentionSelection, approvalSelection } = useContext(
     AdminDashboardContext
   );
 
-<<<<<<< HEAD
   useEffect(() => {
     setSelectedProjectData(selectedProject);
   }, []);
-=======
-  
-
-
-  useEffect(() => {
-
-  }, [selectedProject]);
->>>>>>> main
 
   // DATA
 
@@ -82,7 +71,6 @@ const ProjectInfo = ({ selectedProject }) => {
               currentLabelValue={"IME I PREZIME"}
               currentInputValue={selectedProject.nameSurname}
               projectUpdateName={"nameSurname"}
-              
             />
             <AdminTextInput
               currentLabelValue={"ZAVOD (ODJSEK)"}

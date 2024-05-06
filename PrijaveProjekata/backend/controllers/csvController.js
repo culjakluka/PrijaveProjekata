@@ -5,10 +5,12 @@ const convertToCSV = async (req, res) => {
     const projectInfo = req.body; // Assuming req.body contains the projectInfo object
     const csv = jsonToCsv(projectInfo);
 
+    const filename = `${encodeURIComponent(projectInfo.projectTitle)}.csv`; // Encode projectTitle
+
     res.setHeader("Content-Type", "text/csv");
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename=${projectInfo.projectTitle}.csv`
+      `attachment; filename=${filename}.csv`
     );
     res.send(csv);
   } catch (err) {
