@@ -15,6 +15,7 @@ import PdfDownload from "../../../../test/PdfDownload.jsx";
 import CsvConverter from "../../../../test/csv/CsvConverter.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
+import AdminDashboardProjectTeam from "../../AdminDashboardProjectComponents/AdminDashboardProjectTeam/AdminDashboardProjectTeam.js";
 
 const ProjectInfo = ({ selectedProject }) => {
   const [selectedProjectData, setSelectedProjectData] = useState();
@@ -157,7 +158,7 @@ const ProjectInfo = ({ selectedProject }) => {
             />
 
             <AdminQuestion questionText={questions[8]} />
-            <div>{JSON.stringify(selectedProject.projectTeam)}</div>
+            <AdminDashboardProjectTeam />
           </>
         )}
 
@@ -397,7 +398,8 @@ const ProjectInfo = ({ selectedProject }) => {
             />
             <AdminQuestion questionText={questions[18]} />
             {/* Special case, might not have a direct mapping or requires a component to list team members */}
-            <div>{JSON.stringify(selectedProject.projectTeam)}</div>
+            <AdminDashboardProjectTeam />
+
             <AdminTextInput
               currentLabelValue={"POTREBNA DOKUMENTACIJA"}
               currentInputValue={selectedProject.requiredDocumentationFESB}

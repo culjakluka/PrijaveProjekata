@@ -106,6 +106,9 @@ const AdminDashboard = () => {
   // project locked
   const[projectLocked, setProjectLocked] = useState(true);
 
+  // editing of project in progress
+  const[editingInProgress, setEditingInProgress] = useState(false);
+
   // USE EFFECT
 
 
@@ -333,9 +336,12 @@ const AdminDashboard = () => {
 
   // editing part
   const manageEditing = () => {
-    setProjectEditable(true);
-    setProjectLocked(false);
+    setProjectEditable(true); // make project editable
 
+    setProjectLocked(false); // unlock project
+    
+    // activate editing state
+    setEditingInProgress(true);
   }
 
   const discardChanges = () => { 
@@ -381,9 +387,12 @@ const AdminDashboard = () => {
 
   const handleProjectId = (event) => {
     setProjectId(event.target.value);
-  };
-
-  console.log("PROJECT COPY", projectCopy);
+  };    
+  // console log outputs
+  
+  console.log("CURRENT PROJECT TEAM:\n" + selectedProject?.projectTeam);
+  
+  // TESTING END //
 
   return (
     <>
@@ -411,7 +420,9 @@ const AdminDashboard = () => {
           modalApproveProjectIsOpen,
           setModalApproveProjectIsOpen,
           modalDeclineProjectIsOpen,
-          setModalDeclineProjectIsOpen
+          setModalDeclineProjectIsOpen,
+          editingInProgress,
+          setEditingInProgress
         }}
       >
         <div className="admin-dashboard-container">
@@ -655,7 +666,7 @@ const AdminDashboard = () => {
 
                       <div className="decline-button-container manage-button-style">
                         <button
-                          onClick={() => rejectProject(selectedProject._id)}
+                          onClick={() => setModalDeclineProjectIsOpen(true)}
                           className="decline-button"
                         >
                           ODBIJ
@@ -671,10 +682,10 @@ const AdminDashboard = () => {
               {selectedProject && (
                 <>
                 {/* PDF SECTION */}
-                <div class="project-to-pdf-container">
+                <div className="project-to-pdf-container">
                   <p style={{color:"#515151", fontWeight:"bold"}}>Dohvati projekt u obliku pdf dokumenta:</p>
-                  <button onClick={intentionSelection ? () => handlePDF(formattedData, "NAMJERA PRIJAVE") : () => handlePDF(formattedData2, "TRAŽENJE SUGLASNOSTI")} class="project-to-pdf-button">
-                    <div class="project-to-pdf-txt">PREUZMI</div>
+                  <button onClick={intentionSelection ? () => handlePDF(formattedData, "NAMJERA PRIJAVE") : () => handlePDF(formattedData2, "TRAŽENJE SUGLASNOSTI")} className="project-to-pdf-button">
+                    <div className="project-to-pdf-txt">PREUZMI</div>
                     <FontAwesomeIcon icon={faDownload} style={{color: "#ffffff"}}/>
                   </button>
                 </div>

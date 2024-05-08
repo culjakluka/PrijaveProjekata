@@ -10,15 +10,21 @@ import Style from './ModalDeclineProject.module.css';
 // context
 import { AdminDashboardContext } from "../../../../../context/AdminDashboardContext";
 
+// api
+import { rejectProject } from '../../ApiRequests';
+
 const ModalDeclineProject = () => {
 
     const {
         modalDeclineProjectIsOpen,
         setModalDeclineProjectIsOpen,
+        selectedProject
     } = useContext(AdminDashboardContext)
 
     const handleYesButton = () => {
         //TO-DO
+        rejectProject(selectedProject._id);
+        setModalDeclineProjectIsOpen(false);
     }
 
     const handleNoButton = () => {

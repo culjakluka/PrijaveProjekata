@@ -26,7 +26,8 @@ const ModalUpdateProjectInfo = () => {
         selectedProject,
         setSelectedProject,
         projectLocked,
-        setProjectLocked
+        setProjectLocked,
+        setEditingInProgress
     } = useContext(AdminDashboardContext)
 
     const handleYesButton = () => {
@@ -36,7 +37,7 @@ const ModalUpdateProjectInfo = () => {
         setSelectedProject({...selectedProject, ...updateProjectData});
         setUpdateProjectData({})
         setProjectLocked(true);
-        
+        setEditingInProgress(false);
     }
 
     const handleNoButton = () => {
