@@ -134,7 +134,7 @@
     flex-direction: column;
     height: 100%;
     padding: 10px 30px 100px 30px;
-    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .single-application-container-locked {
@@ -144,7 +144,7 @@
     flex-direction: column;
     height: 100%;
     padding: 10px 30px 100px 30px;
-    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /* remove scrollbar */

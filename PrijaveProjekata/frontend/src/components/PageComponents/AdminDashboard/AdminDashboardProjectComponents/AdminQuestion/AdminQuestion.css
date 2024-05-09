@@ -1,11 +1,13 @@
 .admin-question {
     display: flex;
     align-self: flex-start;
-    padding: 10px 0px 10px 0%;
+    padding: 10px 0px 10px 0px;
 }
 
 .admin-question-text {
     color: #6e6e6e;
     font-size: 15px;
     font-weight: bold;
+    height: 100%;
+    text-align: center;
 }
