@@ -19,7 +19,6 @@ import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
 const ProjectInfo = ({ selectedProject }) => {
   const [selectedProjectData, setSelectedProjectData] = useState();
 
-
   const { intentionSelection, approvalSelection } = useContext(
     AdminDashboardContext
   );
@@ -72,7 +71,6 @@ const ProjectInfo = ({ selectedProject }) => {
               currentLabelValue={"IME I PREZIME"}
               currentInputValue={selectedProject.nameSurname}
               projectUpdateName={"nameSurname"}
-              
             />
             <AdminTextInput
               currentLabelValue={"ZAVOD (ODJSEK)"}
