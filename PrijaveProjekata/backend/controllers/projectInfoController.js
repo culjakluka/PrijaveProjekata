@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs/promises");
 const EmailService = require("../services/emailService");
+const ProjectInfoToPDFService = require("../services/projectInfoToPDFService");
 
 const defaultEmail = process.env.DEFAULT_EMAIL;
 
@@ -92,13 +93,16 @@ const createProjectInfoSet = async (req, res) => {
 
   // Add doc to the database
   try {
+    let infoPDF = ProjectInfoToPDFService.generateProjectInfoPDF(projectData);
     projectData.state = "firstFormSubmitted";
     const projectInfoSet = await ProjectInfoModel.create(projectData);
     console.log(projectData);
+
     EmailService.sendEmail(
       [defaultEmail],
       "Project form submitted",
-      "A new project form has been submitted."
+      "A new project form has been submitted.",
+      infoPDF
     );
     res.status(200).json(projectInfoSet);
   } catch (error) {
@@ -304,6 +308,8 @@ const updateProjectInfoSet = async (req, res) => {
     let pdfs = [];
     let emptyFields = [];
     const pdfDocuments = req.files.pdfDocuments;
+    let infoPDF = ProjectInfoToPDFService.generateProjectInfoPDF(projectData);
+
     projectData["state"] = "secondFormSubmitted";
 
     if (req.body.secondInputMarker) {
@@ -354,13 +360,11 @@ const updateProjectInfoSet = async (req, res) => {
     }
 
     if (req.files.pdfDocuments && req.files.pdfDocuments.length > 0) {
-      // check if pdfs are in the request body
       const uploadPath = path.join(__dirname, "..", uploadDirectory);
       for (const file of pdfDocuments) {
         const filename = file.originalname;
         const filepath = path.join(uploadPath, file.filename);
 
-        // Add PDF information to the array
         pdfs.push({
           filename,
           filepath,
@@ -380,8 +384,6 @@ const updateProjectInfoSet = async (req, res) => {
         projectData[field] = value;
       }
     });
-    // console.log("projectData: ")
-    // console.log(projectData)
 
     if (emptyFields.length > 0) {
       return res
@@ -406,7 +408,8 @@ const updateProjectInfoSet = async (req, res) => {
     EmailService.sendEmail(
       [defaultEmail],
       "Project form submitted",
-      "A new project form has been submitted."
+      "A new project form has been submitted.",
+      infoPDF
     );
     res.status(200).json(projectInfoSet);
   } catch (error) {

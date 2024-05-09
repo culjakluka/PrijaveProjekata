@@ -5,7 +5,7 @@ const convertToCSV = async (req, res) => {
     const projectInfo = req.body; // Assuming req.body contains the projectInfo object
     const csv = jsonToCsv(projectInfo);
 
-    const filename = `${encodeURIComponent(projectInfo.projectTitle)}.csv`; // Encode projectTitle
+    const filename = `${encodeURIComponent(projectInfo.projectAcronym)}.csv`; // Encode projectTitle
 
     res.setHeader("Content-Type", "text/csv");
     res.setHeader(

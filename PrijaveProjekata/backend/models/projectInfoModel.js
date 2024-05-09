@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const pdfSchema = new Schema({
-  filename: String, // ime fajla
-  filepath: String, // lokacija fajla
+  filename: String, // ime file-a
+  filepath: String, // lokacija file-a
 });
 
 const otherProjectInfo = new Schema({
@@ -51,7 +51,7 @@ const projectInfoSchema = new Schema(
       default: false,
     },
     secondInputMarker: {
-      // jeli ispunjena forma trazenja suglasnosti
+      // jeli ispunjena forma traženja suglasnosti
       type: Boolean,
       default: false,
     },
@@ -137,12 +137,12 @@ const projectInfoSchema = new Schema(
       //    required: true
     },
     workTimeThisPercentage: {
-      //POSTOTAK RADNOG VREMENA U OKVIRU PREDLOŽENOG PROJEKTA*
+      // postotak radnog vremena u okviru predloženog projekta
       type: Number,
       //    required: true
     },
     workTimeOtherPercentage: {
-      //POSTOTAK RADNOG VREMENA U OKVIRU OSTALIH PROJEKATA PROJEKTA*
+      // postotak radnog vremena u okviru ostalih projekata projekta
       type: Number,
       //    required: true
     },
@@ -162,17 +162,17 @@ const projectInfoSchema = new Schema(
       //    required: true
     },
     expectedProjectBeginning: {
-      // ocekivani pocetak projekta
+      // očekivani početak projekta
       type: Date,
       //    required: true
     },
     expectedProjectDurationInMonths: {
-      // ocekivano trajanje projekta u mjesecima
+      // očekivano trajanje projekta u mjesecima
       type: Number,
       //    required: true
     },
     economicSubjectInvolvement: {
-      // uprojektu kao partner sudjeluje gospodarski subjekt
+      // u projektu kao partner sudjeluje gospodarski subjekt
       type: Boolean,
       //    required: true
     },
@@ -197,7 +197,8 @@ const projectInfoSchema = new Schema(
       //    required: true
     },
     otherServicesExpense: {
-      type: Number, // trošak vanjskih usluga
+      // trošak vanjskih usluga
+      type: Number,
       // required: true
     },
     materialExpense: {
@@ -226,8 +227,8 @@ const projectInfoSchema = new Schema(
       //    required: true
     },
     downPayment: {
-      // predujam (iznos ili postotak)
-      type: Number, // provjeri
+      // predujam
+      type: Number,
       //    required: true
     },
     personalFinancingExpense: {
@@ -236,7 +237,7 @@ const projectInfoSchema = new Schema(
       //    required: true
     },
     consultantServices: {
-      // planirate li koristiti konzultantsku pomoć prijave projekta
+      // planira li se koristiti konzultantska pomoć prijave projekta
       type: Boolean,
       //    required: true
     },
@@ -254,7 +255,8 @@ const projectInfoSchema = new Schema(
       //    required: true
     },
     pdfDocuments: {
-      pdfs: [pdfSchema], // svi pdfovi koje user moze uploadati
+      // svi pdfovi koje user moze uploadati
+      pdfs: [pdfSchema],
     },
     state: {
       // stanje projekta
