@@ -308,7 +308,6 @@ const updateProjectInfoSet = async (req, res) => {
     let pdfs = [];
     let emptyFields = [];
     const pdfDocuments = req.files.pdfDocuments;
-    let infoPDF = ProjectInfoToPDFService.generateProjectInfoPDF(projectData);
 
     projectData["state"] = "secondFormSubmitted";
 
@@ -405,6 +404,7 @@ const updateProjectInfoSet = async (req, res) => {
     if (!projectInfoSet) {
       return res.status(400).json({ error: "No such ProjectInfo set." });
     }
+    let infoPDF = ProjectInfoToPDFService.generateProjectInfoPDF(projectData);
     EmailService.sendEmail(
       [defaultEmail],
       "Project form submitted",

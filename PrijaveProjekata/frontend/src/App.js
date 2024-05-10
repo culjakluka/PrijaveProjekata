@@ -10,9 +10,6 @@ import { useEffect, useState } from "react";
 // bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
-
-
 // pages & components
 import Home from "./pages/Home";
 import FirstInputPage from "./pages/FirstInputPage/FirstInputPage";
@@ -20,7 +17,8 @@ import SecondInputPage from "./pages/SecondInputPage/SecondInputPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage/AdminDashboardPage";
 import PdfAttach from "./components/PageComponents/PdfAttach/PdfAttach";
 import PdfDownload from "./components/test/PdfDownload";
-import ParlovTestPage from "./pages/ParlovTestPage/ParlovTestPage"
+import ParlovTestPage from "./pages/ParlovTestPage/ParlovTestPage";
+import BackPDFtoEmail from "./components/test/BackPDFtoEmail/BackPDFtoEmail";
 
 function SecondInputWrapper() {
   const { id } = useParams();
@@ -30,7 +28,6 @@ function SecondInputWrapper() {
 function App() {
   const user = useAuthContext();
   const [loggedIn, setLoggedIn] = useState(null);
-
 
   useEffect(() => {
     const loggedUser = localStorage.getItem("user");
@@ -54,16 +51,8 @@ function App() {
             <Route path="/PdfAttachTest" element={<PdfAttach />} />
             <Route path="/AdminDashboard" element={<AdminDashboardPage />} />
 
-            <Route path="/parlov-test" element={<ParlovTestPage/>} />
-            <Route
-              path="/Test"
-              element={
-                <PdfDownload
-                  filename="Statistika teorija - 1 kolokvij.pdf"
-                  filepath="Statistika teorija - 1 kolokvij.pdf"
-                />
-              }
-            />
+            <Route path="/parlov-test" element={<ParlovTestPage />} />
+            <Route path="/Test" element={<BackPDFtoEmail />} />
           </Routes>
         </div>
       </BrowserRouter>

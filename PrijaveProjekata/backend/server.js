@@ -8,6 +8,7 @@ const dean = require("./routes/dean");
 const department = require("./routes/department");
 const pdf = require("./routes/pdf");
 const csv = require("./routes/csv");
+const testInfoToPDF = require("./routes/testInfoToPDF");
 const cors = require("cors");
 
 require("express-async-errors");
@@ -40,6 +41,7 @@ app.use("/api/dean", dean);
 app.use("/api/department", department);
 app.use("/api/pdf", pdf);
 app.use("/api/csv", csv);
+app.use("/api/generate-pdf", testInfoToPDF);
 
 // global error handler
 app.use((err, req, res, next) => {
