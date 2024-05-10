@@ -57,12 +57,12 @@ const NumberInput = ({name, label, initialValue, setSpecificState, currencyOrPer
         <div className={Style.NumberInputContainer}>
             <label className={Style.NumberInputLabel}>{label}</label>
             <div className={Style.NumberInputHolder}>
-                <div className={Style.CurrencySign}>{currencyOrPercentage}</div>
                 <input type='number'
                     value={inputValue} 
                     onChange={handleChange} 
                     className={Style.NumberInputInput}>
                 </input>
+                <div className={Style.CurrencySign}>{currencyOrPercentage}</div>
             </div>
         </div>
     );

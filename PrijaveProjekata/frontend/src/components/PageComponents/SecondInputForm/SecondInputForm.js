@@ -18,6 +18,8 @@ import AttachHeadOfDepartmentStatement from "../../InputComponents/AttachHeadOfD
 import AutomaticInput from "../../InputComponents/AutomaticInput/AutomaticInput.js";
 import CalendarInput from "../../InputComponents/CalendarInput/CalendarInput.js";
 import ProjectSummary from "../../InputComponents/ProjectSummary/ProjectSummary.js";
+import NumberInput from "../../InputComponents/NumberInput/NumberInput.js";
+import NumberInputSelect from "../../InputComponents/NumberInputSelect/NumberInputSelect.js";
 
 // data
 import {
@@ -27,9 +29,8 @@ import {
 import { questions, radioButtonData1 } from "../../data/secondInputFormData.js";
 
 // context
-import { SecondInputFormDataConext } from "../../../context/SecondInputFormDataContext.js";
+import { SecondInputFormDataConext } from '../../../context/SecondInputFormDataContext.js';  
 import { useAuthContext } from "../../../hooks/useAuthContext.js";
-import NumberInput from "../../InputComponents/NumberInput/NumberInput.js";
 
 const SecondInputForm = (docId) => {
   const { user } = useAuthContext();
@@ -348,7 +349,11 @@ const SecondInputForm = (docId) => {
     <div className={Style.InputFormContainer}>
       <div className={Style.InputForm}>
         <SecondInputFormDataConext.Provider
-          value={{ projectTeam, setProjectTeam }}
+          value={{ 
+            projectTeam,
+            setProjectTeam,
+            totalValue
+          }}
         >
           <h1 className="document-title">NAMJERA PRIJAVE</h1>
 
@@ -499,20 +504,20 @@ const SecondInputForm = (docId) => {
           />
 
           <Question questionText={questions[12]} />
-          <NumberInput
+          <NumberInputSelect
             label={"DIO PRORAČUNA KOJI PRIPADA FESB-u"}
             name={"fesb_value_part"}
             currencyOrPercentage={"€"}
             setSpecificState={setFesbValuePart}
             initialValue={fesbValuePart}
           />
-          <NumberInput
+          <NumberInputSelect
             label={"TROŠAK POSTOJEĆEG OSOBLJA"}
             name={"current_personnel_expense"}
             currencyOrPercentage={"€"}
             setSpecificState={setCurrentPesonnelExpense}
           />
-          <NumberInput
+          <NumberInputSelect
             label={"TROŠAK NOVOZAPOSLENOG OSOBLJA"}
             name={"new_personnel_expense"}
             currencyOrPercentage={"€"}
@@ -522,7 +527,7 @@ const SecondInputForm = (docId) => {
             label={"NEIZRAVNI TROŠKOVI (15% NA TROŠKOVE OSOBLJA)"}
             value={0.15 * fesbValuePart}
           />
-          <NumberInput
+          <NumberInputSelect
             label={
               "TROŠAK I POPIS OPREME KOJA SE NABAVLJA (OZNAČITI NABAVU IZNAD 26.544,00 E"
             }
@@ -530,25 +535,25 @@ const SecondInputForm = (docId) => {
             name={"equipment_description_and_expense"}
             setSpecificState={setEquipmentDescriptionAndExpense}
           />
-          <NumberInput
+          <NumberInputSelect
             label={"TROŠAK AMORTIZACIJE OPREME"}
             name={"equipment_amortization_expense"}
             currencyOrPercentage={"€"}
             setSpecificState={setEquipmentAmortizationExpense}
           />
-          <NumberInput
+          <NumberInputSelect
             label={"TROŠAK VANJSKIH USLUGA"}
             name={"other_services_expense"}
             currencyOrPercentage={"€"}
             setSpecificState={setOtherServicesExpense}
           />
-          <NumberInput
+          <NumberInputSelect
             label={"TROŠAK MATERIJALA I SITNOG INVENTARA"}
             name={"material_expense"}
             currencyOrPercentage={"€"}
             setSpecificState={setMaterialExpense}
           />
-          <NumberInput
+          <NumberInputSelect
             label={"PUTNI TROŠAK/TROŠAK KOTIZACIJA/STRUČNOG USAVRŠAVANJA"}
             currencyOrPercentage={"€"}
             name={"travel_registration_education_expense"}
@@ -562,7 +567,7 @@ const SecondInputForm = (docId) => {
           />
 
           <Question questionText={questions[13]} />
-          <NumberInput
+          <NumberInputSelect
             label={""}
             name={"partner_expense"}
             setSpecificState={setPartnerExpense}
@@ -570,18 +575,18 @@ const SecondInputForm = (docId) => {
           />
 
           <Question questionText={questions[14]} />
-          <NumberInput
+          <NumberInputSelect
             label={""}
             name={"requested_funding"}
-            setSpecificState={setPartnerExpense}
+            setSpecificState={setRequestedFunding}
             currencyOrPercentage={"€"}
           />
 
           <Question questionText={questions[15]} />
-          <NumberInput
+          <NumberInputSelect
             label={""}
             name={"down_payment"}
-            setSpecificState={setPartnerExpense}
+            setSpecificState={setDownPayment}
             currencyOrPercentage={"€"}
           />
 

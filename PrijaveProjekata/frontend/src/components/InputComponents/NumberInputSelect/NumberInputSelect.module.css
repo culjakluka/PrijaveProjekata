@@ -10,6 +10,12 @@
 .NumberInputHolder {
     display: flex;
     flex-direction: row;
+
+}
+
+.NumberInput {
+    display: flex;
+    flex-direction: row;
     width: 30%;
 
     box-sizing: border-box;
@@ -18,8 +24,38 @@
     background-color: #f8f8f8;
 }
 
+.Percentage {
+    padding: 3px 5px 3px 5px;
+    border-left: 2px solid #ccc;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+}
+
+.PercentageSelected {
+    background-color: #9f9f9f63;
+    padding: 3px 5px 3px 5px;
+    border-left: 2px solid #ccc;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+}
+
 .CurrencySign {
-    margin-right: 5px;
+    padding: 3px 7px 3px 7px;
+    border-left: 2px solid #ccc;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+}
+
+.CurrencySignSelected {
+    background-color: #9f9f9f63;
+    padding: 3px 7px 3px 7px;
+    border-left: 2px solid #ccc;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;    
 }
 
 .NumberInputLabel {
