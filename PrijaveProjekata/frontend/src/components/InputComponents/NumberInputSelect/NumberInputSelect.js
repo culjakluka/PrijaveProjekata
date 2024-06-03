@@ -5,7 +5,6 @@ import Style from './NumberInputSelect.module.css'
 
 // context
 import { SecondInputFormDataConext } from '../../../context/SecondInputFormDataContext';
-import { el } from 'date-fns/locale';
 
 const NumberInputSelect = ({name, label, initialValue, setSpecificState, currencyOrPercentage}) => {
 
@@ -75,7 +74,7 @@ const NumberInputSelect = ({name, label, initialValue, setSpecificState, currenc
     }, [currencySelected, percentageSelected])
     
     useEffect(() => {
-        if(currencySelected) {
+        if(currencySelected) {      
             setFinalValue(inputValue);
         } else if(percentageSelected) {
             setFinalValue(totalValue * (parseInt(inputValue) / 100));

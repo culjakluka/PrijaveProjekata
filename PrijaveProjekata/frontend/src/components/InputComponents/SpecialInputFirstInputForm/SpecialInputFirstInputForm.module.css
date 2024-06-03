@@ -145,21 +145,78 @@
     background-color: white;
 }
 
-#SpecialInputAddMember {
-    background-color: white;
-    color: #a6a6a6;
+.SpecialInputAddMember {
+    align-self: center;
+    background-color: #6F6F6F;
+    color: #FDFDFD;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    font-size: 1em;
+    padding: 3px 15px 3px 15px;
     margin-left: 70px;
-    margin-right: 70px;
-    border: solid 2px #A4A4A4;
+    margin-right: 70px; 
 }
 
-#SpecialInputAddProject {
-    background-color: white;
-    color: #a6a6a6;
-    border: solid 2px #A4A4A4;
+.SpecialInputAddProject {
+    align-self: center;
+    background-color: #6F6F6F;
+    color: #FDFDFD;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    font-size: 1em;
+    padding: 3px 15px 3px 15px;
+    margin-left: 70px;
+    margin-right: 70px;
 }
 
 .SpecialSeparatorLine {
     margin-left: 20px;
     margin-right: 20px;
+}
+
+/* SPECIAL INPUT */
+.ProjectTeamContainer {
+    display: flex;
+    flex-direction: column;   
+    align-items: flex-start;
+    width: 100%;
+    padding-left: 10px;
+}
+
+.ProjectTeamMember {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0px 0px 0px;
+}
+
+.ProjectTeamMemberInfo {
+    display: flex;
+    flex-direction: row;
+    font-weight: bold;
+    margin: 0px;
+    height: 100%;
+    color: #4a4949;
+} 
+
+.ProjectOtherProjectsTitle {
+    font-size: 1em;
+    padding-left: 5px;
+}
+
+.ProjectTeamMemberOtherProjects {
+    display: flex;
+    flex-direction: column;
+    font-size: 1em;
+    padding-left: 10px;
+}
+
+.ProjectTeamOtherProjectInfo {
+    display: flex;
+    flex-direction: row;
 }

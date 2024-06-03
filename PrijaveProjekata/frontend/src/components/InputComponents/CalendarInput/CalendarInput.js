@@ -59,7 +59,7 @@ const CalendarInput = ({name, label, setSpecificState, initialValue}) => {
             sessionStorage.setItem(name, initialValue.split("T")[0]);
         }
 
-    }, [initialValue])
+    }, [initialValue])  
 
 
     // useEffect to save input value to local session storage whenever it changes
@@ -69,6 +69,21 @@ const CalendarInput = ({name, label, setSpecificState, initialValue}) => {
         sessionStorage.setItem(name, inputValue);
 
     }, [inputValue, name]); // re-run this effect when 'inputValue' or 'name' changes
+
+    // format date
+    const formatDate = (value) => { 
+        if(!value) return '';
+
+        const[year, month, day] = value.split('-');
+        return `${day}/${month}/${year}`;
+    }
+
+    const handleDataBackToISO = (value) => {
+        if(!value) return '';
+
+        const[day, month, year] = value.split('/');
+        return `${year}-${month}-${day}`;
+    }
 
     return (  
         <div className="calendar-input-container">
