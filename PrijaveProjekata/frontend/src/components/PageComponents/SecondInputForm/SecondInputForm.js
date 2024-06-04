@@ -536,7 +536,7 @@ const SecondInputForm = (docId) => {
           />
           <NumberInputSelect
             label={
-              "TROŠAK I POPIS OPREME KOJA SE NABAVLJA (OZNAČITI NABAVU IZNAD 26.544,00 E"
+              "TROŠAK I POPIS OPREME KOJA SE NABAVLJA (OZNAČITI NABAVU IZNAD 26.544,00 E)"
             }
             currencyOrPercentage={"€"}
             name={"equipment_description_and_expense"}
@@ -625,6 +625,24 @@ const SecondInputForm = (docId) => {
             name={"consultant_services"}
             setSelectionState={setConsultantServices}
           />
+<<<<<<< HEAD
+          {
+            consultantServices && ( 
+              <div>
+                <p>Ukoliko je odgovor DA:</p>
+                <TextInputWithoutTitle
+                  name={"consultant_expense"}
+                  setSpecificState={setConsultantExpense}
+                />
+                <TextInputWithoutTitle
+                  name={"consultant_expense_source"}
+                  setSpecificState={setConsultantExpenseSource}
+                />
+              </div>
+            )
+          }
+          
+=======
           <p>Ukoliko je odgovor DA:</p>
           <p>Navedite trošak izrade projektne prijave*</p>
           <TextInputWithoutTitle
@@ -637,6 +655,7 @@ const SecondInputForm = (docId) => {
             name={"consultant_expense_source"}
             setSpecificState={setConsultantExpenseSource}
           />
+>>>>>>> main
 
           <Question questionText={questions[20]} />
           <p>
