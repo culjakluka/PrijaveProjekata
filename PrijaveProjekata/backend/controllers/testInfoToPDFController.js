@@ -1,10 +1,12 @@
-const { generateProjectInfoPDF } = require("../services/pdfService");
+const {
+  generateProjectInfoPDF,
+} = require("../services/projectInfoToPDFService");
 
 async function generatePDF(req, res) {
   try {
     const { projectData } = req.body;
 
-    // Generate the PDF document using your service
+    // Generate the PDF document
     const doc = await generateProjectInfoPDF(projectData);
 
     // Pipe the PDF content to the response
