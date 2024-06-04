@@ -626,15 +626,22 @@ const SecondInputForm = (docId) => {
             name={"consultant_services"}
             setSelectionState={setConsultantServices}
           />
-          <p>Ukoliko je odgovor DA:</p>
-          <TextInputWithoutTitle
-            name={"consultant_expense"}
-            setSpecificState={setConsultantExpense}
-          />
-          <TextInputWithoutTitle
-            name={"consultant_expense_source"}
-            setSpecificState={setConsultantExpenseSource}
-          />
+          {
+            consultantServices && ( 
+              <div>
+                <p>Ukoliko je odgovor DA:</p>
+                <TextInputWithoutTitle
+                  name={"consultant_expense"}
+                  setSpecificState={setConsultantExpense}
+                />
+                <TextInputWithoutTitle
+                  name={"consultant_expense_source"}
+                  setSpecificState={setConsultantExpenseSource}
+                />
+              </div>
+            )
+          }
+          
 
           <Question questionText={questions[20]} />
           <p>
