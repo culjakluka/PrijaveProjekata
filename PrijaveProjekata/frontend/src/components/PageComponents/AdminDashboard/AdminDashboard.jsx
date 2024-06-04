@@ -17,9 +17,15 @@ import ProjectInfoButtonContainer from "./AdminDashboardComponents/ProjectInfoBu
 
 // external components
 
-// FontAwesome 
+// FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt, faFilePdf, faDownload, faLock, faLockOpen } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPencilAlt,
+  faFilePdf,
+  faDownload,
+  faLock,
+  faLockOpen,
+} from "@fortawesome/free-solid-svg-icons";
 
 // api requests
 import {
@@ -35,7 +41,10 @@ import {
 // pdf components
 import FirstInputFormPDF from "../../InputComponents/PDF/FirstInputFormPDF.js";
 import { pdf } from "@react-pdf/renderer";
-import { firstInputFormData, secondInputFormData } from '../../InputComponents/PDF/data.js'
+import {
+  firstInputFormData,
+  secondInputFormData,
+} from "../../InputComponents/PDF/data.js";
 
 const AdminDashboard = () => {
   const [projectSets, setProjectSets] = useState(null);
@@ -80,15 +89,17 @@ const AdminDashboard = () => {
   const [modalUpdateProjectInfoIsOpen, setModalUpdateProjectInfoIsOpen] =
     useState(false);
 
-    // modal - discard changes
-    const[modalDiscardChangesIsOpen, setModalDiscardChangesIsOpen] = useState(false); 
+  // modal - discard changes
+  const [modalDiscardChangesIsOpen, setModalDiscardChangesIsOpen] =
+    useState(false);
 
+  // modal - approve project
+  const [modalApproveProjectIsOpen, setModalApproveProjectIsOpen] =
+    useState(false);
 
-    // modal - approve project
-    const[modalApproveProjectIsOpen, setModalApproveProjectIsOpen] = useState(false);
-
-    // modal - decline project
-    const[modalDeclineProjectIsOpen, setModalDeclineProjectIsOpen] = useState(false);
+  // modal - decline project
+  const [modalDeclineProjectIsOpen, setModalDeclineProjectIsOpen] =
+    useState(false);
 
   // project editable
   const [projectEditable, setProjectEditable] = useState(false);
@@ -104,13 +115,12 @@ const AdminDashboard = () => {
   const [formattedData2, setFormattedData2] = useState(secondInputFormData);
 
   // project locked
-  const[projectLocked, setProjectLocked] = useState(true);
+  const [projectLocked, setProjectLocked] = useState(true);
 
   // editing of project in progress
-  const[editingInProgress, setEditingInProgress] = useState(false);
+  const [editingInProgress, setEditingInProgress] = useState(false);
 
   // USE EFFECT
-
 
   // after component is mounted
   useEffect(() => {
@@ -214,88 +224,122 @@ const AdminDashboard = () => {
       formattedData[0].elements[1].value = selectedProject?.vocation || "";
       formattedData[0].elements[2].value = selectedProject?.department || "";
       formattedData[0].elements[3].value = selectedProject?.email || "";
-  
+
       formattedData[1].elements[0].value = selectedProject?.projectTitle || "";
-      formattedData[1].elements[1].value = selectedProject?.projectAcronym || "";
-      formattedData[1].elements[2].value = selectedProject?.applicationDeadline || "";
-  
-      formattedData[2].elements[0].value = selectedProject?.projectSummary || "";
-  
-      formattedData[3].elements[0].value = selectedProject?.applicationURL || "";
-  
-      formattedData[4].elements[0].value = selectedProject?.projectApplicant || "";
-  
-      formattedData[5].elements[0].value = selectedProject?.projectPartners || "";
-  
+      formattedData[1].elements[1].value =
+        selectedProject?.projectAcronym || "";
+      formattedData[1].elements[2].value =
+        selectedProject?.applicationDeadline || "";
+
+      formattedData[2].elements[0].value =
+        selectedProject?.projectSummary || "";
+
+      formattedData[3].elements[0].value =
+        selectedProject?.applicationURL || "";
+
+      formattedData[4].elements[0].value =
+        selectedProject?.projectApplicant || "";
+
+      formattedData[5].elements[0].value =
+        selectedProject?.projectPartners || "";
+
       formattedData[6].elements[0].value = selectedProject?.totalValue || "";
       formattedData[6].elements[1].value = selectedProject?.fesbValuePart || "";
-  
-      formattedData[7].elements[0].value = selectedProject?.newEmploymentBoolean || "";
-  
+
+      formattedData[7].elements[0].value =
+        selectedProject?.newEmploymentBoolean || "";
     } else if (approvalSelection) {
-  
       formattedData2[0].elements[0].value = selectedProject?.nameSurname || "";
       formattedData2[0].elements[1].value = selectedProject?.vocation || "";
       formattedData2[0].elements[2].value = selectedProject?.department || "";
       formattedData2[0].elements[3].value = selectedProject?.email || "";
-      formattedData2[0].elements[4].value = selectedProject?.mobilePhoneNumber || "";
-      formattedData2[0].elements[5].value = selectedProject?.workTimeThisPercentage || "";
-      formattedData2[0].elements[6].value = selectedProject?.workTimeOtherPercentage || "";
-      formattedData2[0].elements[7].value = selectedProject?.teamLeaderNote || "";
-  
+      formattedData2[0].elements[4].value =
+        selectedProject?.mobilePhoneNumber || "";
+      formattedData2[0].elements[5].value =
+        selectedProject?.workTimeThisPercentage || "";
+      formattedData2[0].elements[6].value =
+        selectedProject?.workTimeOtherPercentage || "";
+      formattedData2[0].elements[7].value =
+        selectedProject?.teamLeaderNote || "";
+
       formattedData2[1].elements[0].value = selectedProject?.projectTitle || "";
-      formattedData2[1].elements[1].value = selectedProject?.projectAcronym || "";
-      formattedData2[1].elements[2].value = selectedProject?.applicationDeadline || "";
-  
-      formattedData2[2].elements[0].value = selectedProject?.projectSummary || "";
-  
-      formattedData2[3].elements[0].value = selectedProject?.applicationURL || "";
-  
-      formattedData2[4].elements[0].value = selectedProject?.sourceOfFunding || "";
-  
+      formattedData2[1].elements[1].value =
+        selectedProject?.projectAcronym || "";
+      formattedData2[1].elements[2].value =
+        selectedProject?.applicationDeadline || "";
+
+      formattedData2[2].elements[0].value =
+        selectedProject?.projectSummary || "";
+
+      formattedData2[3].elements[0].value =
+        selectedProject?.applicationURL || "";
+
+      formattedData2[4].elements[0].value =
+        selectedProject?.sourceOfFunding || "";
+
       formattedData2[5].elements[0].value = selectedProject?.projectType || "";
-  
-      formattedData2[6].elements[0].value = selectedProject?.expectedProjectBeggining || "";
-  
-      formattedData2[7].elements[0].value = selectedProject?.expectedProjectDurationInMonths || "";
-  
-      formattedData2[8].elements[0].value = selectedProject?.projectApplicant || "";
-  
-      formattedData2[9].elements[0].value = selectedProject?.projectPartners || "";
-  
-      formattedData2[10].elements[0].value = selectedProject?.economicSubjectInvolvement || "";
-  
+
+      formattedData2[6].elements[0].value =
+        selectedProject?.expectedProjectBeggining || "";
+
+      formattedData2[7].elements[0].value =
+        selectedProject?.expectedProjectDurationInMonths || "";
+
+      formattedData2[8].elements[0].value =
+        selectedProject?.projectApplicant || "";
+
+      formattedData2[9].elements[0].value =
+        selectedProject?.projectPartners || "";
+
+      formattedData2[10].elements[0].value =
+        selectedProject?.economicSubjectInvolvement || "";
+
       formattedData2[11].elements[0].value = selectedProject?.totalValue || "";
-  
-      formattedData2[12].elements[0].value = selectedProject?.fesbValuePart || "";
-      formattedData2[12].elements[1].value = selectedProject?.currentPesonnelExpense || "";
-      formattedData2[12].elements[2].value = selectedProject?.newPersonnelExpense || "";
-      formattedData2[12].elements[3].value = selectedProject?.fesbValuePart ? selectedProject.fesbValuePart * 0.15 : "";
-      formattedData2[12].elements[4].value = selectedProject?.equipmentDescriptionAndExpense || "";
-      formattedData2[12].elements[5].value = selectedProject?.equipmentAmortizationExpense || "";
-      formattedData2[12].elements[6].value = selectedProject?.otherServicesExpense || "";
-      formattedData2[12].elements[7].value = selectedProject?.travelExpense || "";
+
+      formattedData2[12].elements[0].value =
+        selectedProject?.fesbValuePart || "";
+      formattedData2[12].elements[1].value =
+        selectedProject?.currentPesonnelExpense || "";
+      formattedData2[12].elements[2].value =
+        selectedProject?.newPersonnelExpense || "";
+      formattedData2[12].elements[3].value = selectedProject?.fesbValuePart
+        ? selectedProject.fesbValuePart * 0.15
+        : "";
+      formattedData2[12].elements[4].value =
+        selectedProject?.equipmentDescriptionAndExpense || "";
+      formattedData2[12].elements[5].value =
+        selectedProject?.equipmentAmortizationExpense || "";
+      formattedData2[12].elements[6].value =
+        selectedProject?.otherServicesExpense || "";
+      formattedData2[12].elements[7].value =
+        selectedProject?.travelExpense || "";
       formattedData2[12].elements[8].value = selectedProject?.expenseNote || "";
-  
-      formattedData2[13].elements[0].value = selectedProject?.partnerExpense || "";
-  
-      formattedData2[14].elements[0].value = selectedProject?.requestedFunding || "";
-  
+
+      formattedData2[13].elements[0].value =
+        selectedProject?.partnerExpense || "";
+
+      formattedData2[14].elements[0].value =
+        selectedProject?.requestedFunding || "";
+
       formattedData2[15].elements[0].value = selectedProject?.downPayment || "";
-  
-      formattedData2[16].elements[0].value = selectedProject?.personalFinancingExpense || "";
-  
-      formattedData2[17].elements[0].value = selectedProject?.newEmploymentBoolean || "";
-  
-      formattedData2[18].elements[0].value = JSON.stringify(selectedProject?.projectTeam || "");
-  
-      formattedData2[19].elements[0].value = selectedProject?.consultantServices ? "Da" : "Ne";
-  
+
+      formattedData2[16].elements[0].value =
+        selectedProject?.personalFinancingExpense || "";
+
+      formattedData2[17].elements[0].value =
+        selectedProject?.newEmploymentBoolean || "";
+
+      formattedData2[18].elements[0].value = JSON.stringify(
+        selectedProject?.projectTeam || ""
+      );
+
+      formattedData2[19].elements[0].value = selectedProject?.consultantServices
+        ? "Da"
+        : "Ne";
     } else {
       console.log("No project selected");
     }
   }, [selectedProject, intentionSelection, approvalSelection]);
-  
 
   // FUNCTIONS
 
@@ -333,21 +377,19 @@ const AdminDashboard = () => {
     setIntentionSelection(false);
   };
 
-
   // editing part
   const manageEditing = () => {
     setProjectEditable(true); // make project editable
 
     setProjectLocked(false); // unlock project
-    
+
     // activate editing state
     setEditingInProgress(true);
-  }
+  };
 
-  const discardChanges = () => { 
+  const discardChanges = () => {
     setModalDiscardChangesIsOpen(true);
-  }
-
+  };
 
   // handling PDF
 
@@ -356,30 +398,35 @@ const AdminDashboard = () => {
     // Assuming pdf() is a function that returns a Promise resolving to a blob
     // Generate the document
     const doc = <FirstInputFormPDF data={projectData} title={title} />;
-  
-    // Create a PDF blob
-    pdf(doc).toBlob().then(blob => {
-      // Create a Blob URL
-      const url = URL.createObjectURL(blob);
-  
-      // Create a temporary link element
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = selectedProject.nameSurname + " - " + selectedProject.projectTitle + '.pdf';  // Specify the filename to download
-  
-      // Append the link to the body, click it, and remove it
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-  
-      // Optional: Release the Blob URL to free up resources
-      URL.revokeObjectURL(url);
-    }).catch(err => {
-      console.error(err);
-    });
-  }
-  
 
+    // Create a PDF blob
+    pdf(doc)
+      .toBlob()
+      .then((blob) => {
+        // Create a Blob URL
+        const url = URL.createObjectURL(blob);
+
+        // Create a temporary link element
+        const link = document.createElement("a");
+        link.href = url;
+        link.download =
+          selectedProject.nameSurname +
+          " - " +
+          selectedProject.projectTitle +
+          ".pdf"; // Specify the filename to download
+
+        // Append the link to the body, click it, and remove it
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Optional: Release the Blob URL to free up resources
+        URL.revokeObjectURL(url);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   // TESTING START //
 
@@ -387,11 +434,11 @@ const AdminDashboard = () => {
 
   const handleProjectId = (event) => {
     setProjectId(event.target.value);
-  };    
+  };
   // console log outputs
-  
+
   console.log("CURRENT PROJECT TEAM:\n" + selectedProject?.projectTeam);
-  
+
   // TESTING END //
 
   return (
@@ -411,7 +458,7 @@ const AdminDashboard = () => {
           setModalUpdateProjectInfoIsOpen,
           updateProjectData,
           setUpdateProjectData,
-          selectedProject,  
+          selectedProject,
           setSelectedProject,
           setProjectLocked,
           projectLocked,
@@ -422,7 +469,7 @@ const AdminDashboard = () => {
           modalDeclineProjectIsOpen,
           setModalDeclineProjectIsOpen,
           editingInProgress,
-          setEditingInProgress
+          setEditingInProgress,
         }}
       >
         <div className="admin-dashboard-container">
@@ -436,8 +483,6 @@ const AdminDashboard = () => {
           {modalApproveProjectIsOpen && <ModalApproveProject />}
 
           {modalDeclineProjectIsOpen && <ModalDeclineProject />}
-
-          
 
           <AdminDashboardHeader />
 
@@ -617,18 +662,30 @@ const AdminDashboard = () => {
                   selectProject={setSelectedApprovalFormId}
                 />
               )}
-
             </div>
 
             {/* THIRD SECTION */}
-                    
-            {/* if selectedProject exists => show selected project's info */}
-            <div className={projectLocked ? "single-application-container-locked" : "single-application-container-unlocked"}>
 
-              {selectedProject != null && (
-                projectLocked ? <FontAwesomeIcon icon={faLock} style={{alignSelf : "flex-start", marginBottom : "5px"}}/>
-                : <FontAwesomeIcon icon={faLockOpen} style={{alignSelf : "flex-start", marginBottom : "5px"}}/>
-              )}
+            {/* if selectedProject exists => show selected project's info */}
+            <div
+              className={
+                projectLocked
+                  ? "single-application-container-locked"
+                  : "single-application-container-unlocked"
+              }
+            >
+              {selectedProject != null &&
+                (projectLocked ? (
+                  <FontAwesomeIcon
+                    icon={faLock}
+                    style={{ alignSelf: "flex-start", marginBottom: "5px" }}
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faLockOpen}
+                    style={{ alignSelf: "flex-start", marginBottom: "5px" }}
+                  />
+                ))}
 
               {selectedProject != null &&
                 pendingSelected /*to prevent rendering if the project is not selected*/ && (
@@ -650,51 +707,67 @@ const AdminDashboard = () => {
                       </button>
                     </div>
 
-                    {projectEditable && !projectLocked && 
-                      <button className="discard-changes-button manage-button-style" onClick={() => discardChanges()}>ODBACI PROMJENE</button>}
+                    {projectEditable && !projectLocked && (
+                      <button
+                        className="discard-changes-button manage-button-style"
+                        onClick={() => discardChanges()}
+                      >
+                        ODBACI PROMJENE
+                      </button>
+                    )}
 
-                    { !projectEditable &&  
-                    <div className="decision-buttons-container">
-                      <div className="approve-button-container manage-button-style">
-                        <button
-                          onClick={() => setModalApproveProjectIsOpen(true)}
-                          className="approve-button"
-                        >
-                          ODOBRI
-                        </button>
+                    {!projectEditable && (
+                      <div className="decision-buttons-container">
+                        <div className="approve-button-container manage-button-style">
+                          <button
+                            onClick={() => setModalApproveProjectIsOpen(true)}
+                            className="approve-button"
+                          >
+                            ODOBRI
+                          </button>
+                        </div>
+
+                        <div className="decline-button-container manage-button-style">
+                          <button
+                            onClick={() => setModalDeclineProjectIsOpen(true)}
+                            className="decline-button"
+                          >
+                            ODBIJ
+                          </button>
+                        </div>
                       </div>
-
-                      <div className="decline-button-container manage-button-style">
-                        <button
-                          onClick={() => setModalDeclineProjectIsOpen(true)}
-                          className="decline-button"
-                        >
-                          ODBIJ
-                        </button>
-                      </div>
-                    </div>
-                    }
-
+                    )}
                   </div>
                 )}
-              
 
               {selectedProject && (
                 <>
-                {/* PDF SECTION */}
-                <div className="project-to-pdf-container">
-                  <p style={{color:"#515151", fontWeight:"bold"}}>Dohvati projekt u obliku pdf dokumenta:</p>
-                  <button onClick={intentionSelection ? () => handlePDF(formattedData, "NAMJERA PRIJAVE") : () => handlePDF(formattedData2, "TRAŽENJE SUGLASNOSTI")} className="project-to-pdf-button">
-                    <div className="project-to-pdf-txt">PREUZMI</div>
-                    <FontAwesomeIcon icon={faDownload} style={{color: "#ffffff"}}/>
-                  </button>
-                </div>
-                {/* PDF SECTION END */}
-                
-                <ProjectInfo selectedProject={selectedProject}/>
+                  {/* PDF SECTION */}
+                  <div className="project-to-pdf-container">
+                    <p style={{ color: "#515151", fontWeight: "bold" }}>
+                      Dohvati projekt u obliku pdf dokumenta:
+                    </p>
+                    <button
+                      onClick={
+                        intentionSelection
+                          ? () => handlePDF(formattedData, "NAMJERA PRIJAVE")
+                          : () =>
+                              handlePDF(formattedData2, "TRAŽENJE SUGLASNOSTI")
+                      }
+                      className="project-to-pdf-button"
+                    >
+                      <div className="project-to-pdf-txt">PREUZMI</div>
+                      <FontAwesomeIcon
+                        icon={faDownload}
+                        style={{ color: "#ffffff" }}
+                      />
+                    </button>
+                  </div>
+                  {/* PDF SECTION END */}
+
+                  <ProjectInfo selectedProject={selectedProject} />
                 </>
               )}
-
             </div>
           </div>
         </div>
