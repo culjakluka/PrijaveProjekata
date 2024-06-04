@@ -1,4 +1,4 @@
-.project-info-container{
+.ProjectInfoContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,4 +36,19 @@
     font-size: 1.2em;
     color:#515151;
     font-weight: bold;
+}
+
+.ConvertToCsvContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    margin: 20px 0px 10px 0px;
+}
+
+.ConvertToCsvContainer p {
+    text-align: center;
+    margin: 0;
+    margin-right: 20px;
+    font-size: 1.1em;
 }

@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 
 // style
-import "./ProjectInfo.css";
+import Style from  "./ProjectInfo.module.css";
 import "../../AdminDashboard.css";
 
 // context
@@ -57,13 +57,17 @@ const ProjectInfo = ({ selectedProject }) => {
 
   return (
     <>
-      <div className="project-info-container">
+      <div className={Style.ProjectInfoContainer}>
         <h4>Document_id:{selectedProject._id}</h4>
         <h2>
           {selectedProject.nameSurname} - {selectedProject.projectAcronym}
         </h2>
 
-        <CsvConverter jsonData={selectedProject} />
+        <div className={Style.ConvertToCsvContainer}>
+          <p style={{color:"#515151", fontWeight:"bold"}}>Dohvati projekt u obliku csv datoteke: </p>
+          <CsvConverter jsonData={selectedProject} />
+        </div>
+        
 
         {intentionSelection && (
           <>
@@ -163,12 +167,12 @@ const ProjectInfo = ({ selectedProject }) => {
 
         {approvalSelection && (
           <>
-            <div className="pdfContainer">
-              <div className="pdfTitle">Projektna dokumentacija:</div>
-              <div className="pdfContent">
+            <div className={Style.pdfContainer}>
+              <div className={Style.pdfTitle}>Projektna dokumentacija:</div>
+              <div className={Style.pdfContent}>
                 {Array.isArray(selectedProject?.pdfDocuments) &&
                   selectedProject.pdfDocuments.map((pdf) => (
-                    <div className="pdfDivInside" key={pdf._id}>
+                    <div className={Style.pdfDivInside} key={pdf._id}>
                       <FontAwesomeIcon
                         icon={faFilePdf}
                         size="xl"
