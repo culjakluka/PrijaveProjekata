@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         marginTop: 50
     },
     signatureTitle : {
-        marginBottom: 40
+        marginBottom: 30
     },
     signatureLine : {
         width: 210,
@@ -84,8 +84,6 @@ const styles = StyleSheet.create({
 });
 
 const DepartmentHeadStatementPDF = ({ nameSurnameApplicant, nameSurnameDepartmentHead }) => {
-
-    
 
     return(
         <Document> 
