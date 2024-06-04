@@ -164,7 +164,7 @@ const FirstInputForm = () => {
       console.log(departments);
 
       const fetchedDepartments = departments.map(
-        (department) => department.name
+        (department) => (department.name + " - " + department.headName)
       );
       // Update state with fetched department names
       setDepartmentsData(fetchedDepartments);

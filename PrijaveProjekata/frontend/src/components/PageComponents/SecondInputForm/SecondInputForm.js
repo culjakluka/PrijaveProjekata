@@ -12,7 +12,7 @@ import DropdownMenuInputOther from "../../InputComponents/DropdownMenuInputOther
 import DropdownMenuInput from "../../InputComponents/DropdownMenuInput/DropdownMenuInput.js";
 import RadioButtonInput from "../../InputComponents/RadioButtonInput/RadioButtonInput.js";
 import SpecialInputSecondInputForm from "../../InputComponents/SpecialInput/SpecialInputSecondInputForm.js";
-import GenerirajIzjavuPredstojnikaZavoda from "../../InputComponents/GenerateHeadOfDepartmentStatement/GenerateHeadOfDepartmentStatement.js";
+import GenerateHeadOfDepartmentStatement from "../../InputComponents/GenerateHeadOfDepartmentStatement/GenerateHeadOfDepartmentStatement.js";
 import AttachAdditionalDocumentation from "../../InputComponents/AttachAdditionalDocumentation/AttachAdditionalDocumentation.js";
 import AttachHeadOfDepartmentStatement from "../../InputComponents/AttachHeadOfDepartmentStatement/AttachHeadOfDepartmentStatement.js";
 import AutomaticInput from "../../InputComponents/AutomaticInput/AutomaticInput.js";
@@ -352,7 +352,9 @@ const SecondInputForm = (docId) => {
           value={{ 
             projectTeam,
             setProjectTeam,
-            totalValue
+            totalValue,
+            department,
+            nameSurname
           }}
         >
           <h1 className="document-title">NAMJERA PRIJAVE</h1>
@@ -644,7 +646,7 @@ const SecondInputForm = (docId) => {
             setSpecificState={setRequiredDocumentationFESB}
           />
 
-          <GenerirajIzjavuPredstojnikaZavoda />
+          <GenerateHeadOfDepartmentStatement/>
 
           <Question questionText={questions[21]} />
 

@@ -70,6 +70,11 @@ const projectInfoSchema = new Schema(
       type: String,
       //    required: true
     },
+    headOfDepartment: {
+      // ime i prezime predstojnika zavoda
+      type: String,
+      //   required: true
+    },
     email: {
       // email adresa voditelja projekta
       type: String,
