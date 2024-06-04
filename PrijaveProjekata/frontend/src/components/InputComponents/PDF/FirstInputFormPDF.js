@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         fontFamily : "Helvetica"
     },
     section: {
-        margin: 20,
+        padding: 20,
         flexGrow: 1,
         alignSelf: "flex-start",
         fontSize : "12px"

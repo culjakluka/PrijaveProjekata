@@ -128,6 +128,7 @@
 
 /* third section*/
 .single-application-container-unlocked {
+    color:#292929;
     background-color: #FDF9F9;
     flex: 1;
     display: flex;
