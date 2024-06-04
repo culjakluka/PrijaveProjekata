@@ -690,6 +690,7 @@ const AdminDashboard = () => {
                   </button>
                 </div>
                 {/* PDF SECTION END */}
+                
                 <ProjectInfo selectedProject={selectedProject}/>
                 </>
               )}
