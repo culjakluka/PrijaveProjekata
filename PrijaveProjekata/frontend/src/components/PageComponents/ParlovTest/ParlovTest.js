@@ -9,7 +9,7 @@ const ParlovTest = () => {
         <div>
             <PDFViewer style={{width : "100%", height: "100vh" }}>
                 {/* <FirstInputFormPDF data={secondInputFormData}/> */}
-                <DepartmentHeadStatementPDF />
+                <DepartmentHeadStatementPDF nameSurname={"Petar Parlov"}/>
             </PDFViewer>
         </div>
     );
