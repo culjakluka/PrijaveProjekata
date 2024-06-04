@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+// styles
+import Style from "./CsvConverter.module.css";
+
 const CsvConverter = ({ jsonData }) => {
   const handleConvert = async () => {
     try {
@@ -35,7 +38,7 @@ const CsvConverter = ({ jsonData }) => {
 
   return (
     <div>
-      <button onClick={handleConvert}>Convert to CSV</button>
+      <button className={Style.CsvConvertButton} onClick={handleConvert} >Konvertiraj u CSV</button>
     </div>
   );
 };

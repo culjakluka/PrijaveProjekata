@@ -1,0 +1,18 @@
+.CsvConvertButton {
+    align-self: center;
+    background-color: #6F6F6F;
+    color: #FDFDFD;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    font-size: 1em;
+    padding: 3px 15px 3px 15px;
+}
+
+
+.CsvConvertButton:hover {
+    background-color: #cecece;
+  }
+  

@@ -104,6 +104,7 @@ const ProjectInfo = ({ selectedProject }) => {
               currentLabelValue={"ROK ZA PRIJAVU PROJEKTA"}
               currentInputValue={selectedProject.applicationDeadline}
               projectUpdateName={"applicationDeadline"}
+              isDate={true}
             />
 
             <AdminQuestion questionText={questions[2]} />
