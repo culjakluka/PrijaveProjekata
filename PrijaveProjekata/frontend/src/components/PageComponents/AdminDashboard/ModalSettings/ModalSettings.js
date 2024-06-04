@@ -69,11 +69,14 @@ const ModalSettings = ({}) => {
     // Fetch department data
     const fetchDepartmentData = async () => {
         try {
-            const departmentsData = await getDepartments();
-            setDepartments(departmentsData);
-            console.log(departmentsData);
-            // Handle the fetched department data as needed
-            console.log(departmentsData);
+            const response = await fetch(BASE_URL);
+            if (response.ok) {
+                const departmentsData = await response.json();
+                setDepartments(departmentsData);
+            } else {
+                console.error('Failed to fetch department data');
+                window.alert('Failed to fetch department data!');
+            }
         } catch (error) {
             console.error('Error fetching department data:', error);
             window.alert('Failed to fetch department data!');
@@ -110,20 +113,21 @@ const ModalSettings = ({}) => {
         setModalIsOpen(false);
     }
 
-    useEffect(() => {
-        if(modalIsOpen) {
-            fetchDeanData();
-            fetchDepartmentData();
-        }
-    }, [modalIsOpen])
+    // useEffect(() => {
+    //     if(modalIsOpen) {
+    //         fetchDeanData();
+    //         fetchDepartmentData();
+    //     }
+    // }, [modalIsOpen])
 
     useEffect(() => {
-        // TO-DO
+        fetchDeanData();
+        fetchDepartmentData();
     }, [])
 
-    useEffect(() => {
-        fetchDepartmentData();
-    }, [departments])
+    // useEffect(() => {
+    //     fetchDepartmentData();
+    // }, [departments])
 
     const handleDepartmentName = (event) => {
         setNewDepartmentData({...newDepartmentData, name : event.target.value});

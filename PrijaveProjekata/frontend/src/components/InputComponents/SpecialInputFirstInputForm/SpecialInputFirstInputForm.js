@@ -80,17 +80,24 @@ const SpecialInputFirstInputForm = ({ name, pitanje }) => {
           <div className={Style.SpecialInputCompletedMembers}>
             {/* GENERATING COMPLETED PROJECT MEMBERS */}
             {projectTeam.length > 0 ? (
-              projectTeam.map((member, index) => (
-                <CompletedMember
-                  key={index}
-                  memberId={index}
-                  fullName={member.nameSurname}
-                  email={member.email}
-                  percent={member.thisProjectPercentage}
-                  projectsArray={member.otherProjects}
-                  deleteSingleMember={deleteMember}
-                />
-              ))
+              projectTeam?.map((member, index) => (
+                <div className={Style.ProjectTeamMember}>
+                    <div className={Style.ProjectTeamMemberInfo}>
+                        <div style={{marginRight:"10px"}}>{member.nameSurname}</div>
+                        <div>{member.thisProjectPercentage}%</div>
+                    </div>
+                    
+                    <div className={Style.ProjectOtherProjectsTitle}>OSTALI PROJEKTI:</div>
+                    {member.otherProjects.map((project, index) => (
+                        <div className={Style.ProjectTeamMemberOtherProjects}>
+                            <div className={Style.ProjectTeamOtherProjectInfo}>
+                                {project.otherProjectName} {project.otherProjectPercentage}%
+                            </div>
+                        </div>
+                    
+                    ))}
+                </div>
+            ))
             ) : (
               <p>niste dodali niti jednog člana...</p>
             )}
