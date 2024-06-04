@@ -517,7 +517,6 @@ const SecondInputForm = (docId) => {
             name={"fesb_value_part"}
             currencyOrPercentage={"€"}
             setSpecificState={setFesbValuePart}
-            initialValue={fesbValuePart}
           />
           <NumberInputSelect
             label={"TROŠAK POSTOJEĆEG OSOBLJA"}
@@ -626,6 +625,7 @@ const SecondInputForm = (docId) => {
             name={"consultant_services"}
             setSelectionState={setConsultantServices}
           />
+<<<<<<< HEAD
           {
             consultantServices && ( 
               <div>
@@ -642,6 +642,20 @@ const SecondInputForm = (docId) => {
             )
           }
           
+=======
+          <p>Ukoliko je odgovor DA:</p>
+          <p>Navedite trošak izrade projektne prijave*</p>
+          <TextInputWithoutTitle
+            name={"consultant_expense"}
+            setSpecificState={setConsultantExpense}
+          />
+
+          <p>Navedite iz kojih sredstava se planira financirati prethodno navedeni trošak*</p>
+          <TextInputWithoutTitle
+            name={"consultant_expense_source"}
+            setSpecificState={setConsultantExpenseSource}
+          />
+>>>>>>> main
 
           <Question questionText={questions[20]} />
           <p>
