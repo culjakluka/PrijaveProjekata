@@ -14,7 +14,7 @@ let questions = [
   "13. Proračun projekta (može se unositi vrijednost ili postotak ukupne vrijednosti projketa*)",
   "14. Proračun za ostale partnere",
   "15. Traženo financiranje",
-  "16. Predujam (iznos ili postotak",
+  "16. Predujam (iznos ili postotak)",
   "17. Iznos potrebnog vlastitog sufinanciranja projekta",
   "18. Jesu li u projektu planirana nova radna mjesta*",
   "19. Navedite ostale osobe koje će biti uključene u provedbu projekta",

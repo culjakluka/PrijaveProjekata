@@ -537,7 +537,7 @@ const SecondInputForm = (docId) => {
           />
           <NumberInputSelect
             label={
-              "TROŠAK I POPIS OPREME KOJA SE NABAVLJA (OZNAČITI NABAVU IZNAD 26.544,00 E"
+              "TROŠAK I POPIS OPREME KOJA SE NABAVLJA (OZNAČITI NABAVU IZNAD 26.544,00 E)"
             }
             currencyOrPercentage={"€"}
             name={"equipment_description_and_expense"}
