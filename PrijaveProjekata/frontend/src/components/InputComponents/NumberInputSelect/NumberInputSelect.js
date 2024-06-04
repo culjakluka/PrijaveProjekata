@@ -6,13 +6,11 @@ import Style from './NumberInputSelect.module.css'
 // context
 import { SecondInputFormDataConext } from '../../../context/SecondInputFormDataContext';
 
-const NumberInputSelect = ({name, label, initialValue, setSpecificState, currencyOrPercentage}) => {
-
-    const[inputValue, setInputValue] = useState("");
-    const[percentageSelected, setPercentageSelected] = useState(false);
-    const[currencySelected, setCurrencySelected] = useState(true);
-    const[totalProjectValue, setTotalProjectValue] = useState();
-    const[finalValue, setFinalValue] = useState(0);
+const NumberInputSelect = ({ name, label, initialValue, setSpecificState, currencyOrPercentage }) => {
+    const [inputValue, setInputValue] = useState("");
+    const [percentageSelected, setPercentageSelected] = useState(false);
+    const [currencySelected, setCurrencySelected] = useState(true);
+    const [finalValue, setFinalValue] = useState(0);
 
     const { totalValue } = useContext(SecondInputFormDataConext);
 
@@ -20,118 +18,114 @@ const NumberInputSelect = ({name, label, initialValue, setSpecificState, currenc
     useEffect(() => {
         try {
             const savedValue = sessionStorage.getItem(name);
-
-            if(savedValue) {
-                if(currencySelected) {
-                    setInputValue(savedValue);
-                    setFinalValue(savedValue);
-                    setSpecificState(savedValue);
-
-                } else if(percentageSelected) {
-                    setFinalValue(totalValue * (parseInt(savedValue) / 100));
-                    setInputValue(savedValue);
-                    setSpecificState(totalValue * (parseInt(savedValue) / 100));
+            if (savedValue) {
+                const parsedValue = parseFloat(savedValue);
+                if (currencySelected) {
+                    setInputValue(parsedValue);
+                    setFinalValue(parsedValue);
+                    setSpecificState(parsedValue);
+                } else if (percentageSelected) {
+                    const calculatedValue = totalValue * (parsedValue / 100);
+                    setFinalValue(calculatedValue);
+                    setSpecificState(calculatedValue);
+                    setInputValue(parsedValue);
                 } else {
                     console.log("Neither currency nor percentage selected!");
                 }
             }
-
+        } catch (error) {
+            console.log("Value not available in sessionStorage!\n", error);
         }
-        catch(error) {
-            console.log("Value not available in sessionStorage!\n", error)
-        }
-    }, [])
+    }, []);
 
     useEffect(() => {
-        try{
+        try {
             const savedValue = sessionStorage.getItem(name);
-
-            if(savedValue) {
-                setInputValue(savedValue);
-                setSpecificState(savedValue);
-            } else if(initialValue) {
-                setInputValue(initialValue);
-                setSpecificState(initialValue);
-                setFinalValue(initialValue);
+            if (savedValue) {
+                const parsedValue = parseFloat(savedValue);
+                setInputValue(parsedValue);
+                setSpecificState(parsedValue);
+            } else if (initialValue) {
+                const parsedValue = parseFloat(initialValue);
+                setInputValue(parsedValue);
+                setSpecificState(parsedValue);
+                setFinalValue(parsedValue);
             } else {
                 console.log("savedValue and initialValue aren't available for ", name);
             }
-        }catch(error) {
-
+        } catch (error) {
+            console.log(error);
         }
-
-    }, [initialValue])
+    }, [initialValue, name, setSpecificState]);
 
     useEffect(() => {
-        if(currencySelected) {
-            setInputValue(inputValue);
-            setFinalValue(inputValue);
-        } else if(percentageSelected) {
-            setFinalValue(totalValue * (parseInt(inputValue) / 100));
+        if (currencySelected) {
+            setFinalValue(parseFloat(inputValue));
+            setSpecificState(parseFloat(inputValue));
+        } else if (percentageSelected) {
+            const calculatedValue = totalValue * (parseFloat(inputValue) / 100);
+            setFinalValue(calculatedValue);
+            setSpecificState(calculatedValue);
+        }
+    }, [currencySelected, percentageSelected, inputValue, totalValue, setSpecificState]);
 
-            console.log("totalValue : ", totalValue, "inputValue : ", inputValue);
-        }
-    }, [currencySelected, percentageSelected])
-    
     useEffect(() => {
-        if(currencySelected) {      
-            setFinalValue(inputValue);
-        } else if(percentageSelected) {
-            setFinalValue(totalValue * (parseInt(inputValue) / 100));
-            setSpecificState(totalValue * (parseInt(inputValue) / 100));
+        if (currencySelected) {
+            setFinalValue(parseFloat(inputValue));
+        } else if (percentageSelected) {
+            const calculatedValue = totalValue * (parseFloat(inputValue) / 100);
+            setFinalValue(calculatedValue);
+            setSpecificState(calculatedValue);
         }
-    }, [totalValue])
+    }, [totalValue, inputValue, currencySelected, percentageSelected, setSpecificState]);
 
     const handleChange = (event) => {
-        
         const newValue = event.target.value;
+        setInputValue(newValue);
 
-        if(currencySelected) {
-            setInputValue(newValue);
-            setSpecificState(newValue);
-            setFinalValue(newValue);
-        } else if(percentageSelected) {
-            setSpecificState(totalValue * (parseInt(newValue) / 100));
-            setFinalValue(totalValue * (parseInt(newValue) / 100));
-            setInputValue(newValue);
+        if (currencySelected) {
+            setSpecificState(parseFloat(newValue));
+            setFinalValue(parseFloat(newValue));
+        } else if (percentageSelected) {
+            const calculatedValue = totalValue * (parseFloat(newValue) / 100);
+            setSpecificState(calculatedValue);
+            setFinalValue(calculatedValue);
         }
 
-        try{
+        try {
             sessionStorage.setItem(name, newValue);
-        } catch(error) {
+        } catch (error) {
             console.log("Unable to write value into session storage for ", name, error);
         }
-    }
+    };
 
     const manageCurrencySelected = () => {
         setCurrencySelected(true);
         setPercentageSelected(false);
-    }
+    };
 
     const managePercentageSelected = () => {
         setCurrencySelected(false);
         setPercentageSelected(true);
-    }
+    };
 
-    return (  
+    return (
         <div className={Style.NumberInputContainer}>
             <label className={Style.NumberInputLabel}>{label}</label>
             <div className={Style.NumberInputHolder}>
                 <div className={Style.NumberInput}>
                     <input type='number'
-                        value={inputValue} 
-                        onChange={handleChange} 
+                        value={inputValue}
+                        onChange={handleChange}
                         className={Style.NumberInputInput}>
                     </input>
-                    <button onClick={() => managePercentageSelected()} className={percentageSelected ? Style.PercentageSelected : Style.Percentage}>%</button>
-                    <button onClick={() => manageCurrencySelected()} className={currencySelected ? Style.CurrencySignSelected :  Style.CurrencySign}>{currencyOrPercentage}</button>
+                    <button onClick={managePercentageSelected} className={percentageSelected ? Style.PercentageSelected : Style.Percentage}>%</button>
+                    <button onClick={manageCurrencySelected} className={currencySelected ? Style.CurrencySignSelected : Style.CurrencySign}>{currencyOrPercentage}</button>
                 </div>
-
-                <div style={{marginLeft : "20px", fontSize : "1.2em"}}>({finalValue} €)</div>
+                <div style={{ marginLeft: "20px", fontSize: "1.2em" }}>({finalValue} €)</div>
             </div>
-            
         </div>
     );
 }
- 
+
 export default NumberInputSelect;

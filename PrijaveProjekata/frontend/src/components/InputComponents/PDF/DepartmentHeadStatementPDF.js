@@ -111,7 +111,7 @@ const DepartmentHeadStatementPDF = ({ nameSurnameApplicant, nameSurnameDepartmen
                             <Text style={styles.signatureTitle}>Predstojnik zavoda</Text>
                             <View style={styles.signatureLine}></View>
                             <Text>{nameSurnameDepartmentHead}</Text>
-                        </View>
+                        </View> 
                     </View>
                 </View>
                 <Image style={styles.documentFooter} src={fesbStatementFooter}/>

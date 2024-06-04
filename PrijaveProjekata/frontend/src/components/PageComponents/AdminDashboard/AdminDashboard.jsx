@@ -674,7 +674,8 @@ const AdminDashboard = () => {
                   : "single-application-container-unlocked"
               }
             >
-              {selectedProject != null &&
+              {selectedProject != null  &&
+                pendingSelected &&
                 (projectLocked ? (
                   <FontAwesomeIcon
                     icon={faLock}
