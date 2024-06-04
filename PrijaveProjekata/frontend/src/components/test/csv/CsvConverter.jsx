@@ -21,7 +21,7 @@ const CsvConverter = ({ jsonData }) => {
 
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", `${jsonData.projectTitle}.csv`);
+      link.setAttribute("download", `${jsonData.projectAcronym}.csv`);
 
       document.body.appendChild(link);
       link.click();

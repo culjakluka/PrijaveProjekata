@@ -1,4 +1,5 @@
 const { Parser } = require("json2csv");
+const { fieldMapping } = require("../config/fieldMapping");
 
 const convertToCSV = async (req, res) => {
   try {
@@ -27,7 +28,11 @@ function jsonToCsv(projectInfo) {
   let csv = "";
   for (const key in flattenedData) {
     if (flattenedData.hasOwnProperty(key)) {
-      csv += `${key},${flattenedData[key]}\n`; // Append field name and value separated by comma
+      const translatedFieldName = fieldMapping[key] || key;
+      csv += `${translatedFieldName},${flattenedData[key]}\n`;
+    }
+    else {
+      csv += `${key},${flattenedData[key]}\n`;
     }
   }
 
@@ -35,71 +40,46 @@ function jsonToCsv(projectInfo) {
 }
 
 function flattenProjectInfo(projectInfo) {
-  const flattenedData = {
-    userId: projectInfo.userId,
-    firstInputMarker: projectInfo.firstInputMarker,
-    secondInputMarker: projectInfo.secondInputMarker,
-    nameSurname: projectInfo.nameSurname,
-    vocation: projectInfo.vocation,
-    department: projectInfo.department,
-    email: projectInfo.email,
-    projectTitle: projectInfo.projectTitle,
-    projectAcronym: projectInfo.projectAcronym,
-    applicationDeadline: projectInfo.applicationDeadline,
-    projectSummary: projectInfo.projectSummary,
-    applicationURL: projectInfo.applicationURL,
-    projectApplicant: projectInfo.projectApplicant,
-    projectPartners: projectInfo.projectPartners,
-    totalValue: projectInfo.totalValue,
-    fesbValuePart: projectInfo.fesbValuePart,
-    newEmploymentBoolean: projectInfo.newEmploymentBoolean,
-    mobilePhoneNumber: projectInfo.mobilePhoneNumber,
-    workTimeThisPercentage: projectInfo.workTimeThisPercentage,
-    workTimeOtherPercentage: projectInfo.workTimeOtherPercentage,
-    teamLeaderNote: projectInfo.teamLeaderNote,
-    sourceOfFunding: projectInfo.sourceOfFunding,
-    projectType: projectInfo.projectType,
-    expectedProjectBeginning: projectInfo.expectedProjectBeginning,
-    expectedProjectDurationInMonths:
-      projectInfo.expectedProjectDurationInMonths,
-    economicSubjectInvolvement: projectInfo.economicSubjectInvolvement,
-    currentPesonnelExpense: projectInfo.currentPesonnelExpense,
-    newPersonnelExpense: projectInfo.newPersonnelExpense,
-    equipmentDescriptionAndExpense: projectInfo.equipmentDescriptionAndExpense,
-    equipmentAmortizationExpense: projectInfo.equipmentAmortizationExpense,
-    otherServicesExpense: projectInfo.otherServicesExpense,
-    materialExpense: projectInfo.materialExpense,
-    travelRegistrationEducationExpense:
-      projectInfo.travelRegistrationEducationExpense,
-    expenseNote: projectInfo.expenseNote,
-    partnerExpense: projectInfo.partnerExpense,
-    requestedFunding: projectInfo.requestedFunding,
-    downPayment: projectInfo.downPayment,
-    personalFinancingExpense: projectInfo.personalFinancingExpense,
-    consultantServices: projectInfo.consultantServices,
-    consultantExpense: projectInfo.consultantExpense,
-    consultantExpenseSource: projectInfo.consultantExpenseSource,
-    requiredDocumentationFESB: projectInfo.requiredDocumentationFESB,
-    state: projectInfo.state,
-  };
+  const flattenedData = {};
+  
+  // Remove unnnecessary fields
+  let unnecessaryFields = ["__v", "_id", "userId", "createdAt", "updatedAt", "pdfDocuments", "state", "firstInputMarker", "secondInputMarker"];
+
+  Object.keys(projectInfo).forEach((key) => {
+    if (
+      unnecessaryFields.includes(key) ||
+      projectInfo[key] === undefined ||
+      projectInfo[key] === null ||
+      projectInfo[key] === ""
+    ) {
+      delete projectInfo[key]; // Delete the key from projectInfo, not flattenedData
+    }
+  });
+
+  // Flatten projectInfo using fieldMapping
+  for (const key in fieldMapping) {
+    if (projectInfo.hasOwnProperty(key)) {
+      flattenedData[fieldMapping[key]] = projectInfo[key];
+    }
+  }
 
   // Flatten projectTeam if present
   if (projectInfo.projectTeam && Array.isArray(projectInfo.projectTeam)) {
     projectInfo.projectTeam.forEach((member, index) => {
-      const memberPrefix = `projectTeam_${index}_`;
-      flattenedData[`${memberPrefix}nameSurname`] = member.nameSurname;
+      const memberPrefix = `projektni_tim_${index}_`;
+      flattenedData[`${memberPrefix}ime_prezime`] = member.nameSurname;
       flattenedData[`${memberPrefix}email`] = member.email;
-      flattenedData[`${memberPrefix}thisProjectPercentage`] =
+      flattenedData[`${memberPrefix}postotak_ovog_projekta`] =
         member.thisProjectPercentage;
       if (member.otherProjects && Array.isArray(member.otherProjects)) {
         member.otherProjects.forEach((project, projectIndex) => {
-          const projectPrefix = `${memberPrefix}otherProjects_${projectIndex}_`;
+          const projectPrefix = `${memberPrefix}ostali_projekti_${projectIndex}_`;
           if (project.otherProjectName) {
-            flattenedData[`${projectPrefix}otherProjectName`] =
+            flattenedData[`${projectPrefix}ime_projekta`] =
               project.otherProjectName;
           }
           if (project.otherProjectPercentage) {
-            flattenedData[`${projectPrefix}otherProjectPercentage`] =
+            flattenedData[`${projectPrefix}postotak_projekta`] =
               project.otherProjectPercentage;
           }
         });
@@ -124,19 +104,10 @@ function flattenProjectInfo(projectInfo) {
     });
   }
 
-  // Remove empty fields
-  Object.keys(flattenedData).forEach((key) => {
-    if (
-      flattenedData[key] === undefined ||
-      flattenedData[key] === null ||
-      flattenedData[key] === ""
-    ) {
-      delete flattenedData[key];
-    }
-  });
 
   return flattenedData;
 }
+
 
 module.exports = {
   convertToCSV,
