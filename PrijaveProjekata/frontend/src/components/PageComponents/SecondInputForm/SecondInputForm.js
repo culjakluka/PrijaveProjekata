@@ -29,7 +29,7 @@ import {
 import { questions, radioButtonData1 } from "../../data/secondInputFormData.js";
 
 // context
-import { SecondInputFormDataConext } from '../../../context/SecondInputFormDataContext.js';  
+import { SecondInputFormDataConext } from "../../../context/SecondInputFormDataContext.js";
 import { useAuthContext } from "../../../hooks/useAuthContext.js";
 
 const SecondInputForm = (docId) => {
@@ -349,12 +349,12 @@ const SecondInputForm = (docId) => {
     <div className={Style.InputFormContainer}>
       <div className={Style.InputForm}>
         <SecondInputFormDataConext.Provider
-          value={{ 
+          value={{
             projectTeam,
             setProjectTeam,
             totalValue,
             department,
-            nameSurname
+            nameSurname,
           }}
         >
           <h1 className="document-title">NAMJERA PRIJAVE</h1>
@@ -465,7 +465,7 @@ const SecondInputForm = (docId) => {
             name={"expected_project_beginning"}
             setSpecificState={setExpectedProjectBeginning}
           />
-          <CalendarInput 
+          <CalendarInput
             label={"POČETAK PROJEKTA"}
             name={"expected_project_beginning"}
             setSpecificState={setExpectedProjectBeginning}
@@ -566,7 +566,17 @@ const SecondInputForm = (docId) => {
             name={"travel_registration_education_expense"}
             setSpecificState={setTravelRegistrationEducationExpense}
           />
-          <p>Upozoriti ukoliko je zbroj stavki od 13.2 do 13.9 veći od 13.1</p>
+          {currentPesonnelExpense +
+            newPersonnelExpense +
+            0.15 * fesbValuePart +
+            equipmentDescriptionAndExpense +
+            equipmentAmortizationExpense +
+            otherServicesExpense +
+            materialExpense +
+            travelRegistrationEducationExpense >
+            fesbValuePart && (
+            <p>Zbroj troškova je veći od dijela proračuna koji FESB pokriva.</p>
+          )}
           <TextInput
             label={"NAPOMENA"}
             name={"expense_note"}
@@ -625,22 +635,19 @@ const SecondInputForm = (docId) => {
             name={"consultant_services"}
             setSelectionState={setConsultantServices}
           />
-          {
-            consultantServices && ( 
-              <div>
-                <p>Ukoliko je odgovor DA:</p>
-                <TextInputWithoutTitle
-                  name={"consultant_expense"}
-                  setSpecificState={setConsultantExpense}
-                />
-                <TextInputWithoutTitle
-                  name={"consultant_expense_source"}
-                  setSpecificState={setConsultantExpenseSource}
-                />
-              </div>
-            )
-          }
-          
+          {consultantServices && (
+            <div>
+              <p>Ukoliko je odgovor DA:</p>
+              <TextInputWithoutTitle
+                name={"consultant_expense"}
+                setSpecificState={setConsultantExpense}
+              />
+              <TextInputWithoutTitle
+                name={"consultant_expense_source"}
+                setSpecificState={setConsultantExpenseSource}
+              />
+            </div>
+          )}
 
           <Question questionText={questions[20]} />
           <p>
@@ -652,7 +659,7 @@ const SecondInputForm = (docId) => {
             setSpecificState={setRequiredDocumentationFESB}
           />
 
-          <GenerateHeadOfDepartmentStatement/>
+          <GenerateHeadOfDepartmentStatement />
 
           <Question questionText={questions[21]} />
 
