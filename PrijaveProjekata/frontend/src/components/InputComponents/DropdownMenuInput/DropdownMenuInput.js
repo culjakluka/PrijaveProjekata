@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./DropdownMenuInput.css";
 
-const DropdownMenuInput = ({ name, label, data, setSpecificState }) => {
+const DropdownMenuInput = ({ name, label, data, setSpecificState, isDepartment }) => {
   const [selectionValue, setSelectionValue] = useState("");
   const [options, setOptions] = useState([]);
 
@@ -14,7 +14,13 @@ const DropdownMenuInput = ({ name, label, data, setSpecificState }) => {
   };
 
   useEffect(() => {
-    setOptions(data);
+    if(isDepartment) {
+      const filteredData = data.map(item => item.split(' - ')[0]);
+      setOptions(filteredData);
+    } else {
+      setOptions(data);
+    }
+    
 
     // check if the selection value is stored in storage
     const selectionValueSessionStorage = sessionStorage.getItem(name);

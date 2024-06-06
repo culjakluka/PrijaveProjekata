@@ -41,7 +41,7 @@ const firstInputFormData = [
     "question" : "3. Sažetak projekta (do 200 znakova)",
     "elements" : [
       {
-        "title" : "",
+        "title" : "SAŽETAK PROJEKTA",
         "value" : "t is a long established fact that a reader will" + 
         "be distracted by the readable content of a page when looking" + 
         "at its layout. The point of using Lorem Ipsum is that it has a" +  
@@ -56,11 +56,11 @@ const firstInputFormData = [
     ]
   },
   {
-    "question" : "4. Koordinator projekta",
+    "question" : "4. Poveznica na natječaj",
     "elements" : [
       {
-        "title" : "LINK NA STRANICU NA KOJOJ SE NALAZI POTPUNA DOKUMENTACIJA",
-        "value" : "www.fesb.hr"
+        "title" : "LINK NA STRANICU NA KOJOJ SE NALAZI POTPUNA DOKUMENTACIJA ",
+        "value" : "https://www.index.hr/vijesti/clanak/francuska-demonstrira-moc-rusi-nas-cekaju-u-mediteranu-mi-gledamo-njih-a-oni-nas/2571237.aspx?index_ref=naslovnica_vijesti_prva_d"
       }
     ]
   },
@@ -68,7 +68,7 @@ const firstInputFormData = [
     "question" : "5. Ostali partneri na projektu",
     "elements" : [
       {
-        "title" : "PRIJAVITELJ PROJEKTA/VODECI PARTNER (INSTITUCIJA, TVRTKA...)",
+        "title" : "PRIJAVITELJ PROJEKTA/VODECI PARTNER (INSTITUCIJA, TVRTKA...) ",
         "value" : "FESB"
       }
     ]
@@ -174,7 +174,7 @@ const secondInputFormData = [
     "question" : "3. Sažetak projekta (do 200 znakova)",
     "elements" : [
       {
-        "title" : "",
+        "title" : "SAŽETAK PROJEKTA",
         "value" : "t is a long established fact that a reader will" + 
         "be distracted by the readable content of a page when looking" + 
         "at its layout. The point of using Lorem Ipsum is that it has a" +  
@@ -189,7 +189,7 @@ const secondInputFormData = [
     ]
   },
   {
-    "question" : "4, Poveznica na natjecaj",
+    "question" : "4. Poveznica na natjecaj",
     "elements" : [
       {
         "title" : "LINK NA STRANICU",

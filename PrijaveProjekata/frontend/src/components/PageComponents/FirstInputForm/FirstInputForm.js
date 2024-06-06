@@ -25,6 +25,7 @@ import NumberInput from "../../InputComponents/NumberInput/NumberInput.js";
 
 // API requests
 import { getDepartments } from "./firstInputFormApi.js";
+import NumberInputSelectFirstForm from "../../InputComponents/NumberInputSelectFirstForm/NumberInputSelectFirstForm.js";
 
 const FirstInputForm = () => {
   const { logout } = useLogout();
@@ -183,7 +184,11 @@ const FirstInputForm = () => {
   const [departmentsData, setDepartmentsData] = useState([]);
 
   return (
-    <FirstInputFormDataContext.Provider value={{ projectTeam, setProjectTeam }}>
+    <FirstInputFormDataContext.Provider value={{
+      projectTeam,
+      setProjectTeam,
+      totalValue 
+      }}>
       <div className={Style.InputContainer}>
         {user && (
           <div className="logout">
@@ -210,6 +215,7 @@ const FirstInputForm = () => {
             name={"zavod"}
             data={departmentsData}
             setSpecificState={setDepartment}
+            isDepartment={true}
           />
           <TextInput
             label={"E-MAIL"}
@@ -270,15 +276,16 @@ const FirstInputForm = () => {
             }
             name={"ukupna_vrijednost_projekta"}
             setSpecificState={setTotalValue}
-            currencyOrPercentage={"$"}
+            currencyOrPercentage={"€"}
           />
 
-          <TextInput
+          <NumberInputSelectFirstForm
             label={
               "DIO PRORAČUNA KOJI PRIPADA FESB-u(vrijednost ili postotak ukupne vrijednosti"
             }
             name={"dio_proracuna_fesb"}
             setSpecificState={setFesbValuePart}
+            currencyOrPercentage={"€"}
           />
 
           <Question questionText={questions[7]} />
