@@ -108,8 +108,41 @@ const firstInputFormData = [
     "question" : "9. Projektni tim",
     "elements" : [
       {
-        "title" : "",
-        "value" : ""
+        "title" : "PROJEKTNI TIM",
+        "projectTeam" : [
+          {
+            "nameSurname" : "Pero Peric",
+            "thisProjectPercentage" : "100%",
+            "otherProjects" : [
+              {
+                "otherProjectName" : "Projekt 1",
+                "otherProjectPercentage" : "54%"
+              },
+              {
+                "otherProjectName" : "Projekt 2",
+                "otherProjectPercentage" : "34%"
+              }
+            ]
+          },
+          {
+            "nameSurname" : "Ivo Ivic",
+            "thisProjectPercentage" : "100%",
+            "otherProjects" : [
+              {
+                "otherProjectName" : "Projekt 1",
+                "otherProjectPercentage" : "54%"
+              },
+              {
+                "otherProjectName" : "Projekt 2",
+                "otherProjectPercentage" : "34%"
+              },
+              {
+                "otherProjectName" : "Projekt 3",
+                "otherProjectPercentage" : "12%"
+              }
+            ]
+          }
+        ] 
       }
     ]
   }
@@ -356,11 +389,44 @@ const secondInputFormData = [
     ]
   },
   {
-    "question" : "19. Ostale osobe koje ce sudjelovati u provedbi projekta",
+    "question" : "19. Projektni tim",
     "elements" : [
       {
-        "title" : "", 
-        "value" : "1223"
+        "title" : "PROJEKTNI TIM",
+        "projectTeam" : [
+          {
+            "nameSurname" : "Pero Peric",
+            "thisProjectPercentage" : "100%",
+            "otherProjects" : [
+              {
+                "otherProjectName" : "Projekt 1",
+                "otherProjectPercentage" : "54%"
+              },
+              {
+                "otherProjectName" : "Projekt 2",
+                "otherProjectPercentage" : "34%"
+              }
+            ]
+          },
+          {
+            "nameSurname" : "Ivo Ivic",
+            "thisProjectPercentage" : "100%",
+            "otherProjects" : [
+              {
+                "otherProjectName" : "Projekt 1",
+                "otherProjectPercentage" : "54%"
+              },
+              {
+                "otherProjectName" : "Projekt 2",
+                "otherProjectPercentage" : "34%"
+              },
+              {
+                "otherProjectName" : "Projekt 3",
+                "otherProjectPercentage" : "12%"
+              }
+            ]
+          }
+        ] 
       }
     ]
   },

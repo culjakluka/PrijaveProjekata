@@ -461,10 +461,6 @@ const SecondInputForm = (docId) => {
           />
 
           <Question questionText={questions[6]} />
-          <TextInput
-            name={"expected_project_beginning"}
-            setSpecificState={setExpectedProjectBeginning}
-          />
           <CalendarInput
             label={"POČETAK PROJEKTA"}
             name={"expected_project_beginning"}
