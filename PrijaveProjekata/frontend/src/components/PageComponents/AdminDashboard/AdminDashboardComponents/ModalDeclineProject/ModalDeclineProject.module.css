@@ -35,6 +35,8 @@
 .ModalClose {
     align-self: flex-end;
     margin-right: 10px;
+    border: none;
+    background-color: transparent;
 }
 
 .ModalQuestion {
