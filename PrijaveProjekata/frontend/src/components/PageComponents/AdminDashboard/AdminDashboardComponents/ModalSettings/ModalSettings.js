@@ -125,7 +125,7 @@ const ModalSettings = ({}) => {
       fetchDeanData();
       fetchDepartmentData();
     }
-  }, [modalSettingsIsOpen]);
+  }, []);
 
   const handleDepartmentName = (event) => {
     setNewDepartmentData({ ...newDepartmentData, name: event.target.value });
