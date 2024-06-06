@@ -8,8 +8,8 @@ const ParlovTest = () => {
     return (  
         <div>
             <PDFViewer style={{width : "100%", height: "100vh" }}>
-                {/* <FirstInputFormPDF data={secondInputFormData}/> */}
-                <DepartmentHeadStatementPDF nameSurname={"Petar Parlov"}/>
+                <FirstInputFormPDF data={firstInputFormData} title={"TRAŽENJE SUGLASNOSTI"}/>
+                {/* <DepartmentHeadStatementPDF nameSurname={"Petar Parlov"}/> */}
             </PDFViewer>
         </div>
     );
