@@ -171,7 +171,7 @@ const ProjectInfo = ({ selectedProject }) => {
               <div className={Style.pdfTitle}>Projektna dokumentacija:</div>
               <div className={Style.pdfContent}>
                 {Array.isArray(selectedProject?.pdfDocuments) &&
-                  selectedProject.pdfDocuments.map((pdf) => (
+                  selectedProject.pdfDocuments.slice(0,5).map((pdf) => (
                     <div className={Style.pdfDivInside} key={pdf._id}>
                       <FontAwesomeIcon
                         icon={faFilePdf}
