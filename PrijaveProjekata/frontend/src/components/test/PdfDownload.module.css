@@ -1,15 +1,20 @@
 .pdfDownloadContainer{
-    border-radius: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-x: auto;
 }
 
-.pdfDownloadContainer p {
+.pdfDocumentTitle {
     margin: 0;
     color: #515151;
     font-weight: bold;
-    margin-right: 10px;
+    font-size: 0.9em;
+    width: 100%;
+    overflow: hidden; /* Hide the overflow text */
+    text-overflow: ellipsis; /* Add ellipsis (...) for overflow text */
+    white-space: nowrap; /* Prevent the text from wrapping to the next line */
+  
 }
 
 .downloadButton {

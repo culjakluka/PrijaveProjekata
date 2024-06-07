@@ -11,6 +11,14 @@
     width: 100%;
 }
 
+
+.pdfContent {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    width: 100%;
+}
+
 .pdfDivInside {
     display: flex;
     flex-direction: column;
@@ -25,11 +33,6 @@
     text-decoration: none;
     color: #333;
     font-weight: bold;
-}
-
-.pdfContent {
-    display: flex;
-    flex-direction: row;
 }
 
 .pdfTitle {

@@ -64,7 +64,7 @@ const ProjectInfo = ({ selectedProject }) => {
         </h2>
 
         <div className={Style.ConvertToCsvContainer}>
-          <p style={{color:"#515151", fontWeight:"bold"}}>Dohvati projekt u obliku csv datoteke: </p>
+          <p style={{color:"#515151", fontWeight:"bold", fontSize:"1em"}}>Dohvati projekt u obliku csv datoteke: </p>
           <CsvConverter jsonData={selectedProject} />
         </div>
         

@@ -1,3 +1,6 @@
+// this data is shaped in the way that it corresponds to the structure of the PDF document
+// firstInputFormData for first form and secondInputFormData for second form
+
 const firstInputFormData = [
   {
     "question" : "1. Prijavitelj projekta/voditelj projektnog tima sa strane FESB-a",
