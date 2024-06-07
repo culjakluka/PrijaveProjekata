@@ -238,7 +238,7 @@ const SecondInputForm = (docId) => {
 
   const handleFilesSelect = (selectedFile) => {
     // Update the pdfDocuments state with the selected file
-    setPdfDocuments((prevDocuments) => [...prevDocuments, selectedFile]);
+    setPdfDocuments((prevDocuments) => [...prevDocuments, ...selectedFile]);
   };
 
   const handleSubmit = async () => {
@@ -635,22 +635,19 @@ const SecondInputForm = (docId) => {
             name={"consultant_services"}
             setSelectionState={setConsultantServices}
           />
-          {
-            consultantServices && ( 
-              <div>
-                <p>Ukoliko je odgovor DA:</p>
-                <TextInputWithoutTitle
-                  name={"consultant_expense"}
-                  setSpecificState={setConsultantExpense}
-                />
-                <TextInputWithoutTitle
-                  name={"consultant_expense_source"}
-                  setSpecificState={setConsultantExpenseSource}
-                />
-              </div>
-            )
-          }
-          
+          {consultantServices && (
+            <div>
+              <p>Ukoliko je odgovor DA:</p>
+              <TextInputWithoutTitle
+                name={"consultant_expense"}
+                setSpecificState={setConsultantExpense}
+              />
+              <TextInputWithoutTitle
+                name={"consultant_expense_source"}
+                setSpecificState={setConsultantExpenseSource}
+              />
+            </div>
+          )}
 
           <Question questionText={questions[20]} />
           <p>
