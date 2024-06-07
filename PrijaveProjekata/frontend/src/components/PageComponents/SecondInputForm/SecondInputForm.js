@@ -638,11 +638,15 @@ const SecondInputForm = (docId) => {
           {consultantServices && (
             <div>
               <p>Ukoliko je odgovor DA:</p>
-              <TextInputWithoutTitle
+              <NumberInput
+                label={"TROŠAK KONZULTANTSKE USLUGE"}
                 name={"consultant_expense"}
                 setSpecificState={setConsultantExpense}
+                initialValue={consultantExpense}
+                currencyOrPercentage={"€"}
               />
-              <TextInputWithoutTitle
+              <TextInput
+                label={"IZVOR SREDSTAVA ZA KONZULTANTSKE USLUGE"}
                 name={"consultant_expense_source"}
                 setSpecificState={setConsultantExpenseSource}
               />

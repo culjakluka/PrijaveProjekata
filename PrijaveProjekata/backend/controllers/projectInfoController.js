@@ -352,10 +352,13 @@ const updateProjectInfoSet = async (req, res) => {
         "downPayment",
         "personalFinancingExpense",
         "consultantServices",
-        "consultantExpense",
-        "consultantExpenseSource",
         "requiredDocumentationFESB",
       ];
+    }
+
+    if (req.body.consultantServices === "true") {
+      fieldsToCheck.push("consultantExpense");
+      fieldsToCheck.push("consultantExpsenseSource");
     }
 
     if (req.files.pdfDocuments && req.files.pdfDocuments.length > 0) {
