@@ -5,8 +5,8 @@ import { useState } from "react";
 const PdfAttach = ({ onFilesSelect }) => {
   const [file, setFile] = useState([]);
 
-  const handleFileChange = (e) => {
-    const selectedFiles = e.target.files[0];
+  const handleFileChange = (event) => {
+    const selectedFiles = Array.from(event.target.files);
     setFile(selectedFiles);
     onFilesSelect(selectedFiles);
     console.log(file);
