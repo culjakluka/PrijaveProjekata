@@ -246,8 +246,11 @@ const AdminDashboard = () => {
       formattedData[6].elements[0].value = selectedProject?.totalValue || "";
       formattedData[6].elements[1].value = selectedProject?.fesbValuePart || "";
 
-      formattedData[7].elements[0].value =
-        selectedProject?.newEmploymentBoolean || "";
+      formattedData[7].elements[0].value = selectedProject?.newEmploymentBoolean || "";
+
+      formattedData[8].elements[0].projectTeam = selectedProject?.projectTeam || "";
+
+      
     } else if (approvalSelection) {
       formattedData2[0].elements[0].value = selectedProject?.nameSurname || "";
       formattedData2[0].elements[1].value = selectedProject?.vocation || "";
@@ -329,9 +332,7 @@ const AdminDashboard = () => {
       formattedData2[17].elements[0].value =
         selectedProject?.newEmploymentBoolean || "";
 
-      formattedData2[18].elements[0].value = JSON.stringify(
-        selectedProject?.projectTeam || ""
-      );
+      formattedData2[18].elements[0].projectTeam = selectedProject?.projectTeam || "";
 
       formattedData2[19].elements[0].value = selectedProject?.consultantServices
         ? "Da"

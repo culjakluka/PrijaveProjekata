@@ -43,6 +43,40 @@ const styles = StyleSheet.create({
         flexWrap: "wrap", // Allow wrapping if value is longer than available width
         whiteSpace: "normal", // Allow text to wrap within the elementInfo container
     },
+    elementInfoProjectTeam : { 
+        display: "flex",
+        flexDirection: "column",
+        paddingLeft: "10px",
+        whiteSpace: "normal", // Allow text to wrap within the elementInfo container
+    },
+    memberInfoContainer : {
+        display: "flex",
+        flexDirection: "column",
+        marginTop: "5px",
+    },
+    memberInfo : {
+        display: "flex",
+        flexDirection: "row",
+        marginBottom: "3px",
+    },
+    memberNameSurname : {
+        marginLeft: "5px",
+        fontWeight: "bold",
+    },
+    memberProjectPercentage : {
+        marginLeft: "5px",
+    },
+    otherProjectContainer : {
+        display: "flex",
+        flexDirection: "row",
+        paddingLeft: "10px",    
+    },
+    otherProjectName : {
+        marginLeft: "5px",
+    },
+    otherProjectPercentage : {
+        marginLeft: "5px",
+    },
     label: {
         fontWeight: "bold",
         textTransform: "uppercase",
@@ -71,11 +105,33 @@ const FirstInputFormPDF = ({data, title}) => {
                         return (
                             <View key={index}>
                                 <Text style={styles.question}>{element.question}</Text>
-                                {element.elements.map((element, index) => {
+                                {element.elements.map((member, index) => {
                                     return (
+                                        member.title != "PROJEKTNI TIM" ? 
                                         <View style={styles.elementInfo} key={index}>
-                                            <Text style={styles.label}> {element.title ? element.title + " : " : ""}</Text>
-                                            <Text style={styles.value}>{element.value}</Text>
+                                            <Text style={styles.label}> {member.title ? member.title + " : " : ""}</Text>
+                                            <Text style={styles.value}>{member.value}</Text>
+                                        </View>
+                                        :
+                                        <View style={styles.elementInfoProjectTeam} key={index}> 
+                                            {member.projectTeam.map((member, index) => {
+                                                return (
+                                                    <View style={styles.memberInfoContainer} key={index}>
+                                                        <View style={styles.memberInfo}>
+                                                            <Text style={styles.memberNameSurname}> {member.nameSurname}</Text>
+                                                            <Text style={styles.memberProjectPercentage}>{member.thisProjectPercentage}</Text>
+                                                        </View>
+                                                        {member.otherProjects.map((otherProject, index) => {
+                                                            return (
+                                                                <View style={styles.otherProjectContainer}>
+                                                                    <Text style={styles.otherProjectName}>{otherProject.otherProjectName}</Text>
+                                                                    <Text style={styles.otherProjectPercentage}>{otherProject.otherProjectPercentage}</Text>
+                                                                </View>
+                                                            )
+                                                        })}
+                                                    </View>
+                                                );
+                                            })}
                                         </View>
                                     );
                                 })}

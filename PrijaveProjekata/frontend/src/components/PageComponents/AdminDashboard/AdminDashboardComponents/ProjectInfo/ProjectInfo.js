@@ -64,7 +64,7 @@ const ProjectInfo = ({ selectedProject }) => {
         </h2>
 
         <div className={Style.ConvertToCsvContainer}>
-          <p style={{color:"#515151", fontWeight:"bold"}}>Dohvati projekt u obliku csv datoteke: </p>
+          <p style={{color:"#515151", fontWeight:"bold", fontSize:"1em"}}>Dohvati projekt u obliku csv datoteke: </p>
           <CsvConverter jsonData={selectedProject} />
         </div>
         
@@ -171,7 +171,7 @@ const ProjectInfo = ({ selectedProject }) => {
               <div className={Style.pdfTitle}>Projektna dokumentacija:</div>
               <div className={Style.pdfContent}>
                 {Array.isArray(selectedProject?.pdfDocuments) &&
-                  selectedProject.pdfDocuments.map((pdf) => (
+                  selectedProject.pdfDocuments.slice(0,5).map((pdf) => (
                     <div className={Style.pdfDivInside} key={pdf._id}>
                       <FontAwesomeIcon
                         icon={faFilePdf}

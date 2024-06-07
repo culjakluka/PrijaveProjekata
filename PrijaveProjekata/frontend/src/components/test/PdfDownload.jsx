@@ -1,4 +1,4 @@
-import react from "react";
+import react, { useState } from "react";
 import styles from "./PdfDownload.module.css";
 
 // external components
@@ -7,6 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
 const PdfDownload = ({ filename, filepath }) => {
+
+  const[fullFilename, setFullFilename] = useState(filename);
+
   const handleDownload = async () => {
     try {
       console.log("filename: " + filename);
@@ -22,9 +25,10 @@ const PdfDownload = ({ filename, filepath }) => {
       console.log("Error downloading pdf: " + error);
     }
   };
+
   return (
     <div className={styles.pdfDownloadContainer}>
-      <p>{filename}</p>
+      <p className={styles.pdfDocumentTitle}>{filename.substring(0,15)+"..."}</p>
       <button onClick={handleDownload} className={styles.downloadButton}>
         <div className={styles.downloadButtonText}>PREUZMI</div>
         <FontAwesomeIcon icon={faDownload} style={{color: "#ffffff"}}/>

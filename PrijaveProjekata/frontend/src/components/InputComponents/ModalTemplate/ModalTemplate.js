@@ -26,9 +26,9 @@ const ModalTemplate = () => {
         <div className={Style.ModalContainerOverlay}>
         <div className={Style.Modal}>
             <div className={Style.ModalTopContainer}>
-                <div className={Style.ModalClose}>
-                        <FontAwesomeIcon onClick={() => closeModal()} icon={faXmark} size='1x'/>
-                </div>
+                <button className={Style.ModalClose} onClick={() => closeModal()}>
+                        <FontAwesomeIcon icon={faXmark} size='1x'/>
+                </button>
                 <h3 className={Style.ModalQuestion}>Odbaci promjene?</h3>
             </div>
             
