@@ -4,12 +4,18 @@ import React from "react";
 import TextInput from "../../InputComponents/TextInput/TextInput";
 import DropdownMenuInput from "../../InputComponents/DropdownMenuInput/DropdownMenuInput";
 import RadioButtonInput from "../../InputComponents/RadioButtonInput/RadioButtonInput";
+
+// my components
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import Question from "../../InputComponents/Question/Question";
 import SpecialInputFirstInputForm from "../../InputComponents/SpecialInputFirstInputForm/SpecialInputFirstInputForm.js";
 import TextInputWithoutTitle from "../../InputComponents/TextInputWithoutTitle/TextInputWithoutTitle";
 import CompletedProject from "../../InputComponents/CompletedProject/CompletedProject";
 import CalendarInput from "../../InputComponents/CalendarInput/CalendarInput";
+
+// modal components
+import ModalTemplate from "../../InputComponents/ModalTemplate/ModalTemplate.js";
+
 
 // styles
 import Style from "./FirstInputForm.module.css";
@@ -189,6 +195,9 @@ const FirstInputForm = () => {
       setProjectTeam,
       totalValue 
       }}>
+
+      <ModalTemplate />
+
       <div className={Style.InputContainer}>
         {user && (
           <div className="logout">

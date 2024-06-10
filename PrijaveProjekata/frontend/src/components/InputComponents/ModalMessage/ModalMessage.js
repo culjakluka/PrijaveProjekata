@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes as faXmark } from '@fortawesome/free-solid-svg-icons';
 
 // style
-import Style from './ModalApproveProject.module.css';
+import Style from './ModalMessage.module.css';
 
 const ModalMessage = () => {
 
@@ -41,4 +41,4 @@ const ModalMessage = () => {
     );
 }
  
-export default ModalTemplate;
+export default ModalMessage;
