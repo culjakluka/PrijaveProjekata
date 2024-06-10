@@ -220,7 +220,6 @@ const FirstInputForm = () => {
           <h1 className="document-title">NAMJERA PRIJAVE</h1>
           <h3>{user.userId}</h3>
           <Question questionText={questions[0]} />
-          <p style={{"color": "red"}}>MOLIMO POPUNITE POLJE</p>
           <TextInput
             label={"IME I PREZIME"}
             name="ime_prezime"
