@@ -29,8 +29,10 @@ import {
 import { questions, radioButtonData1 } from "../../data/secondInputFormData.js";
 
 // context
-import { SecondInputFormDataConext } from "../../../context/SecondInputFormDataContext.js";
+import { SecondInputFormDataContext } from "../../../context/SecondInputFormDataContext.js";
 import { useAuthContext } from "../../../hooks/useAuthContext.js";
+import ModalApplicationUpdated from "../../InputComponents/ModalApplicationUpdated/ModalApplicationUpdated.js";
+import { set } from "date-fns";
 
 const SecondInputForm = (docId) => {
   const { user } = useAuthContext();
@@ -89,6 +91,9 @@ const SecondInputForm = (docId) => {
   const [requiredDocumentationFESB, setRequiredDocumentationFESB] =
     useState("");
   const [pdfDocuments, setPdfDocuments] = useState([]);
+
+  // application updated modal - after application is submitted
+  const [modalApplicationUpdatedIsOpen, setModalApplicationUpdatedIsOpen] = useState(true);
 
   useEffect(() => {
     setInputFormData({
@@ -315,7 +320,7 @@ const SecondInputForm = (docId) => {
 
         console.log("Update successful:", responseData);
 
-        window.alert("Update successful!", responseData);
+        setModalApplicationUpdatedIsOpen(true);
       } else {
         // handle potentional non-JSON response
         const errorData = await response.json().catch(() => null);
@@ -348,15 +353,19 @@ const SecondInputForm = (docId) => {
     // all the child components inside SecondInputFormDataConext.Provide have access value data
     <div className={Style.InputFormContainer}>
       <div className={Style.InputForm}>
-        <SecondInputFormDataConext.Provider
+        <SecondInputFormDataContext.Provider
           value={{
             projectTeam,
             setProjectTeam,
             totalValue,
             department,
             nameSurname,
+            setModalApplicationUpdatedIsOpen
           }}
         >
+
+          {modalApplicationUpdatedIsOpen && <ModalApplicationUpdated />}
+
           <h1 className="document-title">NAMJERA PRIJAVE</h1>
 
           <Question questionText={questions[0]} />
@@ -670,7 +679,7 @@ const SecondInputForm = (docId) => {
           <button className="default-button" onClick={handleSubmit}>
             PODNESI TRAZENJE SUGLASNOSTI
           </button>
-        </SecondInputFormDataConext.Provider>
+        </SecondInputFormDataContext.Provider>
       </div>
     </div>
   );

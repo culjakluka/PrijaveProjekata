@@ -28,21 +28,21 @@ const SpecialInputMember = ({ addProjectMember }) => {
   };
 
   return (
-    <div>
       <div className={Style.SpecialInputMemberInfo}>
         <input
-          className={Style.SpecialInputInput}
+          className={Style.SpecialInputTextInput}
           placeholder="ime i prezime..."
           onChange={(e) => setNewItemNameSurname(e.target.value)}
         />
         <input
-          className={Style.SpecialInputInput}
+          className={Style.SpecialInputTextInput}
           placeholder="e-mail..."
           onChange={(e) => setNewItemEmail(e.target.value)}
         />
         <input
-          className={Style.SpecialInputInput}
+          className={Style.SpecialInputNumberInput}
           placeholder="postotak..."
+          type="number"
           onChange={(e) => setNewItemPercentage(e.target.value)}
         />
         
@@ -63,7 +63,7 @@ const SpecialInputMember = ({ addProjectMember }) => {
               />
             ))
           ) : (
-            <p>niste dodali niti jedan projekt ovom članu...</p>
+            <p style={{marginLeft:"10px"}}>niste dodali niti jedan projekt ovom članu...</p>
           )}
         </div>
 
@@ -71,7 +71,6 @@ const SpecialInputMember = ({ addProjectMember }) => {
           DODAJ ČLANA
         </button>
       </div>
-    </div>
   );
 };
 

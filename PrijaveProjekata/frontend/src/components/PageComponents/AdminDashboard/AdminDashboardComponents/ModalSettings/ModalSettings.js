@@ -151,7 +151,7 @@ const ModalSettings = ({}) => {
       <div className={Style.ModalContainerOverlay}>
         <div className={Style.Modal}>
           <div className={Style.ModalTopBar}>
-            <button onClick={() => closeModal()}>
+            <button style={{border:"none",backgroundColor:"transparent"}} onClick={() => closeModal()}>
               <FontAwesomeIcon icon={faXmark} size="1x" />
             </button>
           </div>

@@ -70,8 +70,8 @@ const SpecialInputFirstInputForm = ({ name, pitanje }) => {
           <SpecialInputMemberContainer addProjectMember={addNewMember} />
         ) : null}
 
-        <button onClick={manageInputForm} id="special-input-plus">
-          {addMemberFormIsActive ? "-" : "DODAJ NOVOG ČLANA"}
+        <button onClick={manageInputForm} className={Style.SpecialInputPlus}>
+          {addMemberFormIsActive ? "SAKRIJ" : "DODAJ NOVOG ČLANA"}
         </button>
       </div>
 

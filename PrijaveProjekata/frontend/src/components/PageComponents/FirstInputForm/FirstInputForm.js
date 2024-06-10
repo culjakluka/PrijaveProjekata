@@ -15,7 +15,7 @@ import CalendarInput from "../../InputComponents/CalendarInput/CalendarInput";
 
 // modal components
 import ModalMessage from "../../InputComponents/ModalMessage/ModalMessage.js";
-
+import ModalApplicationSubmitted from "../../InputComponents/ModalApplicationSubmitted/ModalApplicationSubmitted.js";
 
 // styles
 import Style from "./FirstInputForm.module.css";
@@ -32,6 +32,7 @@ import NumberInput from "../../InputComponents/NumberInput/NumberInput.js";
 // API requests
 import { getDepartments } from "./firstInputFormApi.js";
 import NumberInputSelectFirstForm from "../../InputComponents/NumberInputSelectFirstForm/NumberInputSelectFirstForm.js";
+import { set } from "date-fns";
 
 const FirstInputForm = () => {
   const { logout } = useLogout();
@@ -66,6 +67,9 @@ const FirstInputForm = () => {
   const [modalMessageIsOpen, setModalMessageIsOpen] = useState(false);
   const [missingFields, setMissingFields] = useState([]);
 
+  // modal application submitted
+  const [modalApplicationSubmittedIsOpen, setModalApplicationSubmittedIsOpen] = useState(false);
+
   const handleSubmit = async () => {
     try {
       const response = await fetch("/api/projectInfo", {
@@ -79,13 +83,14 @@ const FirstInputForm = () => {
       if (response.ok) {
         const responseData = await response.json();
 
-        console.log("Post successful:", responseData);
+        console.log("Post successful:", responseData)
 
-        window.alert("Post successful");
-
+        // show message that application is submitted
+        
         // clearing session storage and refreshing browser
         sessionStorage.clear();
-        window.location.reload();
+        setModalApplicationSubmittedIsOpen(true);
+
       } else {
         // handle potentional non-JSON response
         const errorData = await response.json().catch(() => null);
@@ -204,10 +209,12 @@ const FirstInputForm = () => {
       setProjectTeam,
       totalValue,
       setModalMessageIsOpen,
+      setModalApplicationSubmittedIsOpen,
       missingFields
       }}>
 
       {modalMessageIsOpen && <ModalMessage missingFieldsMessage={missingFields} />}
+      {modalApplicationSubmittedIsOpen && <ModalApplicationSubmitted />}
 
       <div className={Style.InputContainer}>
         {user && (

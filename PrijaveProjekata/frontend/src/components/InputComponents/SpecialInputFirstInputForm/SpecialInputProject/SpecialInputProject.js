@@ -21,14 +21,15 @@ const SpecialInputProject = ({ addNewProjectProp }) => {
     <div className={Style.SpecialInputMemberProjectsProject}>
       <input
         value={otherProjectName}
-        className={Style.SpecialInputInput}
+        className={Style.SpecialInputTextInput}
         placeholder="naziv projekta..."
         onChange={(e) => setOtherProjectName(e.target.value)}
       />
       <input
         value={otherProjectPercentage}
-        className={Style.SpecialInputInput}
+        className={Style.SpecialInputNumberInput}
         placeholder="postotak u projektu..."
+        type="number"
         onChange={(e) => setOtherProjectPercentage(e.target.value)}
       />
       <button className={Style.SpecialInputAddProject} onClick={addNewProject}>

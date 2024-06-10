@@ -3,7 +3,7 @@ import SpecialInputMemberContainer from "./SpecialInputMemberContainer/SpecialIn
 import Style from "./SpecialInputSecondInputForm.module.css";
 import CompletedMember from "../CompletedMember/CompletedMember.js";
 import { SpecialInputContext } from "./SpecialInputContext.js";
-import { SecondInputFormDataConext } from "../../../context/SecondInputFormDataContext.js";
+import { SecondInputFormDataContext } from "../../../context/SecondInputFormDataContext.js";
 
 const SpecialInputSecondInputForm = ({ name, pitanje }) => {
   // projectMembers contains members that consist of this fields named: - newItemNameSurname
@@ -11,7 +11,7 @@ const SpecialInputSecondInputForm = ({ name, pitanje }) => {
   //                                                                    - newItemPercentag
 
   // using projectTeam from context
-  const { projectTeam, setProjectTeam } = useContext(SecondInputFormDataConext);
+  const { projectTeam, setProjectTeam } = useContext(SecondInputFormDataContext);
 
   // project members
   const [projectMembers, setProjectMembers] = useState([]);
