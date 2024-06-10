@@ -14,7 +14,7 @@ import CompletedProject from "../../InputComponents/CompletedProject/CompletedPr
 import CalendarInput from "../../InputComponents/CalendarInput/CalendarInput";
 
 // modal components
-import ModalTemplate from "../../InputComponents/ModalTemplate/ModalTemplate.js";
+import ModalMessage from "../../InputComponents/ModalMessage/ModalMessage.js";
 
 
 // styles
@@ -62,6 +62,10 @@ const FirstInputForm = () => {
   // object will take all data from input
   // later it will be extracted and sent to databases
 
+  // MISSING FIELDS MODAL
+  const [modalMessageIsOpen, setModalMessageIsOpen] = useState(false);
+  const [missingFields, setMissingFields] = useState([]);
+
   const handleSubmit = async () => {
     try {
       const response = await fetch("/api/projectInfo", {
@@ -91,7 +95,6 @@ const FirstInputForm = () => {
           : `Error: ${response.status} ${response.statusText}`;
 
         console.error("Error posting data: ", errorMessage);
-        window.alert(`Error posting data: ${errorMessage}`);
 
         // printing missing field if there are any and displaying them
         if (
@@ -101,7 +104,13 @@ const FirstInputForm = () => {
         ) {
           const missingFieldsMessage = `Missing fields: ${errorData.emptyFields.join(", ")}`;
           console.error(missingFieldsMessage);
-          window.alert(missingFieldsMessage);
+          //window.alert(missingFieldsMessage);
+          
+          setMissingFields(missingFieldsMessage);
+          // opean modal missing fields
+          setModalMessageIsOpen(true);
+          
+
         }
       }
     } catch (error) {
@@ -193,10 +202,12 @@ const FirstInputForm = () => {
     <FirstInputFormDataContext.Provider value={{
       projectTeam,
       setProjectTeam,
-      totalValue 
+      totalValue,
+      setModalMessageIsOpen,
+      missingFields
       }}>
 
-      <ModalTemplate />
+      {modalMessageIsOpen && <ModalMessage missingFieldsMessage={missingFields} />}
 
       <div className={Style.InputContainer}>
         {user && (
@@ -209,11 +220,13 @@ const FirstInputForm = () => {
           <h1 className="document-title">NAMJERA PRIJAVE</h1>
           <h3>{user.userId}</h3>
           <Question questionText={questions[0]} />
+          <p style={{"color": "red"}}>MOLIMO POPUNITE POLJE</p>
           <TextInput
             label={"IME I PREZIME"}
             name="ime_prezime"
             setSpecificState={setNameSurname}
           />
+
           <TextInput
             label={"TITULA"}
             name={"titula"}

@@ -20,27 +20,30 @@
     flex-direction: column;
     justify-content: space-between;
     background-color: white;
-    width: 30%;
-    height: 20%;
     border-radius: 15px;
-    padding: 5px;    
+    padding: 5px 15px 5px 15px;    
 }
 
 .ModalTopContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 10px;
 }
 
-.ModalClose {
-    align-self: flex-end;
-    margin-right: 10px;
-}
 
 .ModalQuestion {
     color: #515151;
     font-weight: bold;
     align-self: center;
+}
+
+.ModalMissingFieldsContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
 }
 
 .ModalButtonsContainer {
@@ -50,7 +53,7 @@
     margin-bottom: 20px;
 }
 
-.ModalButton {
+.ModalYesButton {
     width: 20%;
     background-color: #6F6F6F;
     color: #FDFDFD;
@@ -59,6 +62,25 @@
     box-shadow: none;
     outline: none;
     border: none;
+}
+
+.ModalYesButton:hover {
+    background-color: #a0a0a0;
+}
+
+.ModalNoButton {
+    width: 20%;
+    background-color: #6F6F6F;
+    color: #FDFDFD;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    box-shadow: none;
+    outline: none;
+    border: none;
+}
+
+.ModalNoButton:hover {
+    background-color: #a0a0a0;
 }
 
 .ModalButton:hover {
