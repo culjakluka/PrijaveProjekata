@@ -21,30 +21,47 @@ const SpecialInputMember = ({ addProjectMember }) => {
 
   const addNewMember = () => {
     addProjectMember(member);
+    setNewItemNameSurname("");
+    setNewItemEmail("");
+    setNewItemPercentage("");
+    setProjects([]);
   };
 
   const addNewProject = (newProject) => {
     setProjects((previousMembers) => [...previousMembers, newProject]);
   };
 
+  // part that makes sure that not higher number than 100 is entered - percentage
+  const handlePercentageChange = (e) => {
+    const value = e.target.value;
+    if((value === '' || (value >= 0 && value <= 100)) && value.length <= 3) {
+      setNewItemPercentage(value)
+    }
+  }
+
   return (
       <div className={Style.SpecialInputMemberInfo}>
         <input
           className={Style.SpecialInputTextInput}
           placeholder="ime i prezime..."
+          value={newItemNameSurname}
           onChange={(e) => setNewItemNameSurname(e.target.value)}
         />
         <input
           className={Style.SpecialInputTextInput}
           placeholder="e-mail..."
+          value={newItemEmail}
           onChange={(e) => setNewItemEmail(e.target.value)}
         />
         <div>
         <input
           className={Style.SpecialInputNumberInput}
-          placeholder="postotak..."
+          placeholder="postotak u projektu..."
           type="number"
-          onChange={(e) => setNewItemPercentage(e.target.value)}
+          min="0"
+          max="100"
+          value={newItemPercentage}
+          onChange={handlePercentageChange}
         />%
         </div>
         
@@ -65,7 +82,7 @@ const SpecialInputMember = ({ addProjectMember }) => {
               />
             ))
           ) : (
-            <p style={{marginLeft:"10px"}}>niste dodali niti jedan projekt ovom članu...</p>
+            <p style={{margin:"8px 0px 8px 10px"}}>niste dodali niti jedan projekt ovom članu...</p>
           )}
         </div>
 

@@ -18,6 +18,7 @@ const SpecialInputFirstInputForm = ({ name, pitanje }) => {
   // project members
   const [projectMembers, setProjectMembers] = useState([]);
   const [addMemberFormIsActive, setAddMemberFormIsActive] = useState(false);
+  const [deleteMemberIsActive, setDeleteMemberIsActive] = useState(false);
 
   // when component mounts
   useEffect(() => {
@@ -44,6 +45,7 @@ const SpecialInputFirstInputForm = ({ name, pitanje }) => {
       return updatedMembers;
     });
   };
+
 
   // delete member
   const deleteMember = (memberId) => {
@@ -75,24 +77,35 @@ const SpecialInputFirstInputForm = ({ name, pitanje }) => {
         </button>
       </div>
 
-      {/* ALL MEMBERS */}
+      {/* ALL MEMBERS - PRINTING ALL MEMBERS */}
        
           <div className={Style.SpecialInputCompletedMembers}>
-            <p>Svi članovi:</p>
+            <div style={{display:"flex", flexDirection:"row"}}>
+            <p style={{margin:"0px"}}>Svi članovi:</p>
+            <button onClick={() => setDeleteMemberIsActive(!deleteMemberIsActive)} className={Style.EditProjectTeamMembers}>
+              {deleteMemberIsActive ? "ZAVRŠI" : "UREDITE ČLANOVE"}
+            </button>
+            </div>
             {/* GENERATING COMPLETED PROJECT MEMBERS */}
             {projectTeam.length > 0 ? (
-              projectTeam?.map((member, index) => (
+              projectTeam?.map((member, indexMember) => (
                 <div className={Style.ProjectTeamMember}>
                     <div className={Style.ProjectTeamMemberInfo}>
                         <div style={{marginRight:"10px"}}>{member.nameSurname}</div>
-                        <div>{member.thisProjectPercentage}%</div>
+                        <div style={{marginRight:"10px"}}>({member.email})</div>
+                        <div>- {member.thisProjectPercentage}%</div>
+                        {deleteMemberIsActive &&
+                          <div style={{marginLeft: "auto", fontWeight: "400", textDecoration: "underline", border: "none", }}>
+                            <button onClick={() => deleteMember(indexMember)}className={Style.DeleteMemberYesNo}>IZBRIŠI</button>
+                          </div>
+                        }
                     </div>
                     
                     <div className={Style.ProjectOtherProjectsTitle}>OSTALI PROJEKTI:</div>
-                    {member.otherProjects.map((project, index) => (
-                        <div key={index} className={Style.ProjectTeamMemberOtherProjects}>
+                    {member.otherProjects.map((project, indexProject) => (
+                        <div key={indexProject} className={Style.ProjectTeamMemberOtherProjects}>
                             <div className={Style.ProjectTeamOtherProjectInfo}>
-                                {project.otherProjectName} {project.otherProjectPercentage}%
+                                {project.otherProjectName} - {project.otherProjectPercentage}%
                             </div>
                         </div>
                     

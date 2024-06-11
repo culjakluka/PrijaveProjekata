@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Style from "../SpecialInputFirstInputForm.module.css"; // Replace with the correct path
+import { set } from "date-fns";
 
 const SpecialInputProject = ({ addNewProjectProp }) => {
   const [otherProjectName, setOtherProjectName] = useState("");
@@ -15,7 +16,17 @@ const SpecialInputProject = ({ addNewProjectProp }) => {
 
   const addNewProject = () => {
     addNewProjectProp(project);
+    setOtherProjectName("");
+    setOtherProjectPercentage("");
   };
+
+  // part that makes sure that not higher number than 100 is entered - percentage
+  const handlePercentageChange = (e) => {
+    const value = e.target.value;
+    if((value === '' || (value >= 0 && value <= 100)) && value.length <= 3) {
+      setOtherProjectPercentage(value)
+    }
+  }
 
   return (
     <div className={Style.SpecialInputMemberProjectsProject}>
@@ -30,7 +41,8 @@ const SpecialInputProject = ({ addNewProjectProp }) => {
         className={Style.SpecialInputNumberInput}
         placeholder="postotak u projektu..."
         type="number"
-        onChange={(e) => setOtherProjectPercentage(e.target.value)}
+        max="100"
+        onChange={handlePercentageChange}
       />%
       <button className={Style.SpecialInputAddProject} onClick={addNewProject}>
         DODAJ

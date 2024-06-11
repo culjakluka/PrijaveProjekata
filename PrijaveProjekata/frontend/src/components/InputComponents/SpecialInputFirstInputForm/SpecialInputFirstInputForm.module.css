@@ -3,8 +3,8 @@
     flex-direction: column;
     align-items: flex-start;
     color: #6e6e6e;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 1em;
+    font-weight: 500;
     margin-top: 10px;
 }
 
@@ -35,6 +35,9 @@
 .SpecialInputCompletedMembers {
     width: 100%;
     margin-top: 20px;
+    color: #6e6e6e;
+    font-size: 1em;
+    font-weight: 500;
 }
 
 #CompletedMemberContainer {
@@ -162,6 +165,8 @@
 .SpecialInputMemberProjectsTitle {
     margin-left: 5px;
     margin-top: 10px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 
 .SpecialInputPlus {
@@ -295,7 +300,49 @@
 .ProjectTeamMember {
     display: flex;
     flex-direction: column;
-    margin: 5px 0px 0px 0px;
+    margin: 5px 0px 10px 0px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: rgb(243, 243, 243);
+}
+
+.EditProjectTeamMembers {
+    margin-left: "auto";
+    font-weight: "500"; 
+    border: "none";
+    background-color:"#6F6F6F";
+    color: "#FDFDFD";
+    font-size: "0.8em"
+}
+
+.EditProjectTeamMembers:hover {
+    margin-left: "auto";
+    font-weight: "500"; 
+    border: "none";
+    background-color:"#cecece";
+    color: "#FDFDFD";
+    font-size: "0.8em",
+}
+
+.DeleteMemberYesNo {
+    background-color: #6F6F6F;
+    color: #FDFDFD;
+    font-weight: 500;
+    font-size: 0.8em;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    margin: 2px;
+}
+
+.DeleteMemberYesNo:hover {
+    background-color: #cecece;
+    color: #FDFDFD;
+    font-weight: 500;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    margin: 2px;
 }
 
 .ProjectTeamMemberInfo {
@@ -303,9 +350,11 @@
     flex-direction: row;
     font-weight: bold;
     margin: 0px;
+    padding: 5px;
     height: 100%;
     color: #4a4949;
-} 
+}
+
 
 .ProjectOtherProjectsTitle {
     font-size: 1em;
@@ -322,4 +371,5 @@
 .ProjectTeamOtherProjectInfo {
     display: flex;
     flex-direction: row;
+    padding-left: 5px;
 }

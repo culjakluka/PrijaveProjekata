@@ -366,7 +366,7 @@ const SecondInputForm = (docId) => {
 
           {modalApplicationUpdatedIsOpen && <ModalApplicationUpdated />}
 
-          <h1 className="document-title">NAMJERA PRIJAVE</h1>
+          <h1 className="document-title">TRAŽENJE SUGLASNOSTI</h1>
 
           <Question questionText={questions[0]} />
           <div className={Style.NameSurnameContainer}>
