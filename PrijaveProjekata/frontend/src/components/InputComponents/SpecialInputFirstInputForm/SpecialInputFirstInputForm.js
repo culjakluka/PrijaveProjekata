@@ -83,7 +83,7 @@ const SpecialInputFirstInputForm = ({ name, pitanje }) => {
             <div style={{display:"flex", flexDirection:"row"}}>
             <p style={{margin:"0px"}}>Svi članovi:</p>
             <button onClick={() => setDeleteMemberIsActive(!deleteMemberIsActive)} className={Style.EditProjectTeamMembers}>
-              {deleteMemberIsActive ? "ZAVRŠI" : "UREDITE ČLANOVE"}
+              {deleteMemberIsActive ? "ZAVRŠI UREĐIVANJE" : "UREDITE ČLANOVE"}
             </button>
             </div>
             {/* GENERATING COMPLETED PROJECT MEMBERS */}

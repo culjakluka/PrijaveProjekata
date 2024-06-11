@@ -15,6 +15,10 @@ const SpecialInputProject = ({ addNewProjectProp }) => {
   }, [otherProjectName, otherProjectPercentage]);
 
   const addNewProject = () => {
+    if (otherProjectName === "" || otherProjectPercentage === "") {
+      alert("Niste unijeli sve podatke...");
+      return;
+    }
     addNewProjectProp(project);
     setOtherProjectName("");
     setOtherProjectPercentage("");

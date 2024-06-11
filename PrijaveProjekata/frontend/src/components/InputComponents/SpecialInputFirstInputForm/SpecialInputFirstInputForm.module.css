@@ -308,27 +308,37 @@
 
 .EditProjectTeamMembers {
     margin-left: "auto";
-    font-weight: "500"; 
-    border: "none";
+    font-weight: 500; 
+    border: none;
     background-color:"#6F6F6F";
     color: "#FDFDFD";
-    font-size: "0.8em"
+    font-size: 0.8em
+}
+
+.EditProjectTeamMembers {
+    margin-left: auto;
+    font-weight: 500; 
+    border: none;
+    background-color: #6F6F6F;
+    color: #FDFDFD;
+    font-size: 0.8em;
 }
 
 .EditProjectTeamMembers:hover {
-    margin-left: "auto";
-    font-weight: "500"; 
-    border: "none";
-    background-color:"#cecece";
-    color: "#FDFDFD";
-    font-size: "0.8em",
+    margin-left: auto;
+    font-weight: 500; 
+    border: none;
+    background-color: #cecece;
+    color: #FDFDFD;
+    font-size: 0.8em;
 }
+
 
 .DeleteMemberYesNo {
     background-color: #6F6F6F;
     color: #FDFDFD;
-    font-weight: 500;
     font-size: 0.8em;
+    font-weight: 500;
     box-shadow: none;
     outline: none;
     border: none;
@@ -339,6 +349,7 @@
     background-color: #cecece;
     color: #FDFDFD;
     font-weight: 500;
+    font-size: 0.8em;
     box-shadow: none;
     outline: none;
     border: none;

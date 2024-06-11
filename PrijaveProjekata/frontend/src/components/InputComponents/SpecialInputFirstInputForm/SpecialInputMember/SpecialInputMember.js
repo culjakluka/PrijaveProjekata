@@ -20,6 +20,10 @@ const SpecialInputMember = ({ addProjectMember }) => {
   }, [newItemNameSurname, newItemEmail, newItemPercentage, otherProjects]);
 
   const addNewMember = () => {
+    if (newItemNameSurname === "" || newItemEmail === "" || newItemPercentage === "" || otherProjects.length === 0) {
+      alert("Niste unijeli sve podatke...");
+      return;
+    }
     addProjectMember(member);
     setNewItemNameSurname("");
     setNewItemEmail("");
