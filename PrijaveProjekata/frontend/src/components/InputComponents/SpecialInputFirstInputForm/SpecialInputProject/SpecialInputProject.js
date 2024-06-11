@@ -31,9 +31,9 @@ const SpecialInputProject = ({ addNewProjectProp }) => {
         placeholder="postotak u projektu..."
         type="number"
         onChange={(e) => setOtherProjectPercentage(e.target.value)}
-      />
+      />%
       <button className={Style.SpecialInputAddProject} onClick={addNewProject}>
-        DODAJ PROJEKT
+        DODAJ
       </button>
     </div>
   );

@@ -39,12 +39,14 @@ const SpecialInputMember = ({ addProjectMember }) => {
           placeholder="e-mail..."
           onChange={(e) => setNewItemEmail(e.target.value)}
         />
+        <div>
         <input
           className={Style.SpecialInputNumberInput}
           placeholder="postotak..."
           type="number"
           onChange={(e) => setNewItemPercentage(e.target.value)}
-        />
+        />%
+        </div>
         
         
         <SpecialInputProjectContainer addNewProjectProp={addNewProject} />

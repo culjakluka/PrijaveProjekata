@@ -93,7 +93,7 @@ const SecondInputForm = (docId) => {
   const [pdfDocuments, setPdfDocuments] = useState([]);
 
   // application updated modal - after application is submitted
-  const [modalApplicationUpdatedIsOpen, setModalApplicationUpdatedIsOpen] = useState(true);
+  const [modalApplicationUpdatedIsOpen, setModalApplicationUpdatedIsOpen] = useState(false);
 
   useEffect(() => {
     setInputFormData({

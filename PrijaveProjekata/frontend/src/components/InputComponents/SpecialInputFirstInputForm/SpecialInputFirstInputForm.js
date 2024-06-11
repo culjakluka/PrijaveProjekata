@@ -70,14 +70,15 @@ const SpecialInputFirstInputForm = ({ name, pitanje }) => {
           <SpecialInputMemberContainer addProjectMember={addNewMember} />
         ) : null}
 
-        <button onClick={manageInputForm} className={Style.SpecialInputPlus}>
+        <button onClick={manageInputForm} className={addMemberFormIsActive ? Style.SpecialInputMinus : Style.SpecialInputPlus}>
           {addMemberFormIsActive ? "SAKRIJ" : "DODAJ NOVOG ČLANA"}
         </button>
       </div>
 
       {/* ALL MEMBERS */}
-        <p>Svi članovi:</p>
+       
           <div className={Style.SpecialInputCompletedMembers}>
+            <p>Svi članovi:</p>
             {/* GENERATING COMPLETED PROJECT MEMBERS */}
             {projectTeam.length > 0 ? (
               projectTeam?.map((member, index) => (
@@ -89,7 +90,7 @@ const SpecialInputFirstInputForm = ({ name, pitanje }) => {
                     
                     <div className={Style.ProjectOtherProjectsTitle}>OSTALI PROJEKTI:</div>
                     {member.otherProjects.map((project, index) => (
-                        <div className={Style.ProjectTeamMemberOtherProjects}>
+                        <div key={index} className={Style.ProjectTeamMemberOtherProjects}>
                             <div className={Style.ProjectTeamOtherProjectInfo}>
                                 {project.otherProjectName} {project.otherProjectPercentage}%
                             </div>
