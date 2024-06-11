@@ -325,6 +325,7 @@ const FirstInputForm = () => {
           <SpecialInputFirstInputForm
             name="project_team_members"
             pitanje={questions[8]}
+            formType={"first"}
           />
 
           <button className="default-button" onClick={handleSubmit}>

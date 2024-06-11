@@ -11,7 +11,7 @@ import TextInputWithoutTitle from "../../InputComponents/TextInputWithoutTitle/T
 import DropdownMenuInputOther from "../../InputComponents/DropdownMenuInputOther/DropdownMenuInputOther.js";
 import DropdownMenuInput from "../../InputComponents/DropdownMenuInput/DropdownMenuInput.js";
 import RadioButtonInput from "../../InputComponents/RadioButtonInput/RadioButtonInput.js";
-import SpecialInputSecondInputForm from "../../InputComponents/SpecialInput/SpecialInputSecondInputForm.js";
+import SpecialInputForm from "../../InputComponents/SpecialInputFirstInputForm/SpecialInputFirstInputForm.js";
 import GenerateHeadOfDepartmentStatement from "../../InputComponents/GenerateHeadOfDepartmentStatement/GenerateHeadOfDepartmentStatement.js";
 import AttachAdditionalDocumentation from "../../InputComponents/AttachAdditionalDocumentation/AttachAdditionalDocumentation.js";
 import AttachHeadOfDepartmentStatement from "../../InputComponents/AttachHeadOfDepartmentStatement/AttachHeadOfDepartmentStatement.js";
@@ -630,9 +630,10 @@ const SecondInputForm = (docId) => {
           />
 
           <Question questionText={questions[18]} />
-          <SpecialInputSecondInputForm
+          <SpecialInputForm
             name="project_team_members"
             questionText={""}
+            formType={"second"}
           />
 
           <Question questionText={questions[19]} />
