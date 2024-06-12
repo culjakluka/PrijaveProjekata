@@ -33,6 +33,7 @@ import NumberInput from "../../InputComponents/NumberInput/NumberInput.js";
 import { getDepartments } from "./firstInputFormApi.js";
 import NumberInputSelectFirstForm from "../../InputComponents/NumberInputSelectFirstForm/NumberInputSelectFirstForm.js";
 import { set } from "date-fns";
+import CalendarInputAdvanced from "../../InputComponents/CalendarInputAdvanced/CalendarInputAdvanced.js";
 
 const FirstInputForm = () => {
   const { logout } = useLogout();
@@ -268,6 +269,7 @@ const FirstInputForm = () => {
             setSpecificState={setApplicationDeadline}
             initialDate={"2024-12-11"}
           />
+          <CalendarInputAdvanced />
 
           <Question questionText={questions[2]} />
           <ProjectSummary
@@ -285,7 +287,7 @@ const FirstInputForm = () => {
           <Question questionText={questions[4]} />
           <TextInput
             label={
-              "PRIJAVITELJ PROJEKTA/VODEĆI PARTNER (institucija, tvrtka...)"
+              "PRIJAVITELJ PROJEKTA/VODEĆI PARTNER (FESB, institucija, tvrtka...)"
             }
             name={"prijavitelj_projekta"}
             setSpecificState={setProjectAplicant}
