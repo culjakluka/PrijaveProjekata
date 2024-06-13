@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import hr from 'date-fns/locale/hr'; // croatian
-import { addDays, isWeekend } from 'date-fns';
+import { addDays, isWeekend, addWeeks, parseISO  } from 'date-fns';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -10,18 +10,26 @@ import Style from './CalendarInputAdvanced.module.css';
 
 registerLocale('hr', hr);
 
-const CalendarInputAdvanced = ({ setSpecificState, initialDate, name }) => {
+const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, workingDaysLimit }) => {
 
     const [placeholderText, setPlaceholderText] = useState('mm/dd/yyyy');
 
-    const [selectedDate, setSelectedDate] = useState(() => {
-        // load value from sessionStorage
-        const storedDate = sessionStorage.getItem(name);
-        // if the value exists, set new date as storedDate, 
-        // otherwise set initialDate or null(dd/MM/yyyy format)
-        return storedDate ? new Date(storedDate) : initialDate || null;
-    });
+    const [selectedDate, setSelectedDate] = useState(null);
 
+    useEffect(() => {
+        // Check if initialDate is provided and parse it
+        if (initialDate) {
+            const parsedDate = parseISO(initialDate);
+            setSelectedDate(parsedDate);
+        } else {
+            // Check sessionStorage for existing value
+            const storedDate = sessionStorage.getItem(name);
+            if (storedDate) {
+                const parsedDate = new Date(storedDate);
+                setSelectedDate(parsedDate);
+            }
+        }
+    }, [initialDate, name]);
 
 
     useEffect(() => {
@@ -46,28 +54,39 @@ const CalendarInputAdvanced = ({ setSpecificState, initialDate, name }) => {
 
 
     useEffect(() => {
-        //setSpecificState(selectedDate);
+        setSpecificState(selectedDate);
     }, [selectedDate]);
 
     // restrictions for date picker
     
-    // function to check if a date is a working day (Monday to Friday)
+    // Function to check if a date is a working day (Monday to Friday)
     const isWorkingDay = (date) => {
         const day = date.getDay();
         return day !== 0 && day !== 6; // 0 is Sunday, 6 is Saturday
     };
 
-     // Calculate the maximum selectable date (7 working days from today)
-     const maxSelectableDate = addDays(new Date(), 7);
+    // Calculate the minimum selectable date (7 working days from today)
+    const minSelectableDate = (() => {
+        let currentDate = new Date();
+        let workingDaysCount = 0;
+        // while sum of wokring days is less than 7
+        while (workingDaysCount < workingDaysLimit) {
+            currentDate = addDays(currentDate, 1);
+            if (isWorkingDay(currentDate)) {
+                workingDaysCount++;
+            }
+        }
+        return currentDate;
+    })();
 
-     // Function to filter selectable dates
+    // Function to filter selectable dates
     const isDateSelectable = (date) => {
-        // Check if the date is a working day and is within the next 7 working days
-        return isWorkingDay(date) && date <= maxSelectableDate;
+        // Check if the date is a working day and is at least 7 working days from today
+        return isWorkingDay(date) && date >= minSelectableDate;
     };
-
     return (  
         <div className={Style.DateContainer}>
+            <label className={Style.DateLabel}>{label}</label>
             <DatePicker 
                 showYearDropdown={true} 
                 selected={selectedDate} 

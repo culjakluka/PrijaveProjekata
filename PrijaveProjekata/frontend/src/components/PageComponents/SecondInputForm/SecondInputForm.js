@@ -33,6 +33,7 @@ import { SecondInputFormDataContext } from "../../../context/SecondInputFormData
 import { useAuthContext } from "../../../hooks/useAuthContext.js";
 import ModalApplicationUpdated from "../../InputComponents/ModalApplicationUpdated/ModalApplicationUpdated.js";
 import { set } from "date-fns";
+import CalendarInputAdvanced from "../../InputComponents/CalendarInputAdvanced/CalendarInputAdvanced.js";
 
 const SecondInputForm = (docId) => {
   const { user } = useAuthContext();
@@ -431,12 +432,14 @@ const SecondInputForm = (docId) => {
             setSpecificState={setProjectAcronym}
             initialValue={projectAcronym}
           />
-          <CalendarInput
+          <CalendarInputAdvanced
             label={"ROK ZA PRIJAVU PROJEKTA CALENDAR"}
             name={"application_dead_line"}
             setSpecificState={setApplicationDeadline}
             initialValue={applicationDeadline}
+            workingDaysLimit={7}
           />
+
           <Question questionText={questions[2]} />
           <ProjectSummary
             name={"project_summary"}

@@ -263,13 +263,12 @@ const FirstInputForm = () => {
             name={"akronim_projekta"}
             setSpecificState={setProjectAcronym}
           />
-          <CalendarInput
+          <CalendarInputAdvanced 
             label={"ROK ZA PRIJAVU PROJEKTA"}
             name={"rok_za_prijavu_projekta"}
             setSpecificState={setApplicationDeadline}
-            initialDate={"2024-12-11"}
+            workingDaysLimit={7}
           />
-          <CalendarInputAdvanced />
 
           <Question questionText={questions[2]} />
           <ProjectSummary
