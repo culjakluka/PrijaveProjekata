@@ -34,6 +34,7 @@ import { getDepartments } from "./firstInputFormApi.js";
 import NumberInputSelectFirstForm from "../../InputComponents/NumberInputSelectFirstForm/NumberInputSelectFirstForm.js";
 import { set } from "date-fns";
 import CalendarInputAdvanced from "../../InputComponents/CalendarInputAdvanced/CalendarInputAdvanced.js";
+import NumberInputSelect from "../../InputComponents/NumberInputSelect/NumberInputSelect.js";
 
 const FirstInputForm = () => {
   const { logout } = useLogout();
@@ -267,7 +268,7 @@ const FirstInputForm = () => {
             label={"ROK ZA PRIJAVU PROJEKTA"}
             name={"rok_za_prijavu_projekta"}
             setSpecificState={setApplicationDeadline}
-            workingDaysLimit={7}
+            workingDaysLimit={15}
           />
 
           <Question questionText={questions[2]} />
@@ -308,13 +309,12 @@ const FirstInputForm = () => {
             currencyOrPercentage={"€"}
           />
 
-          <NumberInputSelectFirstForm
+          <NumberInputSelect
             label={
               "DIO PRORAČUNA KOJI PRIPADA FESB-u(vrijednost ili postotak ukupne vrijednosti"
             }
             name={"dio_proracuna_fesb"}
             setSpecificState={setFesbValuePart}
-            currencyOrPercentage={"€"}
           />
 
           <Question questionText={questions[7]} />

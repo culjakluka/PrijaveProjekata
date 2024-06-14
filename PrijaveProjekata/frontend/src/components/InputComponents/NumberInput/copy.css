@@ -4,7 +4,7 @@
     flex-direction: column;
     margin-top: 20px;
     margin-bottom: 20px;
-    color: #000000;
+    color : #000000;
     position: relative;
 }
 
@@ -17,6 +17,7 @@
     border: 2px solid #ccc;
     border-radius: 4px;
     background-color: #f8f8f8;
+    position: relative;
     padding: 2px 5px; /* first value - top/bottom padding, second value - left/right padding value */
 }
 
@@ -32,17 +33,29 @@
     color: #B0355E;
 }
 
-.NumberInputInput {
+.NumberInputInput { 
     width: 100%;
     height: 100%;
     border: none;
     background-color: transparent;
-    position: relative;
-    padding: 2px 5px;
-    color: black;
-    caret-color: black; /* Set caret color to black */
+    color: transparent;
+    caret-color: black; /* Set caret color to red */
+    position: relative; /* Positioned relative to its normal position */
 }
 
 .NumberInputInput:focus {
     outline: none;
 }
+
+.BackgroundDiv {
+    position: absolute; /* Positioned absolutely within the nearest relative ancestor */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 3px 7px; 
+    z-index: 0; /* Ensure the background div is behind the input */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+    white-space: nowrap; /* Prevent text from wrapping */
+  }

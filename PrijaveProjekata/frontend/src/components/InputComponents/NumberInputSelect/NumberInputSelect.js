@@ -6,7 +6,9 @@ import Style from './NumberInputSelect.module.css'
 // context
 import { SecondInputFormDataContext } from '../../../context/SecondInputFormDataContext';
 
-const NumberInputSelect = ({ name, label, initialValue, setSpecificState, currencyOrPercentage }) => {
+const currencySign = "€";
+
+const NumberInputSelect = ({ name, label, initialValue, setSpecificState }) => {
     const [inputValue, setInputValue] = useState("");
     const [percentageSelected, setPercentageSelected] = useState(false);
     const [currencySelected, setCurrencySelected] = useState(true);
@@ -38,6 +40,7 @@ const NumberInputSelect = ({ name, label, initialValue, setSpecificState, curren
         }
     }, []);
 
+    // if intial value is available, set it to the input field
     useEffect(() => {
         try {
             const savedValue = sessionStorage.getItem(name);
@@ -56,7 +59,7 @@ const NumberInputSelect = ({ name, label, initialValue, setSpecificState, curren
         } catch (error) {
             console.log(error);
         }
-    }, [initialValue, name, setSpecificState]);
+    }, [initialValue, name]);
 
     useEffect(() => {
         if (currencySelected) {
@@ -128,7 +131,7 @@ const NumberInputSelect = ({ name, label, initialValue, setSpecificState, curren
                         className={Style.NumberInputInput}>
                     </input>
                     <button onClick={managePercentageSelected} className={percentageSelected ? Style.PercentageSelected : Style.Percentage}>%</button>
-                    <button onClick={manageCurrencySelected} className={currencySelected ? Style.CurrencySignSelected : Style.CurrencySign}>{currencyOrPercentage}</button>
+                    <button onClick={manageCurrencySelected} className={currencySelected ? Style.CurrencySignSelected : Style.CurrencySign}>{currencySign}</button>
                 </div>
                 <div style={{ marginLeft: "20px", fontSize: "1.2em" }}>({formatNumber(finalValue)} €)</div>
             </div>

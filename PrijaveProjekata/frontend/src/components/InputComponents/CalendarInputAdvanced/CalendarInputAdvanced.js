@@ -17,17 +17,22 @@ const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, wor
     const [selectedDate, setSelectedDate] = useState(null);
 
     useEffect(() => {
+        // Check sessionStorage for existing value
+        const storedDate = sessionStorage.getItem(name);
+
         // Check if initialDate is provided and parse it
-        if (initialDate) {
-            const parsedDate = parseISO(initialDate);
-            setSelectedDate(parsedDate);
-        } else {
-            // Check sessionStorage for existing value
-            const storedDate = sessionStorage.getItem(name);
+        if(storedDate) {
             if (storedDate) {
                 const parsedDate = new Date(storedDate);
                 setSelectedDate(parsedDate);
             }
+        } 
+        else if (initialDate) {
+            const parsedDate = parseISO(initialDate);
+            console.log("PARSED DATE" + parsedDate);
+            setSelectedDate(parsedDate);
+        } else {
+            // there is no initial date or stored date
         }
     }, [initialDate, name]);
 

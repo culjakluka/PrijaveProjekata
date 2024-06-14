@@ -436,7 +436,7 @@ const SecondInputForm = (docId) => {
             label={"ROK ZA PRIJAVU PROJEKTA CALENDAR"}
             name={"application_dead_line"}
             setSpecificState={setApplicationDeadline}
-            initialValue={applicationDeadline}
+            initialDate={applicationDeadline}
             workingDaysLimit={7}
           />
 
@@ -473,11 +473,12 @@ const SecondInputForm = (docId) => {
           />
 
           <Question questionText={questions[6]} />
-          <CalendarInput
+          <CalendarInputAdvanced
             label={"POČETAK PROJEKTA"}
             name={"expected_project_beginning"}
             setSpecificState={setExpectedProjectBeginning}
-            initialValue={expectedProjectBeginning}
+            initialDate={expectedProjectBeginning}
+            workingDaysLimit={0}
           />
 
           <Question questionText={questions[7]} />
@@ -516,26 +517,22 @@ const SecondInputForm = (docId) => {
             name={"total_value"}
             setSpecificState={setTotalValue}
             initialValue={totalValue}
-            currencyOrPercentage={"€"}
           />
 
           <Question questionText={questions[12]} />
           <NumberInputSelect
             label={"DIO PRORAČUNA KOJI PRIPADA FESB-u"}
             name={"fesb_value_part"}
-            currencyOrPercentage={"€"}
             setSpecificState={setFesbValuePart}
           />
           <NumberInputSelect
             label={"TROŠAK POSTOJEĆEG OSOBLJA"}
             name={"current_personnel_expense"}
-            currencyOrPercentage={"€"}
             setSpecificState={setCurrentPesonnelExpense}
           />
           <NumberInputSelect
             label={"TROŠAK NOVOZAPOSLENOG OSOBLJA"}
             name={"new_personnel_expense"}
-            currencyOrPercentage={"€"}
             setSpecificState={setNewPersonnelExpense}
           />
           <AutomaticInput
@@ -546,31 +543,26 @@ const SecondInputForm = (docId) => {
             label={
               "TROŠAK I POPIS OPREME KOJA SE NABAVLJA (OZNAČITI NABAVU IZNAD 26.544,00 E)"
             }
-            currencyOrPercentage={"€"}
             name={"equipment_description_and_expense"}
             setSpecificState={setEquipmentDescriptionAndExpense}
           />
           <NumberInputSelect
             label={"TROŠAK AMORTIZACIJE OPREME"}
             name={"equipment_amortization_expense"}
-            currencyOrPercentage={"€"}
             setSpecificState={setEquipmentAmortizationExpense}
           />
           <NumberInputSelect
             label={"TROŠAK VANJSKIH USLUGA"}
             name={"other_services_expense"}
-            currencyOrPercentage={"€"}
             setSpecificState={setOtherServicesExpense}
           />
           <NumberInputSelect
             label={"TROŠAK MATERIJALA I SITNOG INVENTARA"}
             name={"material_expense"}
-            currencyOrPercentage={"€"}
             setSpecificState={setMaterialExpense}
           />
           <NumberInputSelect
             label={"PUTNI TROŠAK/TROŠAK KOTIZACIJA/STRUČNOG USAVRŠAVANJA"}
-            currencyOrPercentage={"€"}
             name={"travel_registration_education_expense"}
             setSpecificState={setTravelRegistrationEducationExpense}
           />
@@ -596,7 +588,6 @@ const SecondInputForm = (docId) => {
             label={""}
             name={"partner_expense"}
             setSpecificState={setPartnerExpense}
-            currencyOrPercentage={"€"}
           />
 
           <Question questionText={questions[14]} />
@@ -604,7 +595,6 @@ const SecondInputForm = (docId) => {
             label={""}
             name={"requested_funding"}
             setSpecificState={setRequestedFunding}
-            currencyOrPercentage={"€"}
           />
 
           <Question questionText={questions[15]} />
@@ -612,7 +602,6 @@ const SecondInputForm = (docId) => {
             label={""}
             name={"down_payment"}
             setSpecificState={setDownPayment}
-            currencyOrPercentage={"€"}
           />
 
           <Question questionText={questions[16]} />
@@ -652,7 +641,6 @@ const SecondInputForm = (docId) => {
                 name={"consultant_expense"}
                 setSpecificState={setConsultantExpense}
                 initialValue={consultantExpense}
-                currencyOrPercentage={"€"}
               />
               <TextInput
                 label={"IZVOR SREDSTAVA ZA KONZULTANTSKE USLUGE"}
