@@ -720,23 +720,13 @@ const AdminDashboard = () => {
 
                     {!projectEditable && (
                       <div className="decision-buttons-container">
-                        <div className="approve-button-container manage-button-style">
-                          <button
-                            onClick={() => setModalApproveProjectIsOpen(true)}
-                            className="approve-button"
-                          >
-                            ODOBRI
-                          </button>
-                        </div>
+                        <button className="approve-button manage-button-style" onClick={() => setModalApproveProjectIsOpen(true)}>
+                          ODOBRI
+                        </button>
 
-                        <div className="decline-button-container manage-button-style">
-                          <button
-                            onClick={() => setModalDeclineProjectIsOpen(true)}
-                            className="decline-button"
-                          >
+                        <button className="decline-button manage-button-style" onClick={() => setModalDeclineProjectIsOpen(true)}>
                             ODBIJ
-                          </button>
-                        </div>
+                        </button>
                       </div>
                     )}
                   </div>

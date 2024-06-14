@@ -18,7 +18,7 @@
     flex-direction: row;
     width: 30%;
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     border-radius: 4px;
     background-color: #f8f8f8;
 }

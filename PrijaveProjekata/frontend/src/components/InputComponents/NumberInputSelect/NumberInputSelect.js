@@ -189,6 +189,7 @@ const NumberInputSelect = ({ name, label, initialValue, setSpecificState, isFirs
                 <div className={Style.NumberInput}>
                     <input type='text'
                         value={inputValue}
+                        placeholder='0.00'
                         onChange={handleChange}
                         className={Style.NumberInputInput}>
                     </input>
