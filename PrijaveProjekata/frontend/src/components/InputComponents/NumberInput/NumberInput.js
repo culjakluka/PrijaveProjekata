@@ -22,7 +22,7 @@ const NumberInput = ({ name, label, initialValue, setSpecificState }) => {
         }
     }, [initialValue, name, setSpecificState]);
 
-    // function to format the number
+    // function that formats number from 1000 to 1,000 or 1000.00 if decimal
     const formatNumber = (value) => {
         // remove all non digit characters - preventing user from entering anything other than numbers
         const numericValue = value.replace(/[^\d.]/g, '');

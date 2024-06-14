@@ -524,16 +524,22 @@ const SecondInputForm = (docId) => {
             label={"DIO PRORAČUNA KOJI PRIPADA FESB-u"}
             name={"fesb_value_part"}
             setSpecificState={setFesbValuePart}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
           <NumberInputSelect
             label={"TROŠAK POSTOJEĆEG OSOBLJA"}
             name={"current_personnel_expense"}
             setSpecificState={setCurrentPesonnelExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
           <NumberInputSelect
             label={"TROŠAK NOVOZAPOSLENOG OSOBLJA"}
             name={"new_personnel_expense"}
             setSpecificState={setNewPersonnelExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
           <AutomaticInput
             label={"NEIZRAVNI TROŠKOVI (15% NA TROŠKOVE OSOBLJA)"}
@@ -545,26 +551,36 @@ const SecondInputForm = (docId) => {
             }
             name={"equipment_description_and_expense"}
             setSpecificState={setEquipmentDescriptionAndExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
           <NumberInputSelect
             label={"TROŠAK AMORTIZACIJE OPREME"}
             name={"equipment_amortization_expense"}
             setSpecificState={setEquipmentAmortizationExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
           <NumberInputSelect
             label={"TROŠAK VANJSKIH USLUGA"}
             name={"other_services_expense"}
             setSpecificState={setOtherServicesExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
           <NumberInputSelect
             label={"TROŠAK MATERIJALA I SITNOG INVENTARA"}
             name={"material_expense"}
             setSpecificState={setMaterialExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
           <NumberInputSelect
             label={"PUTNI TROŠAK/TROŠAK KOTIZACIJA/STRUČNOG USAVRŠAVANJA"}
             name={"travel_registration_education_expense"}
             setSpecificState={setTravelRegistrationEducationExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
           {currentPesonnelExpense +
             newPersonnelExpense +
@@ -588,6 +604,8 @@ const SecondInputForm = (docId) => {
             label={""}
             name={"partner_expense"}
             setSpecificState={setPartnerExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
 
           <Question questionText={questions[14]} />
@@ -595,6 +613,8 @@ const SecondInputForm = (docId) => {
             label={""}
             name={"requested_funding"}
             setSpecificState={setRequestedFunding}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
 
           <Question questionText={questions[15]} />
@@ -602,6 +622,8 @@ const SecondInputForm = (docId) => {
             label={""}
             name={"down_payment"}
             setSpecificState={setDownPayment}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
 
           <Question questionText={questions[16]} />
