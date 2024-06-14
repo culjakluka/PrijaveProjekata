@@ -11,7 +11,7 @@ import TextInputWithoutTitle from "../../InputComponents/TextInputWithoutTitle/T
 import DropdownMenuInputOther from "../../InputComponents/DropdownMenuInputOther/DropdownMenuInputOther.js";
 import DropdownMenuInput from "../../InputComponents/DropdownMenuInput/DropdownMenuInput.js";
 import RadioButtonInput from "../../InputComponents/RadioButtonInput/RadioButtonInput.js";
-import SpecialInputSecondInputForm from "../../InputComponents/SpecialInput/SpecialInputSecondInputForm.js";
+import SpecialInputForm from "../../InputComponents/SpecialInputFirstInputForm/SpecialInputFirstInputForm.js";
 import GenerateHeadOfDepartmentStatement from "../../InputComponents/GenerateHeadOfDepartmentStatement/GenerateHeadOfDepartmentStatement.js";
 import AttachAdditionalDocumentation from "../../InputComponents/AttachAdditionalDocumentation/AttachAdditionalDocumentation.js";
 import AttachHeadOfDepartmentStatement from "../../InputComponents/AttachHeadOfDepartmentStatement/AttachHeadOfDepartmentStatement.js";
@@ -29,8 +29,11 @@ import {
 import { questions, radioButtonData1 } from "../../data/secondInputFormData.js";
 
 // context
-import { SecondInputFormDataConext } from "../../../context/SecondInputFormDataContext.js";
+import { SecondInputFormDataContext } from "../../../context/SecondInputFormDataContext.js";
 import { useAuthContext } from "../../../hooks/useAuthContext.js";
+import ModalApplicationUpdated from "../../InputComponents/ModalApplicationUpdated/ModalApplicationUpdated.js";
+import { set } from "date-fns";
+import CalendarInputAdvanced from "../../InputComponents/CalendarInputAdvanced/CalendarInputAdvanced.js";
 
 const SecondInputForm = (docId) => {
   const { user } = useAuthContext();
@@ -89,6 +92,9 @@ const SecondInputForm = (docId) => {
   const [requiredDocumentationFESB, setRequiredDocumentationFESB] =
     useState("");
   const [pdfDocuments, setPdfDocuments] = useState([]);
+
+  // application updated modal - after application is submitted
+  const [modalApplicationUpdatedIsOpen, setModalApplicationUpdatedIsOpen] = useState(false);
 
   useEffect(() => {
     setInputFormData({
@@ -315,7 +321,7 @@ const SecondInputForm = (docId) => {
 
         console.log("Update successful:", responseData);
 
-        window.alert("Update successful!", responseData);
+        setModalApplicationUpdatedIsOpen(true);
       } else {
         // handle potentional non-JSON response
         const errorData = await response.json().catch(() => null);
@@ -348,16 +354,20 @@ const SecondInputForm = (docId) => {
     // all the child components inside SecondInputFormDataConext.Provide have access value data
     <div className={Style.InputFormContainer}>
       <div className={Style.InputForm}>
-        <SecondInputFormDataConext.Provider
+        <SecondInputFormDataContext.Provider
           value={{
             projectTeam,
             setProjectTeam,
             totalValue,
             department,
             nameSurname,
+            setModalApplicationUpdatedIsOpen
           }}
         >
-          <h1 className="document-title">NAMJERA PRIJAVE</h1>
+
+          {modalApplicationUpdatedIsOpen && <ModalApplicationUpdated />}
+
+          <h1 className="document-title">TRAŽENJE SUGLASNOSTI</h1>
 
           <Question questionText={questions[0]} />
           <div className={Style.NameSurnameContainer}>
@@ -422,12 +432,14 @@ const SecondInputForm = (docId) => {
             setSpecificState={setProjectAcronym}
             initialValue={projectAcronym}
           />
-          <CalendarInput
+          <CalendarInputAdvanced
             label={"ROK ZA PRIJAVU PROJEKTA CALENDAR"}
             name={"application_dead_line"}
             setSpecificState={setApplicationDeadline}
-            initialValue={applicationDeadline}
+            initialDate={applicationDeadline}
+            workingDaysLimit={7}
           />
+
           <Question questionText={questions[2]} />
           <ProjectSummary
             name={"project_summary"}
@@ -461,11 +473,12 @@ const SecondInputForm = (docId) => {
           />
 
           <Question questionText={questions[6]} />
-          <CalendarInput
+          <CalendarInputAdvanced
             label={"POČETAK PROJEKTA"}
             name={"expected_project_beginning"}
             setSpecificState={setExpectedProjectBeginning}
-            initialValue={expectedProjectBeginning}
+            initialDate={expectedProjectBeginning}
+            workingDaysLimit={0}
           />
 
           <Question questionText={questions[7]} />
@@ -504,26 +517,22 @@ const SecondInputForm = (docId) => {
             name={"total_value"}
             setSpecificState={setTotalValue}
             initialValue={totalValue}
-            currencyOrPercentage={"€"}
           />
 
           <Question questionText={questions[12]} />
           <NumberInputSelect
             label={"DIO PRORAČUNA KOJI PRIPADA FESB-u"}
             name={"fesb_value_part"}
-            currencyOrPercentage={"€"}
             setSpecificState={setFesbValuePart}
           />
           <NumberInputSelect
             label={"TROŠAK POSTOJEĆEG OSOBLJA"}
             name={"current_personnel_expense"}
-            currencyOrPercentage={"€"}
             setSpecificState={setCurrentPesonnelExpense}
           />
           <NumberInputSelect
             label={"TROŠAK NOVOZAPOSLENOG OSOBLJA"}
             name={"new_personnel_expense"}
-            currencyOrPercentage={"€"}
             setSpecificState={setNewPersonnelExpense}
           />
           <AutomaticInput
@@ -534,31 +543,26 @@ const SecondInputForm = (docId) => {
             label={
               "TROŠAK I POPIS OPREME KOJA SE NABAVLJA (OZNAČITI NABAVU IZNAD 26.544,00 E)"
             }
-            currencyOrPercentage={"€"}
             name={"equipment_description_and_expense"}
             setSpecificState={setEquipmentDescriptionAndExpense}
           />
           <NumberInputSelect
             label={"TROŠAK AMORTIZACIJE OPREME"}
             name={"equipment_amortization_expense"}
-            currencyOrPercentage={"€"}
             setSpecificState={setEquipmentAmortizationExpense}
           />
           <NumberInputSelect
             label={"TROŠAK VANJSKIH USLUGA"}
             name={"other_services_expense"}
-            currencyOrPercentage={"€"}
             setSpecificState={setOtherServicesExpense}
           />
           <NumberInputSelect
             label={"TROŠAK MATERIJALA I SITNOG INVENTARA"}
             name={"material_expense"}
-            currencyOrPercentage={"€"}
             setSpecificState={setMaterialExpense}
           />
           <NumberInputSelect
             label={"PUTNI TROŠAK/TROŠAK KOTIZACIJA/STRUČNOG USAVRŠAVANJA"}
-            currencyOrPercentage={"€"}
             name={"travel_registration_education_expense"}
             setSpecificState={setTravelRegistrationEducationExpense}
           />
@@ -584,7 +588,6 @@ const SecondInputForm = (docId) => {
             label={""}
             name={"partner_expense"}
             setSpecificState={setPartnerExpense}
-            currencyOrPercentage={"€"}
           />
 
           <Question questionText={questions[14]} />
@@ -592,7 +595,6 @@ const SecondInputForm = (docId) => {
             label={""}
             name={"requested_funding"}
             setSpecificState={setRequestedFunding}
-            currencyOrPercentage={"€"}
           />
 
           <Question questionText={questions[15]} />
@@ -600,7 +602,6 @@ const SecondInputForm = (docId) => {
             label={""}
             name={"down_payment"}
             setSpecificState={setDownPayment}
-            currencyOrPercentage={"€"}
           />
 
           <Question questionText={questions[16]} />
@@ -621,9 +622,10 @@ const SecondInputForm = (docId) => {
           />
 
           <Question questionText={questions[18]} />
-          <SpecialInputSecondInputForm
+          <SpecialInputForm
             name="project_team_members"
             questionText={""}
+            formType={"second"}
           />
 
           <Question questionText={questions[19]} />
@@ -639,7 +641,6 @@ const SecondInputForm = (docId) => {
                 name={"consultant_expense"}
                 setSpecificState={setConsultantExpense}
                 initialValue={consultantExpense}
-                currencyOrPercentage={"€"}
               />
               <TextInput
                 label={"IZVOR SREDSTAVA ZA KONZULTANTSKE USLUGE"}
@@ -670,7 +671,7 @@ const SecondInputForm = (docId) => {
           <button className="default-button" onClick={handleSubmit}>
             PODNESI TRAZENJE SUGLASNOSTI
           </button>
-        </SecondInputFormDataConext.Provider>
+        </SecondInputFormDataContext.Provider>
       </div>
     </div>
   );

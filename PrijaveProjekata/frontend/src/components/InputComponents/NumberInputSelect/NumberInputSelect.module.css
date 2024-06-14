@@ -96,15 +96,3 @@
     outline: none;
 }
 
-/* REMOVING ARROWS IN INPUT(type="number) */
-
-/* Chrome, Safari, Edge, Opera */
-.NumberInputInput::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.NumberInputInput[type=number] {
-    -moz-appearance: textfield;
-  } 

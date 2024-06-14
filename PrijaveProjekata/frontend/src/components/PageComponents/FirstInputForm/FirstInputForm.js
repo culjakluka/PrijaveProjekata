@@ -4,12 +4,18 @@ import React from "react";
 import TextInput from "../../InputComponents/TextInput/TextInput";
 import DropdownMenuInput from "../../InputComponents/DropdownMenuInput/DropdownMenuInput";
 import RadioButtonInput from "../../InputComponents/RadioButtonInput/RadioButtonInput";
+
+// my components
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import Question from "../../InputComponents/Question/Question";
 import SpecialInputFirstInputForm from "../../InputComponents/SpecialInputFirstInputForm/SpecialInputFirstInputForm.js";
 import TextInputWithoutTitle from "../../InputComponents/TextInputWithoutTitle/TextInputWithoutTitle";
 import CompletedProject from "../../InputComponents/CompletedProject/CompletedProject";
 import CalendarInput from "../../InputComponents/CalendarInput/CalendarInput";
+
+// modal components
+import ModalMessage from "../../InputComponents/ModalMessage/ModalMessage.js";
+import ModalApplicationSubmitted from "../../InputComponents/ModalApplicationSubmitted/ModalApplicationSubmitted.js";
 
 // styles
 import Style from "./FirstInputForm.module.css";
@@ -26,6 +32,9 @@ import NumberInput from "../../InputComponents/NumberInput/NumberInput.js";
 // API requests
 import { getDepartments } from "./firstInputFormApi.js";
 import NumberInputSelectFirstForm from "../../InputComponents/NumberInputSelectFirstForm/NumberInputSelectFirstForm.js";
+import { set } from "date-fns";
+import CalendarInputAdvanced from "../../InputComponents/CalendarInputAdvanced/CalendarInputAdvanced.js";
+import NumberInputSelect from "../../InputComponents/NumberInputSelect/NumberInputSelect.js";
 
 const FirstInputForm = () => {
   const { logout } = useLogout();
@@ -56,6 +65,13 @@ const FirstInputForm = () => {
   // object will take all data from input
   // later it will be extracted and sent to databases
 
+  // MISSING FIELDS MODAL
+  const [modalMessageIsOpen, setModalMessageIsOpen] = useState(false);
+  const [missingFields, setMissingFields] = useState([]);
+
+  // modal application submitted
+  const [modalApplicationSubmittedIsOpen, setModalApplicationSubmittedIsOpen] = useState(false);
+
   const handleSubmit = async () => {
     try {
       const response = await fetch("/api/projectInfo", {
@@ -69,13 +85,14 @@ const FirstInputForm = () => {
       if (response.ok) {
         const responseData = await response.json();
 
-        console.log("Post successful:", responseData);
+        console.log("Post successful:", responseData)
 
-        window.alert("Post successful");
-
+        // show message that application is submitted
+        
         // clearing session storage and refreshing browser
         sessionStorage.clear();
-        window.location.reload();
+        setModalApplicationSubmittedIsOpen(true);
+
       } else {
         // handle potentional non-JSON response
         const errorData = await response.json().catch(() => null);
@@ -85,7 +102,6 @@ const FirstInputForm = () => {
           : `Error: ${response.status} ${response.statusText}`;
 
         console.error("Error posting data: ", errorMessage);
-        window.alert(`Error posting data: ${errorMessage}`);
 
         // printing missing field if there are any and displaying them
         if (
@@ -95,7 +111,13 @@ const FirstInputForm = () => {
         ) {
           const missingFieldsMessage = `Missing fields: ${errorData.emptyFields.join(", ")}`;
           console.error(missingFieldsMessage);
-          window.alert(missingFieldsMessage);
+          //window.alert(missingFieldsMessage);
+          
+          setMissingFields(missingFieldsMessage);
+          // opean modal missing fields
+          setModalMessageIsOpen(true);
+          
+
         }
       }
     } catch (error) {
@@ -187,8 +209,15 @@ const FirstInputForm = () => {
     <FirstInputFormDataContext.Provider value={{
       projectTeam,
       setProjectTeam,
-      totalValue 
+      totalValue,
+      setModalMessageIsOpen,
+      setModalApplicationSubmittedIsOpen,
+      missingFields
       }}>
+
+      {modalMessageIsOpen && <ModalMessage missingFieldsMessage={missingFields} />}
+      {modalApplicationSubmittedIsOpen && <ModalApplicationSubmitted />}
+
       <div className={Style.InputContainer}>
         {user && (
           <div className="logout">
@@ -205,6 +234,7 @@ const FirstInputForm = () => {
             name="ime_prezime"
             setSpecificState={setNameSurname}
           />
+
           <TextInput
             label={"TITULA"}
             name={"titula"}
@@ -234,11 +264,11 @@ const FirstInputForm = () => {
             name={"akronim_projekta"}
             setSpecificState={setProjectAcronym}
           />
-          <CalendarInput
+          <CalendarInputAdvanced 
             label={"ROK ZA PRIJAVU PROJEKTA"}
             name={"rok_za_prijavu_projekta"}
             setSpecificState={setApplicationDeadline}
-            initialDate={"2024-12-11"}
+            workingDaysLimit={15}
           />
 
           <Question questionText={questions[2]} />
@@ -257,7 +287,7 @@ const FirstInputForm = () => {
           <Question questionText={questions[4]} />
           <TextInput
             label={
-              "PRIJAVITELJ PROJEKTA/VODEĆI PARTNER (institucija, tvrtka...)"
+              "PRIJAVITELJ PROJEKTA/VODEĆI PARTNER (FESB, institucija, tvrtka...)"
             }
             name={"prijavitelj_projekta"}
             setSpecificState={setProjectAplicant}
@@ -279,13 +309,12 @@ const FirstInputForm = () => {
             currencyOrPercentage={"€"}
           />
 
-          <NumberInputSelectFirstForm
+          <NumberInputSelect
             label={
               "DIO PRORAČUNA KOJI PRIPADA FESB-u(vrijednost ili postotak ukupne vrijednosti"
             }
             name={"dio_proracuna_fesb"}
             setSpecificState={setFesbValuePart}
-            currencyOrPercentage={"€"}
           />
 
           <Question questionText={questions[7]} />
@@ -297,6 +326,7 @@ const FirstInputForm = () => {
           <SpecialInputFirstInputForm
             name="project_team_members"
             pitanje={questions[8]}
+            formType={"first"}
           />
 
           <button className="default-button" onClick={handleSubmit}>

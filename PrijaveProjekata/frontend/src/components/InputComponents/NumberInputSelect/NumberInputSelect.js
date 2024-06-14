@@ -4,15 +4,17 @@ import React, { useEffect, useState, useContext } from 'react'
 import Style from './NumberInputSelect.module.css'
 
 // context
-import { SecondInputFormDataConext } from '../../../context/SecondInputFormDataContext';
+import { SecondInputFormDataContext } from '../../../context/SecondInputFormDataContext';
 
-const NumberInputSelect = ({ name, label, initialValue, setSpecificState, currencyOrPercentage }) => {
+const currencySign = "€";
+
+const NumberInputSelect = ({ name, label, initialValue, setSpecificState }) => {
     const [inputValue, setInputValue] = useState("");
     const [percentageSelected, setPercentageSelected] = useState(false);
     const [currencySelected, setCurrencySelected] = useState(true);
     const [finalValue, setFinalValue] = useState(0);
 
-    const { totalValue } = useContext(SecondInputFormDataConext);
+    const { totalValue } = useContext(SecondInputFormDataContext);
 
     // on start up, check if the value is available in the session storage
     useEffect(() => {
@@ -38,6 +40,7 @@ const NumberInputSelect = ({ name, label, initialValue, setSpecificState, curren
         }
     }, []);
 
+    // if intial value is available, set it to the input field
     useEffect(() => {
         try {
             const savedValue = sessionStorage.getItem(name);
@@ -56,7 +59,7 @@ const NumberInputSelect = ({ name, label, initialValue, setSpecificState, curren
         } catch (error) {
             console.log(error);
         }
-    }, [initialValue, name, setSpecificState]);
+    }, [initialValue, name]);
 
     useEffect(() => {
         if (currencySelected) {
@@ -109,6 +112,14 @@ const NumberInputSelect = ({ name, label, initialValue, setSpecificState, curren
         setPercentageSelected(true);
     };
 
+    // format number 1000 to 1,000.00, etc...
+    const formatNumber = (value) => {
+        if (isNaN(value) || value === null || value === undefined) {
+            return '';
+        }
+        return new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value);
+    };
+
     return (
         <div className={Style.NumberInputContainer}>
             <label className={Style.NumberInputLabel}>{label}</label>
@@ -120,9 +131,9 @@ const NumberInputSelect = ({ name, label, initialValue, setSpecificState, curren
                         className={Style.NumberInputInput}>
                     </input>
                     <button onClick={managePercentageSelected} className={percentageSelected ? Style.PercentageSelected : Style.Percentage}>%</button>
-                    <button onClick={manageCurrencySelected} className={currencySelected ? Style.CurrencySignSelected : Style.CurrencySign}>{currencyOrPercentage}</button>
+                    <button onClick={manageCurrencySelected} className={currencySelected ? Style.CurrencySignSelected : Style.CurrencySign}>{currencySign}</button>
                 </div>
-                <div style={{ marginLeft: "20px", fontSize: "1.2em" }}>({finalValue} €)</div>
+                <div style={{ marginLeft: "20px", fontSize: "1.2em" }}>({formatNumber(finalValue)} €)</div>
             </div>
         </div>
     );

@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const SecondInputFormDataConext = createContext("");
+export const SecondInputFormDataContext = createContext("");

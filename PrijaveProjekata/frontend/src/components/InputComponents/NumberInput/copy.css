@@ -1,0 +1,61 @@
+.NumberInputContainer {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color : #000000;
+    position: relative;
+}
+
+.NumberInputHolder {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 30%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    position: relative;
+    padding: 2px 5px; /* first value - top/bottom padding, second value - left/right padding value */
+}
+
+.CurrencySign {
+    z-index: 1;
+    font-weight: 500;
+}
+
+.NumberInputLabel {
+    align-self: flex-start;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #B0355E;
+}
+
+.NumberInputInput { 
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    color: transparent;
+    caret-color: black; /* Set caret color to red */
+    position: relative; /* Positioned relative to its normal position */
+}
+
+.NumberInputInput:focus {
+    outline: none;
+}
+
+.BackgroundDiv {
+    position: absolute; /* Positioned absolutely within the nearest relative ancestor */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 3px 7px; 
+    z-index: 0; /* Ensure the background div is behind the input */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+    white-space: nowrap; /* Prevent text from wrapping */
+  }

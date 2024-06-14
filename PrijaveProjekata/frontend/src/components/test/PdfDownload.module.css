@@ -8,7 +8,7 @@
     margin: 0;
     color: #515151;
     font-weight: bold;
-    font-size: 0.9em;
+    font-size: 0.8em;
     width: 100%;
     overflow: hidden; /* Hide the overflow text */
     text-overflow: ellipsis; /* Add ellipsis (...) for overflow text */
@@ -29,7 +29,7 @@
 
 .downloadButtonText {
     color: #ffffff;
-    font-size: 1em;
+    font-size: 0.8em;
     margin-right: 10px;
 }
 

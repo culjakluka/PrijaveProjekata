@@ -8,13 +8,13 @@ import { pdf } from "@react-pdf/renderer";
 import DepartmentHeadStatementPDF from '../PDF/DepartmentHeadStatementPDF';
 
 //context
-import { SecondInputFormDataConext } from '../../../context/SecondInputFormDataContext';
+import { SecondInputFormDataContext } from '../../../context/SecondInputFormDataContext';
 
 const GenerateHeadOfDepartmentStatement = () => {
 
     
     // using context
-    const { nameSurname, department } = useContext(SecondInputFormDataConext);   
+    const { nameSurname, department } = useContext(SecondInputFormDataContext);   
 
     // handle pdf new tab
         const handlePDF = () => {

@@ -1,23 +1,22 @@
 import React, { useState, useEffect, useContext } from "react";
 import SpecialInputMemberContainer from "./SpecialInputMemberContainer/SpecialInputMemberContainer.js";
-import CompletedMember from "../CompletedMember/CompletedMember.js";
 import { SpecialInputContext } from "./SpecialInputContext.js";
 import { FirstInputFormDataContext } from "../../../context/FirstInputFormDataContext.js";
+import { SecondInputFormDataContext } from "../../../context/SecondInputFormDataContext.js";
 
 // styles
 import Style from "./SpecialInputFirstInputForm.module.css";
 
-const SpecialInputFirstInputForm = ({ name, pitanje }) => {
-  // projectMembers contains members that consist of this fields named: - newItemNameSurname
-  //                                                                    - newItemEmail
-  //                                                                    - newItemPercentag
-
-  // using projectTeam from context
-  const { projectTeam, setProjectTeam } = useContext(FirstInputFormDataContext);
+const SpecialInputForm = ({ name, pitanje, formType }) => {
+  // Determine the context to use based on formType
+  const { projectTeam, setProjectTeam } = useContext(
+    formType === "first" ? FirstInputFormDataContext : SecondInputFormDataContext
+  );
 
   // project members
   const [projectMembers, setProjectMembers] = useState([]);
   const [addMemberFormIsActive, setAddMemberFormIsActive] = useState(false);
+  const [deleteMemberIsActive, setDeleteMemberIsActive] = useState(false);
 
   // when component mounts
   useEffect(() => {
@@ -28,7 +27,7 @@ const SpecialInputFirstInputForm = ({ name, pitanje }) => {
       const serializedState = JSON.parse(sessionStorageProjectMembers);
       setProjectTeam(serializedState);
     }
-  }, []);
+  }, [name, setProjectTeam]);
 
   // add new member
   const addNewMember = (newMember) => {
@@ -70,40 +69,52 @@ const SpecialInputFirstInputForm = ({ name, pitanje }) => {
           <SpecialInputMemberContainer addProjectMember={addNewMember} />
         ) : null}
 
-        <button onClick={manageInputForm} id="special-input-plus">
-          {addMemberFormIsActive ? "-" : "DODAJ NOVOG ČLANA"}
+        <button onClick={manageInputForm} className={addMemberFormIsActive ? Style.SpecialInputMinus : Style.SpecialInputPlus}>
+          {addMemberFormIsActive ? "SAKRIJ" : "DODAJ NOVOG ČLANA"}
         </button>
-      </div>
 
-      {/* ALL MEMBERS */}
-        <p>Svi članovi:</p>
-          <div className={Style.SpecialInputCompletedMembers}>
-            {/* GENERATING COMPLETED PROJECT MEMBERS */}
-            {projectTeam.length > 0 ? (
-              projectTeam?.map((member, index) => (
-                <div className={Style.ProjectTeamMember}>
-                    <div className={Style.ProjectTeamMemberInfo}>
-                        <div style={{marginRight:"10px"}}>{member.nameSurname}</div>
-                        <div>{member.thisProjectPercentage}%</div>
-                    </div>
-                    
-                    <div className={Style.ProjectOtherProjectsTitle}>OSTALI PROJEKTI:</div>
-                    {member.otherProjects.map((project, index) => (
-                        <div className={Style.ProjectTeamMemberOtherProjects}>
-                            <div className={Style.ProjectTeamOtherProjectInfo}>
-                                {project.otherProjectName} {project.otherProjectPercentage}%
-                            </div>
-                        </div>
-                    
-                    ))}
-                </div>
-            ))
-            ) : (
-              <p>niste dodali niti jednog člana...</p>
-            )}
+        {/* ALL MEMBERS - PRINTING ALL MEMBERS */}
+        <div className={Style.SpecialInputCompletedMembers}>
+          <div style={{display:"flex", flexDirection:"row"}}>
+            <p style={{margin:"0px"}}>Svi članovi:</p>
+            {projectTeam.length > 0 &&
+            <button onClick={() => setDeleteMemberIsActive(!deleteMemberIsActive)} className={Style.EditProjectTeamMembers}>
+              {deleteMemberIsActive ? "ZAVRŠI UREĐIVANJE" : "UREDITE ČLANOVE"}
+            </button>
+            } 
           </div>
+          
+          {projectTeam.length > 0 ? (
+            projectTeam.map((member, index) => (
+              <div key={index} className={Style.ProjectTeamMember}>
+                <div className={Style.ProjectTeamMemberInfo}>
+                  <div style={{marginRight:"10px"}}>{member.nameSurname}</div>
+                  <div style={{marginRight:"10px"}}>({member.email})</div>
+                  <div>- {member.thisProjectPercentage}%</div>
+                  {deleteMemberIsActive && (
+                    <div style={{marginLeft: "auto", fontWeight: "400", textDecoration: "underline", border: "none"}}>
+                      <button onClick={() => deleteMember(index)} className={Style.DeleteMemberYesNo}>IZBRIŠI</button>
+                    </div>
+                  )}
+                </div>
+
+                <div className={Style.ProjectOtherProjectsTitle}>OSTALI PROJEKTI:</div>
+                {member.otherProjects.map((project, indexProject) => (
+                  <div key={indexProject} className={Style.ProjectTeamMemberOtherProjects}>
+                    <div className={Style.ProjectTeamOtherProjectInfo}>
+                      {project.otherProjectName} - {project.otherProjectPercentage}%
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))
+          ) : (
+            <p>niste dodali niti jednog člana...</p>
+          )}
+        </div>
+      </div>
     </SpecialInputContext.Provider>
   );
 };
 
-export default SpecialInputFirstInputForm;
+export default SpecialInputForm;
