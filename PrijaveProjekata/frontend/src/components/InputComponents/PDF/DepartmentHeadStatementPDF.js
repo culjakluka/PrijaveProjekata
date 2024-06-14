@@ -19,6 +19,9 @@ Font.register({
 
 const styles = StyleSheet.create({
     page : {
+        fontFamily: "Roboto",
+        fontSize: 12,
+
     },
     pageContainer : {
         display: "flex",

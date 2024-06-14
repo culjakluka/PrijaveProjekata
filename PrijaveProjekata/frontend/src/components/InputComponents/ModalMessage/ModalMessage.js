@@ -1,43 +1,58 @@
-import { React, useContext } from 'react';
+import { React, useEffect, useState, useContext } from 'react';
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';  
 import { faTimes as faXmark } from '@fortawesome/free-solid-svg-icons';
 
 // style
-import Style from './ModalApproveProject.module.css';
+import Style from './ModalMessage.module.css';
 
-const ModalMessage = () => {
+// context 
+import { FirstInputFormDataContext } from '../../../context/FirstInputFormDataContext';
+
+const ModalTemplate = (height, width, modalMessage, missingFieldsContent) => {
+
+    const[heightPercentage, setHeightPercentage] = useState("40%");
+    const[widthPercentage, setWidthPercentage] = useState("30%");
+    const [message, setMessage] = useState("Molimo popunite sva polja!");
+
+    // context - here bring the context of component here
+    const{ setModalMessageIsOpen, missingFields } = useContext(FirstInputFormDataContext);
+
+    useEffect(() => {
+        if(height) {
+            setHeightPercentage(height);
+        }
+
+        if(width) {
+            setWidthPercentage(width);
+        }
+
+        if(modalMessage) {
+            setMessage(modalMessage);
+        }
+
+    }, []);
 
     const handleYesButton = () => {
-        //TO-DO
+        setModalMessageIsOpen(false)
     }
 
-    const handleNoButton = () => {
-        //TO-DO
-    }
-
-    const closeModal = () => {
-        //TO-DO
-    }
-
-
-    return (  
+    return (
         <div className={Style.ModalContainerOverlay}>
-        <div className={Style.Modal}>
-            <div className={Style.ModalTopContainer}>
-                <button className={Style.ModalClose} onClick={() => closeModal()}>
-                        <FontAwesomeIcon icon={faXmark} size='1x'/>
-                </button>
-                <h3 className={Style.ModalQuestion}>Odbaci promjene?</h3>
-            </div>
+            <div className={Style.Modal} style={{height: heightPercentage, width: widthPercentage }}>
+                <div className={Style.ModalTopContainer}>
+                    <h3 className={Style.ModalQuestion}>{message}</h3>
+                </div>
+                <div className={Style.ModalMissingFieldsContainer}>
+                    <p>{missingFields}</p>
+                </div>
             
-            <div className={Style.ModalButtonsContainer}>
-                <button onClick={() => handleYesButton()} className={Style.ModalButton}>DA</button>
-                <button onClick={() => handleNoButton()} className={Style.ModalButton}>NE</button>
+                <div className={Style.ModalButtonsContainer}>
+                    <button onClick={() => handleYesButton()} className={Style.ModalYesButton}>U REDU</button>
+                </div>
             </div>
         </div>
-    </div>
     );
 }
  

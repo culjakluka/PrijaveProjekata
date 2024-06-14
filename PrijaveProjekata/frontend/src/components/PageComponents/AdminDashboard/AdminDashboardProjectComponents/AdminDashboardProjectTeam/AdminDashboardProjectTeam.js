@@ -18,6 +18,7 @@ const AdminDashboardProjectTeam = () => {
                     <div className={Style.AdminDashboardProjectTeamMemberInfo}>
                         <div style={{marginRight:"10px"}}>{member.nameSurname}</div>
                         <div>{member.thisProjectPercentage}%</div>
+                        <div style={{marginLeft:"10px"}}>{member.email}</div>
                     </div>
                     
                     <div className={Style.AdminDashboardProjectOtherProjectsTitle}>OSTALI PROJEKTI:</div>

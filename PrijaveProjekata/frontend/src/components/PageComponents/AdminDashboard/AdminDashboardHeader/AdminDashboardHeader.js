@@ -23,7 +23,9 @@ const AdminDashboardHeader = () => {
     return (  
         <div className="admin-dashboard-header-container">
             <img className="header-logo" src={logo}/>
-            <FontAwesomeIcon className="admin-dashboard-settings-icon" onClick={() => openModal()} icon={faCog} size="2x" color='#ffffff' />
+            <button style={{border:"none", backgroundColor:"transparent"}}>
+                <FontAwesomeIcon className="admin-dashboard-settings-icon" onClick={() => openModal()} icon={faCog} size="2x" color='#ffffff' />
+            </button>
         </div>
     );
 }

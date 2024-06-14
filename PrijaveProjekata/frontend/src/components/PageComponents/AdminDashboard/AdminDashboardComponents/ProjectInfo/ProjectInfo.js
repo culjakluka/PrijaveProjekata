@@ -10,7 +10,6 @@ import { AdminDashboardContext } from "../../../../../context/AdminDashboardCont
 // my components
 import AdminQuestion from "../../AdminDashboardProjectComponents/AdminQuestion/AdminQuestion.js";
 import AdminTextInput from "../../AdminDashboardProjectComponents/AdminTextInput/AdminTextInput.js";
-import SpecialInputSecondInputForm from "../../../../InputComponents/SpecialInput/SpecialInputSecondInputForm.js";
 import PdfDownload from "../../../../test/PdfDownload.jsx";
 import CsvConverter from "../../../../test/csv/CsvConverter.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -171,7 +170,7 @@ const ProjectInfo = ({ selectedProject }) => {
               <div className={Style.pdfTitle}>Projektna dokumentacija:</div>
               <div className={Style.pdfContent}>
                 {Array.isArray(selectedProject?.pdfDocuments) &&
-                  selectedProject.pdfDocuments.slice(0,5).map((pdf) => (
+                  selectedProject.pdfDocuments.slice(0,10).map((pdf) => (
                     <div className={Style.pdfDivInside} key={pdf._id}>
                       <FontAwesomeIcon
                         icon={faFilePdf}

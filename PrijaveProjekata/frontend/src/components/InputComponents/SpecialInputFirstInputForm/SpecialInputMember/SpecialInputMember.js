@@ -20,31 +20,54 @@ const SpecialInputMember = ({ addProjectMember }) => {
   }, [newItemNameSurname, newItemEmail, newItemPercentage, otherProjects]);
 
   const addNewMember = () => {
+    if (newItemNameSurname === "" || newItemEmail === "" || newItemPercentage === "" || otherProjects.length === 0) {
+      alert("Niste unijeli sve podatke...");
+      return;
+    }
     addProjectMember(member);
+    setNewItemNameSurname("");
+    setNewItemEmail("");
+    setNewItemPercentage("");
+    setProjects([]);
   };
 
   const addNewProject = (newProject) => {
     setProjects((previousMembers) => [...previousMembers, newProject]);
   };
 
+  // part that makes sure that not higher number than 100 is entered - percentage
+  const handlePercentageChange = (e) => {
+    const value = e.target.value;
+    if((value === '' || (value >= 0 && value <= 100)) && value.length <= 3) {
+      setNewItemPercentage(value)
+    }
+  }
+
   return (
-    <div>
       <div className={Style.SpecialInputMemberInfo}>
         <input
-          className={Style.SpecialInputInput}
+          className={Style.SpecialInputTextInput}
           placeholder="ime i prezime..."
+          value={newItemNameSurname}
           onChange={(e) => setNewItemNameSurname(e.target.value)}
         />
         <input
-          className={Style.SpecialInputInput}
+          className={Style.SpecialInputTextInput}
           placeholder="e-mail..."
+          value={newItemEmail}
           onChange={(e) => setNewItemEmail(e.target.value)}
         />
+        <div>
         <input
-          className={Style.SpecialInputInput}
-          placeholder="postotak..."
-          onChange={(e) => setNewItemPercentage(e.target.value)}
-        />
+          className={Style.SpecialInputNumberInput}
+          placeholder="postotak u projektu..."
+          type="number"
+          min="0"
+          max="100"
+          value={newItemPercentage}
+          onChange={handlePercentageChange}
+        />%
+        </div>
         
         
         <SpecialInputProjectContainer addNewProjectProp={addNewProject} />
@@ -63,7 +86,7 @@ const SpecialInputMember = ({ addProjectMember }) => {
               />
             ))
           ) : (
-            <p>niste dodali niti jedan projekt ovom članu...</p>
+            <p style={{margin:"8px 0px 8px 10px"}}>niste dodali niti jedan projekt ovom članu...</p>
           )}
         </div>
 
@@ -71,7 +94,6 @@ const SpecialInputMember = ({ addProjectMember }) => {
           DODAJ ČLANA
         </button>
       </div>
-    </div>
   );
 };
 

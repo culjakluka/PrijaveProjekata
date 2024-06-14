@@ -4,22 +4,25 @@
     flex-direction: column;
     margin-top: 20px;
     margin-bottom: 20px;
-    color : #000000;
+    color: #000000;
+    position: relative;
 }
 
 .NumberInputHolder {
     display: flex;
     flex-direction: row;
+    align-items: center;
     width: 30%;
-
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
     background-color: #f8f8f8;
+    padding: 2px 5px; /* first value - top/bottom padding, second value - left/right padding value */
 }
 
 .CurrencySign {
-    margin-right: 5px;
+    z-index: 1;
+    font-weight: 500;
 }
 
 .NumberInputLabel {
@@ -32,24 +35,14 @@
 .NumberInputInput {
     width: 100%;
     height: 100%;
-    margin-left: 5px;
     border: none;
-    background-color: #f8f8f8;
+    background-color: transparent;
+    position: relative;
+    padding: 2px 5px;
+    color: black;
+    caret-color: black; /* Set caret color to black */
 }
 
 .NumberInputInput:focus {
     outline: none;
 }
-
-/* REMOVING ARROWS IN INPUT(type="number) */
-
-/* Chrome, Safari, Edge, Opera */
-.NumberInputInput::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.NumberInputInput[type=number] {
-    -moz-appearance: textfield;
-  } 

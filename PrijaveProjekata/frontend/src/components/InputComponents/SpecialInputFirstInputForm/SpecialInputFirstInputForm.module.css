@@ -2,8 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: #f9f9f9;
-    padding: 20px;
+    color: #6e6e6e;
+    font-size: 1em;
+    font-weight: 500;
+    margin-top: 10px;
+    width: 80%;
 }
 
 .SpecialInputLabel {
@@ -18,17 +21,24 @@
     flex-direction: row;
 }
 
+.SpecialInputMemberProjectsList {
+}
+
 .SpecialInputMember {
 
 }
 
-#SpecialInputCompletedMember {
+.SpecialInputCompletedMember {
     display: flex;
     flex-direction: column;
 }
 
 .SpecialInputCompletedMembers {
     width: 100%;
+    margin-top: 20px;
+    color: #6e6e6e;
+    font-size: 1em;
+    font-weight: 500;
 }
 
 #CompletedMemberContainer {
@@ -100,22 +110,41 @@
     align-self: flex-start;
     margin-left: 5px;
 }
+.SpecialInputMemberContainer {
+
+}
 
 .SpecialInputMemberInfo {
     display: flex;
     flex-direction: column;
-    border: solid #A4A4A4 2px;
-    border-radius: 5px;
+    border: solid #000000 1px;
     margin-top: 10px;
     margin-bottom: 10px;
-    padding: 5px;
+    padding: 10px;
 }
 
-.SpecialInputInput {
-    border: none;
+.SpecialInputTextInput {
+    border: solid 1px #000000;
+    border-radius: 5px;
+    padding: 2px 6px 2px 6px;
+    margin: 2px;
+    width: 50%;
     border-bottom: 1px solid #A4A4A4;
     margin-left: 5px;
     margin-right: 5px;
+    font-size: 1em;
+}
+
+.SpecialInputNumberInput {
+    border: solid 1px #000000;
+    border-radius: 5px;
+    padding: 2px 6px 2px 6px;
+    margin: 2px;
+    width: 50%;
+    border-bottom: 1px solid #A4A4A4;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 1em;
 }
 
 .SpecialInputInput:focus {
@@ -123,27 +152,83 @@
 }
 
 .SpecialInputProjectContainer {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 5px;
+    display: flex;
+    flex-direction: column;
 }
 
-#SpecialInputMemberProjectsProject {
+.SpecialInputMemberProjectsProject {
     display: flex;
     flex-direction: row;
+    height: 2em;
+    align-items: center;
 }
 
-#SpecialInputMemberProjectsTitle {
+.SpecialInputMemberProjectsTitle {
     margin-left: 5px;
+    margin-top: 10px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 
-#SpecialInputPlus {
-    align-self: center;
-    border: solid 1px gray;
-    border-radius: 2px;
-    font-size: 20px;
-    background-color: white;
+.SpecialInputPlus {
+    background-color: #6F6F6F;
+    color: #FDFDFD;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    margin-left: 30px;
+    margin-top: 10px;
 }
+
+.SpecialInputPlus:hover {
+    background-color: #cecece;
+    color: #FDFDFD;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+.SpecialInputMinus {
+    background-color: #6F6F6F;
+    color: #FDFDFD;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    margin-left: 30px;
+    align-self: center;
+}
+
+.SpecialInputMinus:hover {
+    background-color: #cecece;
+    color: #FDFDFD;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    margin-left: 30px;
+    align-self: center;
+}
+
+.SpecialInputPlus:hover {
+    background-color: #cecece;
+    color: #FDFDFD;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    box-shadow: none;
+    outline: none;
+    border: none;
+}
+
+
 
 .SpecialInputAddMember {
     align-self: center;
@@ -160,9 +245,9 @@
     margin-right: 70px; 
 }
 
-.SpecialInputAddProject {
+.SpecialInputAddMember:hover {
     align-self: center;
-    background-color: #6F6F6F;
+    background-color: #cecece;
     color: #FDFDFD;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 500;
@@ -172,7 +257,31 @@
     font-size: 1em;
     padding: 3px 15px 3px 15px;
     margin-left: 70px;
-    margin-right: 70px;
+    margin-right: 70px; 
+}
+
+.SpecialInputAddProject {
+    display: inline-block;
+    background-color: #6F6F6F;
+    color: #FDFDFD;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    box-shadow: none;
+    border: none;
+    padding: 3px 5px 3px 5px;
+    margin-left: 20px;
+}
+
+.SpecialInputAddProject:hover {
+    display: inline-block;
+    background-color: #cecece;
+    color: #FDFDFD;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    box-shadow: none;
+    border: none;
+    padding: 3px 5px 3px 5px;
+    margin-left: 20px;
 }
 
 .SpecialSeparatorLine {
@@ -192,7 +301,60 @@
 .ProjectTeamMember {
     display: flex;
     flex-direction: column;
-    margin: 5px 0px 0px 0px;
+    margin: 5px 0px 10px 0px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: rgb(243, 243, 243);
+}
+
+.EditProjectTeamMembers {
+    margin-left: "auto";
+    font-weight: 500; 
+    border: none;
+    background-color:"#6F6F6F";
+    color: "#FDFDFD";
+    font-size: 0.8em
+}
+
+.EditProjectTeamMembers {
+    margin-left: auto;
+    font-weight: 500; 
+    border: none;
+    background-color: #6F6F6F;
+    color: #FDFDFD;
+    font-size: 0.8em;
+}
+
+.EditProjectTeamMembers:hover {
+    margin-left: auto;
+    font-weight: 500; 
+    border: none;
+    background-color: #cecece;
+    color: #FDFDFD;
+    font-size: 0.8em;
+}
+
+
+.DeleteMemberYesNo {
+    background-color: #6F6F6F;
+    color: #FDFDFD;
+    font-size: 0.8em;
+    font-weight: 500;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    margin: 2px;
+}
+
+.DeleteMemberYesNo:hover {
+    background-color: #cecece;
+    color: #FDFDFD;
+    font-weight: 500;
+    font-size: 0.8em;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    margin: 2px;
 }
 
 .ProjectTeamMemberInfo {
@@ -200,9 +362,11 @@
     flex-direction: row;
     font-weight: bold;
     margin: 0px;
+    padding: 5px;
     height: 100%;
     color: #4a4949;
-} 
+}
+
 
 .ProjectOtherProjectsTitle {
     font-size: 1em;
@@ -213,10 +377,11 @@
     display: flex;
     flex-direction: column;
     font-size: 1em;
-    padding-left: 10px;
+    margin-left: 5px;
 }
 
 .ProjectTeamOtherProjectInfo {
     display: flex;
     flex-direction: row;
+    padding-left: 5px;
 }
