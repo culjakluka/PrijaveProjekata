@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import "./DropdownMenuInputOther.css";
 
+// dropdown menu that has option to select other and write it down
+// that is main difference between this and DropdownMenuInput
 const DropdownMenuInputOther = ({ name, name2, data, setSpecificState }) => {
   const [selectionValue, setSelectionValue] = useState("");
   const [otherSelectionValue, setOtherSelectionValue] = useState("");

@@ -12,9 +12,9 @@ const NumberInput = ({ name, label, initialValue, setSpecificState }) => {
             const savedValue = sessionStorage.getItem(name);
             if (savedValue) {
                 setInputValue(formatNumber(savedValue));
-                setSpecificState(savedValue);
+                setSpecificState(savedValue);   
             } else if (initialValue) {
-                setInputValue(formatNumber(initialValue));
+                setInputValue(formatNumber(initialValue.toString()));
                 setSpecificState(initialValue);
             }
         } catch (error) {

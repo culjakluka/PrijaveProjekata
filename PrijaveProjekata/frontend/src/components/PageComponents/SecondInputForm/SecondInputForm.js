@@ -34,13 +34,14 @@ import { useAuthContext } from "../../../hooks/useAuthContext.js";
 import ModalApplicationUpdated from "../../InputComponents/ModalApplicationUpdated/ModalApplicationUpdated.js";
 import { set } from "date-fns";
 import CalendarInputAdvanced from "../../InputComponents/CalendarInputAdvanced/CalendarInputAdvanced.js";
+import TotalExpenseWarning from "../../InputComponents/TotalExpenseWarning/TotalExpenseWarning.js";
 
 const SecondInputForm = (docId) => {
   const { user } = useAuthContext();
   // const [projectToUpdateId, setProjectToUpdateId] = useState(documentId)
   const [intentionFormToUpdate, setIntentionFormToUpdate] = useState(null); // data loaded from document
 
-  const [inputFormData, setInputFormData] = useState("");
+  const [inputFormData, setInputFormData] = useState({});
   const [secondInputMarker, setSecondInputMarker] = useState(true);
   const [nameSurname, setNameSurname] = useState("");
   const [vocation, setVocation] = useState("");
@@ -66,7 +67,7 @@ const SecondInputForm = (docId) => {
     useState(false);
   const [totalValue, setTotalValue] = useState(0);
   const [fesbValuePart, setFesbValuePart] = useState(0);
-  const [currentPesonnelExpense, setCurrentPesonnelExpense] = useState(0);
+  const [currentPersonnelExpense, setCurrentPersonnelExpense] = useState(0);
   const [newPersonnelExpense, setNewPersonnelExpense] = useState(0);
   const [indirectExpenses, setIndirectExpenses] = useState(0);
   const [equipmentDescriptionAndExpense, setEquipmentDescriptionAndExpense] =
@@ -96,6 +97,9 @@ const SecondInputForm = (docId) => {
   // application updated modal - after application is submitted
   const [modalApplicationUpdatedIsOpen, setModalApplicationUpdatedIsOpen] = useState(false);
 
+  // this component is used to calculate total expense
+  const [totalExpense, setTotalExpense] = useState(0);
+
   useEffect(() => {
     setInputFormData({
       userId: user?.userId,
@@ -124,7 +128,7 @@ const SecondInputForm = (docId) => {
       expectedProjectBeginning,
       expectedProjectDurationInMonths,
       economicSubjectInvolvement,
-      currentPesonnelExpense,
+      currentPersonnelExpense,
       newPersonnelExpense,
       equipmentDescriptionAndExpense,
       equipmentAmortizationExpense,
@@ -169,7 +173,7 @@ const SecondInputForm = (docId) => {
     expectedProjectBeginning,
     expectedProjectDurationInMonths,
     economicSubjectInvolvement,
-    currentPesonnelExpense,
+    currentPersonnelExpense,
     newPersonnelExpense,
     equipmentDescriptionAndExpense,
     equipmentAmortizationExpense,
@@ -202,7 +206,7 @@ const SecondInputForm = (docId) => {
         }
 
         const data = await response.json();
-
+        console.log("Data fetched: ", data);
         // setting up data loaded from document(_id)
         setIntentionFormToUpdate(data);
       } catch (error) {
@@ -231,11 +235,50 @@ const SecondInputForm = (docId) => {
       setNewEmploymentBoolean(intentionFormToUpdate?.setNewEmploymentBoolean);
       setProjectTeam(intentionFormToUpdate?.projectTeam);
     }
+
+    console.log("Intention form to update: ", intentionFormToUpdate);
+
   }, [intentionFormToUpdate]);
 
   useEffect(() => {
     setIndirectExpenses(0.15 * fesbValuePart);
   }, [fesbValuePart]);
+
+
+  const checkNaN = (value) => {
+    if (isNaN(value)) {
+      return 0;
+    } else {
+      return value;
+    }
+  
+  }
+  useEffect(() => {
+    const calculatedTotalExpense = 
+      checkNaN(currentPersonnelExpense) + 
+      checkNaN(newPersonnelExpense) + 
+      checkNaN(equipmentDescriptionAndExpense) + 
+      checkNaN(equipmentAmortizationExpense) + 
+      checkNaN(otherServicesExpense) + 
+      checkNaN(materialExpense) + 
+      checkNaN(travelRegistrationEducationExpense) + 
+      checkNaN(partnerExpense);
+      
+      setTotalExpense(calculatedTotalExpense);
+
+    console.log("Partner expense test: " + partnerExpense ?? 0);
+
+    console.log("Total expense: ", totalExpense);
+    console.log("FESB value part: ", fesbValuePart);
+  }, [
+    currentPersonnelExpense,
+    newPersonnelExpense, 
+    fesbValuePart, 
+    equipmentDescriptionAndExpense, 
+    equipmentAmortizationExpense, 
+    otherServicesExpense, 
+    materialExpense, 
+    travelRegistrationEducationExpense]);
 
   // callback
   const updateProjectTeam = (projectMembersList) => {
@@ -277,7 +320,7 @@ const SecondInputForm = (docId) => {
       expectedProjectBeginning,
       expectedProjectDurationInMonths,
       economicSubjectInvolvement,
-      currentPesonnelExpense,
+      currentPersonnelExpense,
       newPersonnelExpense,
       equipmentDescriptionAndExpense,
       equipmentAmortizationExpense,
@@ -361,7 +404,9 @@ const SecondInputForm = (docId) => {
             totalValue,
             department,
             nameSurname,
-            setModalApplicationUpdatedIsOpen
+            setModalApplicationUpdatedIsOpen,
+            totalExpense,
+            fesbValuePart
           }}
         >
 
@@ -433,7 +478,7 @@ const SecondInputForm = (docId) => {
             initialValue={projectAcronym}
           />
           <CalendarInputAdvanced
-            label={"ROK ZA PRIJAVU PROJEKTA CALENDAR"}
+            label={"ROK ZA PRIJAVU PROJEKTA"}
             name={"application_dead_line"}
             setSpecificState={setApplicationDeadline}
             initialDate={applicationDeadline}
@@ -478,7 +523,7 @@ const SecondInputForm = (docId) => {
             name={"expected_project_beginning"}
             setSpecificState={setExpectedProjectBeginning}
             initialDate={expectedProjectBeginning}
-            workingDaysLimit={0}
+            workingDaysLimit={7}
           />
 
           <Question questionText={questions[7]} />
@@ -524,13 +569,14 @@ const SecondInputForm = (docId) => {
             label={"DIO PRORAČUNA KOJI PRIPADA FESB-u"}
             name={"fesb_value_part"}
             setSpecificState={setFesbValuePart}
+            initialValue={fesbValuePart}
             isSecondInputForm={true}
             isFirstInputForm={false}
           />
           <NumberInputSelect
             label={"TROŠAK POSTOJEĆEG OSOBLJA"}
             name={"current_personnel_expense"}
-            setSpecificState={setCurrentPesonnelExpense}
+            setSpecificState={setCurrentPersonnelExpense}
             isSecondInputForm={true}
             isFirstInputForm={false}
           />
@@ -582,17 +628,8 @@ const SecondInputForm = (docId) => {
             isSecondInputForm={true}
             isFirstInputForm={false}
           />
-          {currentPesonnelExpense +
-            newPersonnelExpense +
-            0.15 * fesbValuePart +
-            equipmentDescriptionAndExpense +
-            equipmentAmortizationExpense +
-            otherServicesExpense +
-            materialExpense +
-            travelRegistrationEducationExpense >
-            fesbValuePart && (
-            <p>Zbroj troškova je veći od dijela proračuna koji FESB pokriva.</p>
-          )}
+          <TotalExpenseWarning />
+
           <TextInput
             label={"NAPOMENA"}
             name={"expense_note"}
