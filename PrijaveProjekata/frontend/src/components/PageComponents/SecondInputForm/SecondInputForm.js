@@ -255,15 +255,15 @@ const SecondInputForm = (docId) => {
   }
   useEffect(() => {
     const calculatedTotalExpense = 
-      checkNaN(currentPersonnelExpense) + 
-      checkNaN(newPersonnelExpense) + 
-      checkNaN(equipmentDescriptionAndExpense) + 
-      checkNaN(equipmentAmortizationExpense) + 
-      checkNaN(otherServicesExpense) + 
-      checkNaN(materialExpense) + 
-      checkNaN(travelRegistrationEducationExpense) + 
-      checkNaN(partnerExpense);
-      
+      Number(checkNaN(currentPersonnelExpense)) + 
+      Number(checkNaN(newPersonnelExpense)) + 
+      Number(checkNaN(equipmentDescriptionAndExpense)) + 
+      Number(checkNaN(equipmentAmortizationExpense)) + 
+      Number(checkNaN(otherServicesExpense)) + 
+      Number(checkNaN(materialExpense)) + 
+      Number(checkNaN(travelRegistrationEducationExpense)) + 
+      Number(checkNaN(partnerExpense));
+
       setTotalExpense(calculatedTotalExpense);
 
     console.log("Partner expense test: " + partnerExpense ?? 0);
@@ -573,14 +573,14 @@ const SecondInputForm = (docId) => {
             isSecondInputForm={true}
             isFirstInputForm={false}
           />
-          <NumberInputSelect
+          <NumberInput
             label={"TROŠAK POSTOJEĆEG OSOBLJA"}
             name={"current_personnel_expense"}
             setSpecificState={setCurrentPersonnelExpense}
             isSecondInputForm={true}
             isFirstInputForm={false}
           />
-          <NumberInputSelect
+          <NumberInput
             label={"TROŠAK NOVOZAPOSLENOG OSOBLJA"}
             name={"new_personnel_expense"}
             setSpecificState={setNewPersonnelExpense}

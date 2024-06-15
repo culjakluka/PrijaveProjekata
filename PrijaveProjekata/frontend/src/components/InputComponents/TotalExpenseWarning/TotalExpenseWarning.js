@@ -19,7 +19,7 @@ const TotalExpenseWarning = () => {
         } else {
             setShowWarning(false);
         }
-    }, [totalExpense]);
+    }, [totalExpense, fesbValuePart]);
 
     return (
         <div>
