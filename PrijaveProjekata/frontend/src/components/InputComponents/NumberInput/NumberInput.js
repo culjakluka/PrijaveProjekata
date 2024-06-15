@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Style from './NumberInput.module.css';
 
-const currencySign = "€";
-
-const NumberInput = ({ name, label, initialValue, setSpecificState }) => {
+const NumberInput = ({ name, label, initialValue, setSpecificState, currencySign }) => {
     const [inputValue, setInputValue] = useState("");
 
     useEffect(() => {

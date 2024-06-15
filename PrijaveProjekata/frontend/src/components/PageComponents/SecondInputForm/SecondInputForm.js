@@ -11,7 +11,7 @@ import TextInputWithoutTitle from "../../InputComponents/TextInputWithoutTitle/T
 import DropdownMenuInputOther from "../../InputComponents/DropdownMenuInputOther/DropdownMenuInputOther.js";
 import DropdownMenuInput from "../../InputComponents/DropdownMenuInput/DropdownMenuInput.js";
 import RadioButtonInput from "../../InputComponents/RadioButtonInput/RadioButtonInput.js";
-import SpecialInputForm from "../../InputComponents/SpecialInputFirstInputForm/SpecialInputFirstInputForm.js";
+import SpecialInputForm from "../../InputComponents/SpecialInputForm/SpecialInputForm.js";
 import GenerateHeadOfDepartmentStatement from "../../InputComponents/GenerateHeadOfDepartmentStatement/GenerateHeadOfDepartmentStatement.js";
 import AttachAdditionalDocumentation from "../../InputComponents/AttachAdditionalDocumentation/AttachAdditionalDocumentation.js";
 import AttachHeadOfDepartmentStatement from "../../InputComponents/AttachHeadOfDepartmentStatement/AttachHeadOfDepartmentStatement.js";
@@ -527,9 +527,10 @@ const SecondInputForm = (docId) => {
           />
 
           <Question questionText={questions[7]} />
-          <TextInputWithoutTitle
+          <NumberInput
             name={"expected_project_duration_in_months"}
             setSpecificState={setExpectedProjectDurationInMonths}
+            currencySign={""}
           />
 
           <Question questionText={questions[8]} />
@@ -562,6 +563,7 @@ const SecondInputForm = (docId) => {
             name={"total_value"}
             setSpecificState={setTotalValue}
             initialValue={totalValue}
+            currencySign={"€"}
           />
 
           <Question questionText={questions[12]} />
@@ -579,6 +581,7 @@ const SecondInputForm = (docId) => {
             setSpecificState={setCurrentPersonnelExpense}
             isSecondInputForm={true}
             isFirstInputForm={false}
+            currencySign={"€"}
           />
           <NumberInput
             label={"TROŠAK NOVOZAPOSLENOG OSOBLJA"}
@@ -586,6 +589,7 @@ const SecondInputForm = (docId) => {
             setSpecificState={setNewPersonnelExpense}
             isSecondInputForm={true}
             isFirstInputForm={false}
+            currencySign={"€"}
           />
           <AutomaticInput
             label={"NEIZRAVNI TROŠKOVI (15% NA TROŠKOVE OSOBLJA)"}
@@ -700,6 +704,7 @@ const SecondInputForm = (docId) => {
                 name={"consultant_expense"}
                 setSpecificState={setConsultantExpense}
                 initialValue={consultantExpense}
+                currencySign={"€"}
               />
               <TextInput
                 label={"IZVOR SREDSTAVA ZA KONZULTANTSKE USLUGE"}
