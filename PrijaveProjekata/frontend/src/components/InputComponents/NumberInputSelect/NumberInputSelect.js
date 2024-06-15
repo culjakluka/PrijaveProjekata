@@ -196,7 +196,7 @@ const NumberInputSelect = ({ name, label, initialValue, setSpecificState, isFirs
                     <button onClick={managePercentageSelected} className={percentageSelected ? Style.PercentageSelected : Style.Percentage}>%</button>
                     <button onClick={manageCurrencySelected} className={currencySelected ? Style.CurrencySignSelected : Style.CurrencySign}>{currencySign}</button>
                 </div>
-                <div style={{ marginLeft: "20px", fontSize: "1em", alignSelf:"center" }}>{formatNumber(finalValue)} € - {isNaN((finalValue/totalValue)) ? "" : ((finalValue/totalValue)*100).toFixed(2)}% ukupne vrijednosti projekta</div>
+                <div style={{ marginLeft: "20px", fontSize: "1.2em", alignSelf:"center" }}>{finalValue ? formatNumber(finalValue)+" € - " : ""}  {isNaN((finalValue/totalValue)) ? "" : ((finalValue/totalValue)*100).toFixed(2)+"%  ukupnog iznosa"}</div>
             </div>
         </div>
     );
