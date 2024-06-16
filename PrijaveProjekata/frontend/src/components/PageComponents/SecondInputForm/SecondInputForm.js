@@ -28,6 +28,9 @@ import {
 } from "../../data/dropdownMenuData.js";
 import { questions, radioButtonData1 } from "../../data/secondInputFormData.js";
 
+// api request
+import { getDepartments } from "../../PageComponents/FirstInputForm/firstInputFormApi.js";
+
 // context
 import { SecondInputFormDataContext } from "../../../context/SecondInputFormDataContext.js";
 import { useAuthContext } from "../../../hooks/useAuthContext.js";
@@ -46,6 +49,9 @@ const SecondInputForm = (docId) => {
   const [nameSurname, setNameSurname] = useState("");
   const [vocation, setVocation] = useState("");
   const [department, setDepartment] = useState("");
+  // fetched departments
+  const [departmentsData, setDepartmentsData] = useState([]);
+//////////////////////////////////////////////////////////////
   const [email, setEmail] = useState("");
   const [mobilePhoneNumber, setMobilePhoneNumber] = useState(0);
   const [workTimeThisPercentage, setWorkTimeThisPercentage] = useState(0);
@@ -214,6 +220,29 @@ const SecondInputForm = (docId) => {
       }
     };
     fetchData();
+
+    const getDepartments = async () => {
+      try {
+          const response = await fetch('/api/department');
+          if (response.ok) {
+              const fetchedDepartments = await response.json();
+
+              const departments = fetchedDepartments.map(
+                (department) => (department.name + " - " + department.headName)
+              );
+              // Update state with fetched department nam
+              setDepartmentsData(departments);
+          } else {
+              console.error('Failed to fetch department data');
+              throw new Error('Failed to fetch department data');
+          }
+      } catch (error) {
+          console.error('Error during getDepartments:', error);
+          throw new Error('Error during getDepartments');
+      }
+    }
+
+    getDepartments();
   }, []);
 
   // after data is loaded completely, update states
@@ -425,11 +454,12 @@ const SecondInputForm = (docId) => {
             setSpecificState={setVocation}
             initialValue={vocation}
           />
-          <TextInput
+          <DropdownMenuInput
             label={"ZAVOD (ODSJEK)"}
             name={"department_2"}
+            data={departmentsData}
             setSpecificState={setDepartment}
-            initialValue={department}
+            isDepartment={true}
           />
           <TextInput
             label={"E-MAIL*"}

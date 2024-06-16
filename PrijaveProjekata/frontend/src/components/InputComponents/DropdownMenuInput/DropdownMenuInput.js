@@ -1,29 +1,36 @@
 import { useState, useEffect } from "react";
 import "./DropdownMenuInput.css";
 
-const DropdownMenuInput = ({ name, label, data, setSpecificState, isDepartment }) => {
+const DropdownMenuInput = ({ name, label, data, setSpecificState, isDepartment, initialValue }) => {
   const [selectionValue, setSelectionValue] = useState("");
   const [options, setOptions] = useState([]);
 
   const handleSelectionChange = (event) => {
-    setSpecificState(event.target.value);
+    const selectedValue = event.target.value;
+    setSpecificState(selectedValue);
+    setSelectionValue(selectedValue);
 
-    setSelectionValue(event.target.value);
-    // save selection in sessionStorage
-    sessionStorage.setItem(name, event.target.value);
+    // Save selection in sessionStorage
+    sessionStorage.setItem(name, selectedValue);
   };
 
   useEffect(() => {
     setOptions(data);
 
-    // check if the selection value is stored in storage
+    // Check if the selection value is stored in sessionStorage
     const selectionValueSessionStorage = sessionStorage.getItem(name);
-    // if it is stored, load it
+
     if (selectionValueSessionStorage) {
       setSelectionValue(selectionValueSessionStorage);
-      setSpecificState(selectionValueSessionStorage); 
+      setSpecificState(selectionValueSessionStorage);
+    } else if (initialValue) {
+      const matchingOption = data.find(option => option === initialValue || (isDepartment && option.split(' - ')[0] === initialValue));
+      if (matchingOption) {
+        setSelectionValue(matchingOption);
+        setSpecificState(matchingOption);
+      }
     }
-  }, [data]);
+  }, [data, initialValue, isDepartment, name, setSpecificState]);
 
   return (
     <div className="dropdown-menu-container">
@@ -31,25 +38,11 @@ const DropdownMenuInput = ({ name, label, data, setSpecificState, isDepartment }
       <label>{label}</label>
       <select value={selectionValue} onChange={handleSelectionChange}>
         <option value="">Odaberite opciju</option>
-        {isDepartment ? options.map(
-          // takes all the data from "data" and maps it
-          // (data that we can take of each memeber of data) => (html element and us of data's data)
-          (member, index) => (
-            <option key={index} value={member}>
-              {member.split(' - ')[0]}
-            </option>
-          )
-        ) :
-        options.map(
-          // takes all the data from "data" and maps it
-          // (data that we can take of each memeber of data) => (html element and us of data's data)
-          (member, index) => (
-            <option key={index} value={member}>
-              {member}
-            </option>
-          )
-        )
-      }
+        {options.map((member, index) => (
+          <option key={index} value={member}>
+            {isDepartment ? member.split(' - ')[0] : member}
+          </option>
+        ))}
       </select>
     </div>
   );

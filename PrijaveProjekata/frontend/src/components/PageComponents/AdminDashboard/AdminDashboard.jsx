@@ -135,7 +135,7 @@ const AdminDashboard = () => {
 
         // load response into data
         const data = await response.json();
-
+        console.log(data);
         // load all data into projectSets
         setProjectSets(data);
 

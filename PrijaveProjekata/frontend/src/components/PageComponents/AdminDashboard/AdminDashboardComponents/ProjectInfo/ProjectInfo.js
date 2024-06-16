@@ -249,6 +249,7 @@ const ProjectInfo = ({ selectedProject }) => {
               currentLabelValue={"ROK ZA PRIJAVU PROJEKTA"}
               currentInputValue={selectedProject.applicationDeadline}
               projectUpdateName={"applicationDeadline"}
+              isDate={true}
             />
             <AdminQuestion questionText={questions[2]} />
             <AdminTextInput
@@ -279,6 +280,7 @@ const ProjectInfo = ({ selectedProject }) => {
               currentLabelValue={"OČEKIVANI POČETAK PROJEKTA"}
               currentInputValue={selectedProject.expectedProjectBeginning}
               projectUpdateName={"expectedProjectBeginning"}
+              isDate={true}
             />
             <AdminQuestion questionText={questions[7]} />
             <AdminTextInput
