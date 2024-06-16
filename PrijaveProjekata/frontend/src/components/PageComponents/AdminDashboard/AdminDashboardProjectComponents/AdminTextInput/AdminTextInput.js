@@ -3,7 +3,14 @@ import './AdminTextInput.css';
 import '../../AdminDashboard.css';
 import { AdminDashboardContext } from '../../../../../context/AdminDashboardContext.js';
 
-const AdminTextInput = ({ currentInputValue, currentLabelValue, editable, projectUpdateName, isDate }) => {
+const AdminTextInput = 
+({  currentInputValue, 
+    currentLabelValue,
+    editable,
+    projectUpdateName, 
+    isDate, 
+    isNumber }) => {
+    
     const [inputValue, setInputValue] = useState("");
     const [labelValue, setLabelValue] = useState("");
 
@@ -14,7 +21,8 @@ const AdminTextInput = ({ currentInputValue, currentLabelValue, editable, projec
         setLabelValue(currentLabelValue);
     }, [currentLabelValue]);
 
-    // Update inputValue when currentInputValue changes or if it's a date, format it
+    // if isDate = true
+    // update inputValue when currentInputValue changes or if it's a date, format it
     useEffect(() => {
         if (isDate && currentInputValue) {
             const date = new Date(currentInputValue);

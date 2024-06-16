@@ -24,8 +24,8 @@ let questions = [
 ];
 
 const radioButtonData1 =
-  "UKOLIKO JE JEDAN OD PARTNERA U PROJEKTU TVRTKA I/ILI POSTOJI " +
-  "PRIJENOS ZNANJA/TEHNOLOGIJE\n PREMA GOSPODARSTVU KOJE JE NUŽNO " +
-  "OSTVARITI TIJEKOM PROVEDBE PROJEKTA ODABERITE DA";
+  "Ukoliko je jedan od partnera u projektu tvrtka i/ili postoji" +
+  " prijenos znanja/tehnologije prema gospodarstvu koje je nužno ostvariti" + 
+  " tijekom provedbe projekta odaberite DA";
 
 export { questions, radioButtonData1 };
