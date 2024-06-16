@@ -433,6 +433,7 @@ const SecondInputForm = (docId) => {
             totalValue,
             department,
             nameSurname,
+            projectTitle,
             setModalApplicationUpdatedIsOpen,
             totalExpense,
             fesbValuePart
@@ -460,6 +461,7 @@ const SecondInputForm = (docId) => {
             data={departmentsData}
             setSpecificState={setDepartment}
             isDepartment={true}
+            initialValue={department}
           />
           <TextInput
             label={"E-MAIL*"}

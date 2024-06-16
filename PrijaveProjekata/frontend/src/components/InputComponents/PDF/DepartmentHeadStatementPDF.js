@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     
 });
 
-const DepartmentHeadStatementPDF = ({ nameSurnameApplicant, nameSurnameDepartmentHead }) => {
+const DepartmentHeadStatementPDF = ({ nameSurnameApplicant, departmentName, nameSurnameDepartmentHead, projectName,  }) => {
 
     return(
         <Document> 
@@ -94,13 +94,13 @@ const DepartmentHeadStatementPDF = ({ nameSurnameApplicant, nameSurnameDepartmen
                     <Text style={styles.documentTitle}>IZJAVA PREDSTOJNIKA ZAVODA</Text>
                     <View style={styles.applicantDataSection}>
                         <Text style={styles.applicantData}>Naziv zavoda</Text>
-                        <View style={styles.dataField}></View>
+                        <View style={styles.dataField}>{departmentName}</View>
                         <Text style={styles.applicantData}>Ime i prezime predstojnika zavoda</Text>
-                        <View style={styles.dataField}></View>
+                        <View style={styles.dataField}>{nameSurnameDepartmentHead}TEST</View>
                         <Text style={styles.applicantData}>Naziv projekta za čiju prijavu se traži suglasnost</Text>
-                        <View style={styles.dataField}></View>
+                        <View style={styles.dataField}>{projectName}</View>
                         <Text style={styles.applicantData}>Prijavitelj projekta/voditelj projektnog tima sa strane FESB-a</Text>
-                        <View style={styles.dataField}></View>
+                        <View style={styles.dataField}>{nameSurnameApplicant}</View>
                     </View>
                     <View>
                         <Text style={styles.statementText}>Zavod je upoznat s gore navedenim projektnim prijedlogom te se daje suglasnost za prijavu predmetnog Projekta.</Text>
