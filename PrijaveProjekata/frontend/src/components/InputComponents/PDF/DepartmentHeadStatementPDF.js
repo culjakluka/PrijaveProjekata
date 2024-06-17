@@ -46,9 +46,14 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
     dataField : {
-        border: "1px solid black",
+        display: "flex",
+        flexDirection: "row",
+        border: "none", 
+        borderBottom: "1px solid black",
         height: "20px",
-        marginBottom: 20
+        marginBottom: 20,
+        paddingLeft: 5,
+        justifyContent: "end"
     },
     statementTextSection : {
         alignSelf: "start",
@@ -94,13 +99,21 @@ const DepartmentHeadStatementPDF = ({ nameSurnameApplicant, departmentName, name
                     <Text style={styles.documentTitle}>IZJAVA PREDSTOJNIKA ZAVODA</Text>
                     <View style={styles.applicantDataSection}>
                         <Text style={styles.applicantData}>Naziv zavoda</Text>
-                        <View style={styles.dataField}>{departmentName}</View>
+                            <View style={styles.dataField}>
+                                <Text>{departmentName}</Text>
+                            </View>
                         <Text style={styles.applicantData}>Ime i prezime predstojnika zavoda</Text>
-                        <View style={styles.dataField}>{nameSurnameDepartmentHead}TEST</View>
+                            <View style={styles.dataField}>
+                                <Text>{nameSurnameDepartmentHead}TEST</Text>
+                            </View>
                         <Text style={styles.applicantData}>Naziv projekta za čiju prijavu se traži suglasnost</Text>
-                        <View style={styles.dataField}>{projectName}</View>
+                            <View style={styles.dataField}>
+                                <Text>{projectName}</Text>
+                            </View>
                         <Text style={styles.applicantData}>Prijavitelj projekta/voditelj projektnog tima sa strane FESB-a</Text>
-                        <View style={styles.dataField}>{nameSurnameApplicant}</View>
+                            <View style={styles.dataField}>
+                                <Text>{nameSurnameApplicant}</Text>
+                            </View>
                     </View>
                     <View>
                         <Text style={styles.statementText}>Zavod je upoznat s gore navedenim projektnim prijedlogom te se daje suglasnost za prijavu predmetnog Projekta.</Text>
