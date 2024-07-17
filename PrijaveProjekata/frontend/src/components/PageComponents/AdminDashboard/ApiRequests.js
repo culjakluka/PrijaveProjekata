@@ -111,6 +111,7 @@ const submitFirstForm = async (projectId) => {
         "state='firstFormSubitted' updated successfully!\n",
         responseData
       );
+      window.location.reload();
     } else {
       // handle potentional non-JSON response
       const errorData = await response.json().catch(() => null);
@@ -125,6 +126,7 @@ const submitFirstForm = async (projectId) => {
 
     // Handle the response as needed
     console.log(responseData); // Log the response data
+    
   } catch (error) {
     console.error('Couldnt set up state="firstFormSubmitted!" error:', error);
     window.alert('Couldnt set up state="firstFormSubmitted!" error:', error);
@@ -152,6 +154,7 @@ const submitSecondForm = async (projectId) => {
         "state='secondFormSubitted' updated successfully!\n",
         responseData
       );
+      window.location.reload();
     } else {
       // handle potentional non-JSON response
       const errorData = await response.json().catch(() => null);
@@ -187,6 +190,7 @@ const rejectProject = async (projectId) => {
 
     // Handle the response as needed
     console.log(responseData); // Log the response data
+    window.location.reload();
   } catch (error) {
     console.error("Unable to decline probject, an error occured: ", error);
     window.alert("Unable to decline probject, an error occured: ", error);

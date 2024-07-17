@@ -14,14 +14,19 @@ const GenerateHeadOfDepartmentStatement = () => {
 
     
     // using context
-    const { nameSurname, department } = useContext(SecondInputFormDataContext);   
+    const { nameSurname, department, projectTitle } = useContext(SecondInputFormDataContext);   
 
     // handle pdf new tab
         const handlePDF = () => {
         // Assuming pdf() is a function that returns a Promise resolving to a blob
         // Generate the document
         // split department to get only the name of the head of department
-        const doc = <DepartmentHeadStatementPDF nameSurnameApplicant={nameSurname} nameSurnameDepartmentHead={department.split(" - ")[1]?.trim() || ""}/>;
+        const doc = <DepartmentHeadStatementPDF 
+        nameSurnameApplicant={nameSurname} 
+        nameSurnameDepartmentHead={department.split(" - ")[1]?.trim() || ""}
+        departmentName={department.split(" - ")[0]?.trim() || ""}
+        projectName={projectTitle}
+        />;
     
         // Create a PDF blob
         pdf(doc).toBlob().then(blob => {

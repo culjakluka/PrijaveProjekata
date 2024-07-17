@@ -181,7 +181,7 @@ const projectInfoSchema = new Schema(
       type: Boolean,
       //    required: true
     },
-    currentPesonnelExpense: {
+    currentPersonnelExpense: {
       // trošak postojućeg osoblja
       type: Number,
       //    required: true

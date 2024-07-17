@@ -339,7 +339,7 @@ const updateProjectInfoSet = async (req, res) => {
         "expectedProjectBeginning",
         "expectedProjectDurationInMonths",
         "economicSubjectInvolvement",
-        "currentPesonnelExpense",
+        "currentPersonnelExpense",
         "newPersonnelExpense",
         "equipmentDescriptionAndExpense",
         "equipmentAmortizationExpense",

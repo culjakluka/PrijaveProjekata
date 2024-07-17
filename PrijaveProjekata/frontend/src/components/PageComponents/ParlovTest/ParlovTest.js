@@ -9,12 +9,12 @@ const ParlovTest = () => {
 
     return (  
         <div>
-            <CalendarInputAdvanced/>
+            
             {/* PDF TESTING */}
-            {/* <PDFViewer style={{width : "100%", height: "100vh" }}>
-                <FirstInputFormPDF data={firstInputFormData} title={"TRAŽENJE SUGLASNOSTI"}/>
-                <DepartmentHeadStatementPDF nameSurname={"Petar Parlov"}/>
-            </PDFViewer> */}
+            <PDFViewer style={{width : "100%", height: "100vh" }}>
+                {/* <FirstInputFormPDF data={firstInputFormData} title={"TRAŽENJE SUGLASNOSTI"}/> */}
+                <DepartmentHeadStatementPDF nameSurnameApplicant={"Petar Parlov"} departmentName={"Zavod za test"} nameSurnameDepartmentHead={"Predstojnik Zavoda"} projectName={"Testni Projekt"}/>
+            </PDFViewer>
         </div>
     );
 }

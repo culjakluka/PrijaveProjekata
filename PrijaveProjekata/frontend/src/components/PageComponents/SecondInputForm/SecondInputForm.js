@@ -11,7 +11,7 @@ import TextInputWithoutTitle from "../../InputComponents/TextInputWithoutTitle/T
 import DropdownMenuInputOther from "../../InputComponents/DropdownMenuInputOther/DropdownMenuInputOther.js";
 import DropdownMenuInput from "../../InputComponents/DropdownMenuInput/DropdownMenuInput.js";
 import RadioButtonInput from "../../InputComponents/RadioButtonInput/RadioButtonInput.js";
-import SpecialInputForm from "../../InputComponents/SpecialInputFirstInputForm/SpecialInputFirstInputForm.js";
+import SpecialInputForm from "../../InputComponents/SpecialInputForm/SpecialInputForm.js";
 import GenerateHeadOfDepartmentStatement from "../../InputComponents/GenerateHeadOfDepartmentStatement/GenerateHeadOfDepartmentStatement.js";
 import AttachAdditionalDocumentation from "../../InputComponents/AttachAdditionalDocumentation/AttachAdditionalDocumentation.js";
 import AttachHeadOfDepartmentStatement from "../../InputComponents/AttachHeadOfDepartmentStatement/AttachHeadOfDepartmentStatement.js";
@@ -28,23 +28,30 @@ import {
 } from "../../data/dropdownMenuData.js";
 import { questions, radioButtonData1 } from "../../data/secondInputFormData.js";
 
+// api request
+import { getDepartments } from "../../PageComponents/FirstInputForm/firstInputFormApi.js";
+
 // context
 import { SecondInputFormDataContext } from "../../../context/SecondInputFormDataContext.js";
 import { useAuthContext } from "../../../hooks/useAuthContext.js";
 import ModalApplicationUpdated from "../../InputComponents/ModalApplicationUpdated/ModalApplicationUpdated.js";
 import { set } from "date-fns";
 import CalendarInputAdvanced from "../../InputComponents/CalendarInputAdvanced/CalendarInputAdvanced.js";
+import TotalExpenseWarning from "../../InputComponents/TotalExpenseWarning/TotalExpenseWarning.js";
 
 const SecondInputForm = (docId) => {
   const { user } = useAuthContext();
   // const [projectToUpdateId, setProjectToUpdateId] = useState(documentId)
   const [intentionFormToUpdate, setIntentionFormToUpdate] = useState(null); // data loaded from document
 
-  const [inputFormData, setInputFormData] = useState("");
+  const [inputFormData, setInputFormData] = useState({});
   const [secondInputMarker, setSecondInputMarker] = useState(true);
   const [nameSurname, setNameSurname] = useState("");
   const [vocation, setVocation] = useState("");
   const [department, setDepartment] = useState("");
+  // fetched departments
+  const [departmentsData, setDepartmentsData] = useState([]);
+//////////////////////////////////////////////////////////////
   const [email, setEmail] = useState("");
   const [mobilePhoneNumber, setMobilePhoneNumber] = useState(0);
   const [workTimeThisPercentage, setWorkTimeThisPercentage] = useState(0);
@@ -66,7 +73,7 @@ const SecondInputForm = (docId) => {
     useState(false);
   const [totalValue, setTotalValue] = useState(0);
   const [fesbValuePart, setFesbValuePart] = useState(0);
-  const [currentPesonnelExpense, setCurrentPesonnelExpense] = useState(0);
+  const [currentPersonnelExpense, setCurrentPersonnelExpense] = useState(0);
   const [newPersonnelExpense, setNewPersonnelExpense] = useState(0);
   const [indirectExpenses, setIndirectExpenses] = useState(0);
   const [equipmentDescriptionAndExpense, setEquipmentDescriptionAndExpense] =
@@ -96,6 +103,9 @@ const SecondInputForm = (docId) => {
   // application updated modal - after application is submitted
   const [modalApplicationUpdatedIsOpen, setModalApplicationUpdatedIsOpen] = useState(false);
 
+  // this component is used to calculate total expense
+  const [totalExpense, setTotalExpense] = useState(0);
+
   useEffect(() => {
     setInputFormData({
       userId: user?.userId,
@@ -124,7 +134,7 @@ const SecondInputForm = (docId) => {
       expectedProjectBeginning,
       expectedProjectDurationInMonths,
       economicSubjectInvolvement,
-      currentPesonnelExpense,
+      currentPersonnelExpense,
       newPersonnelExpense,
       equipmentDescriptionAndExpense,
       equipmentAmortizationExpense,
@@ -169,7 +179,7 @@ const SecondInputForm = (docId) => {
     expectedProjectBeginning,
     expectedProjectDurationInMonths,
     economicSubjectInvolvement,
-    currentPesonnelExpense,
+    currentPersonnelExpense,
     newPersonnelExpense,
     equipmentDescriptionAndExpense,
     equipmentAmortizationExpense,
@@ -202,7 +212,7 @@ const SecondInputForm = (docId) => {
         }
 
         const data = await response.json();
-
+        console.log("Data fetched: ", data);
         // setting up data loaded from document(_id)
         setIntentionFormToUpdate(data);
       } catch (error) {
@@ -210,6 +220,29 @@ const SecondInputForm = (docId) => {
       }
     };
     fetchData();
+
+    const getDepartments = async () => {
+      try {
+          const response = await fetch('/api/department');
+          if (response.ok) {
+              const fetchedDepartments = await response.json();
+
+              const departments = fetchedDepartments.map(
+                (department) => (department.name + " - " + department.headName)
+              );
+              // Update state with fetched department nam
+              setDepartmentsData(departments);
+          } else {
+              console.error('Failed to fetch department data');
+              throw new Error('Failed to fetch department data');
+          }
+      } catch (error) {
+          console.error('Error during getDepartments:', error);
+          throw new Error('Error during getDepartments');
+      }
+    }
+
+    getDepartments();
   }, []);
 
   // after data is loaded completely, update states
@@ -231,11 +264,50 @@ const SecondInputForm = (docId) => {
       setNewEmploymentBoolean(intentionFormToUpdate?.setNewEmploymentBoolean);
       setProjectTeam(intentionFormToUpdate?.projectTeam);
     }
+
+    console.log("Intention form to update: ", intentionFormToUpdate);
+
   }, [intentionFormToUpdate]);
 
   useEffect(() => {
     setIndirectExpenses(0.15 * fesbValuePart);
   }, [fesbValuePart]);
+
+
+  const checkNaN = (value) => {
+    if (isNaN(value)) {
+      return 0;
+    } else {
+      return value;
+    }
+  
+  }
+  useEffect(() => {
+    const calculatedTotalExpense = 
+      Number(checkNaN(currentPersonnelExpense)) + 
+      Number(checkNaN(newPersonnelExpense)) + 
+      Number(checkNaN(equipmentDescriptionAndExpense)) + 
+      Number(checkNaN(equipmentAmortizationExpense)) + 
+      Number(checkNaN(otherServicesExpense)) + 
+      Number(checkNaN(materialExpense)) + 
+      Number(checkNaN(travelRegistrationEducationExpense)) + 
+      Number(checkNaN(partnerExpense));
+
+      setTotalExpense(calculatedTotalExpense);
+
+    console.log("Partner expense test: " + partnerExpense ?? 0);
+
+    console.log("Total expense: ", totalExpense);
+    console.log("FESB value part: ", fesbValuePart);
+  }, [
+    currentPersonnelExpense,
+    newPersonnelExpense, 
+    fesbValuePart, 
+    equipmentDescriptionAndExpense, 
+    equipmentAmortizationExpense, 
+    otherServicesExpense, 
+    materialExpense, 
+    travelRegistrationEducationExpense]);
 
   // callback
   const updateProjectTeam = (projectMembersList) => {
@@ -277,7 +349,7 @@ const SecondInputForm = (docId) => {
       expectedProjectBeginning,
       expectedProjectDurationInMonths,
       economicSubjectInvolvement,
-      currentPesonnelExpense,
+      currentPersonnelExpense,
       newPersonnelExpense,
       equipmentDescriptionAndExpense,
       equipmentAmortizationExpense,
@@ -361,7 +433,10 @@ const SecondInputForm = (docId) => {
             totalValue,
             department,
             nameSurname,
-            setModalApplicationUpdatedIsOpen
+            projectTitle,
+            setModalApplicationUpdatedIsOpen,
+            totalExpense,
+            fesbValuePart
           }}
         >
 
@@ -380,10 +455,12 @@ const SecondInputForm = (docId) => {
             setSpecificState={setVocation}
             initialValue={vocation}
           />
-          <TextInput
+          <DropdownMenuInput
             label={"ZAVOD (ODSJEK)"}
             name={"department_2"}
+            data={departmentsData}
             setSpecificState={setDepartment}
+            isDepartment={true}
             initialValue={department}
           />
           <TextInput
@@ -433,7 +510,7 @@ const SecondInputForm = (docId) => {
             initialValue={projectAcronym}
           />
           <CalendarInputAdvanced
-            label={"ROK ZA PRIJAVU PROJEKTA CALENDAR"}
+            label={"ROK ZA PRIJAVU PROJEKTA"}
             name={"application_dead_line"}
             setSpecificState={setApplicationDeadline}
             initialDate={applicationDeadline}
@@ -478,13 +555,14 @@ const SecondInputForm = (docId) => {
             name={"expected_project_beginning"}
             setSpecificState={setExpectedProjectBeginning}
             initialDate={expectedProjectBeginning}
-            workingDaysLimit={0}
+            workingDaysLimit={7}
           />
 
           <Question questionText={questions[7]} />
-          <TextInputWithoutTitle
+          <NumberInput
             name={"expected_project_duration_in_months"}
             setSpecificState={setExpectedProjectDurationInMonths}
+            currencySign={""}
           />
 
           <Question questionText={questions[8]} />
@@ -517,6 +595,7 @@ const SecondInputForm = (docId) => {
             name={"total_value"}
             setSpecificState={setTotalValue}
             initialValue={totalValue}
+            currencySign={"€"}
           />
 
           <Question questionText={questions[12]} />
@@ -524,16 +603,25 @@ const SecondInputForm = (docId) => {
             label={"DIO PRORAČUNA KOJI PRIPADA FESB-u"}
             name={"fesb_value_part"}
             setSpecificState={setFesbValuePart}
+            initialValue={fesbValuePart}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
-          <NumberInputSelect
+          <NumberInput
             label={"TROŠAK POSTOJEĆEG OSOBLJA"}
             name={"current_personnel_expense"}
-            setSpecificState={setCurrentPesonnelExpense}
+            setSpecificState={setCurrentPersonnelExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
+            currencySign={"€"}
           />
-          <NumberInputSelect
+          <NumberInput
             label={"TROŠAK NOVOZAPOSLENOG OSOBLJA"}
             name={"new_personnel_expense"}
             setSpecificState={setNewPersonnelExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
+            currencySign={"€"}
           />
           <AutomaticInput
             label={"NEIZRAVNI TROŠKOVI (15% NA TROŠKOVE OSOBLJA)"}
@@ -545,38 +633,39 @@ const SecondInputForm = (docId) => {
             }
             name={"equipment_description_and_expense"}
             setSpecificState={setEquipmentDescriptionAndExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
           <NumberInputSelect
             label={"TROŠAK AMORTIZACIJE OPREME"}
             name={"equipment_amortization_expense"}
             setSpecificState={setEquipmentAmortizationExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
           <NumberInputSelect
             label={"TROŠAK VANJSKIH USLUGA"}
             name={"other_services_expense"}
             setSpecificState={setOtherServicesExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
           <NumberInputSelect
             label={"TROŠAK MATERIJALA I SITNOG INVENTARA"}
             name={"material_expense"}
             setSpecificState={setMaterialExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
           <NumberInputSelect
             label={"PUTNI TROŠAK/TROŠAK KOTIZACIJA/STRUČNOG USAVRŠAVANJA"}
             name={"travel_registration_education_expense"}
             setSpecificState={setTravelRegistrationEducationExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
-          {currentPesonnelExpense +
-            newPersonnelExpense +
-            0.15 * fesbValuePart +
-            equipmentDescriptionAndExpense +
-            equipmentAmortizationExpense +
-            otherServicesExpense +
-            materialExpense +
-            travelRegistrationEducationExpense >
-            fesbValuePart && (
-            <p>Zbroj troškova je veći od dijela proračuna koji FESB pokriva.</p>
-          )}
+          <TotalExpenseWarning />
+
           <TextInput
             label={"NAPOMENA"}
             name={"expense_note"}
@@ -588,6 +677,8 @@ const SecondInputForm = (docId) => {
             label={""}
             name={"partner_expense"}
             setSpecificState={setPartnerExpense}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
 
           <Question questionText={questions[14]} />
@@ -595,6 +686,8 @@ const SecondInputForm = (docId) => {
             label={""}
             name={"requested_funding"}
             setSpecificState={setRequestedFunding}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
 
           <Question questionText={questions[15]} />
@@ -602,6 +695,8 @@ const SecondInputForm = (docId) => {
             label={""}
             name={"down_payment"}
             setSpecificState={setDownPayment}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
           />
 
           <Question questionText={questions[16]} />
@@ -641,6 +736,7 @@ const SecondInputForm = (docId) => {
                 name={"consultant_expense"}
                 setSpecificState={setConsultantExpense}
                 initialValue={consultantExpense}
+                currencySign={"€"}
               />
               <TextInput
                 label={"IZVOR SREDSTAVA ZA KONZULTANTSKE USLUGE"}

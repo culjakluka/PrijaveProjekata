@@ -8,7 +8,7 @@ import RadioButtonInput from "../../InputComponents/RadioButtonInput/RadioButton
 // my components
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import Question from "../../InputComponents/Question/Question";
-import SpecialInputFirstInputForm from "../../InputComponents/SpecialInputFirstInputForm/SpecialInputFirstInputForm.js";
+import SpecialInputFirstInputForm from "../../InputComponents/SpecialInputForm/SpecialInputForm.js";
 import TextInputWithoutTitle from "../../InputComponents/TextInputWithoutTitle/TextInputWithoutTitle";
 import CompletedProject from "../../InputComponents/CompletedProject/CompletedProject";
 import CalendarInput from "../../InputComponents/CalendarInput/CalendarInput";
@@ -31,7 +31,6 @@ import NumberInput from "../../InputComponents/NumberInput/NumberInput.js";
 
 // API requests
 import { getDepartments } from "./firstInputFormApi.js";
-import NumberInputSelectFirstForm from "../../InputComponents/NumberInputSelectFirstForm/NumberInputSelectFirstForm.js";
 import { set } from "date-fns";
 import CalendarInputAdvanced from "../../InputComponents/CalendarInputAdvanced/CalendarInputAdvanced.js";
 import NumberInputSelect from "../../InputComponents/NumberInputSelect/NumberInputSelect.js";
@@ -306,7 +305,7 @@ const FirstInputForm = () => {
             }
             name={"ukupna_vrijednost_projekta"}
             setSpecificState={setTotalValue}
-            currencyOrPercentage={"€"}
+            currencySign={"€"}
           />
 
           <NumberInputSelect
@@ -315,6 +314,8 @@ const FirstInputForm = () => {
             }
             name={"dio_proracuna_fesb"}
             setSpecificState={setFesbValuePart}
+            isFirstInputForm={true}
+            isSecondInputForm={false}
           />
 
           <Question questionText={questions[7]} />

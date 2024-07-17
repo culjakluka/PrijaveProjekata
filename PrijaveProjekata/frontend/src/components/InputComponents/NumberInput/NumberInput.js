@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Style from './NumberInput.module.css';
 
-const currencySign = "€";
-
-const NumberInput = ({ name, label, initialValue, setSpecificState }) => {
+const NumberInput = ({ name, label, initialValue, setSpecificState, currencySign }) => {
     const [inputValue, setInputValue] = useState("");
 
     useEffect(() => {
@@ -12,9 +10,9 @@ const NumberInput = ({ name, label, initialValue, setSpecificState }) => {
             const savedValue = sessionStorage.getItem(name);
             if (savedValue) {
                 setInputValue(formatNumber(savedValue));
-                setSpecificState(savedValue);
+                setSpecificState(savedValue);   
             } else if (initialValue) {
-                setInputValue(formatNumber(initialValue));
+                setInputValue(formatNumber(initialValue.toString()));
                 setSpecificState(initialValue);
             }
         } catch (error) {
@@ -22,7 +20,7 @@ const NumberInput = ({ name, label, initialValue, setSpecificState }) => {
         }
     }, [initialValue, name, setSpecificState]);
 
-    // function to format the number
+    // function that formats number from 1000 to 1,000 or 1000.00 if decimal
     const formatNumber = (value) => {
         // remove all non digit characters - preventing user from entering anything other than numbers
         const numericValue = value.replace(/[^\d.]/g, '');

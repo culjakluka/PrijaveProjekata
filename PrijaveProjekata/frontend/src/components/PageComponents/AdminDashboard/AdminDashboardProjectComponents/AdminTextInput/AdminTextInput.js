@@ -1,33 +1,35 @@
 import React, { useContext, useEffect, useState } from "react";
 import './AdminTextInput.css';
 import '../../AdminDashboard.css';
-
-// context
 import { AdminDashboardContext } from '../../../../../context/AdminDashboardContext.js';
 
-const AdminTextInput = ({ currentInputValue, currentLabelValue, editable, projectUpdateName, isDate }) => {
+const AdminTextInput = 
+({  currentInputValue, 
+    currentLabelValue,
+    editable,
+    projectUpdateName, 
+    isDate, 
+    isNumber }) => {
+    
     const [inputValue, setInputValue] = useState("");
     const [labelValue, setLabelValue] = useState("");
 
-    // context
-    const { projectEditable, setProjectEditable, updateProjectData, setUpdateProjectData, selectedProject, projectLocked } = useContext(AdminDashboardContext);
+    const { projectEditable, setUpdateProjectData, projectLocked } = useContext(AdminDashboardContext);
 
+    // Update labelValue when currentLabelValue changes
     useEffect(() => {
         setLabelValue(currentLabelValue);
     }, [currentLabelValue]);
 
-    
+    // if isDate = true
+    // update inputValue when currentInputValue changes or if it's a date, format it
     useEffect(() => {
         if (isDate && currentInputValue) {
-            
             const date = new Date(currentInputValue);
             if (!isNaN(date)) {
-                
                 const day = String(date.getUTCDate()).padStart(2, '0');
                 const month = String(date.getUTCMonth() + 1).padStart(2, '0'); 
                 const year = date.getUTCFullYear();
-
-                
                 const fixedDate = `${day}.${month}.${year}`;
                 setInputValue(fixedDate);
             } else {
@@ -36,42 +38,9 @@ const AdminTextInput = ({ currentInputValue, currentLabelValue, editable, projec
         } else {
             setInputValue(currentInputValue);
         }
-    }, [currentInputValue, isDate]);
+    }, [currentInputValue, isDate, projectEditable]);
 
-    useEffect(() => {
-        if (isDate && inputValue) {
-            
-            const date = new Date(inputValue);
-            if (!isNaN(date)) {
-                
-                const day = String(date.getUTCDate()).padStart(2, '0');
-                const month = String(date.getUTCMonth() + 1).padStart(2, '0'); 
-                const year = date.getUTCFullYear();
-
-                
-                const fixedDate = `${day}.${month}.${year}`;
-                setInputValue(fixedDate);
-            }
-        }
-    }, [projectLocked, isDate, inputValue]);
-
-    useEffect(() => {
-        if (isDate && inputValue) {
-            
-            const date = new Date(inputValue);
-            if (!isNaN(date)) {
-                
-                const day = String(date.getUTCDate()).padStart(2, '0');
-                const month = String(date.getUTCMonth() + 1).padStart(2, '0'); 
-                const year = date.getUTCFullYear();
-
-                
-                const fixedDate = `${day}.${month}.${year}`;
-                setInputValue(fixedDate);
-            }
-        }
-    }, [isDate, inputValue]);
-
+    // Handle changes to the input value
     const handleChange = (e) => {
         setInputValue(e.target.value);
 

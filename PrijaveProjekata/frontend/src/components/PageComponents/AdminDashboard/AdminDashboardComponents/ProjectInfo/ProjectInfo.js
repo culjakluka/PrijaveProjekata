@@ -6,6 +6,7 @@ import "../../AdminDashboard.css";
 
 // context
 import { AdminDashboardContext } from "../../../../../context/AdminDashboardContext.js";
+import { ProjectInfoContext } from "../../../../../context/ProjectInfoContext.js";
 
 // my components
 import AdminQuestion from "../../AdminDashboardProjectComponents/AdminQuestion/AdminQuestion.js";
@@ -22,6 +23,7 @@ const ProjectInfo = ({ selectedProject }) => {
   const { intentionSelection, approvalSelection } = useContext(
     AdminDashboardContext
   );
+  
 
   useEffect(() => {
     setSelectedProjectData(selectedProject);
@@ -55,7 +57,8 @@ const ProjectInfo = ({ selectedProject }) => {
   ];
 
   return (
-    <>
+    <ProjectInfoContext.Provider value={{
+    }}>
       <div className={Style.ProjectInfoContainer}>
         <h4>Document_id:{selectedProject._id}</h4>
         <h2>
@@ -246,6 +249,7 @@ const ProjectInfo = ({ selectedProject }) => {
               currentLabelValue={"ROK ZA PRIJAVU PROJEKTA"}
               currentInputValue={selectedProject.applicationDeadline}
               projectUpdateName={"applicationDeadline"}
+              isDate={true}
             />
             <AdminQuestion questionText={questions[2]} />
             <AdminTextInput
@@ -276,6 +280,7 @@ const ProjectInfo = ({ selectedProject }) => {
               currentLabelValue={"OČEKIVANI POČETAK PROJEKTA"}
               currentInputValue={selectedProject.expectedProjectBeginning}
               projectUpdateName={"expectedProjectBeginning"}
+              isDate={true}
             />
             <AdminQuestion questionText={questions[7]} />
             <AdminTextInput
@@ -410,7 +415,7 @@ const ProjectInfo = ({ selectedProject }) => {
           </>
         )}
       </div>
-    </>
+    </ProjectInfoContext.Provider>
   );
 };
 

@@ -34,7 +34,7 @@ const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, wor
         } else {
             // there is no initial date or stored date
         }
-    }, [initialDate, name]);
+    }, []);
 
 
     useEffect(() => {
