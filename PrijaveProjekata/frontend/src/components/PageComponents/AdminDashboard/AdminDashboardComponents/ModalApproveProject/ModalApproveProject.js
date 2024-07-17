@@ -22,15 +22,39 @@ const ModalApproveProject = () => {
     setModalApproveProjectIsOpen,
     intentionSelection,
     selectedProject,
+    setModalMessageIsOpen,
+    setMessageForModal,
+    setLoadingSpinnerIsOpen
   } = useContext(AdminDashboardContext);
 
-  const handleYesButton = () => {
+  const handleYesButton = async () => {
     if (intentionSelection) {
-      approveFirstFormSubmit(selectedProject._id);
-      setModalApproveProjectIsOpen(false);
+      setModalApproveProjectIsOpen(false); // hide modal approveProjectIsOpen
+      setLoadingSpinnerIsOpen(true)
+      const check = await approveFirstFormSubmit(selectedProject._id); // await for respons
+      if(check) {
+        setMessageForModal("Projekt je uspješno odobren!");
+        setModalMessageIsOpen(true); // open message
+        setLoadingSpinnerIsOpen(false);
+      } else if(!check) {
+        setMessageForModal("Provjerite internet vezu!");
+        setModalMessageIsOpen(true); // open message
+        setLoadingSpinnerIsOpen(false);
+      }
+      
     } else if (!intentionSelection) {
-      approveSecondFormSubmit(selectedProject._id);
-      setModalApproveProjectIsOpen(false);
+      setModalApproveProjectIsOpen(false); // hide modal approveProjectIsOpen
+      setLoadingSpinnerIsOpen(true)
+      const check = await approveSecondFormSubmit(selectedProject._id); // await for respons
+      if(check) {
+        setMessageForModal("Projekt je uspješno odobren!");
+        setModalMessageIsOpen(true); // open message
+        setLoadingSpinnerIsOpen(false);
+      } else if(!check) {
+        setMessageForModal("Provjerite internet vezu!");
+        setModalMessageIsOpen(true); // open message
+        setLoadingSpinnerIsOpen(false);
+      }
     } else {
       console.log("Intention selection is not set!");
       window.alert("There is an error with intention selection!");

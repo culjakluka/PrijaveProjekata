@@ -11,9 +11,11 @@ import ModalUpdateProjectInfo from "./AdminDashboardComponents/ModalUpdateProjec
 import ModalDiscardChanges from "./AdminDashboardComponents/ModalDiscardChanges/ModalDiscardChanges.js";
 import ModalApproveProject from "./AdminDashboardComponents/ModalApproveProject/ModalApproveProject.js";
 import ModalDeclineProject from "./AdminDashboardComponents/ModalDeclineProject/ModalDeclineProject.js";
+import ModalMessage from "../../InputComponents/ModalMessage/ModalMessage.js";
 import AdminDashboardHeader from "./AdminDashboardHeader/AdminDashboardHeader";
 import ProjectInfo from "./AdminDashboardComponents/ProjectInfo/ProjectInfo";
 import ProjectInfoButtonContainer from "./AdminDashboardComponents/ProjectInfoButtonContainer/ProjectInfoButtonContainer";
+import LoadingSpinner from '../../InputComponents/LoadingSpinner/LoadingSpinner.js'
 
 // external components
 
@@ -100,6 +102,13 @@ const AdminDashboard = () => {
   // modal - decline project
   const [modalDeclineProjectIsOpen, setModalDeclineProjectIsOpen] =
     useState(false);
+
+  // modal - message
+  const [modalMessageIsOpen, setModalMessageIsOpen] = useState(false);
+  const [messageForModal, setMessageForModal] = useState("Projekt uspješno odobren!");
+
+  // loading spinner
+  const [loadingSpinnerIsOpen, setLoadingSpinnerIsOpen] = useState(false)
 
   // project editable
   const [projectEditable, setProjectEditable] = useState(false);
@@ -471,6 +480,9 @@ const AdminDashboard = () => {
           setModalDeclineProjectIsOpen,
           editingInProgress,
           setEditingInProgress,
+          setModalMessageIsOpen,
+          setMessageForModal,
+          setLoadingSpinnerIsOpen
         }}
       >
         <div className="admin-dashboard-container">
@@ -484,6 +496,12 @@ const AdminDashboard = () => {
           {modalApproveProjectIsOpen && <ModalApproveProject />}
 
           {modalDeclineProjectIsOpen && <ModalDeclineProject />}
+
+          {modalMessageIsOpen && <ModalMessage modalMessage={messageForModal} setModalIsOpen={setModalMessageIsOpen} reload={true}/>}
+
+          {loadingSpinnerIsOpen && <LoadingSpinner/>}
+
+
 
           <AdminDashboardHeader />
 

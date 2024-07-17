@@ -18,10 +18,8 @@ const approveFirstFormSubmit = async (projectId) => {
         "state='firstFormApproved' updated successfully!\n",
         responseData
       );
-      window.alert(
-        "state='firstFormApproved' updated successfully!\n",
-        responseData
-      );
+
+      return true;
     } else {
       // handle potentional non-JSON response
       const errorData = await response.json().catch(() => null);
@@ -31,15 +29,15 @@ const approveFirstFormSubmit = async (projectId) => {
         : `Error: ${response.status} ${response.statusText}`;
 
       console.error("state='firstFormApproved' ERROR\nmessage:", errorMessage);
-      window.alert("state='firstFormApproved' ERROR\nmessage:", errorMessage);
+
+      return false;
     }
 
     // Handle the response as needed
     console.log(responseData); // Log the response data
-    window.location.reload();
   } catch (error) {
     console.error("Error approving first form submit:", error);
-    window.alert("Error approving first form submit:", error);
+    return false;
     // Handle errors as needed
   }
 };
@@ -63,10 +61,8 @@ const approveSecondFormSubmit = async (projectId) => {
         "state='secondFormApproved' updated successfully!\n",
         responseData
       );
-      window.alert(
-        "state='secondFormApproved' updated successfully!\n",
-        responseData
-      );
+
+      return true;
     } else {
       // handle potentional non-JSON response
       const errorData = await response.json().catch(() => null);
@@ -76,7 +72,8 @@ const approveSecondFormSubmit = async (projectId) => {
         : `Error: ${response.status} ${response.statusText}`;
 
       console.error("state='secondFormApproved' ERROR\nmessage:", errorMessage);
-      window.alert("state='secondFormApproved' ERROR\nmessage:", errorMessage);
+
+      return false;
     }
     // Handle the response as needed
     console.log(responseData); // Log the response data
@@ -85,6 +82,7 @@ const approveSecondFormSubmit = async (projectId) => {
   } catch (error) {
     console.error("Error approving second form submit:", error);
     // Handle errors as needed
+    return false;
   }
 };
 

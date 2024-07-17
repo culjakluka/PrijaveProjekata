@@ -31,30 +31,24 @@
     margin-top: 10px;
 }
 
-
-.ModalQuestion {
-    color: #515151;
-    font-weight: bold;
-    align-self: center;
-}
-
-.ModalMissingFieldsContainer {
+.ModalMessageContainer {
     display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-
+    flex: 2;
+    align-items: center;
+    justify-content: center;
+    color: #6F6F6F;
 }
 
 .ModalButtonsContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin-bottom: 20px;
+    flex: 1;
 }
 
 .ModalYesButton {
     width: 20%;
+    height: 70%;
     background-color: #6F6F6F;
     color: #FDFDFD;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

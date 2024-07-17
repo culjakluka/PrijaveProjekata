@@ -10,14 +10,13 @@ import Style from './ModalMessage.module.css';
 // context 
 import { FirstInputFormDataContext } from '../../../context/FirstInputFormDataContext';
 
-const ModalTemplate = (height, width, modalMessage, missingFieldsContent) => {
+const ModalMessage = ({ height, width, modalMessage, missingFieldsContent, setModalIsOpen, reload }) => {
 
-    const[heightPercentage, setHeightPercentage] = useState("40%");
+    const[heightPercentage, setHeightPercentage] = useState("20%");
     const[widthPercentage, setWidthPercentage] = useState("30%");
     const [message, setMessage] = useState("Molimo popunite sva polja!");
 
-    // context - here bring the context of component here
-    const{ setModalMessageIsOpen, missingFields } = useContext(FirstInputFormDataContext);
+
 
     useEffect(() => {
         if(height) {
@@ -35,19 +34,18 @@ const ModalTemplate = (height, width, modalMessage, missingFieldsContent) => {
     }, []);
 
     const handleYesButton = () => {
-        setModalMessageIsOpen(false)
+        setModalIsOpen(false)
+        if(reload) {
+            window.location.reload()
+        }
     }
 
     return (
         <div className={Style.ModalContainerOverlay}>
             <div className={Style.Modal} style={{height: heightPercentage, width: widthPercentage }}>
-                <div className={Style.ModalTopContainer}>
+                <div className={Style.ModalMessageContainer}>
                     <h3 className={Style.ModalQuestion}>{message}</h3>
                 </div>
-                <div className={Style.ModalMissingFieldsContainer}>
-                    <p>{missingFields}</p>
-                </div>
-            
                 <div className={Style.ModalButtonsContainer}>
                     <button onClick={() => handleYesButton()} className={Style.ModalYesButton}>U REDU</button>
                 </div>
@@ -56,4 +54,4 @@ const ModalTemplate = (height, width, modalMessage, missingFieldsContent) => {
     );
 }
  
-export default ModalTemplate;
+export default ModalMessage;
