@@ -138,7 +138,7 @@ const projectInfoSchema = new Schema(
     },
     mobilePhoneNumber: {
       // broj mobitela voditelja projekta
-      type: Number,
+      type: String,
       //    required: true
     },
     workTimeThisPercentage: {
