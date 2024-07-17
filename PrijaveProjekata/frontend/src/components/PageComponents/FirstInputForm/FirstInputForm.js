@@ -301,7 +301,7 @@ const FirstInputForm = () => {
           <Question questionText={questions[6]} />
           <NumberInput
             label={
-              "UKUPNA VRIJEDNOST(ukoliko trenutno nije poznat točan iznos, navesti okviran iznos"
+              "UKUPNA VRIJEDNOST(ukoliko trenutno nije poznat točan iznos, navesti okviran iznos)"
             }
             name={"ukupna_vrijednost_projekta"}
             setSpecificState={setTotalValue}
@@ -310,7 +310,7 @@ const FirstInputForm = () => {
 
           <NumberInputSelect
             label={
-              "DIO PRORAČUNA KOJI PRIPADA FESB-u(vrijednost ili postotak ukupne vrijednosti"
+              "DIO PRORAČUNA KOJI PRIPADA FESB-u(vrijednost ili postotak ukupne vrijednosti)"
             }
             name={"dio_proracuna_fesb"}
             setSpecificState={setFesbValuePart}
