@@ -10,7 +10,7 @@ import Style from './CalendarInputAdvanced.module.css';
 
 registerLocale('hr', hr);
 
-const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, workingDaysLimit }) => {
+const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, workingDaysLimit, isAdminDashboard }) => {
 
     const [placeholderText, setPlaceholderText] = useState('mm/dd/yyyy');
 
@@ -36,6 +36,14 @@ const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, wor
         }
     }, []);
 
+    useEffect(() => {
+        if(isAdminDashboard) {
+            const parsedDate = parseISO(initialDate);
+            console.log("PARSED DATE" + parsedDate);
+            setSelectedDate(parsedDate);
+        }
+    }, [initialDate]);
+
 
     useEffect(() => {
         // if date is not selected, set dd/MM/yyyy as placeholder text
@@ -59,7 +67,9 @@ const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, wor
 
 
     useEffect(() => {
-        setSpecificState(selectedDate);
+        if(!isAdminDashboard) {
+            setSpecificState(selectedDate);
+        }
     }, [selectedDate]);
 
     // restrictions for date picker

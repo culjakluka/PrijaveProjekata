@@ -268,6 +268,7 @@ const FirstInputForm = () => {
             name={"rok_za_prijavu_projekta"}
             setSpecificState={setApplicationDeadline}
             workingDaysLimit={15}
+            isAdminDashboard={false}
           />
 
           <Question questionText={questions[2]} />
