@@ -36,7 +36,7 @@ const fieldMapping = {
   otherServicesExpense: "trošak vanjskih usluga",
   materialExpense: "trošak materijala i sitnog inventara",
   travelRegistrationEducationExpense:
-    "trošak puta, kotizacije i profesionalnog usavršavanja",
+    "trošak puta; kotizacije i profesionalnog usavršavanja",
   expenseNote: "napomena o ne navedenim stavkama proračuna",
   partnerExpense: "proračun za ostale partnere",
   requestedFunding: "traženo financiranje",
