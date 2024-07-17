@@ -358,7 +358,7 @@ const updateProjectInfoSet = async (req, res) => {
 
     if (req.body.consultantServices === "true") {
       fieldsToCheck.push("consultantExpense");
-      fieldsToCheck.push("consultantExpsenseSource");
+      fieldsToCheck.push("consultantExpenseSource");
     }
 
     if (req.files.pdfDocuments && req.files.pdfDocuments.length > 0) {
