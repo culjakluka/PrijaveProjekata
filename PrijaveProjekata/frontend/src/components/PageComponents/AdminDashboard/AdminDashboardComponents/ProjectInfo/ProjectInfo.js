@@ -120,6 +120,7 @@ const ProjectInfo = ({ selectedProject }) => {
               label={"ROK ZA PRIJAVU PROJEKTA"} 
               initialDate={selectedProject.applicationDeadline} 
               setSelectedDate={date => console.log(date)} 
+              setSpecificState={setSelectedProjectData}
               placeholderText={"Odaberite datum"} 
               isAdminDashboard={true}
               workingDaysLimit={0}
