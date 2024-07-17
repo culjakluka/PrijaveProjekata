@@ -14,6 +14,7 @@ import RadioButtonInput from "../../InputComponents/RadioButtonInput/RadioButton
 import SpecialInputForm from "../../InputComponents/SpecialInputForm/SpecialInputForm.js";
 import GenerateHeadOfDepartmentStatement from "../../InputComponents/GenerateHeadOfDepartmentStatement/GenerateHeadOfDepartmentStatement.js";
 import AttachAdditionalDocumentation from "../../InputComponents/AttachAdditionalDocumentation/AttachAdditionalDocumentation.js";
+import AttachCurrentlyAvailableBudget from "../../InputComponents/AttachCurrentlyAvailableBudget/AttachCurrentlyAvailableBudget.jsx";
 import AttachHeadOfDepartmentStatement from "../../InputComponents/AttachHeadOfDepartmentStatement/AttachHeadOfDepartmentStatement.js";
 import AutomaticInput from "../../InputComponents/AutomaticInput/AutomaticInput.js";
 import CalendarInput from "../../InputComponents/CalendarInput/CalendarInput.js";
@@ -761,6 +762,8 @@ const SecondInputForm = (docId) => {
           <Question questionText={questions[21]} />
 
           <AttachHeadOfDepartmentStatement onFilesSelect={handleFilesSelect} />
+
+          <AttachCurrentlyAvailableBudget onFilesSelect={handleFilesSelect} />
 
           <AttachAdditionalDocumentation onFilesSelect={handleFilesSelect} />
 
