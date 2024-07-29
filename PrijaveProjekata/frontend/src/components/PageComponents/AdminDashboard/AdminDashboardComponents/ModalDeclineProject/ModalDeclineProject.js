@@ -10,20 +10,35 @@ import Style from "./ModalDeclineProject.module.css";
 // context
 import { AdminDashboardContext } from "../../../../../context/AdminDashboardContext";
 
-// api
-import { rejectProject } from "../../ApiRequests";
+// importing api requests
+import {
+  rejectProject
+} from "../../ApiRequests";
 
 const ModalDeclineProject = () => {
   const {
-    modalDeclineProjectIsOpen,
     setModalDeclineProjectIsOpen,
     selectedProject,
+    setModalMessageIsOpen,
+    setMessageForModal,
+    setLoadingSpinnerIsOpen
   } = useContext(AdminDashboardContext);
 
-  const handleYesButton = () => {
-    //TO-DO
-    rejectProject(selectedProject._id);
-    setModalDeclineProjectIsOpen(false);
+  const handleYesButton = async () => {
+    setModalDeclineProjectIsOpen(false); // hide modal approveProjectIsOpen
+    setLoadingSpinnerIsOpen(true)
+      
+    const check = await rejectProject(selectedProject._id); // await for response
+
+    if(check) {
+      setMessageForModal("Projekt uspješno odbijen!");
+      setModalMessageIsOpen(true); // open message
+      setLoadingSpinnerIsOpen(false);
+    } else if(!check) {
+      setMessageForModal("Provjerite internet vezu!");
+      setModalMessageIsOpen(true); // open message
+      setLoadingSpinnerIsOpen(false);
+    }
   };
 
   const handleNoButton = () => {

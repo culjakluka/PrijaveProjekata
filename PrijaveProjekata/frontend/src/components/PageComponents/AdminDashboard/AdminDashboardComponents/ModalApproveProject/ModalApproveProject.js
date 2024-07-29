@@ -31,7 +31,9 @@ const ModalApproveProject = () => {
     if (intentionSelection) {
       setModalApproveProjectIsOpen(false); // hide modal approveProjectIsOpen
       setLoadingSpinnerIsOpen(true)
-      const check = await approveFirstFormSubmit(selectedProject._id); // await for respons
+      
+      const check = await approveFirstFormSubmit(selectedProject._id); // await for response
+
       if(check) {
         setMessageForModal("Projekt je uspješno odobren!");
         setModalMessageIsOpen(true); // open message

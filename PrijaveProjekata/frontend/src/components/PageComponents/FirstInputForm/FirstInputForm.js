@@ -214,7 +214,7 @@ const FirstInputForm = () => {
       missingFields
       }}>
 
-      {modalMessageIsOpen && <ModalMessage missingFieldsMessage={missingFields} />}
+      {modalMessageIsOpen && <ModalMessage missingFieldsMessage={missingFields} setModalIsOpen={setModalMessageIsOpen}/>}
       {modalApplicationSubmittedIsOpen && <ModalApplicationSubmitted />}
 
       <div className={Style.InputContainer}>
