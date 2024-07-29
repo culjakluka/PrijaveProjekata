@@ -346,9 +346,11 @@ const ProjectInfo = ({ selectedProject }) => {
             />
             <AdminTextInput
               currentLabelValue={"NEIZRAVNI TROŠKOVI"}
-              currentInputValue={`${0.15 * selectedProject.fesbValuePart}`}
+              currentInputValue={selectedProject.indirectExpenses}
               projectUpdateName={"fesbValuePart"}
-            />{" "}
+            />
+            {selectedProject.indirectExpensesManualInput && (
+              <p>Neizravni troškovi su uneseni ručno</p>)}
             {/* Calculated as 15% of FESB value part */}
             <AdminTextInput
               currentLabelValue={"TROŠAK I POPIS OPREME"}
