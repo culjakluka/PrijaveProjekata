@@ -183,16 +183,20 @@ const rejectProject = async (projectId) => {
     const responseData = await response.json();
 
     if (response.ok) {
-      window.alert("Project successfully declined\n");
-    }
+      console.log('Projekt uspješno odbijen!');
+
+      // returning true so it can be handled later easier
+      return true;
+    } 
 
     // Handle the response as needed
     console.log(responseData); // Log the response data
-    window.location.reload();
+
   } catch (error) {
     console.error("Unable to decline probject, an error occured: ", error);
     window.alert("Unable to decline probject, an error occured: ", error);
-    // Handle errors as needed
+    // // returning ture so it can be handled later easier
+    return false;
   }
 };
 
