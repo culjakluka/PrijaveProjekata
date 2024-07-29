@@ -7,15 +7,21 @@ async function generateProjectInfoPDF(projectData) {
     // Create a new PDF document
     const doc = new PDFDocument();
 
+    doc.registerFont('Cardo', 'fonts/Cardo/Cardo-Regular.ttf')
+    
+    doc.font('Cardo').fontSize(12);
+
     // Add project info to the PDF
     for (const [key, value] of Object.entries(projectData)) {
       const fieldName = fieldMapping[key] || key;
       if (value && typeof value !== "object") {
         // Exclude fields with empty values and objects
-        doc.text(`${fieldName}: ${value}`);
+        doc.font('Cardo')
+        .fontSize(12).text(`${fieldName}: ${value}`);
       } else if (Array.isArray(value) && value.length > 0) {
         // Handle arrays of objects
-        doc.text(`${fieldName}:`);
+        doc.font('Cardo')
+        .fontSize(12).text(`${fieldName}:`);
         value.forEach((item) => {
           doc.text(JSON.stringify(item));
         });

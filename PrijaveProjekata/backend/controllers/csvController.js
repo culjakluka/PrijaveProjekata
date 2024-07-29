@@ -13,8 +13,8 @@ const convertToCSV = async (req, res) => {
       "Content-Disposition",
       `attachment; filename=${filename}.csv`
     );
-    res.send(csv);
-  } catch (err) {
+    res.send(Buffer.from('\uFEFF' + csv, 'utf-8'));
+  }catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
   }
@@ -52,7 +52,7 @@ function flattenProjectInfo(projectInfo) {
       projectInfo[key] === null ||
       projectInfo[key] === ""
     ) {
-      delete projectInfo[key]; // Delete the key from projectInfo, not flattenedData
+      delete projectInfo[key];
     }
   });
 
@@ -62,8 +62,9 @@ function flattenProjectInfo(projectInfo) {
       flattenedData[fieldMapping[key]] = projectInfo[key];
     }
   }
+  delete flattenedData[fieldMapping["projectTeam"]];
 
-  // Flatten projectTeam if present
+  // Flatten projectTeam
   if (projectInfo.projectTeam && Array.isArray(projectInfo.projectTeam)) {
     projectInfo.projectTeam.forEach((member, index) => {
       const memberPrefix = `projektni_tim_${index}_`;
@@ -86,24 +87,6 @@ function flattenProjectInfo(projectInfo) {
       }
     });
   }
-
-  // Flatten pdfDocuments if present
-  if (
-    projectInfo.pdfDocuments &&
-    projectInfo.pdfDocuments.pdfs &&
-    Array.isArray(projectInfo.pdfDocuments.pdfs)
-  ) {
-    projectInfo.pdfDocuments.pdfs.forEach((pdf, index) => {
-      const pdfPrefix = `pdfDocuments_${index}_`;
-      if (pdf.filename) {
-        flattenedData[`${pdfPrefix}filename`] = pdf.filename;
-      }
-      if (pdf.filepath) {
-        flattenedData[`${pdfPrefix}filepath`] = pdf.filepath;
-      }
-    });
-  }
-
 
   return flattenedData;
 }
