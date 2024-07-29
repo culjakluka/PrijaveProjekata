@@ -361,6 +361,13 @@ const updateProjectInfoSet = async (req, res) => {
       fieldsToCheck.push("consultantExpenseSource");
     }
 
+    // neizravni troskovi
+    if(req.body.indirectExpensesManualInput === "true") {
+      fieldsToCheck.push("indirectExpenses");
+    }else{
+      projectData["indirectExpenses"] = 0.15 * req.body.fesbValuePart;
+    }
+
     if (req.files.pdfDocuments && req.files.pdfDocuments.length > 0) {
       const uploadPath = path.join(__dirname, "..", uploadDirectory);
       for (const file of pdfDocuments) {

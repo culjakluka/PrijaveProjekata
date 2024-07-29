@@ -216,6 +216,14 @@ const projectInfoSchema = new Schema(
       type: Number,
       //    required: true
     },
+    indirectExpenses: {
+      // trošak neposrednih troškova
+      type: Number,
+    },
+    indirectExpensesManualInput: {
+      // rucni unos neposrednih troskova
+      type: Boolean,
+    },
     expenseNote: {
       // napomena o ne navedenim stavkama proračuna
       type: String,
