@@ -16,6 +16,7 @@ import CsvConverter from "../../../../test/csv/CsvConverter.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
 import AdminDashboardProjectTeam from "../../AdminDashboardProjectComponents/AdminDashboardProjectTeam/AdminDashboardProjectTeam.js";
+import CalendarInputAdvanced from "../../../../InputComponents/CalendarInputAdvanced/CalendarInputAdvanced.js";
 
 const ProjectInfo = ({ selectedProject }) => {
   const [selectedProjectData, setSelectedProjectData] = useState();
@@ -55,6 +56,8 @@ const ProjectInfo = ({ selectedProject }) => {
     "20. Planirate li koristiti konzultantsku pomoć prilikom prijave projekta?",
     "21. Navedite dokumentaciju koju je potrebno osigurati za prijavu projekta od strane FESB-a",
   ];
+
+  const [dummyData, setDummyData] = useState("");
 
   return (
     <ProjectInfoContext.Provider value={{
@@ -112,6 +115,17 @@ const ProjectInfo = ({ selectedProject }) => {
               projectUpdateName={"applicationDeadline"}
               isDate={true}
             />
+            <div style={{alignSelf:"start"}}>
+            <CalendarInputAdvanced
+              label={"ROK ZA PRIJAVU PROJEKTA"} 
+              initialDate={selectedProject.applicationDeadline} 
+              setSelectedDate={date => console.log(date)} 
+              setSpecificState={setSelectedProjectData}
+              placeholderText={"Odaberite datum"} 
+              isAdminDashboard={true}
+              workingDaysLimit={0}
+            />
+            </div>
 
             <AdminQuestion questionText={questions[2]} />
             <AdminTextInput
