@@ -347,7 +347,7 @@ const ProjectInfo = ({ selectedProject }) => {
             <AdminTextInput
               currentLabelValue={"NEIZRAVNI TROŠKOVI"}
               currentInputValue={selectedProject.indirectExpenses}
-              projectUpdateName={"fesbValuePart"}
+              projectUpdateName={"indirectExpenses"}
             />
             {selectedProject.indirectExpensesManualInput && (
               <p>Neizravni troškovi su uneseni ručno</p>)}
