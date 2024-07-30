@@ -236,12 +236,18 @@ const adminUpdateProjectInfoSet = async (project_id, projectData) => {
     if (response.ok) {
       console.log("Project updated successfully!", data);
       window.alert("Project updated successfully!", data);
+
+      // to check if it was successfull
+      return true;
     } else {
       console.error("Error updating project!", data.error);
-      window.alert("Error updating project!", data.error);
+
+      return false;
     }
   } catch (error) {
     console.log("Error: ", error.message);
+  
+    return false;
   }
 };
 
