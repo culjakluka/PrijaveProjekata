@@ -329,6 +329,7 @@ const updateProjectInfoSet = async (req, res) => {
         "totalValue",
         "fesbValuePart",
         "newEmploymentBoolean",
+        "newEmploymentPositions",
         "mobilePhoneNumber",
         "workTimeThisPercentage",
         "workTimeOtherPercentage",
@@ -362,9 +363,9 @@ const updateProjectInfoSet = async (req, res) => {
     }
 
     // neizravni troskovi
-    if(req.body.indirectExpensesManualInput === "true") {
+    if (req.body.indirectExpensesManualInput === "true") {
       fieldsToCheck.push("indirectExpenses");
-    }else{
+    } else {
       projectData["indirectExpenses"] = 0.15 * req.body.fesbValuePart;
     }
 
