@@ -58,6 +58,7 @@ const createProjectInfoSet = async (req, res) => {
       "totalValue",
       "fesbValuePart",
       "newEmploymentBoolean",
+      "newEmploymentPositions",
       "projectTeam",
     ];
   }

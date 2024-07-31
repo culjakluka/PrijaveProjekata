@@ -1,0 +1,80 @@
+.PositionsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.InputContainer {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    margin: 15px 0px 7px 0px;
+    color: #5a5a5a;
+}
+
+.InputTitle {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.ValueInput {
+    margin-bottom: 4px;
+    height: 1.3em;
+    font-size: 1em;
+}
+
+.ValueInput::placeholder {
+    color: #5a5a5a;
+    font-size: 0.9em;
+}
+
+.ValueInput:focus {
+    border: none;
+    outline: 1.5px solid #6F6F6F;
+    font-size: 1em;
+}
+
+.AddNewPositionButton {
+    border: none;
+    outline: none;
+    background-color: #6F6F6F;
+    width: auto;
+    color: white;
+    font-size: 1em;
+    margin: 5px ;
+}
+
+.AddNewPositionButton:hover {
+    border: none;
+    outline: none;
+    background-color: #bbbbbb;
+    color: white;
+    font-size: 1em;
+    margin: 5px 0px 5px 20px;
+}
+
+.PositionContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.RemovePositionButton {
+    text-decoration: underline;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    align-self: flex-start;
+    padding: 0px;
+}
+
+.RemovePositionButton:hover {
+    text-decoration: underline;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    align-self: flex-start;
+    padding: 0px;
+}

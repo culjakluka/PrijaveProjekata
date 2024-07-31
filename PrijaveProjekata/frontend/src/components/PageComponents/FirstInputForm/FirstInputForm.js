@@ -37,6 +37,7 @@ import { getDepartments } from "./firstInputFormApi.js";
 import { set } from "date-fns";
 import CalendarInputAdvanced from "../../InputComponents/CalendarInputAdvanced/CalendarInputAdvanced.js";
 import NumberInputSelect from "../../InputComponents/NumberInputSelect/NumberInputSelect.js";
+import NewEmploymentPositions from "../../InputComponents/NewEmploymentPositions/NewEmploymentPositions.js";
 
 const FirstInputForm = () => {
   const { logout } = useLogout();
@@ -59,6 +60,7 @@ const FirstInputForm = () => {
   const [totalValue, setTotalValue] = useState(0);
   const [fesbValuePart, setFesbValuePart] = useState(0);
   const [newEmploymentBoolean, setNewEmployment] = useState(null);
+  const [newEmploymentPositions, setNewEmploymentPositions] = useState([]);
   const [projectTeam, setProjectTeam] = useState([]);
   const [firstInputMarker, setFirstInputMarker] = useState(true);
   const [secondInputMarker, setSecondInputMarker] = useState(false);
@@ -146,6 +148,7 @@ const FirstInputForm = () => {
       totalValue,
       fesbValuePart,
       newEmploymentBoolean,
+      newEmploymentPositions,
       projectTeam,
     });
 
@@ -166,6 +169,7 @@ const FirstInputForm = () => {
     totalValue,
     fesbValuePart,
     newEmploymentBoolean,
+    newEmploymentPositions,
     projectTeam,
   ]);
 
@@ -333,7 +337,10 @@ const FirstInputForm = () => {
             simpleQuestionValue={""}
             setSelectionState={setNewEmployment}
           />
-
+          {newEmploymentBoolean && 
+            <NewEmploymentPositions formType='first'/>
+          }
+          
           <SpecialInputFirstInputForm
             name="project_team_members"
             pitanje={questions[8]}
