@@ -13,41 +13,41 @@ import { SecondInputFormDataContext } from '../../../context/SecondInputFormData
 const NewEmploymentPositions = ({ formType }) => {
     
     const { newEmploymentPositions, setNewEmploymentPositions } = useContext(formType === "first" ? FirstInputFormDataContext : SecondInputFormDataContext);
-    const [currentPosition, setCurrentPosition] = useState({
-        name : '',
-        bruttoSalary : '',
-        timePercentage : ''
+    const [employmentPosition, setEmploymentPosition] = useState({
+        positionName : '',
+        positionSalary : '',
+        positionPercentage : ''
     });
 
     // handle name change in input
     const handleNameChange = (e) => {
-        setCurrentPosition({
-            ...currentPosition,
-            name : e.target.value
+        setEmploymentPosition({
+            ...employmentPosition,
+            positionName : e.target.value
         });
     }
 
     const handleBruttoSalaryChange = (e) => {
-        setCurrentPosition({
-            ...currentPosition,
-            bruttoSalary : e.target.value
+        setEmploymentPosition({
+            ...employmentPosition,
+            positionSalary : e.target.value
         });
     }
 
     const handleTimePercentageChange = (e) => {
-        setCurrentPosition({
-            ...currentPosition,
-            timePercentage : e.target.value
+        setEmploymentPosition({
+            ...employmentPosition,
+            positionPercentage : e.target.value
         });
     }
 
     const addNewPosition = () => {
         
-        if(currentPosition.name === '' || currentPosition.bruttoSalary === '' || currentPosition.timePercentage === '') {
+        if(employmentPosition.positionName === '' || employmentPosition.positionSalary === '' || employmentPosition.positionPercentage === '') {
             console.log('Sva polja moraju biti popunjena!');
         } else {
-            setNewEmploymentPositions([...newEmploymentPositions, currentPosition]);
-            setCurrentPosition({
+            setNewEmploymentPositions([...newEmploymentPositions, employmentPosition]);
+            setEmploymentPosition({
                 name : '',
                 bruttoSalary : '',
                 timePercentage : ''
@@ -60,11 +60,11 @@ const NewEmploymentPositions = ({ formType }) => {
         <div className={Style.PositionsContainer}>   
             <div className={Style.InputContainer}>
                 <div className={Style.InputTitle}>Naziv novog radnog mjesta</div>
-                <input className={Style.ValueInput} onChange={handleNameChange} value={currentPosition.name} type='text' placeholder='molimo popunite polje...'></input> 
+                <input className={Style.ValueInput} onChange={handleNameChange} value={employmentPosition.positionName} type='text' placeholder='molimo popunite polje...'></input> 
                 <div className={Style.InputTitle}>Bruto plaća</div>
-                <input className={Style.ValueInput} onChange={handleBruttoSalaryChange} value={currentPosition.bruttoSalary} type='text' placeholder='molimo popunite polje...'></input>
+                <input className={Style.ValueInput} onChange={handleBruttoSalaryChange} value={employmentPosition.positionSalary} type='text' placeholder='molimo popunite polje...'></input>
                 <div className={Style.InputTitle}>Postotak radnog vremena</div>
-                <input className={Style.ValueInput} onChange={handleTimePercentageChange} value={currentPosition.timePercentage} type='text' placeholder='molimo popunite polje...'></input>
+                <input className={Style.ValueInput} onChange={handleTimePercentageChange} value={employmentPosition.positionPercentage} type='text' placeholder='molimo popunite polje...'></input>
                 <button onClick={() => addNewPosition()}className={Style.AddNewPositionButton}>Dodaj novo radno mjesto</button>
             </div>
             

@@ -218,6 +218,8 @@ const FirstInputForm = () => {
         setModalMessageIsOpen,
         setModalApplicationSubmittedIsOpen,
         missingFields,
+        newEmploymentPositions,
+        setNewEmploymentPositions,
       }}
     >
       {modalMessageIsOpen && (
