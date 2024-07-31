@@ -21,6 +21,9 @@ import ModalApplicationSubmitted from "../../InputComponents/ModalApplicationSub
 import Style from "./FirstInputForm.module.css";
 import "../../../index.css";
 
+// utils
+import translateMissingFields from "../../../utils/translateMissingFields.js";
+
 // data
 import { questions } from "../../data/firstInputFormData.js";
 
@@ -69,7 +72,8 @@ const FirstInputForm = () => {
   const [missingFields, setMissingFields] = useState([]);
 
   // modal application submitted
-  const [modalApplicationSubmittedIsOpen, setModalApplicationSubmittedIsOpen] = useState(false);
+  const [modalApplicationSubmittedIsOpen, setModalApplicationSubmittedIsOpen] =
+    useState(false);
 
   const handleSubmit = async () => {
     try {
@@ -84,14 +88,13 @@ const FirstInputForm = () => {
       if (response.ok) {
         const responseData = await response.json();
 
-        console.log("Post successful:", responseData)
+        console.log("Post successful:", responseData);
 
         // show message that application is submitted
-        
+
         // clearing session storage and refreshing browser
         sessionStorage.clear();
         setModalApplicationSubmittedIsOpen(true);
-
       } else {
         // handle potentional non-JSON response
         const errorData = await response.json().catch(() => null);
@@ -111,12 +114,10 @@ const FirstInputForm = () => {
           const missingFieldsMessage = `Missing fields: ${errorData.emptyFields.join(", ")}`;
           console.error(missingFieldsMessage);
           //window.alert(missingFieldsMessage);
-          
-          setMissingFields(missingFieldsMessage);
+
+          setMissingFields(errorData.emptyFields);
           // opean modal missing fields
           setModalMessageIsOpen(true);
-          
-
         }
       }
     } catch (error) {
@@ -186,7 +187,7 @@ const FirstInputForm = () => {
       console.log(departments);
 
       const fetchedDepartments = departments.map(
-        (department) => (department.name + " - " + department.headName)
+        (department) => department.name + " - " + department.headName
       );
       // Update state with fetched department names
       setDepartmentsData(fetchedDepartments);
@@ -205,16 +206,24 @@ const FirstInputForm = () => {
   const [departmentsData, setDepartmentsData] = useState([]);
 
   return (
-    <FirstInputFormDataContext.Provider value={{
-      projectTeam,
-      setProjectTeam,
-      totalValue,
-      setModalMessageIsOpen,
-      setModalApplicationSubmittedIsOpen,
-      missingFields
-      }}>
-
-      {modalMessageIsOpen && <ModalMessage missingFieldsMessage={missingFields} setModalIsOpen={setModalMessageIsOpen}/>}
+    <FirstInputFormDataContext.Provider
+      value={{
+        projectTeam,
+        setProjectTeam,
+        totalValue,
+        setModalMessageIsOpen,
+        setModalApplicationSubmittedIsOpen,
+        missingFields,
+      }}
+    >
+      {modalMessageIsOpen && (
+        <ModalMessage
+          modalMessage={translateMissingFields(missingFields)}
+          height={"15em"}
+          setModalIsOpen={setModalMessageIsOpen}
+          isMissingFieldsModal={true}
+        />
+      )}
       {modalApplicationSubmittedIsOpen && <ModalApplicationSubmitted />}
 
       <div className={Style.InputContainer}>
@@ -263,7 +272,7 @@ const FirstInputForm = () => {
             name={"akronim_projekta"}
             setSpecificState={setProjectAcronym}
           />
-          <CalendarInputAdvanced 
+          <CalendarInputAdvanced
             label={"ROK ZA PRIJAVU PROJEKTA"}
             name={"rok_za_prijavu_projekta"}
             setSpecificState={setApplicationDeadline}

@@ -21,6 +21,7 @@ import CalendarInput from "../../InputComponents/CalendarInput/CalendarInput.js"
 import ProjectSummary from "../../InputComponents/ProjectSummary/ProjectSummary.js";
 import NumberInput from "../../InputComponents/NumberInput/NumberInput.js";
 import NumberInputSelect from "../../InputComponents/NumberInputSelect/NumberInputSelect.js";
+import ModalMessage from "../../InputComponents/ModalMessage/ModalMessage.js";
 
 // data
 import {
@@ -31,6 +32,9 @@ import { questions, radioButtonData1 } from "../../data/secondInputFormData.js";
 
 // api request
 import { getDepartments } from "../../PageComponents/FirstInputForm/firstInputFormApi.js";
+
+// utils
+import translateMissingFields from "../../../utils/translateMissingFields.js";
 
 // context
 import { SecondInputFormDataContext } from "../../../context/SecondInputFormDataContext.js";
@@ -52,7 +56,7 @@ const SecondInputForm = (docId) => {
   const [department, setDepartment] = useState("");
   // fetched departments
   const [departmentsData, setDepartmentsData] = useState([]);
-//////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////
   const [email, setEmail] = useState("");
   const [mobilePhoneNumber, setMobilePhoneNumber] = useState(0);
   const [workTimeThisPercentage, setWorkTimeThisPercentage] = useState(0);
@@ -102,7 +106,12 @@ const SecondInputForm = (docId) => {
   const [pdfDocuments, setPdfDocuments] = useState([]);
 
   // application updated modal - after application is submitted
-  const [modalApplicationUpdatedIsOpen, setModalApplicationUpdatedIsOpen] = useState(false);
+  const [modalApplicationUpdatedIsOpen, setModalApplicationUpdatedIsOpen] =
+    useState(false);
+
+  // empty fields modal
+  const [modalMessageIsOpen, setModalMessageIsOpen] = useState(false);
+  const [missingFields, setMissingFields] = useState([]);
 
   // this component is used to calculate total expense
   const [totalExpense, setTotalExpense] = useState(0);
@@ -224,24 +233,24 @@ const SecondInputForm = (docId) => {
 
     const getDepartments = async () => {
       try {
-          const response = await fetch('/api/department');
-          if (response.ok) {
-              const fetchedDepartments = await response.json();
+        const response = await fetch("/api/department");
+        if (response.ok) {
+          const fetchedDepartments = await response.json();
 
-              const departments = fetchedDepartments.map(
-                (department) => (department.name + " - " + department.headName)
-              );
-              // Update state with fetched department nam
-              setDepartmentsData(departments);
-          } else {
-              console.error('Failed to fetch department data');
-              throw new Error('Failed to fetch department data');
-          }
+          const departments = fetchedDepartments.map(
+            (department) => department.name + " - " + department.headName
+          );
+          // Update state with fetched department nam
+          setDepartmentsData(departments);
+        } else {
+          console.error("Failed to fetch department data");
+          throw new Error("Failed to fetch department data");
+        }
       } catch (error) {
-          console.error('Error during getDepartments:', error);
-          throw new Error('Error during getDepartments');
+        console.error("Error during getDepartments:", error);
+        throw new Error("Error during getDepartments");
       }
-    }
+    };
 
     getDepartments();
   }, []);
@@ -267,13 +276,11 @@ const SecondInputForm = (docId) => {
     }
 
     console.log("Intention form to update: ", intentionFormToUpdate);
-
   }, [intentionFormToUpdate]);
 
   useEffect(() => {
     setIndirectExpenses(0.15 * fesbValuePart);
   }, [fesbValuePart]);
-
 
   const checkNaN = (value) => {
     if (isNaN(value)) {
@@ -281,20 +288,19 @@ const SecondInputForm = (docId) => {
     } else {
       return value;
     }
-  
-  }
+  };
   useEffect(() => {
-    const calculatedTotalExpense = 
-      Number(checkNaN(currentPersonnelExpense)) + 
-      Number(checkNaN(newPersonnelExpense)) + 
-      Number(checkNaN(equipmentDescriptionAndExpense)) + 
-      Number(checkNaN(equipmentAmortizationExpense)) + 
-      Number(checkNaN(otherServicesExpense)) + 
-      Number(checkNaN(materialExpense)) + 
-      Number(checkNaN(travelRegistrationEducationExpense)) + 
+    const calculatedTotalExpense =
+      Number(checkNaN(currentPersonnelExpense)) +
+      Number(checkNaN(newPersonnelExpense)) +
+      Number(checkNaN(equipmentDescriptionAndExpense)) +
+      Number(checkNaN(equipmentAmortizationExpense)) +
+      Number(checkNaN(otherServicesExpense)) +
+      Number(checkNaN(materialExpense)) +
+      Number(checkNaN(travelRegistrationEducationExpense)) +
       Number(checkNaN(partnerExpense));
 
-      setTotalExpense(calculatedTotalExpense);
+    setTotalExpense(calculatedTotalExpense);
 
     console.log("Partner expense test: " + partnerExpense ?? 0);
 
@@ -302,13 +308,14 @@ const SecondInputForm = (docId) => {
     console.log("FESB value part: ", fesbValuePart);
   }, [
     currentPersonnelExpense,
-    newPersonnelExpense, 
-    fesbValuePart, 
-    equipmentDescriptionAndExpense, 
-    equipmentAmortizationExpense, 
-    otherServicesExpense, 
-    materialExpense, 
-    travelRegistrationEducationExpense]);
+    newPersonnelExpense,
+    fesbValuePart,
+    equipmentDescriptionAndExpense,
+    equipmentAmortizationExpense,
+    otherServicesExpense,
+    materialExpense,
+    travelRegistrationEducationExpense,
+  ]);
 
   // callback
   const updateProjectTeam = (projectMembersList) => {
@@ -403,9 +410,6 @@ const SecondInputForm = (docId) => {
           ? errorData.error
           : `Error: ${response.status} ${response.statusText}`;
 
-        console.error("Error posting data1: ", errorMessage);
-        window.alert(`Error posting data1: ${errorMessage}`);
-
         // printing missing field if there are any and displaying them
         if (
           errorData &&
@@ -414,12 +418,17 @@ const SecondInputForm = (docId) => {
         ) {
           const missingFieldsMessage = `Missing fields: ${errorData.emptyFields.join(", ")}`;
           console.error(missingFieldsMessage);
-          window.alert(missingFieldsMessage);
+
+          setMissingFields(errorData.emptyFields);
+          setModalMessageIsOpen(true);
+        } else {
+          window.alert(`Error posting data!`);
+          console.error("Error posting data: ", errorMessage);
         }
       }
     } catch (error) {
-      console.error("Error posting data2:", error.message);
-      window.alert(`Error posting data1: ${error.message}`);
+      console.error("Error posting data:", error.message);
+      window.alert(`Error posting data: ${error.message}`);
     }
   };
 
@@ -437,10 +446,17 @@ const SecondInputForm = (docId) => {
             projectTitle,
             setModalApplicationUpdatedIsOpen,
             totalExpense,
-            fesbValuePart
+            fesbValuePart,
           }}
         >
-
+          {modalMessageIsOpen && (
+            <ModalMessage
+              modalMessage={translateMissingFields(missingFields)}
+              height={"15em"}
+              setModalIsOpen={setModalMessageIsOpen}
+              isMissingFieldsModal={true}
+            />
+          )}
           {modalApplicationUpdatedIsOpen && <ModalApplicationUpdated />}
 
           <h1 className="document-title">TRAŽENJE SUGLASNOSTI</h1>

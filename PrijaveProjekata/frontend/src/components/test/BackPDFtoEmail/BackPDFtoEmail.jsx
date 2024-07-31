@@ -42,6 +42,19 @@ class BackPDFtoEmail extends React.Component {
         projectApplicant: "Miroljub Petrović",
         projectPartners: "Nema ostalih partnera",
         projectSummary: "Ovo je dug sadrzaj",
+        projectTeam: [
+          {
+            email: "la",
+            nameSurname: "Miroljub Petrović",
+            thisProjectPercentage: 10,
+            otherProjects: [
+              {
+                otherProjectName: "Pod Mač Bato",
+                otherProjectPercentage: 10,
+              },
+            ],
+          },
+        ],
         projectTitle: "Pod Mač Bato",
         projectType: "Međunarodni znanstveni kompetitivni",
         requestedFunding: 0,

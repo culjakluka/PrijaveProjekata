@@ -18,6 +18,21 @@ const otherProjectInfo = new Schema({
   },
 });
 
+const employmentPosition = new Schema({
+  positionName: {
+    // naziv radnog mjesta
+    type: String,
+  },
+  positionSalary: {
+    // plaća radnog mjesta
+    type: Number,
+  },
+  positionPercentage: {
+    // postotak radnog vremena na radnom mjestu
+    type: Number,
+  },
+});
+
 const projectTeamMember = new Schema({
   nameSurname: {
     // ime i prezime suradnika na projektu
@@ -129,6 +144,11 @@ const projectInfoSchema = new Schema(
     newEmploymentBoolean: {
       // jesu li predviđena nova radna mjesta
       type: Boolean,
+      //    required: true
+    },
+    newEmploymentPositions: {
+      // opis novih radnih mjesta
+      type: [employmentPosition],
       //    required: true
     },
     projectTeam: {
