@@ -38,8 +38,13 @@ const getProjectInfo = async (req, res) => {
 
 //create a ProjectInfo set (submit prve forme)
 const createProjectInfoSet = async (req, res) => {
-  let fieldsToCheck;
+  // Ensure userId is provided
+  if (!req.body.userId) {
+    return res.status(400).send({ error: "userId is required" });
+  }
 
+  // Initialize fieldsToCheck based on conditions
+  let fieldsToCheck = [];
   if (req.body.firstInputMarker && !req.body.secondInputMarker) {
     fieldsToCheck = [
       "userId",
@@ -61,15 +66,18 @@ const createProjectInfoSet = async (req, res) => {
       "newEmploymentPositions",
       "projectTeam",
     ];
+  } else {
+    return res.status(400).send({ error: "Invalid input markers" });
   }
 
   const projectData = {};
-
-  let emptyFields = [];
+  const emptyFields = [];
 
   fieldsToCheck.forEach((field) => {
-    const value =
-      field === "newEmploymentBoolean" ? req.files : req.body[field];
+    if (field === "userId") {
+      console.log("userId:", req.body.userId);
+    }
+    const value = req.body[field];
     if (field === "newEmploymentBoolean") {
       const newEmploymentBoolean = JSON.parse(req.body.newEmploymentBoolean);
       if (newEmploymentBoolean === null) {
@@ -85,27 +93,28 @@ const createProjectInfoSet = async (req, res) => {
     }
   });
 
+  // Return error if there are empty required fields
   if (emptyFields.length > 0) {
-    return res.status(400).json({
-      emptyFields,
-    });
+    return res.status(400).json({ emptyFields });
   }
 
-  // Add doc to the database
+  // Add document to the database
   try {
-    let infoPDF = ProjectInfoToPDFService.generateProjectInfoPDF(projectData);
     projectData.state = "firstFormSubmitted";
+    console.log("projectData:", projectData);
     const projectInfoSet = await ProjectInfoModel.create(projectData);
-    console.log(projectData);
 
+    const infoPDF = ProjectInfoToPDFService.generateProjectInfoPDF(projectData);
     EmailService.sendEmail(
       [defaultEmail],
       "Project form submitted",
       "A new project form has been submitted.",
       infoPDF
     );
+
     res.status(200).json(projectInfoSet);
   } catch (error) {
+    console.error("createProjectInfoSet error:", error);
     res.status(400).json({ error: error.message });
   }
 };
