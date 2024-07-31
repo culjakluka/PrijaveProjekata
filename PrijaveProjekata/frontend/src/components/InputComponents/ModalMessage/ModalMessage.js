@@ -37,7 +37,7 @@ const ModalMessage = ({ height, width, modalMessage, missingFieldsContent, setMo
         setModalIsOpen(false)
         if(reload) {
             window.location.reload()
-        }
+        }   
     }
 
     return (

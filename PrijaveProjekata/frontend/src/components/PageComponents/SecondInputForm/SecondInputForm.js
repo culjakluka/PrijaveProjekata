@@ -39,6 +39,7 @@ import ModalApplicationUpdated from "../../InputComponents/ModalApplicationUpdat
 import { set } from "date-fns";
 import CalendarInputAdvanced from "../../InputComponents/CalendarInputAdvanced/CalendarInputAdvanced.js";
 import TotalExpenseWarning from "../../InputComponents/TotalExpenseWarning/TotalExpenseWarning.js";
+import NewEmploymentPositions from "../../InputComponents/NewEmploymentPositions/NewEmploymentPositions.js";
 
 const SecondInputForm = (docId) => {
   const { user } = useAuthContext();
@@ -716,8 +717,11 @@ const SecondInputForm = (docId) => {
             setSelectionState={setNewEmploymentBoolean}
             initialValue={newEmploymentBoolean}
           />
-
+          {newEmploymentBoolean &&
+            <NewEmploymentPositions/>
+          }
           
+
 
           <Question questionText={questions[18]} />
           <SpecialInputForm
