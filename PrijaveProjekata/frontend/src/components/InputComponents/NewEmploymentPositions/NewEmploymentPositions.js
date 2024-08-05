@@ -22,7 +22,7 @@ const NewEmploymentPositions = ({ formType }) => {
     // function that formats number from 1000 to 1,000 or 1000.00 if decimal
     const formatNumber = (value) => {
         // remove all non digit characters - preventing user from entering anything other than numbers
-        const numericValue = value.replace(/[^\d.]/g, '');
+        const numericValue = String(value).replace(/[^\d.]/g, '');
 
         // split the number into parts before and after the decimal point
         const parts = numericValue.split('.');
@@ -109,7 +109,7 @@ const NewEmploymentPositions = ({ formType }) => {
                 </input>
                 <button onClick={() => addNewPosition()}className={Style.AddNewPositionButton}>DODAJ NOVO RADNO MJESTO</button>
             </div>
-            
+            <div style={{fontWeight: '700', color: '#6e6e6e'}}>DODANA RADNA MJESTA:</div>
             {newEmploymentPositions?.length > 0 ? newEmploymentPositions.map((position, index) => {
                 return (
                     <Position key={index} positionProp={position} setNewPositionsProp={setNewEmploymentPositions} formatNumber={formatNumber} />

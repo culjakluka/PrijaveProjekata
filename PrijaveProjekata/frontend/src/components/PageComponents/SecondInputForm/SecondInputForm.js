@@ -98,6 +98,7 @@ const SecondInputForm = (docId) => {
   const [downPayment, setDownPayment] = useState(0);
   const [personalFinancingExpense, setPersonalFinancingExpense] = useState("");
   const [newEmploymentBoolean, setNewEmploymentBoolean] = useState(false);
+  const [newEmploymentPositions, setNewEmploymentPositions] = useState([]);
   const [projectTeam, setProjectTeam] = useState([]);
   const [consultantServices, setConsultantServices] = useState(false);
   const [consultantExpense, setConsultantExpense] = useState(0);
@@ -158,6 +159,7 @@ const SecondInputForm = (docId) => {
       downPayment,
       personalFinancingExpense,
       newEmploymentBoolean,
+      newEmploymentPositions,
       consultantServices,
       consultantExpense,
       consultantExpenseSource,
@@ -273,7 +275,9 @@ const SecondInputForm = (docId) => {
       setTotalValue(intentionFormToUpdate?.totalValue);
       setFesbValuePart(intentionFormToUpdate?.fesbValuePart);
       setNewEmploymentBoolean(intentionFormToUpdate?.setNewEmploymentBoolean);
+      setNewEmploymentPositions(intentionFormToUpdate?.newEmploymentPositions);
       setProjectTeam(intentionFormToUpdate?.projectTeam);
+    
     }
 
     console.log("Intention form to update: ", intentionFormToUpdate);
@@ -448,6 +452,8 @@ const SecondInputForm = (docId) => {
             setModalApplicationUpdatedIsOpen,
             totalExpense,
             fesbValuePart,
+            newEmploymentPositions,
+            setNewEmploymentPositions
           }}
         >
           {modalMessageIsOpen && (
@@ -733,8 +739,8 @@ const SecondInputForm = (docId) => {
             setSelectionState={setNewEmploymentBoolean}
             initialValue={newEmploymentBoolean}
           />
-          {newEmploymentBoolean &&
-            <NewEmploymentPositions/>
+          {(newEmploymentPositions.length > 0) &&    
+            <NewEmploymentPositions formType='second'/>
           }
           
 
