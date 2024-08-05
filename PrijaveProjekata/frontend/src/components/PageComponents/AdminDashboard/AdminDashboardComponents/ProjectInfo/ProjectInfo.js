@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
 import AdminDashboardProjectTeam from "../../AdminDashboardProjectComponents/AdminDashboardProjectTeam/AdminDashboardProjectTeam.js";
 import CalendarInputAdvanced from "../../../../InputComponents/CalendarInputAdvanced/CalendarInputAdvanced.js";
+import AdminDashboardNewEmploymentPositions from '../AdminDashboardNewEmploymentPositions/AdminDashboardNewEmploymentPositions.js';
 
 const ProjectInfo = ({ selectedProject }) => {
   const [selectedProjectData, setSelectedProjectData] = useState();
@@ -175,6 +176,8 @@ const ProjectInfo = ({ selectedProject }) => {
               currentInputValue={selectedProject.newEmploymentBoolean}
               projectUpdateName={"newEmploymentBoolean"}
             />
+
+            <AdminDashboardNewEmploymentPositions />
 
             <AdminQuestion questionText={questions[8]} />
             <AdminDashboardProjectTeam />
