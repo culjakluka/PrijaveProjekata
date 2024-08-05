@@ -8,7 +8,7 @@ import RadioButtonInput from "../../InputComponents/RadioButtonInput/RadioButton
 // my components
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import Question from "../../InputComponents/Question/Question";
-import SpecialInputFirstInputForm from "../../InputComponents/SpecialInputForm/SpecialInputForm.js";
+import SpecialInputForm from "../../InputComponents/SpecialInputForm/SpecialInputForm.js";
 import TextInputWithoutTitle from "../../InputComponents/TextInputWithoutTitle/TextInputWithoutTitle";
 import CompletedProject from "../../InputComponents/CompletedProject/CompletedProject";
 import CalendarInput from "../../InputComponents/CalendarInput/CalendarInput";
@@ -343,7 +343,7 @@ const FirstInputForm = () => {
             <NewEmploymentPositions formType='first'/>
           }
           
-          <SpecialInputFirstInputForm
+          <SpecialInputForm
             name="project_team_members"
             pitanje={questions[8]}
             formType={"first"}

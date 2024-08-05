@@ -37,6 +37,7 @@ const NumberInput = ({ name, label, initialValue, setSpecificState, currencySign
         return parts.join('.');
     };
 
+
     const handleChange = (event) => {
         const rawValue = event.target.value;
         const formattedValue = formatNumber(rawValue);

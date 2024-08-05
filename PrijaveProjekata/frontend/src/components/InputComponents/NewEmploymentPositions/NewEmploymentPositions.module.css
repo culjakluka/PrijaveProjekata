@@ -12,17 +12,22 @@
     padding: 5px 10px;
     margin: 15px 0px 7px 0px;
     color: #5a5a5a;
+    font-size: 1em;
+    font-weight: 500;
 }
 
 .InputTitle {
     font-size: 1em;
     font-weight: bold;
+    font-weight: 500;
+    text-transform: uppercase;
 }
 
 .ValueInput {
     margin-bottom: 4px;
-    height: 1.3em;
+    height: 1.6em;
     font-size: 1em;
+    padding-left: 5px;
 }
 
 .ValueInput::placeholder {
@@ -44,6 +49,8 @@
     color: white;
     font-size: 1em;
     margin: 5px ;
+    font-weight: 500;
+    text-transform: uppercase;
 }
 
 .AddNewPositionButton:hover {
@@ -52,7 +59,7 @@
     background-color: #bbbbbb;
     color: white;
     font-size: 1em;
-    margin: 5px 0px 5px 20px;
+    text-transform: uppercase;
 }
 
 .PositionContainer {
