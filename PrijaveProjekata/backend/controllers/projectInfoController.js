@@ -396,10 +396,10 @@ const updateProjectInfoSet = async (req, res) => {
       if (field === "projectTeam") {
         const projectTeam = JSON.parse(req.body.projectTeam);
         projectData[field] = projectTeam;
-      } else if (field === "newEmploymentPositions") {
+      } else if (field === "newEmploymentPositions" && value) {
         const newEmploymentPositions = JSON.parse(req.body.newEmploymentPositions);
         projectData[field] = newEmploymentPositions;
-      } else if (!value) {
+      } else if (value === 'NaN' || value === 'null') { // pitat profesora sta misli o ovome
         emptyFields.push(field);
       } else if (field === "projectTeam" && value.length === 0) {
         emptyFields.push(field);
