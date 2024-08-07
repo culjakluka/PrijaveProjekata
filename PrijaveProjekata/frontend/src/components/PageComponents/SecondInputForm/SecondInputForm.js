@@ -50,63 +50,63 @@ const SecondInputForm = (docId) => {
   // const [projectToUpdateId, setProjectToUpdateId] = useState(documentId)
   const [intentionFormToUpdate, setIntentionFormToUpdate] = useState(null); // data loaded from document
 
-  const [inputFormData, setInputFormData] = useState({});
+  const [inputFormData, setInputFormData] = useState(null);
   const [secondInputMarker, setSecondInputMarker] = useState(true);
-  const [nameSurname, setNameSurname] = useState("");
-  const [vocation, setVocation] = useState("");
-  const [department, setDepartment] = useState("");
+  const [nameSurname, setNameSurname] = useState(null);
+  const [vocation, setVocation] = useState(null);
+  const [department, setDepartment] = useState(null);
   // fetched departments
-  const [departmentsData, setDepartmentsData] = useState([]);
+  const [departmentsData, setDepartmentsData] = useState(null);
   //////////////////////////////////////////////////////////////
-  const [email, setEmail] = useState("");
-  const [mobilePhoneNumber, setMobilePhoneNumber] = useState(0);
-  const [workTimeThisPercentage, setWorkTimeThisPercentage] = useState(0);
-  const [workTimeOtherPercentage, setWorkTimeOtherPercentage] = useState(0);
-  const [teamLeaderNote, setTeamLeaderNote] = useState("");
-  const [projectTitle, setProjectTitle] = useState("");
-  const [projectAcronym, setProjectAcronym] = useState("");
-  const [applicationDeadline, setApplicationDeadline] = useState("");
-  const [projectSummary, setProjectSummary] = useState("");
-  const [applicationURL, setApplicationURL] = useState("");
-  const [sourceOfFunding, setSourceOfFunding] = useState("");
-  const [projectType, setProjectType] = useState("");
-  const [expectedProjectBeginning, setExpectedProjectBeginning] = useState("");
+  const [email, setEmail] = useState(null);
+  const [mobilePhoneNumber, setMobilePhoneNumber] = useState(null);
+  const [workTimeThisPercentage, setWorkTimeThisPercentage] = useState(null);
+  const [workTimeOtherPercentage, setWorkTimeOtherPercentage] = useState(null);
+  const [teamLeaderNote, setTeamLeaderNote] = useState(null);
+  const [projectTitle, setProjectTitle] = useState(null);
+  const [projectAcronym, setProjectAcronym] = useState(null);
+  const [applicationDeadline, setApplicationDeadline] = useState(null);
+  const [projectSummary, setProjectSummary] = useState(null);
+  const [applicationURL, setApplicationURL] = useState(null);
+  const [sourceOfFunding, setSourceOfFunding] = useState(null);
+  const [projectType, setProjectType] = useState(null);
+  const [expectedProjectBeginning, setExpectedProjectBeginning] = useState(null);
   const [expectedProjectDurationInMonths, setExpectedProjectDurationInMonths] =
-    useState(0);
-  const [projectApplicant, setProjectAplicant] = useState("");
-  const [projectPartners, setProjectPartners] = useState("");
+    useState(null);
+  const [projectApplicant, setProjectAplicant] = useState(null);
+  const [projectPartners, setProjectPartners] = useState(null);
   const [economicSubjectInvolvement, setEconomicSubjectInvolvement] =
-    useState(false);
-  const [totalValue, setTotalValue] = useState(0);
-  const [fesbValuePart, setFesbValuePart] = useState(0);
-  const [currentPersonnelExpense, setCurrentPersonnelExpense] = useState(0);
-  const [newPersonnelExpense, setNewPersonnelExpense] = useState(0);
-  const [indirectExpenses, setIndirectExpenses] = useState(0);
-  const [indirectExpensesManualInput, setIndirectExpensesManualInput] = useState(false);
+    useState(null);
+  const [totalValue, setTotalValue] = useState(null);
+  const [fesbValuePart, setFesbValuePart] = useState(null);
+  const [currentPersonnelExpense, setCurrentPersonnelExpense] = useState(null);
+  const [newPersonnelExpense, setNewPersonnelExpense] = useState(null);
+  const [indirectExpenses, setIndirectExpenses] = useState(null);
+  const [indirectExpensesManualInput, setIndirectExpensesManualInput] = useState(null);
   const [equipmentDescriptionAndExpense, setEquipmentDescriptionAndExpense] =
-    useState("");
+    useState(null);
   const [equipmentAmortizationExpense, setEquipmentAmortizationExpense] =
-    useState(0);
-  const [otherServicesExpense, setOtherServicesExpense] = useState(0);
-  const [materialExpense, setMaterialExpense] = useState(0);
+    useState(null);
+  const [otherServicesExpense, setOtherServicesExpense] = useState(null);
+  const [materialExpense, setMaterialExpense] = useState(null);
   const [
     travelRegistrationEducationExpense,
     setTravelRegistrationEducationExpense,
-  ] = useState(0);
-  const [expenseNote, setExpenseNote] = useState("");
-  const [partnerExpense, setPartnerExpense] = useState(0);
-  const [requestedFunding, setRequestedFunding] = useState(0);
-  const [downPayment, setDownPayment] = useState(0);
-  const [personalFinancingExpense, setPersonalFinancingExpense] = useState("");
-  const [newEmploymentBoolean, setNewEmploymentBoolean] = useState(false);
-  const [newEmploymentPositions, setNewEmploymentPositions] = useState([]);
-  const [projectTeam, setProjectTeam] = useState([]);
-  const [consultantServices, setConsultantServices] = useState(false);
-  const [consultantExpense, setConsultantExpense] = useState(0);
-  const [consultantExpenseSource, setConsultantExpenseSource] = useState("");
+  ] = useState(null);
+  const [expenseNote, setExpenseNote] = useState(null);
+  const [partnerExpense, setPartnerExpense] = useState(null);
+  const [requestedFunding, setRequestedFunding] = useState(null);
+  const [downPayment, setDownPayment] = useState(null);
+  const [personalFinancingExpense, setPersonalFinancingExpense] = useState(null);
+  const [newEmploymentBoolean, setNewEmploymentBoolean] = useState(null);
+  const [newEmploymentPositions, setNewEmploymentPositions] = useState(null);
+  const [projectTeam, setProjectTeam] = useState(null);
+  const [consultantServices, setConsultantServices] = useState(null);
+  const [consultantExpense, setConsultantExpense] = useState(null);
+  const [consultantExpenseSource, setConsultantExpenseSource] = useState(null);
   const [requiredDocumentationFESB, setRequiredDocumentationFESB] =
-    useState("");
-  const [pdfDocuments, setPdfDocuments] = useState([]);
+    useState(null);
+  const [pdfDocuments, setPdfDocuments] = useState(null);
 
   // application updated modal - after application is submitted
   const [modalApplicationUpdatedIsOpen, setModalApplicationUpdatedIsOpen] =
@@ -284,7 +284,7 @@ const SecondInputForm = (docId) => {
       setProjectPartners(intentionFormToUpdate?.projectPartners);
       setTotalValue(intentionFormToUpdate?.totalValue);
       setFesbValuePart(intentionFormToUpdate?.fesbValuePart);
-      setNewEmploymentBoolean(intentionFormToUpdate?.setNewEmploymentBoolean);
+      setNewEmploymentBoolean(intentionFormToUpdate?.newEmploymentBoolean);
       setNewEmploymentPositions(intentionFormToUpdate?.newEmploymentPositions);
       setProjectTeam(intentionFormToUpdate?.projectTeam);
     
@@ -406,7 +406,7 @@ const SecondInputForm = (docId) => {
       requiredDocumentationFESB,
     };
 
-    pdfDocuments.forEach((file, index) => {
+    pdfDocuments?.forEach((file, index) => {
       formData.append(`pdfDocuments`, file);
     });
 
