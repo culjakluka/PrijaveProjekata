@@ -18,9 +18,11 @@ const ModalMessage = ({
   missingFieldsContent,
   setModalIsOpen,
   reload,
+  fontSizeProp
 }) => {
   const [heightPercentage, setHeightPercentage] = useState("20%");
   const [widthPercentage, setWidthPercentage] = useState("30%");
+  const [fontSize, setFontSize] = useState("1.5em");
   const [message, setMessage] = useState("Molimo popunite sva polja!");
 
   useEffect(() => {
@@ -30,6 +32,10 @@ const ModalMessage = ({
 
     if (width) {
       setWidthPercentage(width);
+    }
+
+    if(fontSizeProp){
+      setFontSize(fontSizeProp);
     }
 
     if (modalMessage) {
@@ -59,7 +65,7 @@ const ModalMessage = ({
         style={{ height: heightPercentage, width: widthPercentage }}
       >
         <div className={Style.ModalMessageContainer}>
-          <h3 className={Style.ModalQuestion}>{message}</h3>
+          <div className={Style.ModalMessageMessage} style={{fontSize: fontSize}}>{message}</div>
         </div>
         <div className={Style.ModalButtonsContainer}>
           <button

@@ -98,7 +98,7 @@ const SecondInputForm = (docId) => {
   const [requestedFunding, setRequestedFunding] = useState(0);
   const [downPayment, setDownPayment] = useState(0);
   const [personalFinancingExpense, setPersonalFinancingExpense] = useState("");
-  const [newEmploymentBoolean, setNewEmploymentBoolean] = useState(false);
+  const [newEmploymentBoolean, setNewEmploymentBoolean] = useState(null);
   const [newEmploymentPositions, setNewEmploymentPositions] = useState([]);
   const [projectTeam, setProjectTeam] = useState([]);
   const [consultantServices, setConsultantServices] = useState(false);
@@ -106,7 +106,7 @@ const SecondInputForm = (docId) => {
   const [consultantExpenseSource, setConsultantExpenseSource] = useState("");
   const [requiredDocumentationFESB, setRequiredDocumentationFESB] =
     useState("");
-  const [pdfDocuments, setPdfDocuments] = useState([]);
+  const [pdfDocuments, setPdfDocuments] = useState([]); 
 
   // application updated modal - after application is submitted
   const [modalApplicationUpdatedIsOpen, setModalApplicationUpdatedIsOpen] =
@@ -284,10 +284,9 @@ const SecondInputForm = (docId) => {
       setProjectPartners(intentionFormToUpdate?.projectPartners);
       setTotalValue(intentionFormToUpdate?.totalValue);
       setFesbValuePart(intentionFormToUpdate?.fesbValuePart);
-      setNewEmploymentBoolean(intentionFormToUpdate?.setNewEmploymentBoolean);
+      setNewEmploymentBoolean(intentionFormToUpdate?.newEmploymentBoolean);
       setNewEmploymentPositions(intentionFormToUpdate?.newEmploymentPositions);
       setProjectTeam(intentionFormToUpdate?.projectTeam);
-    
     }
 
     console.log("Intention form to update: ", intentionFormToUpdate);
@@ -489,7 +488,8 @@ const SecondInputForm = (docId) => {
               modalMessage={translateMissingFields(missingFields)}
               height={"15em"}
               setModalIsOpen={setModalMessageIsOpen}
-              isMissingFieldsModal={true}
+              isMissingFieldsModal={true} 
+              fontSizeProp={"1.5em"}
             />
           )}
           {modalApplicationUpdatedIsOpen && <ModalApplicationUpdated />}
@@ -779,7 +779,7 @@ const SecondInputForm = (docId) => {
             setSelectionState={setNewEmploymentBoolean}
             initialValue={newEmploymentBoolean}
           />
-          {    
+          {newEmploymentBoolean &&    
             <NewEmploymentPositions formType='second'/>
           }
           

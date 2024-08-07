@@ -72,7 +72,7 @@ const SpecialInputForm = ({ name, pitanje, formType }) => {
         <button onClick={manageInputForm} className={addMemberFormIsActive ? Style.SpecialInputMinus : Style.SpecialInputPlus}>
           {addMemberFormIsActive ? "SAKRIJ" : "DODAJ NOVOG ČLANA"}
         </button>
-
+        
         {/* ALL MEMBERS - PRINTING ALL MEMBERS */}
         <div className={Style.SpecialInputCompletedMembers}>
           <div style={{display:"flex", flexDirection:"row"}}>

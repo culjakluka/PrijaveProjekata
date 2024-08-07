@@ -225,7 +225,7 @@ const FirstInputForm = () => {
       {modalMessageIsOpen && (
         <ModalMessage
           modalMessage={translateMissingFields(missingFields)}
-          height={"15em"}
+          height={"auto"}
           setModalIsOpen={setModalMessageIsOpen}
           isMissingFieldsModal={true}
         />

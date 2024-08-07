@@ -22,10 +22,8 @@ const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, wor
 
         // Check if initialDate is provided and parse it
         if(storedDate) {
-            if (storedDate) {
-                const parsedDate = new Date(storedDate);
-                setSelectedDate(parsedDate);
-            }
+            const parsedDate = new Date(storedDate);
+            setSelectedDate(parsedDate);
         } 
         else if (initialDate) {
             const parsedDate = parseISO(initialDate);
