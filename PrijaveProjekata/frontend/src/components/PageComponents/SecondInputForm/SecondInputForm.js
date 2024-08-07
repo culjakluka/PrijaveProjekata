@@ -82,6 +82,7 @@ const SecondInputForm = (docId) => {
   const [currentPersonnelExpense, setCurrentPersonnelExpense] = useState(0);
   const [newPersonnelExpense, setNewPersonnelExpense] = useState(0);
   const [indirectExpenses, setIndirectExpenses] = useState(0);
+  const [indirectExpensesManualInput, setIndirectExpensesManualInput] = useState(false);
   const [equipmentDescriptionAndExpense, setEquipmentDescriptionAndExpense] =
     useState("");
   const [equipmentAmortizationExpense, setEquipmentAmortizationExpense] =
@@ -148,6 +149,8 @@ const SecondInputForm = (docId) => {
       economicSubjectInvolvement,
       currentPersonnelExpense,
       newPersonnelExpense,
+      indirectExpenses,
+      indirectExpensesManualInput,
       equipmentDescriptionAndExpense,
       equipmentAmortizationExpense,
       otherServicesExpense,
@@ -194,6 +197,8 @@ const SecondInputForm = (docId) => {
     economicSubjectInvolvement,
     currentPersonnelExpense,
     newPersonnelExpense,
+    indirectExpenses,
+    indirectExpensesManualInput,
     equipmentDescriptionAndExpense,
     equipmentAmortizationExpense,
     otherServicesExpense,
@@ -205,6 +210,7 @@ const SecondInputForm = (docId) => {
     downPayment,
     personalFinancingExpense,
     newEmploymentBoolean,
+    newEmploymentPositions,
     consultantServices,
     consultantExpense,
     consultantExpenseSource,
@@ -287,6 +293,14 @@ const SecondInputForm = (docId) => {
     setIndirectExpenses(0.15 * fesbValuePart);
   }, [fesbValuePart]);
 
+  useEffect(() => {
+    if(indirectExpenses !== (0.15 * fesbValuePart)){
+      setIndirectExpensesManualInput(true);
+    } else if(indirectExpenses === (0.15 * fesbValuePart)) {
+      setIndirectExpensesManualInput(false);
+    }
+  }, [indirectExpenses, fesbValuePart]);
+
   const checkNaN = (value) => {
     if (isNaN(value)) {
       return 0;
@@ -294,6 +308,7 @@ const SecondInputForm = (docId) => {
       return value;
     }
   };
+
   useEffect(() => {
     const calculatedTotalExpense =
       Number(checkNaN(currentPersonnelExpense)) +
@@ -364,6 +379,8 @@ const SecondInputForm = (docId) => {
       economicSubjectInvolvement,
       currentPersonnelExpense,
       newPersonnelExpense,
+      indirectExpenses,
+      indirectExpensesManualInput,
       equipmentDescriptionAndExpense,
       equipmentAmortizationExpense,
       otherServicesExpense,
@@ -375,6 +392,7 @@ const SecondInputForm = (docId) => {
       downPayment,
       personalFinancingExpense,
       newEmploymentBoolean,
+      newEmploymentPositions,
       consultantServices,
       consultantExpense,
       consultantExpenseSource,
@@ -388,6 +406,9 @@ const SecondInputForm = (docId) => {
     Object.entries(cleanData).forEach(([key, value]) => {
       if (key === "projectTeam") {
         formData.append("projectTeam", JSON.stringify(projectTeam));
+      } else if(key === "newEmploymentPositions") {
+        formData.append("newEmploymentPositions", JSON.stringify(newEmploymentPositions));
+
       } else if (key !== "pdfDocuments") {
         formData.append(key, value);
       }
@@ -639,6 +660,7 @@ const SecondInputForm = (docId) => {
             isFirstInputForm={false}
             currencySign={"€"}
           />
+
           <NumberInput
             label={"TROŠAK NOVOZAPOSLENOG OSOBLJA"}
             name={"new_personnel_expense"}
@@ -647,10 +669,21 @@ const SecondInputForm = (docId) => {
             isFirstInputForm={false}
             currencySign={"€"}
           />
-          <AutomaticInput
+
+          <NumberInput
             label={"NEIZRAVNI TROŠKOVI (15% NA TROŠKOVE OSOBLJA)"}
-            value={0.15 * fesbValuePart}
+            name={"indirect_expenses"}
+            setSpecificState={setIndirectExpenses}
+            isSecondInputForm={true}
+            isFirstInputForm={false}
+            currencySign={"€"}
+            initialValue={0.15 * fesbValuePart}
           />
+
+          {indirectExpensesManualInput && 
+            <p>Neizravni troškovi izmjenjeni!</p>
+          }
+
           <NumberInputSelect
             label={
               "TROŠAK I POPIS OPREME KOJA SE NABAVLJA (OZNAČITI NABAVU IZNAD 26.544,00 E)"
@@ -739,7 +772,7 @@ const SecondInputForm = (docId) => {
             setSelectionState={setNewEmploymentBoolean}
             initialValue={newEmploymentBoolean}
           />
-          {(newEmploymentPositions.length > 0) &&    
+          {    
             <NewEmploymentPositions formType='second'/>
           }
           
