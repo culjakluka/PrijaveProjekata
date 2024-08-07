@@ -24,7 +24,7 @@ const DropdownMenuInput = ({ name, label, data, setSpecificState, isDepartment, 
       setSelectionValue(selectionValueSessionStorage);
       setSpecificState(selectionValueSessionStorage);
     } else if (initialValue) {
-      const matchingOption = data.find(option => option === initialValue || (isDepartment && option.split(' - ')[0] === initialValue));
+      const matchingOption = data?.find(option => option === initialValue || (isDepartment && option.split(' - ')[0] === initialValue));
       if (matchingOption) {
         setSelectionValue(matchingOption);
         setSpecificState(matchingOption);
@@ -38,7 +38,7 @@ const DropdownMenuInput = ({ name, label, data, setSpecificState, isDepartment, 
       <label>{label}</label>
       <select value={selectionValue} onChange={handleSelectionChange}>
         <option value="">Odaberite opciju</option>
-        {options.map((member, index) => (
+        {options?.map((member, index) => (
           <option key={index} value={member}>
             {isDepartment ? member.split(' - ')[0] : member}
           </option>

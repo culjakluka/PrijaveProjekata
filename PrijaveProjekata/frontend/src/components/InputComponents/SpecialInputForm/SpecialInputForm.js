@@ -77,15 +77,15 @@ const SpecialInputForm = ({ name, pitanje, formType }) => {
         <div className={Style.SpecialInputCompletedMembers}>
           <div style={{display:"flex", flexDirection:"row"}}>
             <p style={{margin:"0px"}}>Svi članovi:</p>
-            {projectTeam.length > 0 &&
+            {projectTeam?.length > 0 &&
             <button onClick={() => setDeleteMemberIsActive(!deleteMemberIsActive)} className={Style.EditProjectTeamMembers}>
               {deleteMemberIsActive ? "ZAVRŠI UREĐIVANJE" : "UREDITE ČLANOVE"}
             </button>
             } 
           </div>
           
-          {projectTeam.length > 0 ? (
-            projectTeam.map((member, index) => (
+          {projectTeam?.length > 0 ? (
+            projectTeam?.map((member, index) => (
               <div key={index} className={Style.ProjectTeamMember}>
                 <div className={Style.ProjectTeamMemberInfo}>
                   <div style={{marginRight:"10px"}}>{member.nameSurname}</div>
