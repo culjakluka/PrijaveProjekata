@@ -149,6 +149,7 @@ const SecondInputForm = (docId) => {
       economicSubjectInvolvement,
       currentPersonnelExpense,
       newPersonnelExpense,
+      // INDRIRECT EXPENSES
       indirectExpenses,
       indirectExpensesManualInput,
       equipmentDescriptionAndExpense,
@@ -161,6 +162,7 @@ const SecondInputForm = (docId) => {
       requestedFunding,
       downPayment,
       personalFinancingExpense,
+      // NEW EMPLOYMENT
       newEmploymentBoolean,
       newEmploymentPositions,
       consultantServices,
@@ -197,6 +199,7 @@ const SecondInputForm = (docId) => {
     economicSubjectInvolvement,
     currentPersonnelExpense,
     newPersonnelExpense,
+    // INDIRECT EXPENSES
     indirectExpenses,
     indirectExpensesManualInput,
     equipmentDescriptionAndExpense,
@@ -209,6 +212,7 @@ const SecondInputForm = (docId) => {
     requestedFunding,
     downPayment,
     personalFinancingExpense,
+    // NEW EMPLOYMENT
     newEmploymentBoolean,
     newEmploymentPositions,
     consultantServices,
@@ -313,12 +317,14 @@ const SecondInputForm = (docId) => {
     const calculatedTotalExpense =
       Number(checkNaN(currentPersonnelExpense)) +
       Number(checkNaN(newPersonnelExpense)) +
+      Number(checkNaN(indirectExpenses)) +
       Number(checkNaN(equipmentDescriptionAndExpense)) +
       Number(checkNaN(equipmentAmortizationExpense)) +
       Number(checkNaN(otherServicesExpense)) +
       Number(checkNaN(materialExpense)) +
       Number(checkNaN(travelRegistrationEducationExpense)) +
       Number(checkNaN(partnerExpense));
+
 
     setTotalExpense(calculatedTotalExpense);
 
@@ -329,6 +335,7 @@ const SecondInputForm = (docId) => {
   }, [
     currentPersonnelExpense,
     newPersonnelExpense,
+    indirectExpenses,
     fesbValuePart,
     equipmentDescriptionAndExpense,
     equipmentAmortizationExpense,
