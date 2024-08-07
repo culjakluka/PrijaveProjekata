@@ -73,10 +73,7 @@ const createProjectInfoSet = async (req, res) => {
   const projectData = {};
   const emptyFields = [];
 
-  fieldsToCheck.forEach((field) => {
-    if (field === "userId") {
-      console.log("userId:", req.body.userId);
-    }
+  fieldsToCheck.forEach((field) => {  
     const value = req.body[field];
     if (field === "newEmploymentBoolean") {
       const newEmploymentBoolean = JSON.parse(req.body.newEmploymentBoolean);
@@ -86,6 +83,8 @@ const createProjectInfoSet = async (req, res) => {
         projectData[field] = newEmploymentBoolean;
       }
     } else if (!value) {
+      emptyFields.push(field);
+    } else if (field === "projectTeam" && value.length === 0) {
       emptyFields.push(field);
     } else {
       projectData[field] = value;
@@ -397,7 +396,12 @@ const updateProjectInfoSet = async (req, res) => {
       if (field === "projectTeam") {
         const projectTeam = JSON.parse(req.body.projectTeam);
         projectData[field] = projectTeam;
-      } else if (!value) {
+      } else if (field === "newEmploymentPositions" && value) {
+        const newEmploymentPositions = JSON.parse(req.body.newEmploymentPositions);
+        projectData[field] = newEmploymentPositions;
+      } else if (value === 'NaN' || value === 'null') { // pitat profesora sta misli o ovome
+        emptyFields.push(field);
+      } else if (field === "projectTeam" && value.length === 0) {
         emptyFields.push(field);
       } else {
         projectData[field] = value;
@@ -407,7 +411,7 @@ const updateProjectInfoSet = async (req, res) => {
     if (emptyFields.length > 0) {
       return res.status(400).json({ emptyFields });
     }
-
+    
     console.log(req.params.id);
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).json({ error: "No such ProjectInfo set." });
