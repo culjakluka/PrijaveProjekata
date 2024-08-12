@@ -18,6 +18,7 @@ import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
 import AdminDashboardProjectTeam from "../../AdminDashboardProjectComponents/AdminDashboardProjectTeam/AdminDashboardProjectTeam.js";
 import CalendarInputAdvanced from "../../../../InputComponents/CalendarInputAdvanced/CalendarInputAdvanced.js";
 import AdminDashboardNewEmploymentPositions from '../AdminDashboardNewEmploymentPositions/AdminDashboardNewEmploymentPositions.js';
+import AdminDashboardProjectSummary from "../../AdminDashboardProjectComponents/AdminDashboardProjectSummary/AdminDashboardProjectSummary.js";
 
 const ProjectInfo = ({ selectedProject }) => {
   const [selectedProjectData, setSelectedProjectData] = useState();
@@ -129,7 +130,7 @@ const ProjectInfo = ({ selectedProject }) => {
             </div>
 
             <AdminQuestion questionText={questions[2]} />
-            <AdminTextInput
+            <AdminDashboardProjectSummary
               currentLabelValue={"SAŽETAK PROJEKTA"}
               currentInputValue={selectedProject.projectSummary}
               projectUpdateName={"projectSummary"}

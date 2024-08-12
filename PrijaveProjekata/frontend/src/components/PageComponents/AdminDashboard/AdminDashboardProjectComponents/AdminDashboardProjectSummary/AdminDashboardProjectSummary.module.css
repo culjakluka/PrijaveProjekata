@@ -1,0 +1,36 @@
+.AdminProjectSummaryContainer {
+    width: 100%;
+    display: flex;
+    color : #000000;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.AdminProjectSummaryLabel {
+    font-weight: bold;
+    text-transform: uppercase;
+    align-self: center;
+    color: #B0355E;
+    margin: 0px;
+    align-self: flex-start;
+}
+
+.AdminProjectSummary {
+    height: auto;
+    border-bottom: 1px solid #A4A4A4;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 5px;
+    padding: 5px; 
+    text-align: start;
+}
+
+.admin-text-input::placeholder {
+    color: #A4A4A4;
+    margin-left: 5px;
+}
+
+.admin-text-input:focus {
+    outline: none;
+}
