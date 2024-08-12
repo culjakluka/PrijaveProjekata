@@ -35,7 +35,7 @@ const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, wor
     }, []);
 
     useEffect(() => {
-        if(isAdminDashboard) {
+        if(initialDate) {
             const parsedDate = parseISO(initialDate);
             console.log("PARSED DATE" + parsedDate);
             setSelectedDate(parsedDate);

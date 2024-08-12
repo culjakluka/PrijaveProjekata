@@ -15,13 +15,7 @@ const AdminDashboardProjectSummary =
 
     const { projectEditable, setUpdateProjectData, projectLocked } = useContext(AdminDashboardContext);
 
-    // Update labelValue when currentLabelValue changes
-    useEffect(() => {
-        setLabelValue(currentLabelValue);
-    }, [currentLabelValue]);
-
-    // if isDate = true
-    // update inputValue when currentInputValue changes or if it's a date, format it
+    // update inputValue when currentInputValue changes
     useEffect(() => {
         setInputValue(currentInputValue);
     }, [currentInputValue, projectEditable]);
