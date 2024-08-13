@@ -59,7 +59,7 @@ const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, wor
 
     // update sessionStorage when selectedDate changes
     useEffect(() => {
-        if (selectedDate) {
+        if (selectedDate) { 
             sessionStorage.setItem(name, selectedDate);
         } else {
             // remove item from sessionStorage if selectedDate is null
@@ -82,11 +82,11 @@ const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, wor
         return day !== 0 && day !== 6; // 0 is Sunday, 6 is Saturday
     };
 
-    // Calculate the minimum selectable date (7 working days from today)
+    // Calculate the minimum selectable date
     const minSelectableDate = (() => {
         let currentDate = new Date();
         let workingDaysCount = 0;
-        // while sum of wokring days is less than 7
+        // while sum of wokring days is less than [workingDaysLimit]
         while (workingDaysCount < workingDaysLimit) {
             currentDate = addDays(currentDate, 1);
             if (isWorkingDay(currentDate)) {

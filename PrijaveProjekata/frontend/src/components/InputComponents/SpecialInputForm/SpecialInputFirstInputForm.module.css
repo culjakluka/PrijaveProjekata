@@ -16,6 +16,14 @@
     color: #B0355E;
 }
 
+.InputTitle {
+    font-size: 1em;
+    font-weight: bold;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-left: 5px;
+}
+
 #SpecialInputMemberProjects {
     display: flex;
     flex-direction: row;

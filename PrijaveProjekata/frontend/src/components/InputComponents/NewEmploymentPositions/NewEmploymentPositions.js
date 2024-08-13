@@ -19,6 +19,9 @@ const NewEmploymentPositions = ({ formType }) => {
         positionPercentage : ''
     });
 
+    let percentageSign = '%';
+    let currencySign = '€';
+
     // function that formats number from 1000 to 1,000 or 1000.00 if decimal
     const formatNumber = (value) => {
         // remove all non digit characters - preventing user from entering anything other than numbers
@@ -93,20 +96,41 @@ const NewEmploymentPositions = ({ formType }) => {
         <div className={Style.PositionsContainer}>   
             <div className={Style.InputContainer}>
                 <div className={Style.InputTitle}>Naziv novog radnog mjesta</div>
-                <input className={Style.ValueInput} onChange={handleNameChange} value={employmentPosition.positionName} type='text' placeholder='molimo popunite polje...'></input> 
+                <div className={Style.ValueInputContainer}>
+                    <input 
+                        className={Style.ValueInput} 
+                        onChange={handleNameChange} 
+                        value={employmentPosition.positionName} 
+                        type='text' 
+                        placeholder='molimo popunite polje...'
+                        >
+                    </input> 
+                </div>
                 <div className={Style.InputTitle}>Bruto plaća</div>
-                <input className={Style.ValueInput} onChange={handleBruttoSalaryChange} value={employmentPosition.positionSalary} type='text' placeholder='molimo popunite polje...'></input>
+                <div className={Style.ValueInputContainer}>
+                    <input 
+                        className={Style.ValueInput} 
+                        onChange={handleBruttoSalaryChange} 
+                        value={employmentPosition.positionSalary} 
+                        type='text' placeholder='molimo popunite polje...'
+                        >
+                    </input>
+                    {currencySign}
+                </div>
                 <div className={Style.InputTitle}>Postotak radnog vremena</div>
-                <input 
-                    className={Style.ValueInput} 
-                    type='number'
-                    onChange={handleTimePercentageChange} 
-                    value={employmentPosition.positionPercentage} 
-                    placeholder='molimo popunite polje...'
-                    min="0"
-                    max="100"
-                    >   
-                </input>
+                <div className={Style.ValueInputContainer}>
+                    <input 
+                        className={Style.ValueInput}
+                        type='number'
+                        onChange={handleTimePercentageChange} 
+                        value={employmentPosition.positionPercentage} 
+                        placeholder='molimo popunite polje...'
+                        min="0"
+                        max="100"
+                        >   
+                    </input>
+                    {percentageSign}
+                </div>
                 <button onClick={() => addNewPosition()}className={Style.AddNewPositionButton}>DODAJ NOVO RADNO MJESTO</button>
             </div>
             <div style={{fontWeight: '700', color: '#6e6e6e'}}>DODANA RADNA MJESTA:</div>

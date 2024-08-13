@@ -45,12 +45,14 @@ const SpecialInputMember = ({ addProjectMember }) => {
 
   return (
       <div className={Style.SpecialInputMemberInfo}>
+        <div className={Style.InputTitle}>Ime i prezime</div>
         <input
           className={Style.SpecialInputTextInput}
           placeholder="ime i prezime..."
           value={newItemNameSurname}
           onChange={(e) => setNewItemNameSurname(e.target.value)}
         />
+        <div className={Style.InputTitle}>E-mail</div>
         <input
           className={Style.SpecialInputTextInput}
           placeholder="e-mail..."
@@ -58,6 +60,7 @@ const SpecialInputMember = ({ addProjectMember }) => {
           onChange={(e) => setNewItemEmail(e.target.value)}
         />
         <div>
+        <div className={Style.InputTitle}>Postotak u projektu</div>
         <input
           className={Style.SpecialInputNumberInput}
           placeholder="postotak u projektu..."
