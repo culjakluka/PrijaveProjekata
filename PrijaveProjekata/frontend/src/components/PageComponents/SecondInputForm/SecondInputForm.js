@@ -566,6 +566,7 @@ const SecondInputForm = (docId) => {
             name={"application_dead_line"}
             setSpecificState={setApplicationDeadline}
             initialDate={applicationDeadline}
+            isSecondInputForm={true}
             workingDaysLimit={7}
           />
 
@@ -607,6 +608,7 @@ const SecondInputForm = (docId) => {
             name={"expected_project_beginning"}
             setSpecificState={setExpectedProjectBeginning}
             initialDate={expectedProjectBeginning}
+            isSecondInputForm={true}
             workingDaysLimit={7}
           />
 

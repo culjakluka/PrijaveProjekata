@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import hr from 'date-fns/locale/hr'; // croatian
-import { addDays, isWeekend, addWeeks, parseISO  } from 'date-fns';
+import { addDays, isWeekend, addWeeks, parseISO, set  } from 'date-fns';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -10,7 +10,7 @@ import Style from './CalendarInputAdvanced.module.css';
 
 registerLocale('hr', hr);
 
-const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, workingDaysLimit, isAdminDashboard }) => {
+const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, workingDaysLimit, isAdminDashboard, isSecondInputForm }) => {
 
     const [placeholderText, setPlaceholderText] = useState('mm/dd/yyyy');
 
@@ -39,8 +39,10 @@ const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, wor
             const parsedDate = parseISO(initialDate);
             console.log("PARSED DATE" + parsedDate);
             setSelectedDate(parsedDate);
-        } else {
-            setSelectedDate(new Date(initialDate));	
+            setSpecificState(parsedDate);
+        } else if(isSecondInputForm) {
+            setSelectedDate(initialDate);
+            setSpecificState(initialDate);
         }
     }, [initialDate]);
 
@@ -58,7 +60,7 @@ const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, wor
     // update sessionStorage when selectedDate changes
     useEffect(() => {
         if (selectedDate) {
-            sessionStorage.setItem(name, selectedDate.toISOString());
+            sessionStorage.setItem(name, selectedDate);
         } else {
             // remove item from sessionStorage if selectedDate is null
             sessionStorage.removeItem(name); 
@@ -69,7 +71,7 @@ const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, wor
     useEffect(() => {
         if(!isAdminDashboard) {
             setSpecificState(selectedDate);
-        }
+        } 
     }, [selectedDate]);
 
     // restrictions for date picker

@@ -106,7 +106,7 @@
 .SpecialInputMemberInfo {
     display: flex;
     flex-direction: column;
-    border: solid #000000 1px;
+    border: 1px solid #ccc;
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 10px;
@@ -114,7 +114,6 @@
 
 .SpecialInputTextInput {
     border: solid 1px #000000;
-    border-radius: 5px;
     padding: 2px 6px 2px 6px;
     margin: 2px;
     width: 50%;
@@ -126,7 +125,6 @@
 
 .SpecialInputNumberInput {
     border: solid 1px #000000;
-    border-radius: 5px;
     padding: 2px 6px 2px 6px;
     margin: 2px;
     width: 50%;
