@@ -16,10 +16,12 @@ import Style from "./ModalUpdateProjectInfo.module.css";
 // context
 import { AdminDashboardContext } from "../../../../../context/AdminDashboardContext";
 
-// api
+// api -> update project info set
 import { adminUpdateProjectInfoSet } from "../../ApiRequests.js";
 
 const ModalUpdateProjectInfo = () => {
+
+  // loading data from Admin Dashborad Context so it can be updated properly
   const {
     modalUpdateProjectInfoIsOpen,
     setModalUpdateProjectInfoIsOpen,
@@ -34,12 +36,19 @@ const ModalUpdateProjectInfo = () => {
   } = useContext(AdminDashboardContext);
 
   const handleYesButton = () => {
+    // taking project id from already selected project and updating it with new data that has been collected in updateProjectData
     adminUpdateProjectInfoSet(selectedProject._id, updateProjectData);
+    // making project uneidtable
     handleEditable();
+    // hiding modal
     setModalUpdateProjectInfoIsOpen(false);
+    // so the same project again can be displayed
     setSelectedProject({ ...selectedProject, ...updateProjectData });
+    // resetting update project data
     setUpdateProjectData({});
+    // locking project
     setProjectLocked(true);
+    // hiding edit in progress
     setEditingInProgress(false);
   };
 

@@ -1,20 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+
+// context
+import { AdminDashboardContext } from '../../../context/AdminDashboardContext.js';
+
+// external libraries
 import DatePicker, { registerLocale } from 'react-datepicker';
 import hr from 'date-fns/locale/hr'; // croatian
-import { addDays, isWeekend, addWeeks, parseISO, set  } from 'date-fns';
+import { addDays, isWeekend, addWeeks, parseISO, set, format  } from 'date-fns';
 
-import 'react-datepicker/dist/react-datepicker.css';
 
 // style
 import Style from './CalendarInputAdvanced.module.css';
 
+// external styles
+import 'react-datepicker/dist/react-datepicker.css';
+
+// register croatian locale
 registerLocale('hr', hr);
 
-const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, workingDaysLimit, isAdminDashboard, isSecondInputForm }) => {
+const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, workingDaysLimit, isAdminDashboard, projectUpdateName, isSecondInputForm }) => {
 
     const [placeholderText, setPlaceholderText] = useState('mm/dd/yyyy');
 
     const [selectedDate, setSelectedDate] = useState(null);
+
+
+    const { projectEditable, setUpdateProjectData } = useContext(AdminDashboardContext);
 
     useEffect(() => {
         // Check sessionStorage for existing value
@@ -27,7 +38,7 @@ const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, wor
         } 
         else if (initialDate) {
             const parsedDate = parseISO(initialDate);
-            console.log("PARSED DATE" + parsedDate);
+            console.log("PARSED DATE" + parsedDate);    
             setSelectedDate(parsedDate);
         } else {
             // there is no initial date or stored date
@@ -101,17 +112,34 @@ const CalendarInputAdvanced = ({ label, setSpecificState, initialDate, name, wor
         // Check if the date is a working day and is at least 7 working days from today
         return isWorkingDay(date) && date >= minSelectableDate;
     };
+
+    // handle data change
+    const handleChange = (date) => {
+        setSelectedDate(date);
+        // if isAdminDashboard is true, set updated data into updated data collector so it can be updated
+        if(isAdminDashboard) {
+            const formatDate = new Date(date).toISOString();
+            setUpdateProjectData(prevState => ({
+                ...prevState,
+                [projectUpdateName]: formatDate
+            }));
+        }
+    }
+
+
     return (  
         <div className={Style.DateContainer}>
             <label className={Style.DateLabel}>{label}</label>
             <DatePicker 
                 showYearDropdown={true} 
                 selected={selectedDate} 
-                onChange={date => setSelectedDate(date)}
+                onChange={date => handleChange(date)}
                 locale="hr"
                 dateFormat="dd.MM.yyyy"
                 placeholderText={placeholderText}
                 filterDate={isDateSelectable}
+                // if isAdminDashboard is true, disable is equal to !projectEditable... otherwise, input is not disabled
+                disabled={isAdminDashboard ? !projectEditable : false}
             />
         </div>
     );

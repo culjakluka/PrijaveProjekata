@@ -125,6 +125,7 @@ const ProjectInfo = ({ selectedProject }) => {
               setSpecificState={setSelectedProjectData}
               placeholderText={"Odaberite datum"} 
               isAdminDashboard={true}
+              projectUpdateName={"applicationDeadline"}
               workingDaysLimit={0}
             />
             </div>
