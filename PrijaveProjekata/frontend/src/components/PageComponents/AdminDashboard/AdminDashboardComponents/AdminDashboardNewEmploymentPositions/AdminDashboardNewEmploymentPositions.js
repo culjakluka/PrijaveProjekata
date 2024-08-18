@@ -16,9 +16,18 @@ const AdminDashboardNewEmploymentPositions = () => {
             <div style={{fontWeight: '700', color: '#5a5a5a'}}>POPIS NOVIH RADNIH MJESTA:</div>
             {selectedProject?.newEmploymentPositions?.map((member, index) => (
                 <div className={Style.NewPosition}>
-                    <div className={Style.NewPositionInfo}>Ime: {member.positionName}</div>
-                    <div className={Style.NewPositionInfo}>Bruto plaća: {member.positionSalary}€</div>
-                    <div className={Style.NewPositionInfo}>Postotak radnog vremena: {member.positionPercentage}%</div>
+                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                        <div className={Style.NewPositionInfoTitle}>Ime: </div>
+                        <div className={Style.NewPositionInfo}>{member.positionName}</div>
+                    </div>
+                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                        <div className={Style.NewPositionInfoTitle}>Bruto plaća: </div>
+                        <div className={Style.NewPositionInfo}>{member.positionSalary}€</div>
+                    </div>
+                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                        <div className={Style.NewPositionInfoTitle}>Postotak radnog vremena: </div>
+                        <div className={Style.NewPositionInfo}>{member.positionPercentage}%</div>
+                    </div>
                 </div>
             ))}
         </div>
