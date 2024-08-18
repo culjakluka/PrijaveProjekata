@@ -116,6 +116,11 @@ const SecondInputForm = (docId) => {
   const [modalMessageIsOpen, setModalMessageIsOpen] = useState(false);
   const [missingFields, setMissingFields] = useState([]);
 
+  // no head of department modal
+  const [modalNoHeadOfDepartmentStatementIsOpen, setModalNoHeadOfDepartmentStatementIsOpen] =
+    useState(false);
+  const [missingHeadOfDepartmentStatement, setMissingHeadOfDepartmentStatement] = useState(true);
+
   // this component is used to calculate total expense
   const [totalExpense, setTotalExpense] = useState(0);
 
@@ -356,111 +361,117 @@ const SecondInputForm = (docId) => {
   const handleSubmit = async () => {
     const formData = new FormData();
 
-    const cleanData = {
-      userId: user?.userId,
-      secondInputMarker,
-      nameSurname,
-      vocation,
-      department,
-      email,
-      projectTitle,
-      projectAcronym,
-      applicationDeadline,
-      projectSummary,
-      applicationURL,
-      projectApplicant,
-      projectPartners,
-      totalValue,
-      fesbValuePart,
-      newEmploymentBoolean,
-      projectTeam,
-      mobilePhoneNumber,
-      workTimeThisPercentage,
-      workTimeOtherPercentage,
-      teamLeaderNote,
-      sourceOfFunding,
-      projectType,
-      expectedProjectBeginning,
-      expectedProjectDurationInMonths,
-      economicSubjectInvolvement,
-      currentPersonnelExpense,
-      newPersonnelExpense,
-      indirectExpenses,
-      indirectExpensesManualInput,
-      equipmentDescriptionAndExpense,
-      equipmentAmortizationExpense,
-      otherServicesExpense,
-      materialExpense,
-      travelRegistrationEducationExpense,
-      expenseNote,
-      partnerExpense,
-      requestedFunding,
-      downPayment,
-      personalFinancingExpense,
-      newEmploymentBoolean,
-      newEmploymentPositions,
-      consultantServices,
-      consultantExpense,
-      consultantExpenseSource,
-      requiredDocumentationFESB,
-    };
-
-    pdfDocuments?.forEach((file, index) => {
-      formData.append(`pdfDocuments`, file);
-    });
-
-    Object.entries(cleanData).forEach(([key, value]) => {
-      if (key === "projectTeam") {
-        formData.append("projectTeam", JSON.stringify(projectTeam));
-      } else if(key === "newEmploymentPositions") {
-        formData.append("newEmploymentPositions", JSON.stringify(newEmploymentPositions));
-
-      } else if (key !== "pdfDocuments") {
-        formData.append(key, value);
-      }
-    });
-    console.log(formData);
-    try {
-      const response = await fetch(
-        `/api/projectInfo/${docId.docId.documentId}`,
-        {
-          method: "PATCH",
-          body: formData,
+    if(missingHeadOfDepartmentStatement) {
+      setModalNoHeadOfDepartmentStatementIsOpen(true);
+    } else {
+      setModalNoHeadOfDepartmentStatementIsOpen(false);
+    
+      const cleanData = {
+        userId: user?.userId,
+        secondInputMarker,
+        nameSurname,
+        vocation,
+        department,
+        email,
+        projectTitle,
+        projectAcronym,
+        applicationDeadline,
+        projectSummary,
+        applicationURL,
+        projectApplicant,
+        projectPartners,
+        totalValue,
+        fesbValuePart,
+        newEmploymentBoolean,
+        projectTeam,
+        mobilePhoneNumber,
+        workTimeThisPercentage,
+        workTimeOtherPercentage,
+        teamLeaderNote,
+        sourceOfFunding,
+        projectType,
+        expectedProjectBeginning,
+        expectedProjectDurationInMonths,
+        economicSubjectInvolvement,
+        currentPersonnelExpense,
+        newPersonnelExpense,
+        indirectExpenses,
+        indirectExpensesManualInput,
+        equipmentDescriptionAndExpense,
+        equipmentAmortizationExpense,
+        otherServicesExpense,
+        materialExpense,
+        travelRegistrationEducationExpense,
+        expenseNote,
+        partnerExpense,
+        requestedFunding,
+        downPayment,
+        personalFinancingExpense,
+        newEmploymentBoolean,
+        newEmploymentPositions,
+        consultantServices,
+        consultantExpense,
+        consultantExpenseSource,
+        requiredDocumentationFESB,
+      };
+  
+      pdfDocuments?.forEach((file, index) => {
+        formData.append(`pdfDocuments`, file);
+      });
+  
+      Object.entries(cleanData).forEach(([key, value]) => {
+        if (key === "projectTeam") {
+          formData.append("projectTeam", JSON.stringify(projectTeam));
+        } else if(key === "newEmploymentPositions") {
+          formData.append("newEmploymentPositions", JSON.stringify(newEmploymentPositions));
+  
+        } else if (key !== "pdfDocuments") {
+          formData.append(key, value);
         }
-      );
-      if (response.ok) {
-        const responseData = await response.json();
-
-        console.log("Update successful:", responseData);
-
-        setModalApplicationUpdatedIsOpen(true);
-      } else {
-        // handle potentional non-JSON response
-        const errorData = await response.json().catch(() => null);
-        // if response is not null
-        const errorMessage = errorData
-          ? errorData.error
-          : `Error: ${response.status} ${response.statusText}`;
-
-        // printing missing field if there are any and displaying them
-        if (
-          errorData &&
-          errorData.emptyFields &&
-          errorData.emptyFields.length > 0
-        ) {
-          const missingFieldsMessage = `Missing fields: ${errorData.emptyFields.join(", ")}`;
-          console.error(missingFieldsMessage);
-
-          setMissingFields(errorData.emptyFields);
-          setModalMessageIsOpen(true);
+      });
+      console.log(formData);
+      try {
+        const response = await fetch(
+          `/api/projectInfo/${docId.docId.documentId}`,
+          {
+            method: "PATCH",
+            body: formData,
+          }
+        );
+        if (response.ok) {
+          const responseData = await response.json();
+  
+          console.log("Update successful:", responseData);
+  
+          setModalApplicationUpdatedIsOpen(true);
         } else {
-          window.alert(`Error posting data!`);
-          console.error("Error posting data: ", errorMessage);
+          // handle potentional non-JSON response
+          const errorData = await response.json().catch(() => null);
+          // if response is not null
+          const errorMessage = errorData
+            ? errorData.error
+            : `Error: ${response.status} ${response.statusText}`;
+  
+          // printing missing field if there are any and displaying them
+          if (
+            errorData &&
+            errorData.emptyFields &&
+            errorData.emptyFields.length > 0
+          ) {
+            const missingFieldsMessage = `Missing fields: ${errorData.emptyFields.join(", ")}`;
+            console.error(missingFieldsMessage);
+  
+            setMissingFields(errorData.emptyFields);
+            setModalMessageIsOpen(true);
+          } else {
+            window.alert(`Error posting data!`);
+            console.error("Error posting data: ", errorMessage);
+          }
         }
+      } catch (error) {
+        console.error("Error posting data:", error.message);
+        window.alert(`Error posting data: ${error.message}`);
       }
-    } catch (error) {
-      console.error("Error posting data:", error.message);
-      window.alert(`Error posting data: ${error.message}`);
     }
   };
 
@@ -483,6 +494,15 @@ const SecondInputForm = (docId) => {
             setNewEmploymentPositions
           }}
         >
+          {modalNoHeadOfDepartmentStatementIsOpen && (
+            <ModalMessage
+              modalMessage={"Niste priložili izjavu predstojnika zavoda!"}
+              height={"15em"}
+              setModalIsOpen={setModalNoHeadOfDepartmentStatementIsOpen}
+              isMissingFieldsModal={false} 
+              fontSizeProp={"1.5em"}
+            />
+          )}
           {modalMessageIsOpen && (
             <ModalMessage
               modalMessage={translateMissingFields(missingFields)}
@@ -831,7 +851,7 @@ const SecondInputForm = (docId) => {
 
           <Question questionText={questions[21]} />
 
-          <AttachHeadOfDepartmentStatement onFilesSelect={handleFilesSelect} />
+          <AttachHeadOfDepartmentStatement onFilesSelect={handleFilesSelect} setMissingHeadOfDepartmentStatement={setMissingHeadOfDepartmentStatement}/>
 
           <AttachCurrentlyAvailableBudget onFilesSelect={handleFilesSelect} />
 

@@ -2,10 +2,14 @@ import React from "react";
 import styles from "./PdfAttach.module.css";
 import { useState } from "react";
 
-const PdfAttach = ({ onFilesSelect }) => {
+const PdfAttach = ({ onFilesSelect, setMissingHeadOfDepartmentStatement, handlesHeadOfDepartmentStatement }) => {
   const [file, setFile] = useState([]);
 
   const handleFileChange = (event) => {
+    if(handlesHeadOfDepartmentStatement && event.target.files.length > 0) {
+      setMissingHeadOfDepartmentStatement(false);
+    }
+      
     const selectedFiles = Array.from(event.target.files);
     setFile(selectedFiles);
     onFilesSelect(selectedFiles);
