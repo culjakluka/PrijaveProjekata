@@ -489,7 +489,7 @@ const SecondInputForm = (docId) => {
               height={"15em"}
               setModalIsOpen={setModalMessageIsOpen}
               isMissingFieldsModal={true} 
-              fontSizeProp={"1.5em"}
+              fontSizeProp={"auto"}
             />
           )}
           {modalApplicationUpdatedIsOpen && <ModalApplicationUpdated />}

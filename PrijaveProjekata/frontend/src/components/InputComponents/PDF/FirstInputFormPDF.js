@@ -46,13 +46,13 @@ const styles = StyleSheet.create({
     elementInfoProjectTeam : { 
         display: "flex",
         flexDirection: "column",
-        paddingLeft: "10px",
         whiteSpace: "normal", // Allow text to wrap within the elementInfo container
     },
     memberInfoContainer : {
         display: "flex",
         flexDirection: "column",
         marginTop: "5px",
+        borderBottom: "1px solid #cecece",
     },
     memberInfo : {
         display: "flex",
@@ -87,9 +87,19 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         flexWrap : "wrap",
         marginLeft : "5px",
+    },
+    positionInfo : {
+        display: "flex",
+        flexDirection: "column",
+        marginLeft: "5px",
+        borderBottom: "1px solid #cecece",
+        padding: "2px",
+        width: "100%",
+        marginBottom: "10px",
     }
 });
 
+// even the name is FirstInputFormPDF, this component is used to generate pdf for both input forms
 const FirstInputFormPDF = ({data, title}) => {
 
     useEffect(() => {
@@ -106,34 +116,59 @@ const FirstInputFormPDF = ({data, title}) => {
                             <View key={index}>
                                 <Text style={styles.question}>{element.question}</Text>
                                 {element.elements.map((member, index) => {
-                                    return (
-                                        member.title != "PROJEKTNI TIM" ? 
-                                        <View style={styles.elementInfo} key={index}>
-                                            <Text style={styles.label}> {member.title ? member.title + " : " : ""}</Text>
-                                            <Text style={styles.value}>{member.value}</Text>
-                                        </View>
-                                        :
-                                        <View style={styles.elementInfoProjectTeam} key={index}> 
-                                            {member.projectTeam.map((member, index) => {
-                                                return (
-                                                    <View style={styles.memberInfoContainer} key={index}>
-                                                        <View style={styles.memberInfo}>
-                                                            <Text style={styles.memberNameSurname}> {member.nameSurname}</Text>
-                                                            <Text style={styles.memberProjectPercentage}>{member.thisProjectPercentage}</Text>
+                                    if (member.title === "PROJEKTNI TIM") {
+                                        return (
+                                            <View style={styles.elementInfoProjectTeam} key={index}> 
+                                                {member.projectTeam.map((teamMember, teamIndex) => {
+                                                    return (
+                                                        <View style={styles.memberInfoContainer} key={teamIndex}>
+                                                            <View style={styles.memberInfo}>
+                                                                <Text style={{fontWeight: 'bold'}}>Ime člana:</Text>
+                                                                <Text style={styles.memberNameSurname}> {teamMember.nameSurname}</Text>
+                                                                <Text style={styles.memberProjectPercentage}>{teamMember.thisProjectPercentage}%</Text>
+                                                            </View>
+                                                            <Text style={{fontWeight: 'bold'}}>Ostali projekti:</Text>
+                                                            {teamMember.otherProjects.map((otherProject, otherIndex) => {
+                                                                return (
+                                                                    <View style={styles.otherProjectContainer} key={otherIndex}>
+                                                                        <Text style={styles.otherProjectName}>{otherProject.otherProjectName}</Text>
+                                                                        <Text style={styles.otherProjectPercentage}>{otherProject.otherProjectPercentage}%</Text>
+                                                                    </View>
+                                                                );
+                                                            })}
                                                         </View>
-                                                        {member.otherProjects.map((otherProject, index) => {
-                                                            return (
-                                                                <View style={styles.otherProjectContainer}>
-                                                                    <Text style={styles.otherProjectName}>{otherProject.otherProjectName}</Text>
-                                                                    <Text style={styles.otherProjectPercentage}>{otherProject.otherProjectPercentage}</Text>
-                                                                </View>
-                                                            )
-                                                        })}
+                                                    );
+                                                })}
+                                            </View>
+                                        );
+                                    } else if (member.title === "NOVA RADNA MJESTA") {
+                                        return <View key={index}>
+                                            <Text style={styles.label}>{member.title}</Text>
+                                            {member.newEmploymentPositions.map((position, index) => {
+                                                return <View style={styles.positionInfo}>
+                                                    <View>
+                                                        <Text style={{fontWeight: 'bold'}}>Ime radnog mjesta: </Text>
+                                                        <Text>{position.positionName}</Text>
                                                     </View>
-                                                );
+                                                    <View>
+                                                        <Text style={{fontWeight: 'bold'}}>Iznos brutto 2 plaće: </Text>
+                                                        <Text>{position.positionSalary}€</Text>
+                                                    </View>
+                                                    <View>
+                                                        <Text style={{fontWeight: 'bold'}}>Postotak radnog vremena: </Text>
+                                                        <Text>{position.positionPercentage}%</Text>
+                                                    </View>
+                                                </View>;
                                             })}
-                                        </View>
-                                    );
+                                        </View>;
+                                    } else {
+                                        return (
+                                            <View style={styles.elementInfo} key={index}>
+                                                <Text style={styles.label}> {member.title ? member.title + " : " : ""}</Text>
+                                                <Text style={styles.value}>{member.value}</Text>
+                                            </View>
+                                        );
+                                    }
                                 })}
                             </View>
                         );
