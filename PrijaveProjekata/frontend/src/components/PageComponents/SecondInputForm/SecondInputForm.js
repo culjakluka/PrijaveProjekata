@@ -106,7 +106,7 @@ const SecondInputForm = (docId) => {
   const [consultantExpenseSource, setConsultantExpenseSource] = useState(null);
   const [requiredDocumentationFESB, setRequiredDocumentationFESB] =
     useState(null);
-  const [pdfDocuments, setPdfDocuments] = useState(null);
+  const [pdfDocuments, setPdfDocuments] = useState([]);
 
   // application updated modal - after application is submitted
   const [modalApplicationUpdatedIsOpen, setModalApplicationUpdatedIsOpen] =
