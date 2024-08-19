@@ -107,6 +107,9 @@ const AdminDashboard = () => {
   const [modalMessageIsOpen, setModalMessageIsOpen] = useState(false);
   const [messageForModal, setMessageForModal] = useState("Projekt uspješno odobren!");
 
+  // modal (no reload) 
+  const [modalMessageNoReloadIsOpen, setModalMessageNoReloadIsOpen] = useState(false);
+  const [messageForNoReloadModal, setMessageForNoReloadModal] = useState("Projekt uspješno ažuriran!");
   // loading spinner
   const [loadingSpinnerIsOpen, setLoadingSpinnerIsOpen] = useState(false)
 
@@ -487,7 +490,9 @@ const AdminDashboard = () => {
           setEditingInProgress,
           setModalMessageIsOpen,
           setMessageForModal,
-          setLoadingSpinnerIsOpen
+          setLoadingSpinnerIsOpen,
+          setModalMessageNoReloadIsOpen,
+          setMessageForNoReloadModal
         }}
       >
         <div className="admin-dashboard-container">
@@ -503,6 +508,8 @@ const AdminDashboard = () => {
           {modalDeclineProjectIsOpen && <ModalDeclineProject />}
 
           {modalMessageIsOpen && <ModalMessage modalMessage={messageForModal} setModalIsOpen={setModalMessageIsOpen} reload={true}/>}
+
+          {modalMessageNoReloadIsOpen && <ModalMessage modalMessage={messageForModal} setModalIsOpen={setModalMessageNoReloadIsOpen} reload={false}/>}
 
           {loadingSpinnerIsOpen && <LoadingSpinner/>}
 
@@ -718,7 +725,7 @@ const AdminDashboard = () => {
                     <div
                       className="edit-button-container manage-button-style"
                       onClick={
-                        !projectEditable
+                        !projectEditable  
                           ? () => manageEditing()
                           : () => setModalUpdateProjectInfoIsOpen(true)
                       }

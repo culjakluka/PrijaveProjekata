@@ -264,15 +264,21 @@ const ProjectInfo = ({ selectedProject }) => {
               currentInputValue={selectedProject.projectAcronym}
               projectUpdateName={"projectAcronym"}
             />
-            <AdminTextInput
-              currentLabelValue={"ROK ZA PRIJAVU PROJEKTA"}
-              currentInputValue={selectedProject.applicationDeadline}
+            <div style={{alignSelf:"start"}}>
+            <CalendarInputAdvanced
+              label={"ROK ZA PRIJAVU PROJEKTA"} 
+              initialDate={selectedProject.applicationDeadline} 
+              setSelectedDate={date => console.log(date)} 
+              setSpecificState={setSelectedProjectData}
+              placeholderText={"Odaberite datum"} 
+              isAdminDashboard={true}
               projectUpdateName={"applicationDeadline"}
-              isDate={true}
+              workingDaysLimit={0}
             />
+            </div>
             <AdminQuestion questionText={questions[2]} />
-            <AdminTextInput
-              currentLabelValue={"summary"}
+            <AdminDashboardProjectSummary
+              currentLabelValue={"SAŽETAK PROJEKTA"}
               currentInputValue={selectedProject.projectSummary}
               projectUpdateName={"projectSummary"}
             />

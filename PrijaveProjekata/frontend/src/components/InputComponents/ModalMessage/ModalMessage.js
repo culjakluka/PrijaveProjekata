@@ -17,13 +17,14 @@ const ModalMessage = ({
   modalMessage,
   missingFieldsContent,
   setModalIsOpen,
-  reload,
+  reloadProp,
   fontSizeProp
 }) => {
   const [heightPercentage, setHeightPercentage] = useState("20%");
   const [widthPercentage, setWidthPercentage] = useState("30%");
   const [fontSize, setFontSize] = useState("1.5em");
   const [message, setMessage] = useState("Molimo popunite sva polja!");
+  const [reload, setReload] = useState(reloadProp);
 
   useEffect(() => {
     if (height) {

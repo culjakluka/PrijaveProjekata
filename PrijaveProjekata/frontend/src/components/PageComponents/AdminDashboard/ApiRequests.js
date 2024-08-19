@@ -235,7 +235,6 @@ const adminUpdateProjectInfoSet = async (project_id, projectData) => {
 
     if (response.ok) {
       console.log("Project updated successfully!", data);
-      window.alert("Project updated successfully!", data);
 
       // to check if it was successfull
       return true;
