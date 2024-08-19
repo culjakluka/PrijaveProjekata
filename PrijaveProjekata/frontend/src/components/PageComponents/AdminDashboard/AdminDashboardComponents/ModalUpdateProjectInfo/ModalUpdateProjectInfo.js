@@ -19,6 +19,7 @@ import { AdminDashboardContext } from "../../../../../context/AdminDashboardCont
 // api -> update project info set
 import { adminUpdateProjectInfoSet } from "../../ApiRequests.js";
 import { set } from "date-fns";
+import { is } from "date-fns/locale";
 
 const ModalUpdateProjectInfo = () => {
 
@@ -40,32 +41,40 @@ const ModalUpdateProjectInfo = () => {
   } = useContext(AdminDashboardContext);
 
   const handleYesButton = async () => {
+    
+    // making project uneditable
+    handleEditable();
+    // closing modal
+    setModalUpdateProjectInfoIsOpen(false);
+    // setting project locked
+    setProjectLocked(true);
+    // setting editing in progress
+    setEditingInProgress(false);
 
-    // start spinner - spinning animation
-    setLoadingSpinnerIsOpen(true);
+    if(!isEmptyObject(updateProjectData)) {
+      
+      // start spinner - spinning animation
+      setLoadingSpinnerIsOpen(true);
 
-    // taking project id from already selected project and updating it with new data that has been collected in updateProjectData
-    const check = await adminUpdateProjectInfoSet(selectedProject._id, updateProjectData);
+      const check = await adminUpdateProjectInfoSet(selectedProject._id, updateProjectData);
+        
 
-    if(check) {
-      // stop spinner - spinning animation
-      setLoadingSpinnerIsOpen(false);
-      // making project uneditable
-      handleEditable();
-      // hiding modal
-      setModalUpdateProjectInfoIsOpen(false);
-      // so the same project again can be displayed
-      setSelectedProject({ ...selectedProject, ...updateProjectData });
-      // resetting update project data
-      setUpdateProjectData({});
-      // locking project
-      setProjectLocked(true);
-      // hiding edit in progress
-      setEditingInProgress(false);
-      // setting message for modal
-      setMessageForNoReloadModal("Projekt uspješno ažuriran!");
-      // opening message modal
-      setModalMessageNoReloadIsOpen(true);
+      if(check) { 
+        // so the same project again can be displayed
+        setSelectedProject({ ...selectedProject, ...updateProjectData });
+        // resetting update project data
+        setUpdateProjectData({});
+        // stop spinner - spinning animation
+        setLoadingSpinnerIsOpen(false);
+        // setting message for modal  
+        setMessageForNoReloadModal("Projekt uspješno ažuriran!");
+        // opening message modal
+        setModalMessageNoReloadIsOpen(true);
+      } else {
+        console.log('Unable to update project!');
+      }
+    } else {
+      console.log('No data to update!');
     }
     
   };
@@ -77,6 +86,10 @@ const ModalUpdateProjectInfo = () => {
   const closeModal = () => {
     setModalUpdateProjectInfoIsOpen(false);
   };
+
+  function isEmptyObject(obj) {
+    return JSON.stringify(obj) === '{}';
+}
 
   return (
     <div className={Style.ModalContainerOverlay}>
