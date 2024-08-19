@@ -362,6 +362,7 @@ const updateProjectInfoSet = async (req, res) => {
         "personalFinancingExpense",
         "consultantServices",
         "requiredDocumentationFESB",
+        "indirectExpensesManualInput",
       ];
     }
 
