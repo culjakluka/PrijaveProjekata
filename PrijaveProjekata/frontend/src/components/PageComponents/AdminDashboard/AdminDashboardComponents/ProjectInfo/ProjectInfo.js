@@ -173,9 +173,12 @@ const ProjectInfo = ({ selectedProject }) => {
             />
 
             <AdminQuestion questionText={questions[7]} />
+            
             <AdminTextInput
-              currentLabelValue={""}
-              currentInputValue={selectedProject.newEmploymentBoolean}
+              currentLabelValue={"NOVOZAPOSLENJE"}
+              currentInputValue={
+                selectedProject.newEmploymentBoolean ? "Da" : "Ne"
+              }
               projectUpdateName={"newEmploymentBoolean"}
             />
 
@@ -430,6 +433,9 @@ const ProjectInfo = ({ selectedProject }) => {
               }
               projectUpdateName={"newEmploymentBoolean"}
             />
+            
+            <AdminDashboardNewEmploymentPositions />
+
             <AdminQuestion questionText={questions[18]} />
             {/* Special case, might not have a direct mapping or requires a component to list team members */}
             <AdminDashboardProjectTeam />
