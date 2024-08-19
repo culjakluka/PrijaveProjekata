@@ -12,12 +12,15 @@
     font-weight: bold;
     height: 100%;
     color: #4a4949;
-    background-color: #d3d3d3;
-    border-radius: 15px;
     padding: 5px;
+    border-bottom: 1px solid #7b7b7b;
 }
 
 .NewPositionInfo {
     margin-left: 10px;
     font-weight: 500;
+}
+
+.NewPositionInfoTitle {
+    font-weight: bold;
 }

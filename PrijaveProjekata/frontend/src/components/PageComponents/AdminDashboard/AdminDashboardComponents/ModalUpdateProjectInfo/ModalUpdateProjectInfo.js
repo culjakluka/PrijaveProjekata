@@ -18,6 +18,7 @@ import { AdminDashboardContext } from "../../../../../context/AdminDashboardCont
 
 // api -> update project info set
 import { adminUpdateProjectInfoSet } from "../../ApiRequests.js";
+import { set } from "date-fns";
 
 const ModalUpdateProjectInfo = () => {
 
@@ -33,23 +34,40 @@ const ModalUpdateProjectInfo = () => {
     projectLocked,
     setProjectLocked,
     setEditingInProgress,
+    setLoadingSpinnerIsOpen,
+    setModalMessageNoReloadIsOpen,
+    setMessageForNoReloadModal,
   } = useContext(AdminDashboardContext);
 
-  const handleYesButton = () => {
+  const handleYesButton = async () => {
+
+    // start spinner - spinning animation
+    setLoadingSpinnerIsOpen(true);
+
     // taking project id from already selected project and updating it with new data that has been collected in updateProjectData
-    adminUpdateProjectInfoSet(selectedProject._id, updateProjectData);
-    // making project uneidtable
-    handleEditable();
-    // hiding modal
-    setModalUpdateProjectInfoIsOpen(false);
-    // so the same project again can be displayed
-    setSelectedProject({ ...selectedProject, ...updateProjectData });
-    // resetting update project data
-    setUpdateProjectData({});
-    // locking project
-    setProjectLocked(true);
-    // hiding edit in progress
-    setEditingInProgress(false);
+    const check = await adminUpdateProjectInfoSet(selectedProject._id, updateProjectData);
+
+    if(check) {
+      // stop spinner - spinning animation
+      setLoadingSpinnerIsOpen(false);
+      // making project uneditable
+      handleEditable();
+      // hiding modal
+      setModalUpdateProjectInfoIsOpen(false);
+      // so the same project again can be displayed
+      setSelectedProject({ ...selectedProject, ...updateProjectData });
+      // resetting update project data
+      setUpdateProjectData({});
+      // locking project
+      setProjectLocked(true);
+      // hiding edit in progress
+      setEditingInProgress(false);
+      // setting message for modal
+      setMessageForNoReloadModal("Projekt uspješno ažuriran!");
+      // opening message modal
+      setModalMessageNoReloadIsOpen(true);
+    }
+    
   };
 
   const handleNoButton = () => {

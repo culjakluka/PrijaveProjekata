@@ -107,6 +107,9 @@ const AdminDashboard = () => {
   const [modalMessageIsOpen, setModalMessageIsOpen] = useState(false);
   const [messageForModal, setMessageForModal] = useState("Projekt uspješno odobren!");
 
+  // modal (no reload) 
+  const [modalMessageNoReloadIsOpen, setModalMessageNoReloadIsOpen] = useState(false);
+  const [messageForNoReloadModal, setMessageForNoReloadModal] = useState("Projekt uspješno ažuriran!");
   // loading spinner
   const [loadingSpinnerIsOpen, setLoadingSpinnerIsOpen] = useState(false)
 
@@ -255,9 +258,14 @@ const AdminDashboard = () => {
       formattedData[6].elements[0].value = selectedProject?.totalValue || "";
       formattedData[6].elements[1].value = selectedProject?.fesbValuePart || "";
 
-      formattedData[7].elements[0].value = selectedProject?.newEmploymentBoolean || "";
+      formattedData[7].elements[0].value = selectedProject?.newEmploymentBoolean || "vrijednost nije zadana";
 
-      formattedData[8].elements[0].projectTeam = selectedProject?.projectTeam || "";
+      formattedData[8].elements[0].newEmploymentPositions = selectedProject?.newEmploymentPositions || "";
+      formattedData[8].elements[0].title = "NOVA RADNA MJESTA"
+
+      formattedData[9].elements[0].projectTeam = selectedProject?.projectTeam || "";
+
+
 
       
     } else if (approvalSelection) {
@@ -341,7 +349,7 @@ const AdminDashboard = () => {
       formattedData2[17].elements[0].value =
         selectedProject?.newEmploymentBoolean || "";
 
-      formattedData2[18].elements[0].projectTeam = selectedProject?.projectTeam || "";
+      formattedData2[19].elements[0].projectTeam = selectedProject?.projectTeam || "";
 
       formattedData2[19].elements[0].value = selectedProject?.consultantServices
         ? "Da"
@@ -406,7 +414,7 @@ const AdminDashboard = () => {
   // handle pdf new tab
   const handlePDF = (projectData, title) => {
     // Assuming pdf() is a function that returns a Promise resolving to a blob
-    // Generate the document
+    // Generate the document using the formattedData
     const doc = <FirstInputFormPDF data={projectData} title={title} />;
 
     // Create a PDF blob
@@ -482,7 +490,9 @@ const AdminDashboard = () => {
           setEditingInProgress,
           setModalMessageIsOpen,
           setMessageForModal,
-          setLoadingSpinnerIsOpen
+          setLoadingSpinnerIsOpen,
+          setModalMessageNoReloadIsOpen,
+          setMessageForNoReloadModal
         }}
       >
         <div className="admin-dashboard-container">
@@ -498,6 +508,8 @@ const AdminDashboard = () => {
           {modalDeclineProjectIsOpen && <ModalDeclineProject />}
 
           {modalMessageIsOpen && <ModalMessage modalMessage={messageForModal} setModalIsOpen={setModalMessageIsOpen} reload={true}/>}
+
+          {modalMessageNoReloadIsOpen && <ModalMessage modalMessage={messageForModal} setModalIsOpen={setModalMessageNoReloadIsOpen} reload={false}/>}
 
           {loadingSpinnerIsOpen && <LoadingSpinner/>}
 
@@ -713,7 +725,7 @@ const AdminDashboard = () => {
                     <div
                       className="edit-button-container manage-button-style"
                       onClick={
-                        !projectEditable
+                        !projectEditable  
                           ? () => manageEditing()
                           : () => setModalUpdateProjectInfoIsOpen(true)
                       }
@@ -758,6 +770,8 @@ const AdminDashboard = () => {
                       Dohvati projekt u obliku pdf dokumenta:
                     </p>
                     <button
+                    //if intentionSelection is true, then handlePDF will generate PDF from formattedData - which means, data formatted for intention form
+                    // else, handlePDF will generate PDF from formattedData2 - which means, data formatted for approval form
                       onClick={
                         intentionSelection
                           ? () => handlePDF(formattedData, "NAMJERA PRIJAVE")

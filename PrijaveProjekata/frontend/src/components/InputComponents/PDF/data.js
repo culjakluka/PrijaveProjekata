@@ -1,6 +1,5 @@
-// this data is shaped in the way that it corresponds to the structure of the PDF document
-// firstInputFormData for first form and secondInputFormData for second form
 
+// default data used to generate pdf documents -> firstInputFormData and secondInputFormData
 const firstInputFormData = [
   {
     "question" : "1. Prijavitelj projekta/voditelj projektnog tima sa strane FESB-a",
@@ -108,7 +107,22 @@ const firstInputFormData = [
     ]
   },
   {
-    "question" : "9. Projektni tim",
+    "question" : "9. Nova radna mjesta",
+    "elements" : [
+      {
+        "title" : "NOVA RADNA MJESTA",
+        "newEmploymentPositions" : [
+          {
+            "positionName" : "Pozicija 1",
+            "positionSalary"  : "1000$",
+            "positionPercentage" : "100%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "question" : "10. Projektni tim",
     "elements" : [
       {
         "title" : "PROJEKTNI TIM",
@@ -392,7 +406,22 @@ const secondInputFormData = [
     ]
   },
   {
-    "question" : "19. Projektni tim",
+    "question" : "19. Nova radna mjesta",
+    "elements" : [
+      {
+        "title" : "NOVA RADNA MJESTA",
+        "newEmploymentPositions" : [
+          {
+            "positionName" : "Pozicija 1",
+            "positionSalary"  : "1000$",
+            "positionPercentage" : "100%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "question" : "20. Projektni tim",
     "elements" : [
       {
         "title" : "PROJEKTNI TIM",
