@@ -33,6 +33,9 @@ import { questions, radioButtonData1 } from "../../data/secondInputFormData.js";
 // api request
 import { getDepartments } from "../../PageComponents/FirstInputForm/firstInputFormApi.js";
 
+// get dean api
+import { getDean } from "../../PageComponents/AdminDashboard/AdminDashboardComponents/ModalSettings/deanApi.js";
+
 // utils
 import translateMissingFields from "../../../utils/translateMissingFields.js";
 
@@ -118,6 +121,9 @@ const SecondInputForm = (docId) => {
 
   // this component is used to calculate total expense
   const [totalExpense, setTotalExpense] = useState(0);
+
+  // get dean data
+  const [deanData, setDeanData] = useState(null);
 
   useEffect(() => {
     setInputFormData({
@@ -266,6 +272,19 @@ const SecondInputForm = (docId) => {
     };
 
     getDepartments();
+
+    const fetchDeanData = async () => {
+      try {
+        const deanData = await getDean();
+        setDeanData(deanData[0]);
+        console.log("Dean data fetched: ", deanData);
+      } catch (error) {
+        console.error("Error fetching dean data", error);
+        window.alert("Failed to fetch dean data!");
+      }
+    }
+
+    fetchDeanData();
   }, []);
 
   // after data is loaded completely, update states
@@ -480,7 +499,8 @@ const SecondInputForm = (docId) => {
             totalExpense,
             fesbValuePart,
             newEmploymentPositions,
-            setNewEmploymentPositions
+            setNewEmploymentPositions,
+            deanData
           }}
         >
           {modalMessageIsOpen && (

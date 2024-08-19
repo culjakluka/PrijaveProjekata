@@ -14,7 +14,7 @@ const GenerateHeadOfDepartmentStatement = () => {
 
     
     // using context
-    const { nameSurname, department, projectTitle } = useContext(SecondInputFormDataContext);   
+    const { nameSurname, department, projectTitle, deanData } = useContext(SecondInputFormDataContext);   
 
     // handle pdf new tab
         const handlePDF = () => {
@@ -26,6 +26,7 @@ const GenerateHeadOfDepartmentStatement = () => {
         nameSurnameDepartmentHead={department.split(" - ")[1]?.trim() || ""}
         departmentName={department.split(" - ")[0]?.trim() || ""}
         projectName={projectTitle}
+        deanName={deanData.name}
         />;
     
         // Create a PDF blob

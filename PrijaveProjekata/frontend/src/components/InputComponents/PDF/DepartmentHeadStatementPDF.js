@@ -29,16 +29,11 @@ const styles = StyleSheet.create({
         paddingLeft: 50,
         paddingRight: 50,
     },
-    documentTitle : {
-        marginTop: 20,
-        marginBottom: 20,
-        alignSelf: "center",
-        fontWeight: "600",
-    },
     applicantDataSection : {
         display: "flex",
         flexDirection: "column",
         justifyContent: "start",
+        marginTop: 30,
         marginBottom: 30,
     },
     applicantData : {
@@ -63,8 +58,8 @@ const styles = StyleSheet.create({
     },
     signatureSectionContainer : {
         display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-end"
+        flexDirection: "row",
+        justifyContent: "space-between",
     },
     signatureSection : { 
         display: "flex",
@@ -85,18 +80,61 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         marginBottom: 10
+    },
+    documentInfoContainer : {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        display: "flex",
+        flexDirection: "column",
+        marginTop: 30
+    },
+    documentInfoLine : {
+        borderTop: "1px solid black",
+        width: "70px",
+        marginBottom: 10
+    },
+    documentInfo : {
+        fontSize: 11,
+        alignSelf: "center"
+    },
+    header : {
+        display: "flex",
+        position: "relative",
+        flexDirection: "row",
+        justifyContent: "center",
+        marginBottom: 20
+    },
+    documentTitle : {
+        marginTop: 20,
+        marginBottom: 20,
+        alignSelf: "center",
+        fontWeight: "600",
     }
     
 });
 
-const DepartmentHeadStatementPDF = ({ nameSurnameApplicant, departmentName, nameSurnameDepartmentHead, projectName,  }) => {
+const DepartmentHeadStatementPDF = ({ nameSurnameApplicant, departmentName, nameSurnameDepartmentHead, projectName, deanName }) => {
 
     return(
         <Document> 
             <Page size="A4" style={styles.page}>
                 <Image src={fesbStatementHeader}/>
                 <View style={styles.pageContainer}>
-                    <Text style={styles.documentTitle}>IZJAVA PREDSTOJNIKA ZAVODA</Text>
+                    <View style={styles.header}>
+                        <View style={styles.documentInfoContainer}>
+                            <View style={styles.documentInfoLine}>
+                                <Text style={styles.documentInfo}>Klasa</Text>
+                            </View>
+                            <View style={styles.documentInfoLine}>
+                                <Text style={styles.documentInfo}>Ur. broj</Text>
+                            </View>
+                        </View>
+                        <Text style={styles.documentTitle}>IZJAVA PREDSTOJNIKA ZAVODA</Text>
+                        <Text>{deanName}</Text>
+                    </View>
+
+                    
                     <View style={styles.applicantDataSection}>
                         <Text style={styles.applicantData}>Naziv zavoda</Text>
                             <View style={styles.dataField}>
@@ -121,6 +159,11 @@ const DepartmentHeadStatementPDF = ({ nameSurnameApplicant, departmentName, name
                         <Text style={styles.statementText}>Ova Izjava je sastavni dio obrasca Traženje suglasnosti za prijavu projekta, ispunjenog od strane {nameSurnameApplicant}.</Text>
                     </View>
                     <View style={styles.signatureSectionContainer}>
+                        <View style={styles.signatureSection}>
+                            <Text style={styles.signatureTitle}>Dekan</Text>
+                            <View style={styles.signatureLine}></View>
+                            <Text>{deanName}</Text>
+                        </View> 
                         <View style={styles.signatureSection}>
                             <Text style={styles.signatureTitle}>Predstojnik zavoda</Text>
                             <View style={styles.signatureLine}></View>
