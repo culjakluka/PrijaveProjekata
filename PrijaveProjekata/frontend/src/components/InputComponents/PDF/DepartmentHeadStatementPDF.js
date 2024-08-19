@@ -131,7 +131,6 @@ const DepartmentHeadStatementPDF = ({ nameSurnameApplicant, departmentName, name
                             </View>
                         </View>
                         <Text style={styles.documentTitle}>IZJAVA PREDSTOJNIKA ZAVODA</Text>
-                        <Text>{deanName}</Text>
                     </View>
 
                     
